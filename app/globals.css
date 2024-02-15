@@ -86,6 +86,7 @@ body {
 .activeCL {
   height: 248px;
   width: 438px;
+  margin: 0 auto;
 }
 
 .home-container {
