@@ -1,3 +1,5 @@
+/* NPM command: npx tailwindcss -i ./app/globals.css -o ./public/output.css --watch */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,6 +8,14 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --background-yellow: rgb(251, 177, 60);
+  --background-blue: rgb(64, 80, 175);
+  --background-teal: rgb(151, 216, 196);
+  --text-black: rgb(38, 38, 38);
+}
+
+html, body {
+  font-family: 'Lato', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,4 +40,64 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/public/assets/fonts/Lato-Regular.ttf') format('ttf');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/public/assets/fonts/Lato-Light.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/public/assets/fonts/Lato-Bold.ttf') format('ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/public/assets/fonts/Lato-Black.ttf') format('ttf');
+  font-weight: 800;
+  font-style: normal;
+}
+
+.yellow-bg {
+  background-color: var(--background-yellow);
+}
+
+.text-dark {
+  color: var(--text-black);
+}
+
+.homeCL {
+  height: 216px;
+  width: 381px;
+}
+
+.activeCL {
+  height: 248px;
+  width: 438px;
+}
+
+.home-container {
+  width: 1470px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.home-container::-webkit-scrollbar {
+  display: none;
+}
+
+.home-container img {
+  flex-shrink: 0;
 }
