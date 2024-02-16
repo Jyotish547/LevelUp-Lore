@@ -74,6 +74,14 @@ body {
   background-color: var(--background-yellow);
 }
 
+.yellow-text {
+  color: var(--background-yellow);
+}
+
+.yellow-border {
+  border-color: var(--background-yellow);
+}
+
 .text-dark {
   color: var(--text-black);
 }
@@ -81,6 +89,7 @@ body {
 .homeCL {
   height: 216px;
   width: 381px;
+  transition: all 0.2s ease-out;
 }
 
 .activeCL {
@@ -101,4 +110,10 @@ body {
 
 .home-container img {
   flex-shrink: 0;
+}
+
+.background-transition {
+  transition: background-image 0.5s ease-in-out;
+  background-size: cover;
+  background-position: center;
 }

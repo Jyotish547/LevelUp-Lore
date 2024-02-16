@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import HomeGames from './cardLayouts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserPlus, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUser, faUserPlus);
+library.add(faUser, faUserPlus, faPuzzlePiece);
 
 type HomeBackgrounds = {
     [key: string]: string; // This line allows dynamic keys of type string
@@ -13,6 +13,10 @@ type HomeBackgrounds = {
 // Object mapping game names to image URL strings
 const homeBackgrounds: HomeBackgrounds = {
   Valorant: '/assets/homePage/backgrounds/Valorant.jpg',
+  LeagueOfLegends: '/assets/homePage/backgrounds/LeagueOfLegends.jpg',
+  RocketLeague: '/assets/homePage/backgrounds/RocketLeague.jpg',
+  EAFC24: '/assets/homePage/backgrounds/EAFC24.jpg',
+  CounterStrike2: '/assets/homePage/backgrounds/Counter-Strike2.jpg',
   // Add other games and their background image paths here
 };
 
@@ -20,12 +24,16 @@ export default function HomePage() {
   const [selectedGame, setSelectedGame] = useState('Valorant');
 
   // Access the URL string directly from the state
-  const backgroundHome = homeBackgrounds[selectedGame] || homeBackgrounds['Valorant'];
+  const backgroundHome = homeBackgrounds[selectedGame];
+
+  const handleGameChange = (game: string) => {
+    setSelectedGame(game);
+  }
 
   return (
-    <main className="relative h-screen bg-cover" style={{ backgroundImage: `url(${backgroundHome})` }}>
-      <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-row items-center">
-        <div className='flex flex-col items-center justify-around w-screen h-3/4'>
+    <main className="relative h-screen m-0 p-0 bg-cover background-transition" style={{ backgroundImage: `url(${backgroundHome})` }}>
+      <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-row items-center">
+        <div className='flex flex-col items-center justify-around w-screen h-screen'>
             <div className='flex flex-col items-center'>
                 <h1 className='text-5xl font-bold my-6'>
                     LevelUp Lore
@@ -34,7 +42,8 @@ export default function HomePage() {
                     Welcome to LevelUp Lore, your ultimate gateway to the universe of gaming! Dive into a meticulously curated collection of game guides, strategies, and lineups, all designed to elevate your gameplay.
                 </p>
             </div>
-            <HomeGames />
+            
+            <HomeGames onGameChange = {handleGameChange} />
             <div className='flex flex-col items-center text-xl'>
                 <p className='mb-6'>Ready to level up? Join us or sign in to start your adventure.</p>
                 <div className='flex flex-row justify-between w-7/12'>
