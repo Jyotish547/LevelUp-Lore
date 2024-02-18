@@ -103,7 +103,7 @@ const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
             </div>
             <div ref={containerRef} className="home-container flex flex-row items-center space-x-4 mx-8 overflow-x-auto">
                 {images.map((image, index) => (
-                    <Link key={index} ref={el => cardRefs.current[index] = el} href="#" onClick={(e) => e.preventDefault()} className={`flex flex-col items-center flex-shrink-0 rounded-lg space-y-8`}>
+                    <Link key={index} ref={el => cardRefs.current[index] = el} href={`/${image.alt.toLowerCase()}`} className={`flex flex-col items-center flex-shrink-0 rounded-lg space-y-8`}>
                         <Image className={`rounded-lg homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={image.src} alt={image.alt} style={{ boxShadow: `3px 3px 8px ${image.shadowColor}`}}/>
                         <Image className={`${index === activeIndex ? 'block' : 'hidden'}`} src={image.logo} alt={image.alt} width={300} />
                     </Link>
