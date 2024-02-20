@@ -34,40 +34,14 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    margin: 0;
+    padding: 0;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-}
-
-@font-face {
-  font-family: 'Lato';
-  src: url('/public/assets/fonts/Lato-Regular.ttf') format('ttf');
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Lato';
-  src: url('/public/assets/fonts/Lato-Light.ttf') format('ttf');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Lato';
-  src: url('/public/assets/fonts/Lato-Bold.ttf') format('ttf');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Lato';
-  src: url('/public/assets/fonts/Lato-Black.ttf') format('ttf');
-  font-weight: 800;
-  font-style: normal;
 }
 
 .yellow-bg {
@@ -116,4 +90,10 @@ body {
   transition: background-image 0.5s ease-in-out;
   background-size: cover;
   background-position: center;
+}
+
+.game-background {
+  background-image: url("/assets/gamePageBackground.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }

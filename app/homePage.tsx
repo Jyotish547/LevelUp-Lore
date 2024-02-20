@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import HomeGames from './cardLayouts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,6 +26,17 @@ export default function HomePage() {
 
   // Access the URL string directly from the state
   const backgroundHome = homeBackgrounds[selectedGame];
+
+  const id = 99 
+
+  const callAPI = async () => {
+ 
+        const res = await fetch(`http://localhost:3000/api/people/${id}`);
+        const data = await res.json();
+        console.log(data);
+ 
+};
+callAPI()
 
   const handleGameChange = (game: string) => {
     setSelectedGame(game);

@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretLeft, faCaretRight, faPuzzlePiece } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 
 import Image from "next/image";
 // Images
@@ -24,9 +24,9 @@ import fc24Logo from '../public/assets/logos/EA FC24.png';
 import rlLogo from '../public/assets/logos/Rocket League.png';
 import cs2Logo from '../public/assets/logos/Counter-Strike 2.png';
 
-library.add(faCaretLeft, faCaretRight, faPuzzlePiece);
+library.add(faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup);
 
-const images = [
+const games = [
     {src: fc24CL, alt: 'EAFC24', logo: fc24Logo, shadowColor: 'rgb(22 163 74)'},
     {src: lolCL, alt: 'LeagueOfLegends', logo: lolLogo, shadowColor: 'rgb(37 99 235)'},
     {src: valorantCL, alt: 'Valorant', logo: valorantLogo, shadowColor: 'rgb(126 34 206)'},
@@ -45,7 +45,7 @@ const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setActiveIndex(prevIndex => (prevIndex + 1) % images.length);
+            setActiveIndex(prevIndex => (prevIndex + 1) % games.length);
         }, 4000);
 
         return () => clearInterval(interval);
@@ -77,16 +77,16 @@ const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 
     const handleLeftScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
-        setActiveIndex(prevIndex => prevIndex === 0 ? images.length - 1 : prevIndex - 1);
+        setActiveIndex(prevIndex => prevIndex === 0 ? games.length - 1 : prevIndex - 1);
     };
 
     const handleRightScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
-        setActiveIndex(prevIndex => (prevIndex + 1) % images.length);
+        setActiveIndex(prevIndex => (prevIndex + 1) % games.length);
     };
 
     useEffect(() => {
-        const gameName = images[activeIndex].alt;
+        const gameName = games[activeIndex].alt;
         onGameChange(gameName);
     }, [activeIndex, onGameChange])
 
@@ -102,10 +102,10 @@ const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
                 </Link>
             </div>
             <div ref={containerRef} className="home-container flex flex-row items-center space-x-4 mx-8 overflow-x-auto">
-                {images.map((image, index) => (
-                    <Link key={index} ref={el => cardRefs.current[index] = el} href={`/${image.alt.toLowerCase()}`} className={`flex flex-col items-center flex-shrink-0 rounded-lg space-y-8`}>
-                        <Image className={`rounded-lg homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={image.src} alt={image.alt} style={{ boxShadow: `3px 3px 8px ${image.shadowColor}`}}/>
-                        <Image className={`${index === activeIndex ? 'block' : 'hidden'}`} src={image.logo} alt={image.alt} width={300} />
+                {games.map((game, index) => (
+                    <Link key={index} ref={el => cardRefs.current[index] = el} href="/game" className={`flex flex-col items-center flex-shrink-0 rounded-lg space-y-8`}>
+                        <Image className={`rounded-lg homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={game.src} alt={game.alt} style={{ boxShadow: `3px 3px 8px ${game.shadowColor}`}}/>
+                        <Image className={`${index === activeIndex ? 'block' : 'hidden'}`} src={game.logo} alt={game.alt} width={300} />
                     </Link>
                 ))}
             </div>
@@ -114,3 +114,5 @@ const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 };
 
 export default HomeGames;
+
+export {valorantLogo, fc24Logo, lolLogo, rlLogo, cs2Logo};
