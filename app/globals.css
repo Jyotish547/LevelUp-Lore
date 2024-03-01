@@ -5,13 +5,14 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground: rgb(0, 0, 0);
+  --background-start: rgb(214, 219, 220);
+  --background-end: rgb(255, 255, 255);
   --background-yellow: rgb(251, 177, 60);
   --background-blue: rgb(64, 80, 175);
   --background-teal: rgb(151, 216, 196);
   --text-black: rgb(38, 38, 38);
+  --eafc24-color: #14F57B;
 }
 
 html, body {
@@ -44,6 +45,8 @@ body {
   }
 }
 
+/* Color Themes */
+
 .yellow-bg {
   background-color: var(--background-yellow);
 }
@@ -58,6 +61,34 @@ body {
 
 .text-dark {
   color: var(--text-black);
+}
+
+/* EAFC 24 */
+
+.text-eafc {
+  color: var(--eafc24-color);
+}
+
+.border-eafc {
+  border-color: var(--eafc24-color);
+}
+
+.bg-eafc {
+  background-color: var(--eafc24-color);
+}
+
+/* Difficulty Tags Colors */
+
+.bg-beginner {
+  background-color: #68DE3E;
+}
+
+.bg-intermediate {
+  background-color: var(--background-yellow);
+}
+
+.bg-advanced {
+  background-color: #AD2E24;
 }
 
 .homeCL {

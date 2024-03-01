@@ -9,7 +9,7 @@ import { valorantLogo, cs2Logo, fc24Logo, lolLogo, rlLogo } from "./cardLayouts"
 import dpIcon from '../public/assets/displayPicture.png';
 
 const eafc24Nav = [
-    {icon: faPeopleGroup, label: "Formations", href: "#"},
+    {icon: faPeopleGroup, label: "Formations", href: "/game"},
     {icon: faRankingStar, label: "Top Cards", href: "#"},
     {icon: faStarHalfStroke, label: "Skill Moves", href: "#"},
     {icon: faLayerGroup, label: "Team Build", href: "#"},
@@ -44,7 +44,7 @@ export default function NavBar() {
             {/* Dynamic Change based on game */}
             <div className="flex flex-col items-center space-y-4">
                 <span className="text-xl font-semibold text-green-500">Change Game</span>
-                <Link href="" className="py-4 px-5 bg-black rounded-lg shadow-md shadow-green-300/30">
+                <Link href="/" className="py-4 px-5 bg-black rounded-lg shadow-md shadow-green-300/30">
                     <Image src={fc24Logo} alt="Game Logo" width="150" />
                 </Link>
             </div>

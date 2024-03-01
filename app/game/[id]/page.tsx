@@ -5,6 +5,6 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function EAFC24() {
     return(
-        <h1>Car name : 5656</h1>
+        <h1>Car name : 4343</h1>
     )
 }

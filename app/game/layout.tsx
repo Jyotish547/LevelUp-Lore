@@ -8,10 +8,28 @@ export default function GamePageLayout({
   }: {
     children: React.ReactNode
   }) {
+
+    const id = 10 
+
+    const callAPI = async () => {
+
+        const res = await fetch(`./game/api/people/${id}`);
+        const data = await res.json();
+        if(id === data.key) {
+          console.log(data);
+        }
+        else {
+          console.log("No content found for the ID.");
+        }
+
+    };
+    callAPI()
+    
+
     return (
       <main className="game-background w-screen h-screen">
         <div className="absolute inset-0 bg-black bg-opacity-60">
-          <div className="mx-16 flex flex-row items-center justify-between h-screen w-auto">
+          <div className="p-16 flex flex-row items-start justify-between h-screen w-auto">
             <NavBar />  
             {children}
           </div>

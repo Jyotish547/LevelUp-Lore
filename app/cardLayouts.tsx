@@ -38,7 +38,7 @@ interface HomeGameProps {
     onGameChange: (game:string) => void;
 }
 
-const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
+export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
     const containerRef = useRef<HTMLDivElement>(null); // Ref for the container
@@ -113,6 +113,26 @@ const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
     );
 };
 
-export default HomeGames;
+import formation1 from '../public/assets/eafc24/formations/1.png';
+import { TypeTags, DifficultyTags } from './components/tags';
+
+// Automate the below cardLayout
+
+export const FormationsEAFC = () => {
+    return(
+        <Link href="#" className='w-1/4 py-4 px-5 bg-black space-y-3 flex flex-col items-start rounded-lg shadow-md shadow-green-300/30'>
+            <Image src={formation1} alt='5-2-1-2' />
+            <div className='flex flex-col items-start'>
+                <span className='text-sm text-eafc'>Formation</span>
+                <span className='text-xl font-semibold tracking-wider'>5-2-1-2</span>
+            </div>
+            <p className='text-base'>A balanced formation blending solid defense with potent attack options through the center.</p>
+            <div className='flex flex-row justify-between w-full'>
+                <TypeTags label="Defensive" bgColor="bg-eafc" textColor="text-dark" />
+                <DifficultyTags level="Beginner" />
+            </div>
+        </Link>
+    )
+}
 
 export {valorantLogo, fc24Logo, lolLogo, rlLogo, cs2Logo};
