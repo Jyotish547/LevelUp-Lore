@@ -5,7 +5,6 @@ import Formations from "./eafc24/formations";
 
 
 export default function EAFC24() {
-    console.log("red")
     return(
         <Formations />
     )

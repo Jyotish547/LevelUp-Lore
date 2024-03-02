@@ -126,5 +126,5 @@ body {
 .game-background {
   background-image: url("/assets/gamePageBackground.png");
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
 }

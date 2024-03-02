@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { NextPage } from 'next';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 import Link from 'next/link';
 
@@ -113,26 +114,71 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
     );
 };
 
-import formation1 from '../public/assets/eafc24/formations/1.png';
+// EAFC 24 Formations Card Layout
+
 import { TypeTags, DifficultyTags } from './components/tags';
 
-// Automate the below cardLayout
+// Formations Interface
+
+type CustomTactics = {
+    defensiveStyle: string;
+    offensiveStyle: string;
+};
+
+type PlayerInstructions = {
+    CB: string;
+    WB: string;
+    CM: string;
+    CAM: string;
+    ST: string;
+};
+
+type FormationData = {
+    formation: string;
+    overview: string;
+    flow: string;
+    image: any;
+    difficulty: string;
+    customTactics: CustomTactics;
+    playerInstructions: PlayerInstructions;
+    tacticalTips: string;
+    advantages: string[];
+    disadvantages: string[];
+};
 
 export const FormationsEAFC = () => {
-    return(
-        <Link href="#" className='w-1/4 py-4 px-5 bg-black space-y-3 flex flex-col items-start rounded-lg shadow-md shadow-green-300/30'>
-            <Image src={formation1} alt='5-2-1-2' />
+
+    const [formationData, setFormationData] = useState<FormationData[]>([]);
+
+    useEffect(() => {
+        const fetchFormationData = async () => {
+            try {
+                const response = await axios.get<{content: FormationData[]}>(`/api/formations/1`);
+                setFormationData(response.data.content);
+            } catch(error) {
+                console.error('Error fetching formation data:', error);
+            }
+        };
+
+        fetchFormationData();
+    }, []);
+
+    if(!formationData) return <div>Loading... </div>;
+
+    return formationData.map((formation, index) => (
+        <Link key={index} href="#" className='w-11/12 py-4 px-5 bg-black space-y-3 flex flex-col items-start justify-between rounded-lg shadow-md shadow-green-300/30'>
+            <Image src={formation.image} alt={formation.formation} className='w-full rounded-md' />
             <div className='flex flex-col items-start'>
                 <span className='text-sm text-eafc'>Formation</span>
-                <span className='text-xl font-semibold tracking-wider'>5-2-1-2</span>
+                <span className='text-xl font-semibold tracking-wider'>{formation.formation}</span>
             </div>
-            <p className='text-base'>A balanced formation blending solid defense with potent attack options through the center.</p>
+            <p className='text-base'>{formation.overview}</p>
             <div className='flex flex-row justify-between w-full'>
-                <TypeTags label="Defensive" bgColor="bg-eafc" textColor="text-dark" />
-                <DifficultyTags level="Beginner" />
+                <TypeTags label={formation.flow} bgColor="bg-eafc" textColor="text-dark" />
+                <DifficultyTags level={formation.difficulty} />
             </div>
         </Link>
-    )
+    ))
 }
 
 export {valorantLogo, fc24Logo, lolLogo, rlLogo, cs2Logo};

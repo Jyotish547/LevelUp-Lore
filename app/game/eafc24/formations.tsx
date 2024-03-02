@@ -11,10 +11,10 @@ export default function Formations() {
 
     const callAPI = async () => {
 
-        const res = await fetch(`/api/people/${id}`);
+        const res = await fetch(`/api/formations/${id}`);
         const data = await res.json();
         if(id === data.key) {
-          console.log(data);
+          console.log(data.content);
         }
         else {
           console.log("No content found for the ID.");
@@ -46,7 +46,10 @@ export default function Formations() {
                 </div>
             </div>
 
-            <FormationsEAFC />
+            <div className="grid grid-cols-3 grid-flow-row gap-y-8">
+                <FormationsEAFC />
+            </div>
+
         </section>
     )
 }

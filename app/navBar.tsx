@@ -9,7 +9,7 @@ import { valorantLogo, cs2Logo, fc24Logo, lolLogo, rlLogo } from "./cardLayouts"
 import dpIcon from '../public/assets/displayPicture.png';
 
 const eafc24Nav = [
-    {icon: faPeopleGroup, label: "Formations", href: "/game"},
+    {icon: faPeopleGroup, label: "Formations", href: "/game/1"},
     {icon: faRankingStar, label: "Top Cards", href: "#"},
     {icon: faStarHalfStroke, label: "Skill Moves", href: "#"},
     {icon: faLayerGroup, label: "Team Build", href: "#"},

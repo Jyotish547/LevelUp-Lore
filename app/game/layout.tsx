@@ -13,7 +13,7 @@ export default function GamePageLayout({
 
     const callAPI = async () => {
 
-        const res = await fetch(`./game/api/people/${id}`);
+        const res = await fetch(`/api/formations/${id}`);
         const data = await res.json();
         if(id === data.key) {
           console.log(data);
@@ -27,8 +27,8 @@ export default function GamePageLayout({
     
 
     return (
-      <main className="game-background w-screen h-screen">
-        <div className="absolute inset-0 bg-black bg-opacity-60">
+      <main className="game-background w-screen h-screen overflow-x-hidden">
+        <div className="absolute inset-0 bg-black bg-opacity-60 w-screen h-screen">
           <div className="p-16 flex flex-row items-start justify-between h-screen w-auto">
             <NavBar />  
             {children}
