@@ -27,9 +27,9 @@ export default function GamePageLayout({
     
 
     return (
-      <main className="game-background w-screen h-screen overflow-x-hidden">
+      <main className="m-0 p-0 game-background w-screen h-screen overflow-x-hidden">
         <div className="absolute inset-0 bg-black bg-opacity-60 w-screen h-screen">
-          <div className="p-16 flex flex-row items-start justify-between h-screen w-auto">
+          <div className="p-16 flex flex-row items-start justify-between h-screen w-screen">
             <NavBar />  
             {children}
           </div>
