@@ -6,7 +6,12 @@ import { faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 import BorderButton from '../../components/buttons';
 import { FormationsEAFC } from "../../cardLayouts";
 
-export default function Formations() {
+interface FormationsProps {
+    onPageChange: (pageName: string) => void; // Adjust the type according to the actual implementation
+  }
+
+export default function Formations({ onPageChange }: FormationsProps) {
+
     const id = 1 
 
     const callAPI = async () => {
@@ -47,7 +52,7 @@ export default function Formations() {
             </div>
 
             <div className="grid grid-cols-3 grid-flow-row gap-y-8">
-                <FormationsEAFC />
+                <FormationsEAFC onPageChange={onPageChange} />
             </div>
 
         </section>

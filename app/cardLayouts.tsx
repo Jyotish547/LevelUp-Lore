@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NextPage } from 'next';
 import { motion } from 'framer-motion';
 import axios from 'axios';
@@ -146,7 +146,11 @@ type FormationData = {
     disadvantages: string[];
 };
 
-export const FormationsEAFC = () => {
+interface FormationsEAFCProps {
+    onPageChange: (pageName: string) => void;
+}
+
+export const FormationsEAFC: React.FC<FormationsEAFCProps> = ({ onPageChange }) => {
 
     const [formationData, setFormationData] = useState<FormationData[]>([]);
 
@@ -166,7 +170,7 @@ export const FormationsEAFC = () => {
     if(!formationData) return <div>Loading... </div>;
 
     return formationData.map((formation, index) => (
-        <Link key={index} href="#" className='w-11/12 py-4 px-5 bg-black space-y-3 flex flex-col items-start justify-between rounded-lg shadow-md shadow-green-300/30'>
+        <div key={index} onClick={() => onPageChange('formationPage')} className='w-11/12 py-4 px-5 bg-black space-y-3 flex flex-col items-start justify-between rounded-lg shadow-md shadow-green-300/30'>
             <Image src={formation.image} alt={formation.formation} className='w-full rounded-md' />
             <div className='flex flex-col items-start'>
                 <span className='text-sm text-eafc'>Formation</span>
@@ -177,7 +181,7 @@ export const FormationsEAFC = () => {
                 <TypeTags label={formation.flow} bgColor="bg-eafc" textColor="text-dark" />
                 <DifficultyTags level={formation.difficulty} />
             </div>
-        </Link>
+        </div>
     ))
 }
 
