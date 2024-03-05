@@ -12,13 +12,12 @@ interface FormationsProps {
 
 export default function Formations({ onPageChange }: FormationsProps) {
 
-    const id = 1 
 
     const callAPI = async () => {
 
-        const res = await fetch(`/api/formations/${id}`);
+        const res = await fetch(`/api/eafc24/formations`);
         const data = await res.json();
-        if(id === data.key) {
+        if(data) {
           console.log(data.content);
         }
         else {

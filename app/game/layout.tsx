@@ -5,7 +5,7 @@
 import NavBar from "../navBar";
 import React, { useState } from 'react';
 import Formations from "./eafc24/formations";
-import { FormationPage } from "./eafc24/formationPage";
+import FormationPage from "./eafc24/formationPage";
 import "../globals.css";
 
 export default function GamePageLayout({
@@ -20,13 +20,13 @@ export default function GamePageLayout({
       setCurrentPage(pageName);
     }
 
-    const id = 10 
+    // const id = 10 
 
     const callAPI = async () => {
 
-        const res = await fetch(`/api/formations/${id}`);
+        const res = await fetch(`/api/eafc24/formations`);
         const data = await res.json();
-        if(id === data.key) {
+        if(data) {
           console.log(data);
         }
         else {
@@ -43,7 +43,7 @@ export default function GamePageLayout({
           <div className="p-16 flex flex-row items-start justify-between h-screen w-screen">
             <NavBar />  
             {currentPage === 'formations' && <Formations onPageChange={handlePageChange} />}
-            {currentPage === 'formationPage' && <FormationPage />}
+            {currentPage === 'formationPage' && <FormationPage onPageChange={handlePageChange} />}
           </div>
         </div>
       </main>

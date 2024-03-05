@@ -117,6 +117,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 // EAFC 24 Formations Card Layout
 
 import { TypeTags, DifficultyTags } from './components/tags';
+import { useRouter } from 'next/navigation';
 
 // Formations Interface
 
@@ -134,6 +135,7 @@ type PlayerInstructions = {
 };
 
 type FormationData = {
+    key: string,
     formation: string;
     overview: string;
     flow: string;
@@ -151,26 +153,38 @@ interface FormationsEAFCProps {
 }
 
 export const FormationsEAFC: React.FC<FormationsEAFCProps> = ({ onPageChange }) => {
+    const router = useRouter();
 
     const [formationData, setFormationData] = useState<FormationData[]>([]);
 
     useEffect(() => {
-        const fetchFormationData = async () => {
-            try {
-                const response = await axios.get<{content: FormationData[]}>(`/api/formations/1`);
-                setFormationData(response.data.content);
-            } catch(error) {
-                console.error('Error fetching formation data:', error);
-            }
-        };
+        if (router) {
+            const fetchFormationData = async () => {
+                try {
+                    const response = await axios.get<{content: FormationData[]}>(`/api/eafc24/formations`);
+                    setFormationData(response.data.content);
+                } catch(error) {
+                    console.error('Error fetching formation data:', error);
+                }
+            };
+            fetchFormationData();
+        }
+    }, [router]);
+    
 
-        fetchFormationData();
-    }, []);
+    const goToFormation = (formation: string) => {
+        if(router) {
+            router.push(`/eafc24/formationPage?formation=${formation}`);
+        }
+    };
 
     if(!formationData) return <div>Loading... </div>;
 
+    // goToFormation(formation.formation)
+    // onPageChange(`/api/eafc24/formations`)
+
     return formationData.map((formation, index) => (
-        <div key={index} onClick={() => onPageChange('formationPage')} className='w-11/12 py-4 px-5 bg-black space-y-3 flex flex-col items-start justify-between rounded-lg shadow-md shadow-green-300/30'>
+        <div key={index} onClick={() => goToFormation(formation.formation)} className='w-11/12 py-4 px-5 bg-black space-y-3 flex flex-col items-start justify-between rounded-lg shadow-md shadow-green-300/30'>
             <Image src={formation.image} alt={formation.formation} className='w-full rounded-md' />
             <div className='flex flex-col items-start'>
                 <span className='text-sm text-eafc'>Formation</span>

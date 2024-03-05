@@ -6,6 +6,7 @@ import formation4321 from '/public/assets/eafc24/formations/4321.jpg';
 import formation41212 from '/public/assets/eafc24/formations/41212.jpg';
 
 type FormationData = {
+  key: any,
   formation: string,
   overview: string,
   flow: string,
@@ -29,24 +30,20 @@ type FormationData = {
 };
 
 type ResponseData = {
-  key: any,
   gameName : string,
   section: string,
   content: FormationData[]
 }
  
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) {
+export default function formationsAPI(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
   const id = req.query.id
   res.status(200).json({
     // Add counter formations to each
-      key: 1,
       gameName: 'Fifa 2024',
       section: 'Formation',
       content: [
         {
+          key: 1,
           formation: "5-2-1-2",
           overview: "A balanced formation blending solid defense with potent attack options through the center.",
           flow: "Defensive",
@@ -80,6 +77,7 @@ export default function handler(
         },
         {
           // Another Formation Example
+          key: 2,
           formation: "4-3-3",
           overview: "The 4-3-3 formation offers a balanced mix of defense and attack, with wide players providing crucial support on the flanks.",
           flow: "Balanced",
@@ -108,6 +106,7 @@ export default function handler(
           ],
         },
         {
+          key: 3,
           formation: "4-3-2-1",
           overview: "Offers a compact midfield with a focus on attacking through the center, providing a strong link between midfield and attack.",
           flow: "Balanced",
@@ -137,6 +136,7 @@ export default function handler(
           ]
         },
         {
+          key: 4,
           formation: "4-1-2-1-2 (Narrow)",
           overview: "Focuses on central play with a diamond midfield, encouraging short, quick passing.",
           flow: "Offensive",
