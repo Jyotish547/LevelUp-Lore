@@ -4,8 +4,8 @@
 
 import NavBar from "../navBar";
 import React, { useState } from 'react';
-import Formations from "./eafc24/formations";
-import FormationPage from "./eafc24/formationPage";
+import Formations from "../../eafc24/formations";
+//import FormationPage from "../../eafc24/formationPage";
 import "../globals.css";
 
 export default function GamePageLayout({
@@ -18,23 +18,26 @@ export default function GamePageLayout({
 
     const handlePageChange = (pageName: string) => {
       setCurrentPage(pageName);
+      const filename = window.location.pathname.split('/').pop();
+
+console.log(filename);
     }
 
     // const id = 10 
 
-    const callAPI = async () => {
+    // const callAPI = async () => {
 
-        const res = await fetch(`/api/eafc24/formations`);
-        const data = await res.json();
-        if(data) {
-          console.log(data);
-        }
-        else {
-          console.log("No content found for the ID.");
-        }
+    //     const res = await fetch(`/api/eafc24/formations`);
+    //     const data = await res.json();
+    //     if(data) {
+    //       console.log(data);
+    //     }
+    //     else {
+    //       console.log("No content found for the ID.");
+    //     }
 
-    };
-    callAPI()
+    // };
+    // callAPI()
     
 
     return (
@@ -42,8 +45,7 @@ export default function GamePageLayout({
         <div className="absolute inset-0 bg-black bg-opacity-60 w-screen h-max">
           <div className="p-16 flex flex-row items-start justify-between h-screen w-screen">
             <NavBar />  
-            {currentPage === 'formations' && <Formations onPageChange={handlePageChange} />}
-            {currentPage === 'formationPage' && <FormationPage onPageChange={handlePageChange} />}
+          {children}
           </div>
         </div>
       </main>
