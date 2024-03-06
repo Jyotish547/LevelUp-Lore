@@ -4,7 +4,7 @@
 
 import NavBar from "../navBar";
 import React, { useState } from 'react';
-import Formations from "../../eafc24/formations";
+import Formations from "../components/formations";
 //import FormationPage from "../../eafc24/formationPage";
 import "../globals.css";
 

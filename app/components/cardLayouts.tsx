@@ -116,7 +116,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 
 // EAFC 24 Formations Card Layout
 
-import { TypeTags, DifficultyTags } from './components/tags';
+import { TypeTags, DifficultyTags } from './tags';
 import { useRouter } from 'next/navigation';
 
 // Formations Interface

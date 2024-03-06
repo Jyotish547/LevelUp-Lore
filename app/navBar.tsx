@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPeopleGroup, faUpRightFromSquare, faRankingStar, faStarHalfStroke, faLayerGroup, faChessBoard, faFutbol, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 
-import { valorantLogo, cs2Logo, fc24Logo, lolLogo, rlLogo } from "./cardLayouts";
+import { valorantLogo, cs2Logo, fc24Logo, lolLogo, rlLogo } from "./components/cardLayouts";
 import dpIcon from '../public/assets/displayPicture.png';
 
 const eafc24Nav = [

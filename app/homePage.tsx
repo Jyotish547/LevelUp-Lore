@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { HomeGames } from './cardLayouts';
+import { HomeGames } from './components/cardLayouts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faUserPlus, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
