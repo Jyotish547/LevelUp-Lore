@@ -17,7 +17,7 @@ type Offense = {
   width: number
 }
 
-type SingleFormationData = {
+export type SingleFormationData = {
     key: any,
     formation: string,
     caption: string,
@@ -40,16 +40,50 @@ type SingleFormationData = {
       },
     },
     playerInstructions: {
-        CB: string,
-        WB: string,
-        CM: string,
-        CDM: string,
-        CAM: string,
-        ST: string,
+        CB: {
+          prop?: string;
+          value?: string;
+          attChange?: string;
+          defChange?: string;
+        }[];
+        WB: {
+            prop?: string;
+            value?: string;
+            attChange?: string;
+            defChange?: string;
+          }[];
+        CM: {
+          prop?: string;
+          value?: string;
+          attChange?: string;
+          defChange?: string;
+        }[];
+        CDM: {
+          prop?: string;
+          value?: string;
+          attChange?: string;
+          defChange?: string;
+        }[];
+        CAM: {
+          prop?: string;
+          value?: string;
+          attChange?: string;
+          defChange?: string;
+        }[];
+        ST: {
+          prop?: string;
+          value?: string;
+          attChange?: string;
+          defChange?: string;
+        }[];
     },
     tacticalTips: string,
     advantages: string[],
     disadvantages: string[],
+    counter: string[],
+    sugFor: {
+      form: string
+    }[];
 };
   
 type FormationData = { 
@@ -59,6 +93,15 @@ type FormationData = {
 };
  
 export default function formationsAPI(req: NextApiRequest, res: NextApiResponse) {
+  
+  // Create Variables for all types of player instructions here
+    const attSup = "Attacking Support";
+    const defPos = "Defensive Position";
+    const attRun = "Attacking Runs";
+    const runTyp = "Run Type";
+    const defSup = "Defensive Support";
+
+
     const formations: FormationData[] = [
       // Your formations data here
       {
@@ -92,12 +135,44 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
                 ,
               },
               playerInstructions: {
-                CB: "Remain defensive",
-                WB: "Join Attack with Overlap instructions, shifting to Stay Back While Attacking if protecting a lead.",
-                CM: "Cover wings and stay back while attacking to support defense.",
-                CAM: "Plays a balanced role, contributing to both defense and attack.",
-                ST: "Balanced, with one prioritizing Get In Behind runs to exploit spaces.",
-                CDM: "N/A"
+                CB: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                WB: [
+                  {
+                    prop: runTyp,
+                    value: "Overlap"
+                  },
+                  {
+                    prop: attRun,
+                    value: "Join the Attack",
+                    defChange: "Stay back while Attacking"
+                  }
+                ],
+                CM: [
+                  {
+                    prop: defPos,
+                    value: "Cover Wing"
+                  }
+                ],
+                CAM: [
+                  {
+                    prop: defSup,
+                    value: "Basic Defensive Support"
+                  }
+                ],
+                CDM: [
+                  // N/A
+                ],
+                ST: [
+                  {
+                    prop: attRun,
+                    value: `Balanced (1 Striker) || Get in Behind (1 Striker)`
+                  }
+                ]
               },
               tacticalTips: "Focus on the overlapping runs of your wingbacks to create scoring opportunities. Properly timing these runs and utilizing cutback passes can be particularly effective. Be mindful of your wingbacks' stamina, as their dual role may require substitutions.||For a formation that appears defensively inclined, the 5-2-1-2 can surprise opponents with its attacking capabilities, especially with strategic use of wingbacks and midfielders to control the game's pace and create chances.",
               advantages: [
@@ -111,6 +186,29 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
                 "Midfield Overrun: Against formations with a packed midfield (like a 4-3-3 or a 4-5-1), there's a risk of being outnumbered and overrun in the midfield.",
                 "Requires High Stamina: The wing-backs have a lot of ground to cover, requiring players in these positions to have high stamina to maintain effectiveness throughout the match.",
                 "Limited Width in Attack: The formation can sometimes become too narrow, especially if wing-backs are not effectively pushing forward or if the team is facing a compact defense."
+              ],
+              counter: [
+                "Exploit the Flanks: The 5-2-1-2 formation is vulnerable on the flanks since it focuses heavily on central defense. Utilizing formations with strong wing play can help in stretching the defense and creating scoring opportunities from wide areas.",
+                "Overload the Midfield: With only two midfielders, the 5-2-1-2 can be outnumbered in the midfield. Formations that pack the midfield can dominate possession and disrupt the flow of the opposing team.",
+                "High Pressing: Pressing high up the pitch can disrupt their buildup play, forcing them into mistakes. This is effective against teams that rely on building attacks from the back.",
+                "Counter-Attacks: Utilizing quick counter-attacks can exploit the space behind the advancing wing-backs, especially if they are caught upfield.",
+              ],
+              sugFor: [
+                {
+                  form: "4-3-3"
+                },
+                {
+                  form: "3-5-2"
+                },
+                {
+                  form: "4-4-2"
+                },
+                {
+                  form: "4-5-1"
+                },
+                {
+                  form: "4-2-3-1"
+                }
               ]
             },
             {
@@ -141,12 +239,52 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
                 ,
               },
               playerInstructions: {
-                CB: "Stay Back While Attacking",
-                WB: "Get Forward and Overlap",
-                CM: "One stays back, others support the attack",
-                CAM: "N/A", // Not applicable for this formation
-                ST: "Stay Central and Get In Behind",
-                CDM: "N/A"
+                // CB: "Stay Back While Attacking",
+                // WB: "Get Forward and Overlap",
+                // CM: "One stays back, others support the attack",
+                // CAM: "N/A", // Not applicable for this formation
+                // ST: "Stay Central and Get In Behind",
+                // CDM: "N/A"
+                CB: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                WB: [
+                  {
+                    prop: runTyp,
+                    value: "Overlap"
+                  },
+                  {
+                    prop: attRun,
+                    value: "Join the Attack"
+                  }
+                ],
+                CM: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                CAM: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                CDM: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                ST: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ]
               },
               tacticalTips: "Utilize the width provided by the wingers to stretch the opposition's defense and create space in the middle.",
               advantages: [
@@ -157,6 +295,29 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
                 "Midfield Exposure: Can be vulnerable to teams that pack the midfield, as there might be spaces for opponents to exploit.",
                 "Defensive Responsibility on Wingers: Requires wingers to track back and help in defense, which might not suit all attacking players.",
               ],
+              counter: [
+                "Exploit the Flanks: The 5-2-1-2 formation is vulnerable on the flanks since it focuses heavily on central defense. Utilizing formations with strong wing play can help in stretching the defense and creating scoring opportunities from wide areas.",
+                "Overload the Midfield: With only two midfielders, the 5-2-1-2 can be outnumbered in the midfield. Formations that pack the midfield can dominate possession and disrupt the flow of the opposing team.",
+                "High Pressing: Pressing high up the pitch can disrupt their buildup play, forcing them into mistakes. This is effective against teams that rely on building attacks from the back.",
+                "Counter-Attacks: Utilizing quick counter-attacks can exploit the space behind the advancing wing-backs, especially if they are caught upfield."
+              ],
+              sugFor: [
+                {
+                  form: "4-3-3"
+                },
+                {
+                  form: "3-5-2"
+                },
+                {
+                  form: "4-4-2"
+                },
+                {
+                  form: "4-5-1"
+                },
+                {
+                  form: "4-2-3-1"
+                }
+              ]
             },
             {
               key: 3,
@@ -185,12 +346,53 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
                 ,
               },
               playerInstructions: {
-                CB: "Stay Back While Attacking",
-                WB: "Stay Back While Attacking, providing security on flanks.",
-                CM: "One CM to Drop Between Defenders, others to Support on Attack",
-                CAM: "Stay Forward, Free Roam to create and exploit spaces.",
-                ST: "Get In Behind, acting as the primary target for through balls.",
-                CDM: "N/A"
+                // CB: "Stay Back While Attacking",
+                // WB: "Stay Back While Attacking, providing security on flanks.",
+                // CM: "One CM to Drop Between Defenders, others to Support on Attack",
+                // CAM: "Stay Forward, Free Roam to create and exploit spaces.",
+                // ST: "Get In Behind, acting as the primary target for through balls.",
+                // CDM: "N/A"
+                CB: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                WB: [
+                  {
+                    prop: runTyp,
+                    value: "Overlap"
+                  },
+                  {
+                    prop: attRun,
+                    value: "Join the Attack",
+                    defChange: "Stay back while Attacking"
+                  }
+                ],
+                CM: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                CAM: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                CDM: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                ST: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ]
               },
               tacticalTips: "Leverage the CAM's creativity to unlock defenses. The forward trio should dynamically interchange positions to disrupt defensive structures.",
               advantages: [
@@ -201,8 +403,32 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
               disadvantages: [
                 "Wing Vulnerability: May struggle against formations that exploit the wings due to the narrow midfield.",
                 "High Energy Demand: Requires midfielders with high stamina due to the extensive ground they need to cover."
+              ],
+              counter: [
+                "Exploit the Flanks: The 5-2-1-2 formation is vulnerable on the flanks since it focuses heavily on central defense. Utilizing formations with strong wing play can help in stretching the defense and creating scoring opportunities from wide areas.",
+                "Overload the Midfield: With only two midfielders, the 5-2-1-2 can be outnumbered in the midfield. Formations that pack the midfield can dominate possession and disrupt the flow of the opposing team.",
+                "High Pressing: Pressing high up the pitch can disrupt their buildup play, forcing them into mistakes. This is effective against teams that rely on building attacks from the back.",
+                "Counter-Attacks: Utilizing quick counter-attacks can exploit the space behind the advancing wing-backs, especially if they are caught upfield."
+              ],
+              sugFor: [
+                {
+                  form: "4-3-3"
+                },
+                {
+                  form: "3-5-2"
+                },
+                {
+                  form: "4-4-2"
+                },
+                {
+                  form: "4-5-1"
+                },
+                {
+                  form: "4-2-3-1"
+                }
               ]
             },
+            
             {
               key: 4,
               formation: "4-1-2-1-2 (Narrow)",
@@ -230,12 +456,52 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
                 ,
               },
               playerInstructions: {
-                CB: "Stay Back While Attacking, anchor the defense.",
-                CDM: "Cut Passing Lanes, Stay Back While Attacking, protect the back four.",
-                CM: "Get Forward, offering options in attack.",
-                CAM: "Stay Forward, act as the link between midfield and strikers.",
-                ST: "Get In Behind, exploit defensive lines with pace.",
-                WB: "N/A"
+                // CB: "Stay Back While Attacking, anchor the defense.",
+                // CDM: "Cut Passing Lanes, Stay Back While Attacking, protect the back four.",
+                // CM: "Get Forward, offering options in attack.",
+                // CAM: "Stay Forward, act as the link between midfield and strikers.",
+                // ST: "Get In Behind, exploit defensive lines with pace.",
+                // WB: "N/A"
+                CB: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                WB: [
+                  {
+                    prop: runTyp,
+                    value: "Overlap"
+                  },
+                  {
+                    prop: attRun,
+                    value: "Join the Attack"
+                  }
+                ],
+                CM: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                CAM: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                CDM: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ],
+                ST: [
+                  {
+                    prop: attSup,
+                    value: "Stay Back While Attacking"
+                  }
+                ]
               },
               tacticalTips: "Maximize the CAM's position to distribute play effectively. Strikers should offer constant movement to create space and opportunities.",
               advantages: [
@@ -245,6 +511,29 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
               disadvantages: [
                 "Limited Width: Struggles to provide width, making it predictable against teams that defend well centrally.",
                 "Defensive Gaps: The aggressive midfield positioning can leave gaps in defense if not managed properly."
+              ],
+              counter: [
+                "Exploit the Flanks: The 5-2-1-2 formation is vulnerable on the flanks since it focuses heavily on central defense. Utilizing formations with strong wing play can help in stretching the defense and creating scoring opportunities from wide areas.",
+                "Overload the Midfield: With only two midfielders, the 5-2-1-2 can be outnumbered in the midfield. Formations that pack the midfield can dominate possession and disrupt the flow of the opposing team.",
+                "High Pressing: Pressing high up the pitch can disrupt their buildup play, forcing them into mistakes. This is effective against teams that rely on building attacks from the back.",
+                "Counter-Attacks: Utilizing quick counter-attacks can exploit the space behind the advancing wing-backs, especially if they are caught upfield."
+              ],
+              sugFor: [
+                {
+                  form: "4-3-3"
+                },
+                {
+                  form: "3-5-2"
+                },
+                {
+                  form: "4-4-2"
+                },
+                {
+                  form: "4-5-1"
+                },
+                {
+                  form: "4-2-3-1"
+                }
               ]
             }
           ]

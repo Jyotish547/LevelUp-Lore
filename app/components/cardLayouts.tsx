@@ -118,7 +118,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 
 import { TypeTags, DifficultyTags } from './tags';
 import { useRouter } from 'next/navigation';
-import { FormationData } from '../game/[id]/page';
+import { SingleFormationData as FormationData } from '@/components/pages/api/formationDetailsByID/[id]';
 
 // interface FormationsEAFCProps {
 //     onPageChange: (pageName: string) => void;

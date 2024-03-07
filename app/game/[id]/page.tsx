@@ -11,6 +11,9 @@ import { faShieldHeart as defensive } from "@fortawesome/free-solid-svg-icons";
 import { faScaleBalanced as balanced } from "@fortawesome/free-solid-svg-icons";
 import { faBomb as offensive } from "@fortawesome/free-solid-svg-icons";
 
+import { SingleFormationData as FormationData } from "@/components/pages/api/formationDetailsByID/[id]";
+import { getIconForPosition } from "../../components/infoDesign";
+
 const getIconForType = (type: string) => {
     switch(type) {
         case "defensive":
@@ -43,47 +46,22 @@ const getIconForDifficulty = (difficulty: string) => {
     }
 };
 
-export interface FormationData {
-    key: number;
-    formation: string;
-    caption: string;
-    overview: string;
-    flow: string;
-    difficulty: string;
-    image: {
-        src: string;
-        height: number;
-        width: number;
-        blurDataURL: string;
-        blurWidth: number;
-        blurHeight: number;
-    };
-    customTactics: {
-        defensiveStyle: string;
-        offensiveStyle: string;
-    };
-    playerInstructions: {
-        CB: string;
-        WB: string;
-        CM: string;
-        CAM: string;
-        ST: string;
-        CDM?: string;
-    };
-    tacticalTips: string;
-    advantages: string[];
-    disadvantages: string[];
-}
 
 export default async function EAFC24( {params} : {params : {id : string}}) {
+
+    // The id used to fetch data from on url
     console.log(params.id);
-    let formationName = params.id;
     
     const response = await fetch(`http://localhost:3000/api/formationDetailsByID/${params.id}`);
+
     const formation = await response.json();
+    const { playerInstructions: instructions } = formation as FormationData;
+
+    console.log(instructions);
 
     // Sample Console Logs
     console.log(formation.customTactics.defenseCap)
+      
 
     return  (
         <div className="flex flex-col items-start justify-center w-4/5 space-y-6">
@@ -179,6 +157,7 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
                                 <p key={index} className="text-lg">{paragraph.trim()}</p>
                             ))}
                         </div>
+                        {/* Suggested Tactics */}
                         <div id="suggested-tactics" className="flex flex-col space-y-4">
                             <HeaderBanner label="Suggested Tactics" style="intermediate" />
                             <div className="space-y-2">
@@ -192,7 +171,7 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
                                     <div className="flex flex-row justify-between items-center">
                                         <span>Defensive Style:</span><span className="font-semibold text-eafc">{formation.customTactics.defense.style}</span>
                                     </div>
-                                        <div className="flex flex-row justify-between items-center">
+                                    <div className="flex flex-row justify-between items-center">
                                         <label htmlFor="width-range">Width:</label>                                      
                                         <input id="width-range" type="range" value={formation.customTactics.defense.width} className={`w-2/5 appearance-none my-range range-${formation.customTactics.defense.width}`} disabled />
                                         <span className="font-semibold text-eafc">~{formation.customTactics.defense.width}</span>
@@ -205,30 +184,58 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
                                 </div>
                             </div>
                         </div>
+                        {/* Player Instructions */}
                         <div id="player-instructions" className="flex flex-col space-y-4">
-                            <HeaderBanner label="Suggested Tactics" style="intermediate" />
-                            <div className="space-y-2">
-                                <span className="text-xl flex flex-row items-center text-eafc">
-                                    <FontAwesomeIcon icon={faShieldHalved} className="mr-1"/> Defense
-                                </span>
-                                <p className="text-lg">
-                                    {formation.customTactics.defenseCap}
-                                </p>
-                                <div className="flex flex-col text-lg w-full space-y-2">
-                                    <div className="flex flex-row justify-between items-center">
-                                        <span>Defensive Style:</span><span className="font-semibold text-eafc">{formation.customTactics.defense.style}</span>
+                            <HeaderBanner label="Player Instructions" style="intermediate" />
+                            <div className="grid grid-cols-2 grid-flow-row gap-8">
+                                {Object.entries(instructions).map(([position, instructionsArray]) => (
+                                    <div key={position} className="flex flex-col space-y-2">
+                                        <h3 className="text-lg flex flex-row items-center space-x-2 py-1 px-2 bg-eafc text-dark w-fit rounded-md font-semibold">
+                                            <FontAwesomeIcon icon={getIconForPosition(position)} />
+                                            <span>{position}</span>
+                                        </h3>
+                                        {instructionsArray.map((instruction, index) => (
+                                            // {formation.tacticalTips.split('||').map((paragraph: string, index: number) => (
+                                            //     <p key={index}>{paragraph.trim()}</p>
+                                            // ))}
+
+                                                <div key={index} className="space-y-2">
+                                                    {
+                                                        instruction.prop 
+                                                        && 
+                                                        <h4>{instruction.prop.split('||')}</h4>}
+                                                    {
+                                                        instruction.value 
+                                                        && 
+                                                        <p className="font-semibold text-eafc">{instruction.value.split('||')}</p>}
+                                                    {
+                                                        instruction.attChange
+                                                        && 
+                                                        <div>
+                                                            <FontAwesomeIcon icon={faShieldHalved} />
+                                                            <p>{instruction.attChange}</p>
+                                                        </div>
+                                                    }
+                                                    {
+                                                        instruction.defChange 
+                                                        && 
+                                                        <div className="flex flex-col items-start space-y-2">
+                                                            <FontAwesomeIcon icon={faShieldHalved} className="p-1 bg-gray-300 text-dark rounded-sm w-fit" />
+                                                            {
+                                                                instruction.defChange.split('||').map((part: string, index: number) => (
+                                                                    <p key={index} className="font-semibold text-eafc">
+                                                                        {part}
+                                                                    </p>
+                                                                ))                                                            
+                                                            }
+                                                            <p>{instruction.defChange}</p>
+                                                        </div>
+                                                    }
+                                                </div>
+
+                                        ))}
                                     </div>
-                                        <div className="flex flex-row justify-between items-center">
-                                        <label htmlFor="width-range">Width:</label>                                      
-                                        <input id="width-range" type="range" value={formation.customTactics.defense.width} className={`w-2/5 appearance-none my-range range-${formation.customTactics.defense.width}`} disabled />
-                                        <span className="font-semibold text-eafc">~{formation.customTactics.defense.width}</span>
-                                    </div>
-                                    <div className="flex flex-row justify-between items-center">
-                                        <label htmlFor="depth-range">Depth:</label>                                      
-                                        <input id="depth-range" type="range" value={formation.customTactics.defense.depth} className={`w-2/5 appearance-none my-range range-${formation.customTactics.defense.depth}`} disabled />
-                                        <span className="font-semibold text-eafc">~{formation.customTactics.defense.depth}</span>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
                     </div>

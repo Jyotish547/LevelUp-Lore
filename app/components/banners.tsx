@@ -5,7 +5,7 @@ import { faList as overview } from "@fortawesome/free-solid-svg-icons";
 import { faQuestionCircle as defaultIcon } from "@fortawesome/free-solid-svg-icons";
 import { faChessBoard as tactical } from "@fortawesome/free-solid-svg-icons";
 
-import { FormationData } from "../game/[id]/page";
+import { SingleFormationData } from "@/components/pages/api/formationDetailsByID/[id]";
 
 interface headerBannerProps {
     label: string,
