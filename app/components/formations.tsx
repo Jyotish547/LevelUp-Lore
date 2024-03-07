@@ -8,20 +8,20 @@ import { FormationsEAFC } from "./cardLayouts";
 
 export default function Formations() {
 
+    // const callAPI = async () => {
 
-    const callAPI = async () => {
+    //     const res = await fetch(`http://localhost:3000/api/allFormations/allFormations`);
+    //     const data = await res.json();
+    //     if(data) {
+    //       console.log(data[0].content);
+    //     }
+    //     else {
+    //       console.log("No content found for the ID.");
+    //     }
 
-        const res = await fetch(`/api/eafc24/formations`);
-        const data = await res.json();
-        if(data) {
-          console.log(data.content);
-        }
-        else {
-          console.log("No content found for the ID.");
-        }
-
-    };
-    callAPI()
+    // };
+    // callAPI()
+    
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
             {/* Header */}

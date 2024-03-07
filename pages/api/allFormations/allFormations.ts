@@ -5,18 +5,6 @@ import formation433 from '/public/assets/eafc24/formations/433.jpg';
 import formation4321 from '/public/assets/eafc24/formations/4321.jpg';
 import formation41212 from '/public/assets/eafc24/formations/41212.jpg';
 
-type Defense = {
-  style: string,
-  width: number,
-  depth: number
-}
-
-type Offense = {
-  play: string,
-  chance: string,
-  width: number
-}
-
 type SingleFormationData = {
     key: any,
     formation: string,
@@ -26,18 +14,8 @@ type SingleFormationData = {
     image: any,
     difficulty: string,
     customTactics: {
-      defenseCap: string,
-      offenseCap: string,
-      defense: {
-        style: string,
-        width: number,
-        depth: number
-      },
-      offense: {
-        play: string,
-        chance: string,
-        width: number
-      },
+        defensiveStyle: string,
+        offensiveStyle: string,
     },
     playerInstructions: {
         CB: string,
@@ -59,6 +37,7 @@ type FormationData = {
 };
  
 export default function formationsAPI(req: NextApiRequest, res: NextApiResponse) {
+
     const formations: FormationData[] = [
       // Your formations data here
       {
@@ -69,27 +48,13 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
               key: 1,
               formation: "5-2-1-2",
               caption: "A balanced formation blending solid defense with potent attack options through the center.",
-              overview: "The 5-2-1-2 formation is a balanced approach that combines solid defense with effective attack. It features five defenders, including three central defenders for strength at the back and two wing-backs who contribute to both defense and attack. || The midfield comprises two central players who support defense and help in building attacks, plus an attacking midfielder focused on creating chances for the team. Up front, two strikers work together to capitalize on opportunities. ||This setup is known for its defensive security while still providing plenty of chances to score, making it a popular choice for teams looking for a blend of stability and offensive potential.",
+              overview: "The 5-2-1-2 formation is a balanced approach that combines solid defense with effective attack. It features five defenders, including three central defenders for strength at the back and two wing-backs who contribute to both defense and attack. The midfield comprises two central players who support defense and help in building attacks, plus an attacking midfielder focused on creating chances for the team. Up front, two strikers work together to capitalize on opportunities. This setup is known for its defensive security while still providing plenty of chances to score, making it a popular choice for teams looking for a blend of stability and offensive potential.",
               flow: "Defensive",
               difficulty: "Beginner",
               image: formation5212,
               customTactics: {
-                defenseCap: "This setup ensures solid defense while not compromising the ability to transition into attack swiftly.",
-                offenseCap: "A Balanced approach with Direct Passing is advisable, keeping the width between 45 to 50. This facilitates a versatile attack capable of adjusting to various in-game situations.",
-                defense: 
-                  {
-                    style: "BALANCED",
-                    width: 45,
-                    depth: 55
-                  }
-                ,
-                offense: 
-                  {
-                    play: "BALANCED",
-                    chance: "DIRECT PASSING",
-                    width: 45
-                  }
-                ,
+                defensiveStyle: "Opt for a Balanced defense with a width of 45 and depth around 55. This setup ensures solid defense while not compromising the ability to transition into attack swiftly.",
+                offensiveStyle: "A Balanced approach with Direct Passing is advisable, keeping the width between 45 to 50. This facilitates a versatile attack capable of adjusting to various in-game situations."
               },
               playerInstructions: {
                 CB: "Remain defensive",
@@ -99,7 +64,7 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
                 ST: "Balanced, with one prioritizing Get In Behind runs to exploit spaces.",
                 CDM: "N/A"
               },
-              tacticalTips: "Focus on the overlapping runs of your wingbacks to create scoring opportunities. Properly timing these runs and utilizing cutback passes can be particularly effective. Be mindful of your wingbacks' stamina, as their dual role may require substitutions.||For a formation that appears defensively inclined, the 5-2-1-2 can surprise opponents with its attacking capabilities, especially with strategic use of wingbacks and midfielders to control the game's pace and create chances.",
+              tacticalTips: "Focus on the overlapping runs of your wingbacks to create scoring opportunities. Properly timing these runs and utilizing cutback passes can be particularly effective. Be mindful of your wingbacks' stamina, as their dual role may require substitutions.",
               advantages: [
                 "Defensive Solidity: With five defenders, including three central defenders and two wing-backs, teams have a robust defensive line that's difficult for opponents to break down, especially against direct attacks.",
                 "Midfield Control: The presence of two central midfielders, along with a central attacking midfielder, allows for a balanced midfield capable of both defending and initiating attacks.",
@@ -123,22 +88,8 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
               difficulty: "Intermediate",
               image: formation433,
               customTactics: {
-                defenseCap: "Press After Possession Loss",
-                offenseCap: "Fast Build Up",
-                defense: 
-                  {
-                    style: "BALANCED",
-                    width: 45,
-                    depth: 55
-                  }
-                ,
-                offense: {
-                  
-                    play: "BALANCED",
-                    chance: "DIRECT PASSING",
-                    width: 45
-                  }
-                ,
+                defensiveStyle: "Press After Possession Loss",
+                offensiveStyle: "Fast Build Up",
               },
               playerInstructions: {
                 CB: "Stay Back While Attacking",
@@ -167,22 +118,8 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
               difficulty: "Intermediate",
               image: formation4321,
               customTactics: {
-                defenseCap: "High Press after Possession Loss with a width of 40 and depth of 60, encouraging a proactive recovery of the ball.",
-                offenseCap: "Possession with emphasis on Short Passing and width of 45, ensuring control and methodical build-up play.",
-                defense: 
-                  {
-                    style: "BALANCED",
-                    width: 45,
-                    depth: 55
-                  }
-                ,
-                offense: 
-                  {
-                    play: "BALANCED",
-                    chance: "DIRECT PASSING",
-                    width: 45
-                  }
-                ,
+                defensiveStyle: "High Press after Possession Loss with a width of 40 and depth of 60, encouraging a proactive recovery of the ball.",
+                offensiveStyle: "Possession with emphasis on Short Passing and width of 45, ensuring control and methodical build-up play."
               },
               playerInstructions: {
                 CB: "Stay Back While Attacking",
@@ -212,22 +149,8 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
               difficulty: "Advanced",
               image: formation41212,
               customTactics: {
-                defenseCap: "Press on Heavy Touch with a width of 50 and depth of 50, aiming to regain possession in the midfield.",
-                offenseCap: "Fast Build Up with width of 40, encouraging quick transitions from defense to attack.",
-                defense: 
-                  {
-                    style: "BALANCED",
-                    width: 45,
-                    depth: 55
-                  }
-                ,
-                offense: 
-                  {
-                    play: "BALANCED",
-                    chance: "DIRECT PASSING",
-                    width: 45
-                  }
-                ,
+                defensiveStyle: "Press on Heavy Touch with a width of 50 and depth of 50, aiming to regain possession in the midfield.",
+                offensiveStyle: "Fast Build Up with width of 40, encouraging quick transitions from defense to attack."
               },
               playerInstructions: {
                 CB: "Stay Back While Attacking, anchor the defense.",
@@ -251,15 +174,8 @@ export default function formationsAPI(req: NextApiRequest, res: NextApiResponse)
       }
     
     ];
-  
-    const formationQueryParam = req.query.id // Example query param
-    const filteredFormation = formations
-      .flatMap(formationData => formationData.content) // Create a flat array of all formations
-      .find(formation => formation.formation === formationQueryParam); // Find the formation matching the query param
 
-    if (filteredFormation) {
-      res.status(200).json(filteredFormation);
-    } else {
-      res.status(404).json({ message: "Formation not found" });
-    }
+    res.status(200).json(formations);
+    
+
   }

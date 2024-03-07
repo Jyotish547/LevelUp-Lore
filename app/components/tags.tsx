@@ -2,11 +2,13 @@ interface typeTagsProps {
     label: string;
     bgColor: string;
     textColor: string;
+    borderColor: string;
+    border: string;
 }
 
-export const TypeTags = ({label, bgColor, textColor}: typeTagsProps) => {
+export const TypeTags = ({label, bgColor, textColor, borderColor, border}: typeTagsProps) => {
     return(
-        <div className={`${bgColor} ${textColor} py-2 px-4 font-semibold rounded-md text-sm flex justify-center`}>
+        <div className={`${bgColor} ${textColor} ${borderColor} ${border} py-2 px-4 rounded-md flex justify-center`}>
             {label} 
         </div>
     )
@@ -32,7 +34,7 @@ export const DifficultyTags = ({ level }: DifficultyTagsProps) => {
     }
 
     return(
-        <div className={`${difficultyObj.bgColor} ${difficultyObj.textColor} py-2 px-4 font-semibold rounded-md text-sm flex justify-center`}>
+        <div className={`${difficultyObj.bgColor} ${difficultyObj.textColor} py-2 px-4 rounded-md flex justify-center`}>
             {difficultyObj.level} 
         </div>
     );

@@ -63,6 +63,58 @@ body {
   color: var(--text-black);
 }
 
+/* Slider */
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  background: var(--eafc24-color); /* Thumb color */
+  cursor: pointer;
+  border-radius: 50%;
+  margin-top: -4px;
+  box-shadow: 0px 0px 10px #444;
+}
+
+input[type='range']::-moz-range-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  background: var(--eafc24-color); /* Thumb color */
+  cursor: pointer;
+  border-radius: 50%;
+  margin-top: -4px;
+  box-shadow: 0px 0px 10px #444;
+}
+
+.my-range::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 10px;
+}
+
+.my-range::-moz-range-track {
+  height: 10px;
+  border-radius: 10px;
+}
+
+/* Value based Ranges */
+
+.range-45::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, var(--eafc24-color) 45%, #444 45%);
+}
+
+.range-45::-moz-range-track {
+  background: linear-gradient(to right, var(--eafc24-color) 45%, #444 45%);
+}
+
+.range-55::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, var(--eafc24-color) 55%, #444 45%);
+}
+
+.range-55::-moz-range-track {
+  background: linear-gradient(to right, var(--eafc24-color) 55%, #444 45%);
+}
+
 /* EAFC 24 */
 
 .text-eafc {
@@ -79,6 +131,18 @@ body {
 
 /* Difficulty Tags Colors */
 
+.text-beginner {
+  color: #68DE3E;
+}
+
+.text-intermediate {
+  color: var(--background-yellow);
+}
+
+.text-advanced {
+  color: #FF5447;
+}
+
 .bg-beginner {
   background-color: #68DE3E;
 }
@@ -88,7 +152,19 @@ body {
 }
 
 .bg-advanced {
-  background-color: #AD2E24;
+  background-color: #FF5447;
+}
+
+.border-beginner {
+  border-color: #68DE3E;
+}
+
+.border-intermediate {
+  border-color: var(--background-yellow);
+}
+
+.border-advanced {
+  border-color: #FF5447;
 }
 
 .homeCL {

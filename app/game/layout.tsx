@@ -42,11 +42,10 @@ console.log(filename);
 
     return (
       <main className="m-0 p-0 game-background w-screen h-screen overflow-x-hidden">
-        <div className="absolute inset-0 bg-black bg-opacity-60 w-screen h-max">
-          <div className="p-16 flex flex-row items-start justify-between h-screen w-screen">
-            <NavBar />  
+        <div className="fixed z-0 inset-0 bg-black bg-opacity-60 w-screen h-screen"></div>
+        <div className="relative z-10 p-16 flex flex-row items-start justify-between h-fit w-screen">
+          <NavBar />  
           {children}
-          </div>
         </div>
       </main>
     )

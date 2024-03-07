@@ -11,19 +11,19 @@ import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup } from "@fortaw
 
 import Image from "next/image";
 // Images
-import valorantCL from '../public/assets/homePage/cardImages/Valorant.jpeg';
-import fc24CL from '../public/assets/homePage/cardImages/FC24.jpg';
-import lolCL from '../public/assets/homePage/cardImages/League of Legends.jpeg';
-import rlCL from '../public/assets/homePage/cardImages/Rocket League.jpeg';
-import cs2CL from '../public/assets/homePage/cardImages/CS2.jpg';
+import valorantCL from '../../public/assets/homePage/cardImages/Valorant.jpeg';
+import fc24CL from '../../public/assets/homePage/cardImages/FC24.jpg';
+import lolCL from '../../public/assets/homePage/cardImages/League of Legends.jpeg';
+import rlCL from '../../public/assets/homePage/cardImages/Rocket League.jpeg';
+import cs2CL from '../../public/assets/homePage/cardImages/CS2.jpg';
 
 // Logos
 
-import valorantLogo from '../public/assets/logos/Valorant.png';
-import lolLogo from '../public/assets/logos/League of Legends.png';
-import fc24Logo from '../public/assets/logos/EA FC24.png';
-import rlLogo from '../public/assets/logos/Rocket League.png';
-import cs2Logo from '../public/assets/logos/Counter-Strike 2.png';
+import valorantLogo from '../../public/assets/logos/Valorant.png';
+import lolLogo from '../../public/assets/logos/League of Legends.png';
+import fc24Logo from '../../public/assets/logos/EA FC24.png';
+import rlLogo from '../../public/assets/logos/Rocket League.png';
+import cs2Logo from '../../public/assets/logos/Counter-Strike 2.png';
 
 library.add(faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup);
 
@@ -118,35 +118,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 
 import { TypeTags, DifficultyTags } from './tags';
 import { useRouter } from 'next/navigation';
-
-// Formations Interface
-
-type CustomTactics = {
-    defensiveStyle: string;
-    offensiveStyle: string;
-};
-
-type PlayerInstructions = {
-    CB: string;
-    WB: string;
-    CM: string;
-    CAM: string;
-    ST: string;
-};
-
-type FormationData = {
-    key: string,
-    formation: string;
-    overview: string;
-    flow: string;
-    image: any;
-    difficulty: string;
-    customTactics: CustomTactics;
-    playerInstructions: PlayerInstructions;
-    tacticalTips: string;
-    advantages: string[];
-    disadvantages: string[];
-};
+import { FormationData } from '../game/[id]/page';
 
 // interface FormationsEAFCProps {
 //     onPageChange: (pageName: string) => void;
@@ -161,8 +133,8 @@ export const FormationsEAFC: React.FC = () => {
         if (router) {
             const fetchFormationData = async () => {
                 try {
-                    const response = await axios.get<{content: FormationData[]}>(`/api/eafc24/formations`);
-                    setFormationData(response.data.content);
+                    const response = await axios.get<{content: FormationData[]}, any>(`http://localhost:3000/api/allFormations/allFormations`);
+                    setFormationData(response.data[0].content);
                 } catch(error) {
                     console.error('Error fetching formation data:', error);
                 }
@@ -178,7 +150,7 @@ export const FormationsEAFC: React.FC = () => {
         }
     };
 
-    if(!formationData) return <div>Loading... </div>;
+    if(!formationData) return <div>Waiting... </div>;
 
     // goToFormation(formation.formation)
     // onPageChange(`/api/eafc24/formations`)
@@ -190,9 +162,9 @@ export const FormationsEAFC: React.FC = () => {
                 <span className='text-sm text-eafc'>Formation</span>
                 <span className='text-xl font-semibold tracking-wider'>{formation.formation}</span>
             </div>
-            <p className='text-base'>{formation.overview}</p>
-            <div className='flex flex-row justify-between w-full'>
-                <TypeTags label={formation.flow} bgColor="bg-eafc" textColor="text-dark" />
+            <p className='text-base'>{formation.caption}</p>
+            <div className='flex flex-row justify-between w-full font-semibold text-sm'>
+                <TypeTags label={formation.flow} bgColor="bg-eafc" textColor="text-dark" borderColor='' border="" />
                 <DifficultyTags level={formation.difficulty} />
             </div>
         </div>
