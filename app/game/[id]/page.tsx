@@ -62,6 +62,7 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
     // Sample Console Logs
     console.log(formation.customTactics.defenseCap)
       
+    
 
     return  (
         <div className="flex flex-col items-start justify-center w-4/5 space-y-6">
@@ -100,13 +101,13 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
                     {/* Left Column */}
                     <div className="flex flex-col w-full space-y-8">
                         <Image src={formation.image} alt={formation.formation} className="w-full" />
-                        <div id="tactical-insights" className="flex flex-col space-y-4">
+                        <div id="tactical-insights" className="flex flex-col space-y-6">
                             <HeaderBanner label="Tactical Insights" style="eafc" />
                             {formation.tacticalTips.split('||').map((paragraph: string, index: number) => (
                                 <p key={index}>{paragraph.trim()}</p>
                             ))}
                         </div>
-                        <div id="advantages" className="flex flex-col space-y-4">
+                        <div id="advantages" className="flex flex-col space-y-6">
                             <HeaderBanner label="Advantages" style="beginner" />
                             <ul className="list-disc">
                                 {formation.advantages.map((advantage: string, index: number) => {
@@ -126,7 +127,7 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
                                 })}
                             </ul>
                         </div>
-                        <div id="disadvantages" className="flex flex-col space-y-4">
+                        <div id="disadvantages" className="flex flex-col space-y-6">
                             <HeaderBanner label="Disadvantages" style="advanced" />
                             <ul className="list-disc">
                                 {formation.disadvantages.map((disadvantage: string, index: number) => {
@@ -150,7 +151,7 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
 
                     {/* Right Column */}
                     <div className="flex flex-col w-full space-y-8">
-                        <div id="overview" className="flex flex-col space-y-4">
+                        <div id="overview" className="flex flex-col space-y-6">
                             <HeaderBanner label="Overview" style="eafc" />
                             {/* Similar way to split paragraphs, add '||' wherever paragraph split required */}
                             {formation.overview.split('||').map((paragraph: string, index: number) => (
@@ -158,7 +159,7 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
                             ))}
                         </div>
                         {/* Suggested Tactics */}
-                        <div id="suggested-tactics" className="flex flex-col space-y-4">
+                        <div id="suggested-tactics" className="flex flex-col space-y-6">
                             <HeaderBanner label="Suggested Tactics" style="intermediate" />
                             <div className="space-y-2">
                                 <span className="text-xl flex flex-row items-center text-eafc">
@@ -185,56 +186,65 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
                             </div>
                         </div>
                         {/* Player Instructions */}
-                        <div id="player-instructions" className="flex flex-col space-y-4">
+                        <div id="player-instructions" className="flex flex-col space-y-6">
                             <HeaderBanner label="Player Instructions" style="intermediate" />
-                            <div className="grid grid-cols-2 grid-flow-row gap-8">
+                            <div className="columns-2 gap-12" style={{ gridAutoRows: 'min-content' }}>
                                 {Object.entries(instructions).map(([position, instructionsArray]) => (
-                                    <div key={position} className="flex flex-col space-y-2">
-                                        <h3 className="text-lg flex flex-row items-center space-x-2 py-1 px-2 bg-eafc text-dark w-fit rounded-md font-semibold">
-                                            <FontAwesomeIcon icon={getIconForPosition(position)} />
-                                            <span>{position}</span>
-                                        </h3>
-                                        {instructionsArray.map((instruction, index) => (
-                                            // {formation.tacticalTips.split('||').map((paragraph: string, index: number) => (
-                                            //     <p key={index}>{paragraph.trim()}</p>
-                                            // ))}
+                                    instructionsArray.length > 0 && ( // Check if instructionsArray is not empty
+                                        <div key={position} className="h-fit flex flex-col items-start w-fit gap-3 mb-12">
+                                            <h3 className="text-xl flex flex-row items-center space-x-2 py-1 px-2 bg-eafc text-dark w-fit rounded-md font-semibold">
+                                                <FontAwesomeIcon icon={getIconForPosition(position)} />
+                                                <span>{position}</span>
+                                            </h3>
+                                            {instructionsArray.map((instruction, index) => (
+                                                    <div key={index} className="space-y-4 text-lg">
+                                                        {
+                                                            instruction.prop 
+                                                            && 
+                                                            <h4>{instruction.prop}</h4>
+                                                        }
+                                                        {
+                                                            instruction.value 
+                                                            &&
+                                                            instruction.value.split('||').map((part: string, index: number) => (
+                                                                <p key={index} className="text-xl font-semibold text-eafc">
+                                                                    {part}
+                                                                </p>
+                                                            ))
+                                                        }
+                                                        {
+                                                            instruction.attChange
+                                                            && 
+                                                            <div className="flex flex-col items-start space-y-4">
+                                                                <FontAwesomeIcon icon={faShieldHalved} className="p-1 bg-gray-300 text-dark rounded-sm w-fit" />
+                                                                {
+                                                                    instruction.attChange.split('||').map((part: string, index: number) => (
+                                                                        <p key={index} className="text-xl font-semibold text-eafc">
+                                                                            {part}
+                                                                        </p>
+                                                                    ))                                                            
+                                                                }
+                                                            </div>
+                                                        }
+                                                        {
+                                                            instruction.defChange 
+                                                            && 
+                                                            <div className="flex flex-col items-start space-y-4">
+                                                                <FontAwesomeIcon icon={faShieldHalved} className="p-1 bg-gray-300 text-dark rounded-sm w-fit" />
+                                                                {
+                                                                    instruction.defChange.split('||').map((part: string, index: number) => (
+                                                                        <p key={index} className="text-xl font-semibold text-eafc">
+                                                                            {part}
+                                                                        </p>
+                                                                    ))                                                            
+                                                                }
+                                                            </div>
+                                                        }
+                                                    </div>
 
-                                                <div key={index} className="space-y-2">
-                                                    {
-                                                        instruction.prop 
-                                                        && 
-                                                        <h4>{instruction.prop.split('||')}</h4>}
-                                                    {
-                                                        instruction.value 
-                                                        && 
-                                                        <p className="font-semibold text-eafc">{instruction.value.split('||')}</p>}
-                                                    {
-                                                        instruction.attChange
-                                                        && 
-                                                        <div>
-                                                            <FontAwesomeIcon icon={faShieldHalved} />
-                                                            <p>{instruction.attChange}</p>
-                                                        </div>
-                                                    }
-                                                    {
-                                                        instruction.defChange 
-                                                        && 
-                                                        <div className="flex flex-col items-start space-y-2">
-                                                            <FontAwesomeIcon icon={faShieldHalved} className="p-1 bg-gray-300 text-dark rounded-sm w-fit" />
-                                                            {
-                                                                instruction.defChange.split('||').map((part: string, index: number) => (
-                                                                    <p key={index} className="font-semibold text-eafc">
-                                                                        {part}
-                                                                    </p>
-                                                                ))                                                            
-                                                            }
-                                                            <p>{instruction.defChange}</p>
-                                                        </div>
-                                                    }
-                                                </div>
-
-                                        ))}
-                                    </div>
+                                            ))}
+                                        </div>
+                                    )
                                 ))}
                             </div>
                         </div>
