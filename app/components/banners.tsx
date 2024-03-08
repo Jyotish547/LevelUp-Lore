@@ -1,9 +1,7 @@
 // Import all headerBanner icons here
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList as overview } from "@fortawesome/free-solid-svg-icons";
-import { faQuestionCircle as defaultIcon } from "@fortawesome/free-solid-svg-icons";
-import { faChessBoard as tactical } from "@fortawesome/free-solid-svg-icons";
+import { faList as overview, faQuestionCircle as defaultIcon, faChessBoard as tactical, faUsersViewfinder as suggested, faBullseye as player, faAnglesUp as advantages, faAnglesDown as disadvantages, faShuffle as countering } from "@fortawesome/free-solid-svg-icons";
 
 import { SingleFormationData } from "@/components/pages/api/formationDetailsByID/[id]";
 
@@ -18,6 +16,16 @@ const getIconForType = (type: string) => {
             return overview;
         case "tactical":
             return tactical;
+        case "suggested":
+            return suggested;
+        case "player":
+            return player;
+        case "advantages":
+            return advantages;
+        case "disadvantages":
+            return disadvantages;
+        case "countering":
+            return countering;
         default:
             return defaultIcon;
         

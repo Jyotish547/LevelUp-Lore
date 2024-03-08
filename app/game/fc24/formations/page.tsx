@@ -3,8 +3,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 
-import BorderButton from './buttons';
-import { FormationsEAFC } from "./cardLayouts";
+import BorderButton from '../../../components/buttons';
+import { FormationsEAFC } from "../../../components/cardLayouts";
 
 export default function Formations() {
 

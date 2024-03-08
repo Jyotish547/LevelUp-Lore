@@ -4,7 +4,7 @@
 
 import NavBar from "../navBar";
 import React, { useState } from 'react';
-import Formations from "../components/formations";
+import Formations from "./fc24/formations/page";
 //import FormationPage from "../../eafc24/formationPage";
 import "../globals.css";
 
@@ -43,9 +43,11 @@ console.log(filename);
     return (
       <main className="m-0 p-0 game-background w-screen h-screen overflow-x-hidden">
         <div className="fixed z-0 inset-0 bg-black bg-opacity-75 w-screen h-screen"></div>
-        <div className="relative z-10 p-16 flex flex-row items-start justify-between h-fit w-screen">
+        <div className="relative z-10 p-16 flex flex-row items-start justify-start h-fit w-screen">
           <NavBar />  
-          {children}
+          <div className="w-full flex justify-end">
+            {children}
+          </div>
         </div>
       </main>
     )

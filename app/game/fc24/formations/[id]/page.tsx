@@ -1,6 +1,6 @@
-import GamePageLayout from "../layout";
-import { DifficultyTags, TypeTags } from "../../components/tags";
-import { HeaderBanner } from "../../components/banners";
+import GamePageLayout from "../../../layout";
+import { DifficultyTags, TypeTags } from "../../../../components/tags";
+import { HeaderBanner } from "../../../../components/banners";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import { faScaleBalanced as balanced } from "@fortawesome/free-solid-svg-icons";
 import { faBomb as offensive } from "@fortawesome/free-solid-svg-icons";
 
 import { SingleFormationData as FormationData } from "@/components/pages/api/formationDetailsByID/[id]";
-import { getIconForPosition } from "../../components/infoDesign";
+import { getIconForPosition } from "../../../../components/infoDesign";
 
 const getIconForType = (type: string) => {
     switch(type) {
@@ -97,7 +97,6 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
             {/* Content */}
             <div className="flex flex-col items-start w-full">
                 <div className="flex flex-row justify-between items-start w-full space-x-12">
-
                     {/* Left Column */}
                     <div className="flex flex-col w-full space-y-8">
                         <Image src={formation.image} alt={formation.formation} className="w-full" />
@@ -249,6 +248,40 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
                             </div>
                         </div>
                     </div>
+                </div>
+                {/* Counter Section */}
+                <div className="flex flex-col w-full space-y-8 mb-6">
+                    <HeaderBanner label={`Countering ${formation.formation} Formation`} style="eafc" />
+                    <ul className="list-disc">
+                        {formation.counter.map((counter: string, index: number) => {
+                            const parts = counter.includes(":") ? counter.split(":") : [counter];
+                            return (
+                                <li key={index}>
+                                    {/* If there's a colon, render the first part bold, and the rest normally */}
+                                    {parts.length > 1 ? (
+                                        <>
+                                            <strong className="text-eafc">{parts[0]}:</strong> {parts.slice(1).join(":")}
+                                        </>
+                                    ) : (
+                                        counter
+                                    )}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+                {/* Counter Formations */}
+                <div className="flex flex-row w-3/4 text-lg justify-between mb-6">
+                    <p className="font-semibold text-eafc">
+                        Suggested Counter Formations:
+                    </p>
+                    {formation.sugFor.map((form: any, index: number) => {
+                        return (
+                            <p key={index} className="text-xl">
+                                {form.form}
+                            </p>
+                        )
+                    })}
                 </div>
             </div>
         </div>

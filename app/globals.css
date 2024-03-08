@@ -45,6 +45,17 @@ body {
   }
 }
 
+/* NavBar */
+
+.active {
+  border-bottom: 3px solid var(--eafc24-color);
+  border-radius: 5px;
+}
+
+.active > span {
+  color: var(--eafc24-color);
+}
+
 /* Color Themes */
 
 .yellow-bg {

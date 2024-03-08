@@ -146,7 +146,7 @@ export const FormationsEAFC: React.FC = () => {
 
     const goToFormation = (formation: string) => {
         if(router) {
-            router.push(`/game/${formation}`);
+            router.push(`/game/fc24/formations/${formation}`);
         }
     };
 
