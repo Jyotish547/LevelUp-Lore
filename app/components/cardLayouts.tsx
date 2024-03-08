@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup, faEllipsisH, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import Image from "next/image";
 // Images
@@ -24,6 +24,8 @@ import lolLogo from '../../public/assets/logos/League of Legends.png';
 import fc24Logo from '../../public/assets/logos/EA FC24.png';
 import rlLogo from '../../public/assets/logos/Rocket League.png';
 import cs2Logo from '../../public/assets/logos/Counter-Strike 2.png';
+
+export {valorantLogo, fc24Logo, lolLogo, rlLogo, cs2Logo};
 
 library.add(faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup);
 
@@ -130,18 +132,18 @@ export const FormationsEAFC: React.FC = () => {
     const [formationData, setFormationData] = useState<FormationData[]>([]);
 
     useEffect(() => {
-        if (router) {
             const fetchFormationData = async () => {
                 try {
-                    const response = await axios.get<{content: FormationData[]}, any>(`http://localhost:3000/api/allFormations/allFormations`);
+                    const response = await axios.get<{content: FormationData[]}, any>(`/api/allFormations`);
                     setFormationData(response.data[0].content);
                 } catch(error) {
                     console.error('Error fetching formation data:', error);
                 }
             };
             fetchFormationData();
-        }
-    }, [router]);
+    });
+
+    // Navigation to Formation Details Page
     
 
     const goToFormation = (formation: string) => {
@@ -171,4 +173,113 @@ export const FormationsEAFC: React.FC = () => {
     ))
 }
 
-export {valorantLogo, fc24Logo, lolLogo, rlLogo, cs2Logo};
+// EA FC24 Top Players Cards
+
+import { PlayersData } from './types/fc24Type';
+
+import rankingTitle1 from '../../public/assets/eafc24/illustrations/rankingTitle1.png'
+import rankingTitle2 from '../../public/assets/eafc24/illustrations/rankingTitle2.png'
+
+export const PlayerCards: React.FC = () => {
+    const [playerData, setPlayerData] = useState<PlayersData[]>([]);
+
+    useEffect(() => {
+        const fetchPlayerData = async () => {
+            try {
+                const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
+                setPlayerData(response.data.items);
+            }
+            catch(error) {
+                console.log('Error fetching players data:', error);
+            }
+        };
+        fetchPlayerData();
+    });
+
+    return (
+        <div className='grid grid-cols-2 grid-flow-row gap-8 justify-items-stretch'>
+            {playerData.slice(0, 20).map((player, index) => (
+                <Link href="#" key={index} className='flex flex-row items-center justify-evenly w-full py-6 playerCard-background rounded-xl shadow-lg shadow-emerald-500/30'>
+                    <div className='flex flex-col z-10 items-center h-full justify-around'>
+                        <div className='flex flex-row items-center space-x-3'>
+                            {
+                                index <= 11 ? (
+                                    <p className='text-3xl mb-3 font-bold text-intermediate'>Rank</p>
+                                ) : (
+                                    <p className='text-3xl mb-3 font-bold text-eafc'>Rank</p>
+                                )
+                            }
+                            <div className='relative text-center text-dark font-black text-4xl rounded-md  w-fit items-center justify-center'>
+                                {
+                                    index <= 11 ? (
+                                        <Image src={rankingTitle1} alt={`${player.rank}`} width={100} />
+                                    ) : (
+                                        <Image src={rankingTitle2} alt={`${player.rank}`} width={100} />
+                                )}
+                                <div className='absolute top-0 bottom-4 left-0 right-3 flex items-center justify-center'>
+                                    {player.rank}
+                                </div>
+                            </div>
+                        </div>
+                        <Image src={player.shieldUrl} alt={player.lastName} width={205} height={290} />
+                    </div>
+                    {/* Content */}
+                    <div className=' z-10 flex flex-col justify-between w-[300px] h-full space-y-4 mr-4'>
+                        <div className='flex flex-row h-full space-x-4 justify-between'>
+                            <div className='flex flex-col h-full justify-between'>
+                                <div className='flex flex-col space-y-1'>
+                                    <span className='text-xl text-eafc'>Name:</span>
+                                    <span className='text-xl font-semibold'>{player.firstName} {player.lastName}</span>
+                                </div>
+                                <div className='flex flex-col space-y-1'>
+                                    <span className='text-xl text-eafc'>Position:</span>
+                                    <span className='text-xl font-semibold'>{player.position.shortLabel}</span>
+                                </div>
+                                <div className='flex flex-col space-y-1'>
+                                    <span className='text-xl text-eafc'>Overall:</span>
+                                    <span className='text-xl font-semibold'>{player.overallRating}</span>
+                                </div>
+                            </div>
+                            <div className='flex flex-col items-center'>
+                                <div className='flex flex-col items-center space-y-1'>
+                                    <span className='text-xl text-eafc'>Nationality:</span>
+                                    <Image src={player.nationality.imageUrl} alt={player.nationality.label} width={80} height={80} className='text-lg font-semibold' />
+                                </div>
+                                <div className='flex flex-col items-center space-y-4'>
+                                    <span className='text-xl text-eafc'>Team:</span>
+                                    <Image src={player.team.imageUrl} alt={player.team.label} width={80} height={80} className='text-lg font-semibold' />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='flex flex-col space-y-2'>
+                            <span className='text-xl text-eafc'>PlayStyles:</span>
+                            <div className='flex flex-row items-center space-x-4'>
+                                <div className='flex flex-row items-end justify-between w-full'>
+                                {
+                                    (player.playStylePlus || []).concat(player.playStyle || []).length > 0 ? (
+                                        (player.playStylePlus || []).concat(player.playStyle || []).slice(0, 3).map((style, index) => (
+                                        <div key={index} className='flex flex-col items-center space-y-2'>
+                                            <Image src={style.imageUrl} alt={style.label} width={60} height={60} className='text-lg font-semibold' />
+                                            <p className='text-center'>{style.label}</p>
+                                        </div>
+                                        ))
+                                    ) : (
+                                        <p>No Playstyles</p>
+                                    )
+                                }
+                                </div>
+                                {(player.playStylePlus || []).concat(player.playStyle || []).length > 3 && (
+                                    <span className='flex flex-row items-center justify-center space-x-2 text-md text-eafc font-semibold'>
+                                        <FontAwesomeIcon icon={faPlusCircle} />
+                                        <p className='text-2xl'>{(player.playStylePlus || []).concat(player.playStyle || []).length}</p>
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </Link>
+            ))}
+        </div>
+    );
+    
+}

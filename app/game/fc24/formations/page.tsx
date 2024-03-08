@@ -7,20 +7,6 @@ import BorderButton from '../../../components/buttons';
 import { FormationsEAFC } from "../../../components/cardLayouts";
 
 export default function Formations() {
-
-    // const callAPI = async () => {
-
-    //     const res = await fetch(`http://localhost:3000/api/allFormations/allFormations`);
-    //     const data = await res.json();
-    //     if(data) {
-    //       console.log(data[0].content);
-    //     }
-    //     else {
-    //       console.log("No content found for the ID.");
-    //     }
-
-    // };
-    // callAPI()
     
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
