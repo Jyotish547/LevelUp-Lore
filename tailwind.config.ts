@@ -16,6 +16,9 @@ const config: Config = {
       fontFamily: {
         sans: ['Lato', 'sans-serif'],
       },
+      gridAutoRows: {
+        'min': 'min-content', // Adjust as needed
+      },
     },
   },
   plugins: [],

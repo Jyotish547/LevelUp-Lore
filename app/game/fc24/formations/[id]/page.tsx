@@ -31,7 +31,6 @@ import { faStarHalfStroke as beginner } from "@fortawesome/free-regular-svg-icon
 import { faStar as intermediate } from "@fortawesome/free-solid-svg-icons";
 import { faRankingStar as advanced } from "@fortawesome/free-solid-svg-icons";
 import { faQuestionCircle as defaultIcon } from "@fortawesome/free-solid-svg-icons";
-import Head from "next/head";
 
 const getIconForDifficulty = (difficulty: string) => {
     switch (difficulty) {
@@ -47,20 +46,21 @@ const getIconForDifficulty = (difficulty: string) => {
 };
 
 
-export default async function EAFC24( {params} : {params : {id : string}}) {
+export default async function EAFC24( {params} : {params : {id : string}} ) {
 
     // The id used to fetch data from on url
-    console.log(params.id);
+    // console.log(params.id);
     
-    const response = await fetch(`http://localhost:3000/api/formationDetailsByID/${params.id}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/formationDetailsByID/${params.id}`);
 
     const formation = await response.json();
     const { playerInstructions: instructions } = formation as FormationData;
+    
 
-    console.log(instructions);
+    // console.log(instructions);
 
-    // Sample Console Logs
-    console.log(formation.customTactics.defenseCap)
+    // // Sample Console Logs
+    // console.log(formation.customTactics.defenseCap)
       
     
 
@@ -250,7 +250,7 @@ export default async function EAFC24( {params} : {params : {id : string}}) {
                     </div>
                 </div>
                 {/* Counter Section */}
-                <div className="flex flex-col w-full space-y-8 mb-6">
+                <div className="flex flex-col w-full space-y-8 my-6">
                     <HeaderBanner label={`Countering ${formation.formation} Formation`} style="eafc" />
                     <ul className="list-disc">
                         {formation.counter.map((counter: string, index: number) => {

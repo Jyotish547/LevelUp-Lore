@@ -7,7 +7,8 @@ import Link from 'next/link';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup, faEllipsisH, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup, faEllipsisH, faPlusCircle, faCircleChevronRight, faAngleRight, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 
 import Image from "next/image";
 // Images
@@ -175,12 +176,17 @@ export const FormationsEAFC: React.FC = () => {
 
 // EA FC24 Top Players Cards
 
-import { PlayersData } from './types/fc24Type';
+import { PlayersData, Stats, StatDetail } from './types/fc24Type';
+
+import { formatDate } from './infoDesign';
 
 import rankingTitle1 from '../../public/assets/eafc24/illustrations/rankingTitle1.png'
 import rankingTitle2 from '../../public/assets/eafc24/illustrations/rankingTitle2.png'
 
 export const PlayerCards: React.FC = () => {
+
+    // const router = useRouter();
+
     const [playerData, setPlayerData] = useState<PlayersData[]>([]);
 
     useEffect(() => {
@@ -188,6 +194,7 @@ export const PlayerCards: React.FC = () => {
             try {
                 const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
                 setPlayerData(response.data.items);
+                // console.log(response.data.items[5])
             }
             catch(error) {
                 console.log('Error fetching players data:', error);
@@ -196,90 +203,436 @@ export const PlayerCards: React.FC = () => {
         fetchPlayerData();
     });
 
+    const [expandedId, setExpandedId] = useState<number | null>(null);
+
+    // const goToPlayer = (player: string) {
+    //     if(router) {
+    //         router.push(`/game/fc24/topCards/${player}`);
+    //     }
+    // }
+      
+
     return (
-        <div className='grid grid-cols-2 grid-flow-row gap-8 justify-items-stretch'>
+
+        // href={`/game/fc24/topCards/${player.rank}`}
+
+        <div className='grid grid-cols-2 grid-flow-row gap-8 justify-items-stretch auto-rows-min' style={{ gridAutoRows: 'minmax(100px, auto)' }}>
             {playerData.slice(0, 20).map((player, index) => (
-                <Link href="#" key={index} className='flex flex-row items-center justify-evenly w-full py-6 playerCard-background rounded-xl shadow-lg shadow-emerald-500/30'>
-                    <div className='flex flex-col z-10 items-center h-full justify-around'>
-                        <div className='flex flex-row items-center space-x-3'>
-                            {
-                                index <= 11 ? (
-                                    <p className='text-3xl mb-3 font-bold text-intermediate'>Rank</p>
-                                ) : (
-                                    <p className='text-3xl mb-3 font-bold text-eafc'>Rank</p>
-                                )
-                            }
-                            <div className='relative text-center text-dark font-black text-4xl rounded-md  w-fit items-center justify-center'>
+                <div
+                    key={index}
+                    className={`h-full w-full playerCard-background rounded-xl shadow-lg shadow-emerald-500/30 cursor-pointer ${expandedId === player.id ? 'col-span-2 row-span-2 flex flex-col space-y-8 py-16' : 'col-span-1 row-span-1 flex flex-row items-center justify-between py-6'}`}
+                    onClick={() => setExpandedId(expandedId === player.id ? null : player.id)}
+                >
+                    <div
+                        className={`flex flex-row items-center h-full ${expandedId !== player.id ? 'w-full justify-evenly' : 'justify-between px-16'}`}
+                    >
+                        {/* Default Card */}
+                        <div className='flex flex-col z-10 items-center h-full justify-between'>
+                            <div className='flex flex-row items-center space-x-3'>
                                 {
-                                    index <= 11 ? (
-                                        <Image src={rankingTitle1} alt={`${player.rank}`} width={100} />
+                                    index <= 9 ? (
+                                        <p className='text-3xl mb-3 font-bold text-intermediate'>Rank</p>
                                     ) : (
-                                        <Image src={rankingTitle2} alt={`${player.rank}`} width={100} />
-                                )}
-                                <div className='absolute top-0 bottom-4 left-0 right-3 flex items-center justify-center'>
-                                    {player.rank}
-                                </div>
-                            </div>
-                        </div>
-                        <Image src={player.shieldUrl} alt={player.lastName} width={205} height={290} />
-                    </div>
-                    {/* Content */}
-                    <div className=' z-10 flex flex-col justify-between w-[300px] h-full space-y-4 mr-4'>
-                        <div className='flex flex-row h-full space-x-4 justify-between'>
-                            <div className='flex flex-col h-full justify-between'>
-                                <div className='flex flex-col space-y-1'>
-                                    <span className='text-xl text-eafc'>Name:</span>
-                                    <span className='text-xl font-semibold'>{player.firstName} {player.lastName}</span>
-                                </div>
-                                <div className='flex flex-col space-y-1'>
-                                    <span className='text-xl text-eafc'>Position:</span>
-                                    <span className='text-xl font-semibold'>{player.position.shortLabel}</span>
-                                </div>
-                                <div className='flex flex-col space-y-1'>
-                                    <span className='text-xl text-eafc'>Overall:</span>
-                                    <span className='text-xl font-semibold'>{player.overallRating}</span>
-                                </div>
-                            </div>
-                            <div className='flex flex-col items-center'>
-                                <div className='flex flex-col items-center space-y-1'>
-                                    <span className='text-xl text-eafc'>Nationality:</span>
-                                    <Image src={player.nationality.imageUrl} alt={player.nationality.label} width={80} height={80} className='text-lg font-semibold' />
-                                </div>
-                                <div className='flex flex-col items-center space-y-4'>
-                                    <span className='text-xl text-eafc'>Team:</span>
-                                    <Image src={player.team.imageUrl} alt={player.team.label} width={80} height={80} className='text-lg font-semibold' />
-                                </div>
-                            </div>
-                        </div>
-                        <div className='flex flex-col space-y-2'>
-                            <span className='text-xl text-eafc'>PlayStyles:</span>
-                            <div className='flex flex-row items-center space-x-4'>
-                                <div className='flex flex-row items-end justify-between w-full'>
-                                {
-                                    (player.playStylePlus || []).concat(player.playStyle || []).length > 0 ? (
-                                        (player.playStylePlus || []).concat(player.playStyle || []).slice(0, 3).map((style, index) => (
-                                        <div key={index} className='flex flex-col items-center space-y-2'>
-                                            <Image src={style.imageUrl} alt={style.label} width={60} height={60} className='text-lg font-semibold' />
-                                            <p className='text-center'>{style.label}</p>
-                                        </div>
-                                        ))
-                                    ) : (
-                                        <p>No Playstyles</p>
+                                        <p className='text-3xl mb-3 font-bold text-eafc'>Rank</p>
                                     )
                                 }
+                                <div className='relative text-center text-dark font-black text-4xl rounded-md  w-fit items-center justify-center'>
+                                    {
+                                        index <= 9 ? (
+                                            <Image src={rankingTitle1} alt={`${player.rank}`} width={100} />
+                                        ) : (
+                                            <Image src={rankingTitle2} alt={`${player.rank}`} width={100} />
+                                    )}
+                                    <div className='absolute top-0 bottom-4 left-0 right-3 flex items-center justify-center'>
+                                        {player.rank}
+                                    </div>
                                 </div>
-                                {(player.playStylePlus || []).concat(player.playStyle || []).length > 3 && (
-                                    <span className='flex flex-row items-center justify-center space-x-2 text-md text-eafc font-semibold'>
-                                        <FontAwesomeIcon icon={faPlusCircle} />
-                                        <p className='text-2xl'>{(player.playStylePlus || []).concat(player.playStyle || []).length}</p>
-                                    </span>
-                                )}
                             </div>
+                            <Image src={player.shieldUrl} alt={player.lastName} width={205} height={290} />
                         </div>
+                        <div className=' z-10 flex flex-col justify-between w-[300px] h-full space-y-4'>
+                            <div className='flex flex-row h-full space-x-4 justify-between'>
+                                <div className='flex flex-col h-full justify-between'>
+                                    <div className='flex flex-col space-y-1'>
+                                        <span className='text-xl text-eafc'>Name:</span>
+                                        <span className='text-xl font-semibold'>{player.firstName} {player.lastName}</span>
+                                    </div>
+                                    <div className='flex flex-col space-y-1'>
+                                        <span className='text-xl text-eafc'>Position:</span>
+                                        <span className='text-xl font-semibold'>{player.position.shortLabel}</span>
+                                    </div>
+                                    <div className='flex flex-col space-y-1'>
+                                        <span className='text-xl text-eafc'>Overall:</span>
+                                        <span className='text-xl font-semibold'>{player.overallRating}</span>
+                                    </div>
+                                </div>
+                                <div className={`flex flex-col items-center ${expandedId === player.id ? 'justify-between' : ''}`}>
+                                    <div className='flex flex-col items-center space-y-1'>
+                                        <span className='text-xl text-eafc'>Nationality:</span>
+                                        <Image src={player.nationality.imageUrl} alt={player.nationality.label} width={80} height={80} className='text-lg font-semibold' />
+                                        {
+                                            expandedId === player.id && (
+                                                <p className='text-xl font-semibold'>{player.nationality.label}</p>
+                                            )
+                                        }
+                                    </div>
+                                    <div className='flex flex-col items-center space-y-4'>
+                                        <span className='text-xl text-eafc'>Team:</span>
+                                        <Image src={player.team.imageUrl} alt={player.team.label} width={80} height={80} className='text-lg font-semibold' />
+                                        {
+                                            expandedId === player.id && (
+                                                <p className='text-xl font-semibold'>{player.team.label}</p>
+                                            )
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            {
+                                expandedId !== player.id && (
+                                    <div className='flex flex-col space-y-2'>
+                                    <span className='text-xl text-eafc'>PlayStyles:</span>
+                                    <div className='flex flex-row items-center space-x-4'>
+                                        <div className='flex flex-row items-end justify-between w-full'>
+                                        {
+                                            (player.playStylePlus || []).concat(player.playStyle || []).length > 0 ? (
+                                            (player.playStylePlus || []).concat(player.playStyle || []).slice(0, 3).map((style, index) => (
+                                                <div key={index} className='flex flex-col items-center space-y-2'>
+                                                <Image src={style.imageUrl} alt={style.label} width={60} height={60} className='text-lg font-semibold' />
+                                                <p className='text-center'>{style.label}</p>
+                                                </div>
+                                            ))
+                                            ) : (
+                                            <p>No Playstyles</p>
+                                            )
+                                        }
+                                        </div>
+                                    </div>
+                                    </div>
+                                )
+                            }
+                        </div>
+                        {/* Expanded Card */}
+                        {
+                            expandedId === player.id && (
+                                    <div className='flex flex-col h-full justify-between z-10'>
+                                        {/* Cells */}
+                                        <div className='flex flex-col items-start space-y-2'>
+                                            <span className='text-xl text-eafc'>
+                                                Weak Foot
+                                            </span>
+                                            <div className='text-xl font-semibold flex flex-row space-x-1'>
+                                                {[...Array(5)].map((_, index) => {
+                                                    if(index < player.weakFootAbility) {
+                                                        return <FontAwesomeIcon key={index} icon={faStar} />
+                                                    } else {
+                                                        return <FontAwesomeIcon key={index} icon={farStar} />
+                                                    }
+                                                })}
+                                            </div>
+                                        </div>
+                                        <div className='flex flex-col items-start space-y-2'>
+                                            <span className='text-xl text-eafc'>
+                                                Att Work Rate
+                                            </span>
+                                            {/* For Star Rating instead of Text */}
+                                            {/* <div className='text-xl font-semibold flex flex-row space-x-1'>
+                                                {[...Array(5)].map((_, index) => {
+                                                    if(index < player.weakFootAbility) {
+                                                        return <FontAwesomeIcon key={index} icon={faStar} />
+                                                    } else {
+                                                        return <FontAwesomeIcon key={index} icon={farStar} />
+                                                    }
+                                                })}
+                                            </div> */}
+                                            <p className='text-xl font-semibold'>
+                                                {
+                                                    player.attackingWorkRate === 2 ?
+                                                    (
+                                                        <>High</>
+                                                    ) : (
+                                                        <>Low</>
+                                                    )
+                                                }
+                                            </p>
+                                        </div>
+                                        <div className='flex flex-col items-start space-y-2'>
+                                            <span className='text-xl text-eafc'>
+                                                Preferred Foot
+                                            </span>
+                                            {/* For Star Rating instead of Text */}
+                                            {/* <div className='text-xl font-semibold flex flex-row space-x-1'>
+                                                {[...Array(5)].map((_, index) => {
+                                                    if(index < player.weakFootAbility) {
+                                                        return <FontAwesomeIcon key={index} icon={faStar} />
+                                                    } else {
+                                                        return <FontAwesomeIcon key={index} icon={farStar} />
+                                                    }
+                                                })}
+                                            </div> */}
+                                            <p className='py-1 px-2 text-md font-semibold text-dark bg-eafc rounded-md'>
+                                                {
+                                                    player.preferredFoot === 1 ?
+                                                    (
+                                                        <>RIGHT</>
+                                                    ) : (
+                                                        <>LEFT</>
+                                                    )
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                            )
+                        }
+                        {
+                            expandedId === player.id && (
+                                <div className='flex flex-col h-full justify-between z-10'>
+                                        {/* Cells */}
+                                        <div className='flex flex-col items-start space-y-2'>
+                                            <span className='text-xl text-eafc'>
+                                                Skill Moves
+                                            </span>
+                                            <div className='text-xl font-semibold flex flex-row space-x-1'>
+                                                {[...Array(5)].map((_, index) => {
+                                                    if(index < player.skillMoves) {
+                                                        return <FontAwesomeIcon key={index} icon={faStar} />
+                                                    } else {
+                                                        return <FontAwesomeIcon key={index} icon={farStar} />
+                                                    }
+                                                })}
+                                            </div>
+                                        </div>
+                                        <div className='flex flex-col items-start space-y-2'>
+                                            <span className='text-xl text-eafc'>
+                                                Def Work Rate
+                                            </span>
+                                            {/* For Star Rating instead of Text */}
+                                            {/* <div className='text-xl font-semibold flex flex-row space-x-1'>
+                                                {[...Array(5)].map((_, index) => {
+                                                    if(index < player.weakFootAbility) {
+                                                        return <FontAwesomeIcon key={index} icon={faStar} />
+                                                    } else {
+                                                        return <FontAwesomeIcon key={index} icon={farStar} />
+                                                    }
+                                                })}
+                                            </div> */}
+                                            <p className='text-xl font-semibold'>
+                                                {
+                                                    player.attackingWorkRate === 2 ?
+                                                    (
+                                                        <>High</>
+                                                    ) : (
+                                                        <>Low</>
+                                                    )
+                                                }
+                                            </p>
+                                        </div>
+                                        <div className='flex flex-col items-start space-y-2'>
+                                            <span className='text-xl text-eafc'>
+                                                Alt Positions
+                                            </span>
+                                            {/* For Star Rating instead of Text */}
+                                            {/* <div className='text-xl font-semibold flex flex-row space-x-1'>
+                                                {[...Array(5)].map((_, index) => {
+                                                    if(index < player.weakFootAbility) {
+                                                        return <FontAwesomeIcon key={index} icon={faStar} />
+                                                    } else {
+                                                        return <FontAwesomeIcon key={index} icon={farStar} />
+                                                    }
+                                                })}
+                                            </div> */}
+                                            <div className='text-md font-semibold flex flex-row space-x-2'>
+                                                {
+                                                    player.alternatePositions?.map((pos) => {
+                                                        return(
+                                                            <div className='py-1 px-2 text-dark bg-eafc rounded-md'>
+                                                                {pos.shortLabel}
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                            )
+                        }
+                        {
+                            expandedId === player.id && (
+                                <div className='flex flex-col h-full justify-between z-10'>
+                                        {/* Cells */}
+                                        <div className='flex flex-col items-start space-y-2'>
+                                            <span className='text-xl text-eafc'>
+                                                Birthday
+                                            </span>
+                                            <p className='text-lg font-semibold'>
+                                                {formatDate(player.birthdate)}
+                                            </p>
+                                        </div>
+                                        <div className='flex flex-col items-start space-y-2'>
+                                            <span className='text-xl text-eafc'>
+                                                Height
+                                            </span>
+                                            {/* For Star Rating instead of Text */}
+                                            {/* <div className='text-xl font-semibold flex flex-row space-x-1'>
+                                                {[...Array(5)].map((_, index) => {
+                                                    if(index < player.weakFootAbility) {
+                                                        return <FontAwesomeIcon key={index} icon={faStar} />
+                                                    } else {
+                                                        return <FontAwesomeIcon key={index} icon={farStar} />
+                                                    }
+                                                })}
+                                            </div> */}
+                                            <p className='text-xl font-semibold'>
+                                                {player.height} CM
+                                            </p>
+                                        </div>
+                                        <div className='flex flex-col items-start space-y-2'>
+                                            <span className='text-xl text-eafc'>
+                                                Weight
+                                            </span>
+                                            {/* For Star Rating instead of Text */}
+                                            {/* <div className='text-xl font-semibold flex flex-row space-x-1'>
+                                                {[...Array(5)].map((_, index) => {
+                                                    if(index < player.weakFootAbility) {
+                                                        return <FontAwesomeIcon key={index} icon={faStar} />
+                                                    } else {
+                                                        return <FontAwesomeIcon key={index} icon={farStar} />
+                                                    }
+                                                })}
+                                            </div> */}
+                                            <p className='text-xl font-semibold'>
+                                                {player.weight} KG
+                                            </p>
+                                        </div>
+                                </div>
+                            )
+                        }
+                        <Link href="#" className='text-eafc text-2xl z-10 py-1 px-3 rounded-full border-2 border-eafc button-hover-eafc'>
+                            <FontAwesomeIcon icon={faAngleRight} />
+                        </Link>
                     </div>
-                </Link>
+                    {
+                        expandedId === player.id && (
+                            <div className={`z-10 flex flex-col w-full items-center px-16 space-y-8`}>
+                                {/* PlayStyles */}
+                                <div className='flex flex-col w-full space-y-4'>
+                                    <hr className='z-10 w-full border-1 border-white rounded-xl items-center' />
+                                    <span className='text-xl text-eafc'>PlayStyles:</span>
+                                    <div className='flex flex-row items-center space-x-4'>
+                                        <div className='flex flex-row flex-wrap items-start justify-between w-full'>
+                                        {
+                                            (player.playStylePlus || []).concat(player.playStyle || []).length > 0 ? (
+                                            (player.playStylePlus || []).concat(player.playStyle || []).map((style, index) => (
+                                                <div key={index} className='flex flex-row items-center px-3 py-2 border-2 justify-between space-x-4 rounded-md'>
+                                                    <Image src={style.imageUrl} alt={style.label} width={40} height={40} className='text-lg font-semibold' />
+                                                    <p className='text-center'>{style.label}</p>
+                                                </div>
+                                            ))
+                                            ) : (
+                                            <p>No Playstyles</p>
+                                            )
+                                        }
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* Statistics */}
+                                <div className='flex flex-row text-lg w-full items-start justify-between'>
+                                    {/* Pace */}
+                                    <StatSection 
+                                        title="Pace"
+                                        stats={player.stats}
+                                        statKeys={['Acceleration', 'Sprint Speed']}
+                                    />
+                                    {/* Shooting */}
+                                    <StatSection 
+                                        title="Shooting"
+                                        stats={player.stats}
+                                        statKeys={['Positioning', 'Finishing', 'Shot Power', 'Long Shots', 'Volleys', 'Penalties']}
+                                    />
+                                    {/* Passing */}
+                                    <StatSection 
+                                        title="Passing"
+                                        stats={player.stats}
+                                        statKeys={['Vision', 'Crossing', 'Free Kick Accuracy', 'Short Passing', 'Long Passing', 'Curve']}
+                                    />
+                                    {/* Dribbling */}
+                                    <StatSection 
+                                        title="Dribbling"
+                                        stats={player.stats}
+                                        statKeys={['Agility', 'Balance', 'Reactions', 'Ball Control', 'Dribbling', 'Composure']}
+                                    />
+                                    {/* Defending */}
+                                    <StatSection 
+                                        title="Defending"
+                                        stats={player.stats}
+                                        statKeys={['Interceptions', 'Heading Accuracy', 'Defensive Awareness', 'Standing Tackle', 'Sliding Tackle']}
+                                    />
+                                    {/* Physicality */}
+                                    <StatSection 
+                                        title="Physicality"
+                                        stats={player.stats}
+                                        statKeys={['Jumping', 'Stamina', 'Strength', 'Aggression']}
+                                    />
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
             ))}
         </div>
     );
     
 }
+
+type StatSectionProps = {
+    title: string,
+    stats: {
+        [key: string]: StatDetail;
+    },
+    statKeys: string[]
+}
+
+const StatSection: React.FC<StatSectionProps> = ({ title, stats, statKeys }) => {
+    const mainStatKey = title.substring(0, 3).toLowerCase();
+
+    return (
+        <div className='flex flex-col h-full w-48 space-y-2'>
+            <div className='flex flex-row w-full justify-between items-center'>
+                <p className='text-eafc'>{title}</p>
+                {/* Assuming the main stat is named with the first 3 letters of the title */}
+                <p className='font-semibold'>{stats[mainStatKey]?.value}</p>
+            </div>
+            {statKeys.map((key) => (
+                <div key={key} className='flex flex-col text-base w-full space-y-2'>
+                    <div className='flex flex-row w-full justify-between items-center'>
+                        <p>{key}</p>
+                        <p className='font-semibold'>{stats[toCamelCase(key)]?.value}</p>
+                    </div>
+                    {/* Placeholder for the stat bar */}
+                    <div className="bg-gray-700 h-1 w-full rounded-lg overflow-hidden">
+                        <div className={`${getBgColorClass(stats[toCamelCase(key)]?.value)} h-1 rounded-lg`} style={{ width: `${stats[toCamelCase(key)]?.value}%` }}></div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+function toCamelCase(str: string): string {
+    return str
+      .split(' ') // Split the string into words
+      .map((word, index) => 
+        index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      ) // Lowercase the first word, capitalize the initial letter of subsequent words
+      .join(''); // Join them back together without spaces
+}
+
+function getBgColorClass(value: number) {
+    if (value >= 70) {
+      return "bg-beginner"; 
+    } else if (value >= 50 && value < 70) {
+      return "bg-intermediate";
+    } else {
+      return "bg-advanced";
+    }
+  }
+  

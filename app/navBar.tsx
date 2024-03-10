@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation";
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,6 +25,17 @@ export default function NavBar() {
     let links;
 
     const [active, setActive] = useState(eafc24Nav[0].href);
+
+    useEffect(() => {
+        // Find the nav item that matches the currentPage
+        const currentNavItem = eafc24Nav.find(nav => currentPage.includes(nav.href));
+        
+        if (currentNavItem) {
+          setActive(currentNavItem.href);
+        } else {
+          setActive(eafc24Nav[0].href);
+        }
+      }, [currentPage]);
 
     if(currentPage.includes('eafc24')) {
         links = (

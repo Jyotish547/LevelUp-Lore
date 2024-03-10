@@ -5,7 +5,7 @@ export type PlayersData = {
     firstName: string;
     lastName: string;
     commonName: string | null;
-    birthdate: string;
+    birthdate: Date;
     height: number;
     skillMoves: number;
     weakFootAbility: number;
@@ -64,7 +64,7 @@ export type PlayersData = {
     label: string;
   };
   
-  type Stats = {
+export type Stats = {
     acceleration: StatDetail;
     aggression: StatDetail;
     agility: StatDetail;
@@ -107,7 +107,7 @@ export type PlayersData = {
     volleys: StatDetail;
   };
   
-  type StatDetail = {
+export type StatDetail = {
     value: number;
     diff?: number;
   };

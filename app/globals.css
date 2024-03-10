@@ -140,6 +140,11 @@ input[type='range']::-moz-range-thumb {
   background-color: var(--eafc24-color);
 }
 
+.button-hover-eafc:hover {
+  background-color: var(--eafc24-color);
+  color: var(--text-black);
+}
+
 /* Difficulty Tags Colors */
 
 .text-beginner {
