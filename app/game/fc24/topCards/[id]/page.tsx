@@ -3,6 +3,8 @@ import Image from "next/image";
 
 import { PlayersData } from "@/components/app/components/types/fc24Type";
 
+// Not using this page as of now, saving for a template for a different page
+
 export default async function PlayerDetails( {params} : {params : {id: string}} ) {
     console.log(params.id);
 

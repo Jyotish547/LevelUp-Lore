@@ -634,5 +634,94 @@ function getBgColorClass(value: number) {
     } else {
       return "bg-advanced";
     }
-  }
+}
+
+// EA FC 24 Skill Moves Card Layout
+
+import type { SkillMove } from '@/components/pages/api/allSkillMoves';
+
+export const SkillMoves: React.FC = () => {
+
+    const [skillData, setSkillData] = useState<SkillMove[]>([])
+
+    useEffect(() => {
+        const fetchSkillData = async () => {
+            try {
+                const response = await axios.get<SkillMove[]>('/api/allSkillMoves');
+                setSkillData(response.data)
+                // console.log(response.data);
+            }
+            catch(error) {
+                console.log('Error fetching Skill Moves:', error);
+            }
+        }
+        fetchSkillData();
+    }, []);
+
+    return(
+        <div className='grid grid-cols-3 grid-flow-row gap-4'>
+            {skillData.map((skill: any, index: any) => (
+                <div key={index} className={`skill-background flex flex-col font-base w-full items-center space-y-4 p-6 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-emerald-400/30'}`}>
+                    {/* Title */}
+                    <div className={`z-10 flex flex-row justify-between items-center w-full`}>
+                        <p className={`font-semibold text-eafc text-xl ${ skill.star >= 3 ? 'text-intermediate' : 'text-beginner' }`}>
+                            {skill.name}
+                        </p>
+                        <div className='flex flex-row justify-end space-x-1'>
+                            {[...Array(5)].map((_, index) => {
+                                if(index < skill.star) {
+                                    return <FontAwesomeIcon key={index} icon={faStar} className={`${ skill.star >= 3 ? 'text-intermediate' : 'text-beginner'}`} />
+                                }
+                            })}
+                        </div>
+                    </div>
+                    {/* Video */}
+                    {
+                        skill.video && (
+                            <iframe
+                                width="400"
+                                height="200"
+                                src={`https://www.youtube.com/embed/${skill.video.id}?start=${skill.video.start}`}
+                                title="YouTube video player"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                className='z-10'
+                            ></iframe>
+                        )
+                    }
+                    <hr className='z-10 border-1 border-white w-full rounded-md' />
+                    {/* PS controls */}
+                    <div className='z-10 flex flex-col w-full'>
+                        <div className='flex flex-row w-full justify-between items-center'>
+                            <span>
+                                <Image src={skill.psControls.icon} alt="PlayStation" className='w-full' />
+                            </span>
+                            <span>
+                                <Image src={skill.psControls.shortLabel} alt="PlayStation" className='w-full' />
+                            </span>
+                        </div>
+                        <p>
+                            {skill.psControls.label}
+                        </p>
+                    </div>
+                    <hr className='z-10 border-1 border-white w-full rounded-md' />
+                    {/* XBOX Controls */}
+                    <div className='z-10 flex flex-col w-full'>
+                        <div className='flex flex-row w-full justify-between items-center'>
+                            <span>
+                                <Image src={skill.xboxControls.icon} alt="PlayStation" className='w-full' />
+                            </span>
+                            <span className=''>
+                                <Image src={skill.xboxControls.shortLabel} alt="PlayStation" className='w-full' />
+                            </span>
+                        </div>
+                        <p>
+                            {skill.xboxControls.label}
+                        </p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
   
