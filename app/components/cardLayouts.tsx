@@ -31,11 +31,11 @@ export {valorantLogo, fc24Logo, lolLogo, rlLogo, cs2Logo};
 library.add(faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup);
 
 const games = [
-    {src: fc24CL, alt: 'EAFC24', logo: fc24Logo, shadowColor: 'rgb(22 163 74)'},
-    {src: lolCL, alt: 'LeagueOfLegends', logo: lolLogo, shadowColor: 'rgb(37 99 235)'},
-    {src: valorantCL, alt: 'Valorant', logo: valorantLogo, shadowColor: 'rgb(126 34 206)'},
-    {src: rlCL, alt: 'RocketLeague', logo: rlLogo, shadowColor: 'rgb(234 88 12)'},
-    {src: cs2CL, alt: 'CounterStrike2', logo: cs2Logo, shadowColor: 'rgb(250 204 21)'},
+    {src: fc24CL, alt: 'EAFC24', logo: fc24Logo, shadowColor: 'rgb(22 163 74)', href: '/game/fc24/formations'},
+    {src: lolCL, alt: 'LeagueOfLegends', logo: lolLogo, shadowColor: 'rgb(37 99 235)', href: '/game/fc24/formations'},
+    {src: valorantCL, alt: 'Valorant', logo: valorantLogo, shadowColor: 'rgb(126 34 206)', href: '/game/valorant/agents'},
+    {src: rlCL, alt: 'RocketLeague', logo: rlLogo, shadowColor: 'rgb(234 88 12)', href: '/game/fc24/formations'},
+    {src: cs2CL, alt: 'CounterStrike2', logo: cs2Logo, shadowColor: 'rgb(250 204 21)', href: '/game/fc24/formations'},
 ]
 
 interface HomeGameProps {
@@ -107,7 +107,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
             </div>
             <div ref={containerRef} className="home-container flex flex-row items-center space-x-4 mx-8 overflow-x-auto">
                 {games.map((game, index) => (
-                    <Link key={index} ref={el => cardRefs.current[index] = el} href="/game" className={`flex flex-col items-center flex-shrink-0 rounded-lg space-y-8`}>
+                    <Link key={index} ref={el => cardRefs.current[index] = el} href={game.href} className={`flex flex-col items-center flex-shrink-0 rounded-lg space-y-8`}>
                         <Image className={`rounded-lg homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={game.src} alt={game.alt} style={{ boxShadow: `3px 3px 8px ${game.shadowColor}`}}/>
                         <Image className={`${index === activeIndex ? 'block' : 'hidden'}`} src={game.logo} alt={game.alt} width={300} />
                     </Link>
@@ -659,9 +659,9 @@ export const SkillMoves: React.FC = () => {
     }, []);
 
     return(
-        <div className='grid grid-cols-3 grid-flow-row gap-4'>
+        <div className='grid grid-cols-3 grid-flow-row gap-12'>
             {skillData.map((skill: any, index: any) => (
-                <div key={index} className={`skill-background flex flex-col font-base w-full items-center space-y-4 p-6 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-emerald-400/30'}`}>
+                <div key={index} className={`skill-background border-1 flex flex-col font-base w-full items-center space-y-4 p-6 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-emerald-400/30'}`}>
                     {/* Title */}
                     <div className={`z-10 flex flex-row justify-between items-center w-full`}>
                         <p className={`font-semibold text-eafc text-xl ${ skill.star >= 3 ? 'text-intermediate' : 'text-beginner' }`}>
@@ -689,9 +689,8 @@ export const SkillMoves: React.FC = () => {
                             ></iframe>
                         )
                     }
-                    <hr className='z-10 border-1 border-white w-full rounded-md' />
                     {/* PS controls */}
-                    <div className='z-10 flex flex-col w-full'>
+                    <div className='z-10 flex flex-col w-full space-y-1'>
                         <div className='flex flex-row w-full justify-between items-center'>
                             <span>
                                 <Image src={skill.psControls.icon} alt="PlayStation" className='w-full' />
@@ -706,7 +705,7 @@ export const SkillMoves: React.FC = () => {
                     </div>
                     <hr className='z-10 border-1 border-white w-full rounded-md' />
                     {/* XBOX Controls */}
-                    <div className='z-10 flex flex-col w-full'>
+                    <div className='z-10 flex flex-col w-full space-y-1'>
                         <div className='flex flex-row w-full justify-between items-center'>
                             <span>
                                 <Image src={skill.xboxControls.icon} alt="PlayStation" className='w-full' />

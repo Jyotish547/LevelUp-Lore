@@ -1,7 +1,7 @@
 'use client'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
+import { faChessBoard, faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 
 import BorderButton from '../../../components/buttons';
 import { FormationsEAFC } from "../../../components/cardLayouts";
@@ -13,10 +13,10 @@ export default function Formations() {
             {/* Header */}
             <header className="space-y-4">
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-eafc w-fit shadow-md shadow-green-300/30">
-                    <FontAwesomeIcon icon={faPeopleGroup} /> <span>Formations</span>
+                    <FontAwesomeIcon icon={faChessBoard} /> <span>Team Tactics</span>
                 </div>
                 <p className="text-lg font-normal">
-                Formations in football define the positioning and roles of players, influenced by the team's strategy, strengths, and opponent's style. It dictates the balance between defense, midfield, and attack through a numerical representation, highlighting the distribution of players across the field. <br /> <br /> These strategic blueprints guide teams in executing their playstyle, whether focusing on defense, possession, or attack, and can be adapted during the match to respond to various situations.
+                    Team Tactics in football define the positioning and roles of players, influenced by the team's strategy, strengths, and opponent's style. It dictates the balance between defense, midfield, and attack through a numerical representation, highlighting the distribution of players across the field. <br /> <br /> These strategic blueprints guide teams in executing their playstyle, whether focusing on defense, possession, or attack, and can be adapted during the match to respond to various situations.
                 </p>
             </header>
 

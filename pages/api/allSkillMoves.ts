@@ -12,6 +12,7 @@ import rl3 from '/public/assets/eafc24/icons/3-RL.png';
 import flgr3 from '/public/assets/eafc24/icons/3-FLGR.png';
 import frgl3 from '/public/assets/eafc24/icons/3-FRGL.png';
 
+
 export type SkillMove = {
     key: any,
     name: string,

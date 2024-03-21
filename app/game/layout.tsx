@@ -3,6 +3,7 @@
 'use client'
 
 import NavBar from "../navBar";
+import { useRouter } from "next/navigation";
 import React, { useState } from 'react';
 import Formations from "./fc24/formations/page";
 //import FormationPage from "../../eafc24/formationPage";
@@ -20,7 +21,7 @@ export default function GamePageLayout({
       setCurrentPage(pageName);
       const filename = window.location.pathname.split('/').pop();
 
-console.log(filename);
+      console.log(filename);
     }
 
     // const id = 10 

@@ -13,6 +13,8 @@
   --background-teal: rgb(151, 216, 196);
   --text-black: rgb(38, 38, 38);
   --eafc24-color: #14F57B;
+  --valo-color: #B181FF;
+
 }
 
 html, body {
@@ -47,13 +49,22 @@ body {
 
 /* NavBar */
 
-.active {
+.active-eafc {
   border-bottom: 3px solid var(--eafc24-color);
   border-radius: 5px;
 }
 
-.active > span {
+.active-eafc > span {
   color: var(--eafc24-color);
+}
+
+.active-valo {
+  border-bottom: 3px solid var(--valo-color);
+  border-radius: 5px;
+}
+
+.active-valo > span {
+  color: var(--valo-color);
 }
 
 /* Color Themes */
@@ -145,6 +156,25 @@ input[type='range']::-moz-range-thumb {
   color: var(--text-black);
 }
 
+/* Valorant */
+
+.text-valo {
+  color: var(--valo-color)
+}
+
+.border-valo {
+  border-color: var(--valo-color);
+}
+
+.bg-valo {
+  background-color: var(--valo-color);
+}
+
+.button-hover-valo:hover {
+  background-color: var(--valo-color);
+  color: var(--text-black);
+}
+
 /* Difficulty Tags Colors */
 
 .text-beginner {
@@ -172,16 +202,20 @@ input[type='range']::-moz-range-thumb {
 }
 
 .border-beginner {
+  border: 1px solid;
   border-color: #68DE3E;
 }
 
 .border-intermediate {
+  border: 1px solid;
   border-color: var(--background-yellow);
 }
 
 .border-advanced {
+  border: 1px solid;
   border-color: #FF5447;
 }
+
 
 .homeCL {
   height: 216px;
