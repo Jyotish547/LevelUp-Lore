@@ -4,7 +4,8 @@ const nextConfig = {
         // Add new image domains here
         domains: [
             'media.contentapi.ea.com',
-            'images.ctfassets.net'
+            'images.ctfassets.net',
+            'media.valorant-api.com'
         ],
     },
 };

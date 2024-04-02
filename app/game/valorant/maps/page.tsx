@@ -1,22 +1,19 @@
 'use client'
 
+import { MapList } from "@/components/app/components/valoComp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import BorderButton from "@/components/app/components/buttons";
 import { faChessBoard } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
-import { AgentList } from "@/components/app/components/valoComp";
-
-export default function Agents() {
+export default function Maps() {
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
             {/* Header */}
             <header className="space-y-4">
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-valo w-fit shadow-md shadow-violet-300/30">
-                    <FontAwesomeIcon icon={faChessBoard} /> <span>Agents</span>
+                    <FontAwesomeIcon icon={faChessBoard} /> <span>Maps</span>
                 </div>
                 <p className="text-lg font-normal">
-                    This is an overview of all the game's characters, detailing their skills and roles. It's a go-to for players looking to master different agents, providing key information on how to best use each one's abilities in battle. This page helps players craft strategies and improve their play, making it a vital tool for anyone aiming to excel in Valorant.
+                    Exploring Valorant's maps offers players a deep dive into the intricate arenas where battles unfold. Each map brings its own unique set of strategic opportunities and challenges, from tight corners for ambushes to open spaces for team skirmishes. Understanding the layout, key sightlines, and objective locations on these maps is crucial for planning effective tactics and outmaneuvering opponents. <br /> Mastery of map knowledge not only enhances gameplay experience but also significantly boosts a team's chances of securing victory by making informed decisions during intense matches.
                 </p>
             </header>
 
@@ -28,7 +25,7 @@ export default function Agents() {
             </div>
             
             {/* Card Layout */}
-                <AgentList />
+                <MapList />
 
         </section>
     )
