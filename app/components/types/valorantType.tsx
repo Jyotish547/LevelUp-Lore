@@ -32,7 +32,7 @@ type Role = {
 export type MapData = {
   uuid: string;
   displayName: string;
-  description: string;
+  narrativeDescription: string;
   tacticalDescription: string;
   coordinates: string;
   displayIcon: string;
@@ -46,8 +46,19 @@ export type MapData = {
 
 interface Callout {
   regionName: string;
+  superRegionName: string;
   location: {
     x: number;
     y: number;
   };
 }
+
+export type CrosshairData = {
+  key: any,
+  username: string,
+  displayIcon: any,
+  title: string,
+  rank: any,
+  crosshair: any,
+  code: string
+}[]

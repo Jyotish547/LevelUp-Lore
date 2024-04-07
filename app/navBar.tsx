@@ -94,13 +94,12 @@ export default function NavBar() {
                     <Image src={fc24Logo} alt="Game Logo" width="150" />
                 </Link>
             </div>
-            <Link href="" className={`flex flex-row items-center justify-between w-full border-2 p-3 rounded-lg ${borderColorClass}`}>
+            <Link href="" className={`flex flex-row items-center justify-center space-x-4 w-full border-2 p-3 rounded-lg ${borderColorClass}`}>
                 <Image src={dpIcon} alt="" width="48" />
                 <div className="flex flex-col">
-                    <span className="text-lg">Reggae547</span>
+                    <span className="text-lg font-semibold">Reggae547</span>
                     <span className="text-sm font-light">Aimbot</span>
                 </div>
-                <FontAwesomeIcon icon={faUpRightFromSquare} className="p-2 bg-green-500 rounded-md text-black text-sm" />
             </Link>
         </nav>
     );

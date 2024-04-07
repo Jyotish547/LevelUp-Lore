@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import axios from "axios";
 import { AgentData } from "./types/valorantType"
 import { MapData } from "./types/valorantType";
@@ -153,6 +153,8 @@ export const MapList: React.FC = () => {
 
     const [mapData, setMapData] = useState<MapData[]>([]);
 
+    const [expandedId, setExpandedId] = useState<string | null>(null);
+
     useEffect(() => {
         const fetchMapData = async () => {
             try {
@@ -167,13 +169,236 @@ export const MapList: React.FC = () => {
         fetchMapData();
     }, []);
 
+    // Calculate co-ordinates for callouts
+    // const calcPos = (map: MapData, x: number, y: number) => {
+    //     const relativeX = (x * map.xMultiplier + map.xScalarToAdd) * 50; // Assuming the background image's width as 50%
+    //     const maxHeight = 100;
+    //     const adjustedY = y * -1
+    //     const relativeY = (adjustedY * map.yMultiplier + map.yScalarToAdd) * 120; // Assuming the background image's height as 100%
+    //     console.log(relativeX, relativeY);
+    //     return { relativeX, relativeY };
+    // };
     return(
-        <div>
-            {mapData.map((map: any, index: number) => (
-                <div key={index}>
-                    {map.displayName}
+        <div className="grid grid-cols-1 grid-flow-row w-full gap-8">
+            {mapData.map((map: any, index: any) => (
+                <div
+                    key={index}
+                    className="row-span-1 valo-background flex flex-col p-8 rounded-lg shadow-md shadow-violet-400/30 space-y-8"
+                    onClick={() => setExpandedId(expandedId === map.uuid ? null : map.uuid)}
+                    >
+                    <div className="flex flex-row w-full justify-between items-center space-x-8">
+                        <Image src={map.splash} alt={map.displayName} width={520} height={500} className="rounded-lg" />
+                        <div className="flex flex-col items-start justify-between h-full py-2">
+                            <span className="text-3xl font-semibold tracking-wider text-valo">
+                                {map.displayName.toUpperCase()}
+                            </span>
+                            <div className="flex flex-col space-y-1">
+                                <p className="text-xl font-semibold text-valo">Description:</p>
+                                <p className="text-md">{map.narrativeDescription}</p>
+                            </div>
+                            <div className="flex flex-row space-x-3 items-center text-xl">
+                                <p className="font-semibold text-valo">Plant Sites:</p>
+                                <p>{map.tacticalDescription}</p>
+                            </div>
+                            <div className="flex flex-row space-x-3 items-center text-xl">
+                                <p className="font-semibold text-valo">Coordinates:</p>
+                                <p>{map.coordinates}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {
+                        expandedId === map.uuid && (
+                            <div className="flex flex-row items-start justify-between">
+                                <div className="flex flex-col items-start space-y-2">
+                                    <p className="text-xl font-semibold text-valo">Map Outline:</p>
+                                    <span className="text-md mb-4">
+                                        Highlighed Areas are Spike Plant regions
+                                    </span>
+                                    <div className="h-[600px] overflow-y-auto px-4 py-2 space-y-4">
+                                        {map.callouts.map((call: any, index: any) => (
+                                            <div key={index} className="flex flex-row space-x-4 items-center">
+                                                <div className="px-3 py-1 text-dark font-bold text-lg bg-intermediate flex flex-row items-center h-fit rounded-md">
+                                                    {index + 1}
+                                                </div>
+                                                <div className="flex flex-col space-y-2 h-fit">
+                                                    <p className="text-valo">Region Name: <span className="font-semibold text-white ml-2">{call.regionName}</span></p>
+                                                    <p className="text-valo">Super Region Name: <span className="font-semibold text-white ml-2">{call.superRegionName}</span></p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                {/* Callout Calculation */}
+                                {/* <div style={{ position: 'relative', width:'50%', height: '100%', backgroundImage: `url(${map.displayIcon})`, backgroundSize: 'cover' }}>
+                                    {map.callouts.map((call: any, index: any) => {
+                                        // const { relativeX, relativeY } = calcPos(map, call.location.x, call.location.y);
+                                        return(
+                                            <div key={index} style={{ position: 'absolute', left:  `${relativeX}%`, top: `${relativeY}%`, transform: 'translate(-50%, -50%)', padding: '5px', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}>
+                                                {call.regionName}
+                                            </div>
+                                        )
+                                    })}
+                                </div> */}
+                                <Image src={map.displayIcon} alt={map.displayName} width={700} height={500} />
+                            </div>
+                        )
+                    }
                 </div>
             ))}
         </div>
     );
+}
+
+import { CrosshairData } from "./types/valorantType";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faCirclePlay } from "@fortawesome/free-regular-svg-icons";
+import { faShareNodes, faCopy, faXmark } from "@fortawesome/free-solid-svg-icons";
+
+interface Crosshair {
+    key: any,
+    username: string,
+    displayIcon: any,
+    title: string,
+    rank: any,
+    crosshair: any,
+    code: string
+}
+
+export const CrosshairList: React.FC = () => {
+
+    const [crosshairData, setCrosshairData] = useState<CrosshairData[]>([]);
+
+    const [preview, setPreview] = useState(false);
+
+    const [selectCrosshair, setSelectCrosshair] = useState<Crosshair | null>(null);
+
+    const overlayRef = useRef<HTMLDivElement>(null);
+
+    const handleCopy = async (code: any) => {
+        await navigator.clipboard.writeText(code);
+        alert('Crosshair code copied to clipboard!');
+    }
+
+    const handlePreview = (crosshair: any) => {
+        setSelectCrosshair(crosshair);
+        setPreview(true);
+    }
+
+    const handleClick = (event: any) => {
+        if(overlayRef.current && !overlayRef.current.contains(event.target)) {
+            setPreview(false);
+        }
+    }
+
+    useEffect(() => {
+        const fetchCrosshairData = async () => {
+            try {
+                const response = await axios.get<{items: CrosshairData[]}, any>(`/api/valorant/allCrosshairs`);
+                setCrosshairData(response.data);
+                // console.log(response.data);
+            }
+            catch(error) {
+                console.log('Error fetching players data:', error);
+            }
+        };
+        fetchCrosshairData();
+    });
+    
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClick);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+        };
+    }, []);
+
+    return(
+        <div className='grid grid-cols-3 grid-flow-row gap-12 w-full'>
+            {crosshairData.map((cross: any, index: number) => (
+                <div key={index} className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-lg w-fit p-8 space-y-5" onClick={() => handlePreview(cross)}>
+                    <Image src={cross.crosshair} alt={cross.title} width={400} height={212} className="border-2 border-valo rounded-lg shadow-lg shadow-violet-400/30" />
+                    <p className="font-semibold text-xl w-full">{cross.title}</p>
+                    <div className="w-full flex flex-row justify-between items-center">
+                        <div className="flex flex-row items-center space-x-3">
+                            <Image src={cross.displayIcon} alt={cross.username} width={30} height={30} />
+                            <span className="font-medium text-valo text-lg">{cross.username}</span>
+                        </div>
+                        <Image src={cross.rank} alt={cross.username} width={30} height={30} />
+                    </div>
+                    <div className="w-full flex flex-row justify-between items-center">
+                        <div className="text-lg font-bold flex flex-row items-center space-x-3">
+                            <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
+                            <p>3.6k</p>
+                        </div>
+                        <div className="text-lg font-bold flex flex-row items-center space-x-3">
+                            <FontAwesomeIcon icon={faShareNodes} className="text-2xl text-intermediate" />
+                            <p>0.7k</p>
+                        </div>
+                    </div>
+                    <div className="w-full flex flex-row justify-between items-center">
+                        <div
+                            className="text-lg text-dark font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-intermediate rounded-md"
+                            onClick={() => handleCopy(cross.code)}
+                        >
+                            <FontAwesomeIcon icon={faCopy} className="text-2xl" />
+                            <p>Copy</p>
+                        </div>
+                        <div
+                            className="text-lg text-dark font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-intermediate rounded-md"
+                            onClick={() => handlePreview(cross)}
+                        >
+                            <FontAwesomeIcon icon={faCirclePlay} className="text-2xl" />
+                            <p>Preview</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+
+            {preview && (
+                <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center" ref={overlayRef}>
+                    <div className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-lg w-fit p-8 space-y-5">
+                        {selectCrosshair && (
+                            <>
+                                <Image src={selectCrosshair.crosshair} alt={selectCrosshair.title} width={400} height={212} className="border-2 border-valo rounded-lg shadow-lg shadow-violet-400/30" />
+                                <p className="font-semibold text-xl w-full">{selectCrosshair.title}</p>
+                                <div className="w-full flex flex-row justify-between items-center">
+                                    <div className="flex flex-row items-center space-x-3">
+                                        <Image src={selectCrosshair.displayIcon} alt={selectCrosshair.username} width={30} height={30} />
+                                        <span className="font-medium text-valo text-lg">{selectCrosshair.username}</span>
+                                    </div>
+                                    <Image src={selectCrosshair.rank} alt={selectCrosshair.username} width={30} height={30} />
+                                </div>
+                                <div className="w-full flex flex-row justify-between items-center">
+                                    <div className="text-lg font-bold flex flex-row items-center space-x-3">
+                                        <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
+                                        <p>3.6k</p>
+                                    </div>
+                                    <div className="text-lg font-bold flex flex-row items-center space-x-3">
+                                        <FontAwesomeIcon icon={faShareNodes} className="text-2xl text-intermediate" />
+                                        <p>0.7k</p>
+                                    </div>
+                                </div>
+                                <div className="w-full flex flex-row justify-between items-center">
+                                    <div
+                                        className="text-lg text-dark font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-intermediate rounded-md"
+                                        onClick={() => handleCopy(selectCrosshair.code)}
+                                    >
+                                        <FontAwesomeIcon icon={faCopy} className="text-2xl" />
+                                        <p>Copy</p>
+                                    </div>
+                                    <div
+                                        className="text-lg font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-advanced rounded-md"
+                                        onClick={() => handleClick(selectCrosshair)}
+                                    >
+                                        <FontAwesomeIcon icon={faXmark} className="text-2xl" />
+                                        <p>Close</p>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
+        </div>
+    )
+
 }

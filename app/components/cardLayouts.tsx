@@ -681,7 +681,7 @@ export const SkillMoves: React.FC = () => {
                             <iframe
                                 width="400"
                                 height="200"
-                                src={`https://www.youtube.com/embed/${skill.video.id}?start=${skill.video.start}`}
+                                src={`https://www.youtube.com/embed/${skill.video.id}?start=${skill.video.start}&end=${skill.video.stop}`}
                                 title="YouTube video player"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen

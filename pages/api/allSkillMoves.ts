@@ -30,6 +30,7 @@ export type SkillMove = {
     video?: {
         id: string,
         start: number,
+        stop: number
     }
 }[]
 
@@ -52,7 +53,8 @@ export default function skillMovesAPI (req: NextApiRequest, res: NextApiResponse
             },
             video: {
                 id: "gI-ifpUe1I0?si=RQTtaSA_tFUVp53U",
-                start: 102
+                start: 102,
+                stop: 160
             }
         },
         {
@@ -71,7 +73,8 @@ export default function skillMovesAPI (req: NextApiRequest, res: NextApiResponse
             },
             video: {
                 id: "gI-ifpUe1I0?si=RQTtaSA_tFUVp53U",
-                start: 102
+                start: 102,
+                stop: 160
             }
         },
         {
@@ -90,7 +93,8 @@ export default function skillMovesAPI (req: NextApiRequest, res: NextApiResponse
             },
             video: {
                 id: "gI-ifpUe1I0?si=RQTtaSA_tFUVp53U",
-                start: 203
+                start: 203,
+                stop: 263
             }
         },
         {
@@ -109,7 +113,8 @@ export default function skillMovesAPI (req: NextApiRequest, res: NextApiResponse
             },
             video: {
                 id: "gI-ifpUe1I0?si=RQTtaSA_tFUVp53U",
-                start: 203
+                start: 203,
+                stop: 263
             }
         },
         {
@@ -128,7 +133,8 @@ export default function skillMovesAPI (req: NextApiRequest, res: NextApiResponse
             },
             video: {
                 id: "gI-ifpUe1I0?si=RQTtaSA_tFUVp53U",
-                start: 203
+                start: 203,
+                stop: 263
             }
         },
         {
@@ -147,7 +153,8 @@ export default function skillMovesAPI (req: NextApiRequest, res: NextApiResponse
             },
             video: {
                 id: "gI-ifpUe1I0?si=RQTtaSA_tFUVp53U",
-                start: 102
+                start: 102,
+                stop: 160
             }
         }
     ];

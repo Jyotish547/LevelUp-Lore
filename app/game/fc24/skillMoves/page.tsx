@@ -13,22 +13,6 @@ import { SkillMoves } from "@/components/app/components/cardLayouts";
 
 export default function TopCardsFC() {
 
-    const [playerData, setPlayerData] = useState<PlayersData[]>([]);
-
-    useEffect(() => {
-        const fetchPlayerData = async () => {
-            try {
-                const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
-                setPlayerData(response.data.items);
-                // console.log(playerData[0].playStyle);
-            }
-            catch(error) {
-                console.log('Error fetching players data:', error);
-            }
-        };
-        fetchPlayerData();
-    });
-
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
             {/* Header */}
