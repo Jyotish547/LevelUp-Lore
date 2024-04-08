@@ -4,13 +4,13 @@ import React, {useState, useEffect} from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPeopleGroup, faUpRightFromSquare, faRankingStar, faStarHalfStroke, faLayerGroup, faChessBoard, faFutbol, faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import { faPeopleGroup, faUpRightFromSquare, faRankingStar, faStarHalfStroke, faLayerGroup, faArrowUpRightDots, faCrosshairs, faChessBoard, faMapLocationDot, faFutbol, faBriefcase, faBullseye, faUsersGear } from "@fortawesome/free-solid-svg-icons";
 
 import { valorantLogo, cs2Logo, fc24Logo, lolLogo, rlLogo } from "./components/cardLayouts";
 import dpIcon from '../public/assets/displayPicture.png';
 
 const eafc24Nav = [
-    {icon: faChessBoard, label: "Team Tactics", href: "/game/fc24/formations", slug: 'eafc'},
+    {icon: faChessBoard, label: "Team Tactics", href: "/game/fc24/formations", slug: 'eafc', game: fc24Logo},
     {icon: faRankingStar, label: "Top Players", href: "/game/fc24/topCards", slug: 'eafc'},
     {icon: faStarHalfStroke, label: "Skill Moves", href: "/game/fc24/skillMoves", slug: 'eafc'},
     {icon: faFutbol, label: "Ultimate Team", href: "/game/fc24/fut", slug: 'eafc'},
@@ -18,12 +18,11 @@ const eafc24Nav = [
 ]
 
 const valoNav = [
-    {icon: faChessBoard, label: "Insights", href: "/game/valorant/insights", slug: 'valo'},
-    {icon: faChessBoard, label: "Lineups", href: "/game/valorant/lineups", slug: 'valo'},
-    {icon: faChessBoard, label: "Agents", href: "/game/valorant/agents", slug: 'valo'},
-    {icon: faChessBoard, label: "Maps", href: "/game/valorant/maps", slug: 'valo'},
-    {icon: faChessBoard, label: "Crosshairs", href: "/game/valorant/crosshairs", slug: 'valo'},
-    {icon: faChessBoard, label: "Guides", href: "/game/valorant/guides", slug: 'valo'}
+    {icon: faBullseye, label: "Lineups", href: "/game/valorant/lineups", slug: 'valo', game: valorantLogo},
+    {icon: faUsersGear, label: "Agents", href: "/game/valorant/agents", slug: 'valo'},
+    {icon: faMapLocationDot, label: "Maps", href: "/game/valorant/maps", slug: 'valo'},
+    {icon: faCrosshairs, label: "Crosshairs", href: "/game/valorant/crosshairs", slug: 'valo'},
+    {icon: faArrowUpRightDots, label: "Guides", href: "/game/valorant/guides", slug: 'valo'}
 ];
 
 interface ColorClasses {
@@ -49,7 +48,7 @@ export default function NavBar() {
         const currentNavItem = currentNav.find(nav => currentPage.includes(nav.href));
         
         setActive(currentNavItem ? currentNavItem.href : currentNav[0]?.href);
-        console.log(currentNav[0])
+        // console.log(currentNav[0])
       }, [pathname, currentPage]);
 
     
@@ -91,7 +90,7 @@ export default function NavBar() {
             <div className="flex flex-col items-center space-y-4">
                 <span className={`text-xl font-semibold ${textColorClass}`}>Change Game</span>
                 <Link href="/" className="py-4 px-5 bg-black rounded-lg shadow-md shadow-green-300/30">
-                    <Image src={fc24Logo} alt="Game Logo" width="150" />
+                    <Image src={currentNav[0]?.game || fc24Logo} alt="Game Logo" width="150" />
                 </Link>
             </div>
             <Link href="" className={`flex flex-row items-center justify-center space-x-4 w-full border-2 p-3 rounded-lg ${borderColorClass}`}>

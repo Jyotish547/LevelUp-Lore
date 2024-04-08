@@ -62,3 +62,33 @@ export type CrosshairData = {
   crosshair: any,
   code: string
 }[]
+
+export type GuideData = {
+  id: any,
+  snippet: Snippet
+}[]
+
+interface Snippet {
+  publishedAt: any,
+  title: string,
+  description: string,
+  thumbnails: Thumbnails,
+  channelTitle: string,
+  resourceId: {
+    videoId: string
+  }
+}
+
+interface Thumbnails {
+  default: Thumbnail,
+  medium: Thumbnail,
+  high: Thumbnail,
+  standard: Thumbnail,
+  maxres: Thumbnail,
+}
+
+interface Thumbnail {
+  url: string,
+  width: number,
+  height: number
+}

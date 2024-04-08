@@ -302,7 +302,7 @@ export const CrosshairList: React.FC = () => {
             }
         };
         fetchCrosshairData();
-    });
+    }, []);
     
     useEffect(() => {
         document.addEventListener('mousedown', handleClick);
@@ -401,4 +401,60 @@ export const CrosshairList: React.FC = () => {
         </div>
     )
 
+}
+
+import { GuideData } from "./types/valorantType";
+
+export const GuideList: React.FC = () => {
+
+    const [guideData, setGuideData] = useState<GuideData[]>([])
+
+    useEffect(() => {
+        const fetchGuideData = async () => {
+            try {
+                const response = await axios.get<{data: GuideData[]}, any>('/api/valorant/allGuides');
+                setGuideData(response.data);
+                console.log(response.data);
+            }
+            catch(error) {
+                console.log('Unable to fetch Guide Data', error);
+            }
+        }
+        fetchGuideData();
+    }, [])
+
+    return(
+        <div className='grid grid-cols-2 grid-flow-row gap-8 w-full'>
+            {guideData.map((guide: any, index: any) => (
+                <div key={index} className="valo-background w-full shadow-md shadow-violet-400/30 rounded-2xl px-8 py-6 flex flex-col items-start justify-between space-y-4">
+                    <div className="relative pt-[56.25%] w-full">
+                        <iframe
+                        src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
+                        title={guide.snippet.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        className="absolute top-0 left-0 w-full h-full rounded-lg"
+                        allowFullScreen
+                        ></iframe>
+                    </div>
+                    <h3 className="text-2xl text-wrap font-semibold text-valo">{guide.snippet.title}</h3>
+                    <div className="w-full flex flex-row items-center justify-between">
+                        <div className="flex flex-col space-y-3">
+                            <h4 className="text-lg">Creator: <Link href={`https://www.youtube.com/@${guide.snippet.channelTitle}`} target="_blank" className="font-semibold text-intermediate" >{guide.snippet.channelTitle}</Link></h4>
+                            <p className="text-lg">Date Posted: <span className="italic">{guide.snippet.publishedAt.substring(0, 10)}</span></p>
+                        </div>
+                        <div className="flex flex-row space-x-4 items-center">
+                            <div className="text-xl font-bold flex flex-row items-center space-x-3">
+                                <FontAwesomeIcon icon={faHeart} className="text-3xl text-intermediate" />
+                                <p>3.6k</p>
+                            </div>
+                            <div className="text-xl font-bold flex flex-row items-center space-x-3">
+                                <FontAwesomeIcon icon={faShareNodes} className="text-3xl text-intermediate" />
+                                <p>0.7k</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
 }
