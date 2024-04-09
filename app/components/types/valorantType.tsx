@@ -92,3 +92,40 @@ interface Thumbnail {
   width: number,
   height: number
 }
+
+
+// Map
+export type LineupMap = {
+  id: string;
+  name: string;
+  agents: LineupAgent;
+}[];
+
+// Agent
+type LineupAgent = {
+  id: string;
+  name: string;
+  description: string;
+  lineups: Lineup;
+}[];
+
+// Lineups
+type Lineup = {
+  id: string;
+  map: string;
+  ability: Ability;
+  location: string;
+  thumbnail: string;
+  title: string;
+  description: string;
+  side: string;
+  images: Images;
+  tags?: string[];
+}[];
+
+// Lineup images
+type Images = {
+  id: string,
+  url: string,
+  description: string
+}[]
