@@ -98,8 +98,6 @@ interface Thumbnail {
 export type LineupMap = {
   id: number;
   map: string;
-  username: string;
-  date: string;
   agents: LineupAgent;
 }[];
 
@@ -113,6 +111,8 @@ type LineupAgent = {
 // Lineups
 type Lineup = {
   id: number;
+  username: string;
+  date: string;
   source: string;
   ability: string;
   location: string[];
