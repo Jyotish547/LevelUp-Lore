@@ -5,7 +5,8 @@ const nextConfig = {
         domains: [
             'media.contentapi.ea.com',
             'images.ctfassets.net',
-            'media.valorant-api.com'
+            'media.valorant-api.com',
+            "lineupsvalorant.com"
         ],
     },
 };

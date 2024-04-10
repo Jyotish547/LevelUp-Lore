@@ -96,36 +96,36 @@ interface Thumbnail {
 
 // Map
 export type LineupMap = {
-  id: string;
-  name: string;
+  id: number;
+  map: string;
+  username: string;
+  date: string;
   agents: LineupAgent;
 }[];
 
 // Agent
 type LineupAgent = {
-  id: string;
+  id: number;
   name: string;
-  description: string;
   lineups: Lineup;
 }[];
 
 // Lineups
 type Lineup = {
-  id: string;
-  map: string;
-  ability: Ability;
-  location: string;
+  id: number;
+  source: string;
+  ability: string;
+  location: string[];
   thumbnail: string;
   title: string;
-  description: string;
-  side: string;
+  description: string[];
+  side: boolean;
   images: Images;
-  tags?: string[];
+  note?: string;
 }[];
 
 // Lineup images
 type Images = {
-  id: string,
+  id: number,
   url: string,
-  description: string
 }[]
