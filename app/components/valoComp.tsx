@@ -14,7 +14,7 @@ export const AgentList: React.FC = () => {
         const fetchAgentData = async () => {
             try {
                 const response = await axios.get<{data: AgentData[]}, any>(`/api/valorant/allAgents`);
-                const dataWithSelectedDesc = response.data.data.map((agent: AgentData) => ({
+                const dataWithSelectedDesc = response.data.map((agent: AgentData) => ({
                     ...agent,
                     defaultAbility: agent.abilities[0]?.description || ''
                 }))
@@ -159,7 +159,7 @@ export const MapList: React.FC = () => {
         const fetchMapData = async () => {
             try {
                 const response = await axios.get<{data: MapData[]}, any>(`/api/valorant/allMaps`);
-                setMapData(response.data.data);
+                setMapData(response.data);
                 // console.log(response.data.data);
             }
             catch(error) {
@@ -252,7 +252,7 @@ export const MapList: React.FC = () => {
 import { CrosshairData } from "./types/valorantType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faCirclePlay } from "@fortawesome/free-regular-svg-icons";
-import { faShareNodes, faCopy, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faShareNodes, faCopy, faXmark, faArrowLeft, faArrowRight, faAngleRight, faAngleLeft, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 interface Crosshair {
     key: any,
@@ -302,9 +302,6 @@ export const CrosshairList: React.FC = () => {
             }
         };
         fetchCrosshairData();
-    }, []);
-    
-    useEffect(() => {
         document.addEventListener('mousedown', handleClick);
         return () => {
             document.removeEventListener('mousedown', handleClick);
@@ -354,8 +351,8 @@ export const CrosshairList: React.FC = () => {
             ))}
 
             {preview && (
-                <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center" ref={overlayRef}>
-                    <div className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-lg w-fit p-8 space-y-5">
+                <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center">
+                    <div className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-lg w-fit p-8 space-y-5" ref={overlayRef}>
                         {selectCrosshair && (
                             <>
                                 <Image src={selectCrosshair.crosshair} alt={selectCrosshair.title} width={400} height={212} className="border-2 border-valo rounded-lg shadow-lg shadow-violet-400/30" />
@@ -414,7 +411,7 @@ export const GuideList: React.FC = () => {
             try {
                 const response = await axios.get<{data: GuideData[]}, any>('/api/valorant/allGuides');
                 setGuideData(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             }
             catch(error) {
                 console.log('Unable to fetch Guide Data', error);
@@ -455,6 +452,235 @@ export const GuideList: React.FC = () => {
                     </div>
                 </div>
             ))}
+        </div>
+    )
+}
+
+import { LineupData } from "./types/valorantType";
+// Per Lineup
+import { Lineup } from "./types/valorantType";
+import { fetchLineup } from "@/components/pages/api/valorant/allLineups";
+
+import dpIcon from '../../public/assets/displayPicture.png';
+
+export const LineupList: React.FC = () => {
+
+    // All Data
+
+    const [data, setData] = useState<{ agents: AgentData[]; maps: MapData[]; lineups: LineupData[] }>({
+        agents: [],
+        maps: [],
+        lineups: [],
+    })
+
+    const [selectLineup, setSelectLineup] = useState<Lineup | null>(null);
+    const [active, setActive] = useState(false);
+
+    // Image Slider
+    const [imageIndex, setImageIndex] = useState(0);
+
+    const prevButton = () => {
+        setImageIndex((prev) => prev - 1);
+    };
+
+    const nextButton = () => {
+        setImageIndex((next) => next + 1);
+    };
+
+    // Lineup Overlay
+
+    const overlayRef = useRef<HTMLDivElement>(null);
+
+    const handleLineup = (lineup: Lineup) => {
+        setSelectLineup(lineup);
+        setActive(true);
+    }
+
+    const handleClick = (event: any) => {
+        if(overlayRef.current && !overlayRef.current.contains(event.target)) {
+            setActive(false);
+        }
+    }
+
+    const prepareLineups = (lineups: LineupData[], agents: AgentData[]): LineupData[] => {
+        return lineups.map((lineupData :any) => ({
+          ...lineupData,
+          agents: lineupData.agents.map((agent: any) => {
+            // Matching Agent
+            const match = agents.find((a: any) => a.displayName === agent.name);
+            
+            if(!match) {
+                return {
+                    ...agent,
+                    matchAbility: null,
+                };
+            }
+
+            console.log(match);
+
+            return {
+              ...agent,
+              lineups: agent.lineups.map((lineup: any) => {
+                const ability = match?.abilities.find((ab: any) => ab.displayName === lineup.ability)
+                return {
+                    ...lineup,
+                    displayIcon: match ? match.displayIcon : null,
+                    abilityIcon: ability ? ability.displayIcon : null,
+                }
+              })
+              
+            };
+          }),
+        }));
+      };
+
+    useEffect(() => {
+        fetchLineup().then(data => {
+            const updatedData = prepareLineups(data.lineups, data.agents);
+            setData({
+                agents: data.agents,
+                maps: data.maps,
+                lineups: updatedData,
+            })
+        });
+        document.addEventListener('mousedown', handleClick);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+        };
+    }, [])
+
+    console.log(selectLineup);
+
+    return(
+        <div className='grid grid-cols-4 grid-flow-row gap-8 w-full'>
+            {data.lineups.map((map: any) => (
+                map.agents.map((agent: any) => (
+                    agent.lineups.map((lineup: any, lineIndex: number) => (
+                        <div key={lineIndex} className="w-fit rounded-lg shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
+                            <div className="image-container w-[350px] h-[196px] relative rounded-t-lg overflow-hidden">
+                                <Image className="rounded-t-lg" src={lineup.thumbnail} alt={lineup.title} fill={true} />
+                                <div className="overlay absolute inset-0 flex flex-col justify-center items-center bg-gradient-to-b from-black/70 from-10% via-neutral-400/0 to-black/70 to-90% w-full h-full justify-between">
+                                    <div className="flex flex-row justify-end items-start w-full">
+                                        {lineup.abilityIcon && (
+                                            <Image src={lineup.abilityIcon} alt={lineup.ability} width={55} height={40} className="p-2 bg-valo20 rounded-md mt-2 mr-2" />
+                                        )}
+                                    </div>
+                                    <div className="flex flex-row justify-start items-end w-full">
+                                        {lineup.displayIcon && (
+                                            <Image src={lineup.displayIcon} alt={lineup.displayName} width={80} height={40} className="p-2 bg-valo20 rounded-md mb-2 ml-2" />
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex flex-col items-start space-y-2 p-5">
+                                <p className="text-xl tracking-wide">{lineup.title}</p>
+                                
+                                {
+                                    lineup.location === 1 ?
+                                    (
+                                        <p className="font-base">For {lineup.location[0]}</p>
+                                    )
+                                    :
+                                    (
+                                        <p className="font-base">From <span className="text-valo mx-1">{lineup.location[0]}</span> to <span className="text-valo mx-1">{lineup.location[1]}</span></p>
+                                    )
+                                }
+                            </div>
+                            
+                        </div>
+                        
+                    ))
+                ))
+            ))}
+            {/* Description Code for Overlay */}
+                                {/* {lineup.description.map((desc: any, index: number) => (
+                                    <ol>
+                                        {index + 1}. {desc}
+                                    </ol>
+            ))} */}
+            {active && (
+                <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center">
+                    <div className="flex flex-row shadow-md shadow-violet-400/30" ref={overlayRef}>
+                        {selectLineup && (
+                            <>
+                                {/* Content */}
+                                <div className="h-auto flex flex-col justify-between p-8 valo-background">
+                                    <div className="text-lg space-y-4">
+                                        <h2 className="text-2xl font-semibold text-valo">{selectLineup.title}</h2>
+                                        <div className="space-y-1 font-regular">
+                                            {selectLineup.description.map((desc: any, index: number) => (
+                                                <p>
+                                                    {index + 1}. {desc}
+                                                </p>
+                                            ))}
+                                        </div>
+                                        {selectLineup.note && (
+                                            <p>
+                                                (Note: {selectLineup.note})
+                                            </p>
+                                        )}
+                                    </div>
+                                    <div className="flex flex-col items-start space-y-6">
+                                        <div className="flex flex-row space-x-4 items-center">
+                                            <div className="text-xl font-bold flex flex-row items-center space-x-3">
+                                                <FontAwesomeIcon icon={faHeart} className="text-3xl text-intermediate" />
+                                                <p>3.6k</p>
+                                            </div>
+                                            <div className="text-xl font-bold flex flex-row items-center space-x-3">
+                                                <FontAwesomeIcon icon={faShareNodes} className="text-3xl text-intermediate" />
+                                                <p>0.7k</p>
+                                            </div>
+                                            <FontAwesomeIcon icon={faBookmark} className={`text-3xl text-intermediate`} />
+                                        </div>
+                                        <div className="flex flex-col items-start w-full space-y-3">
+                                            <p>Uploaded By:</p>
+                                            <div className="flex flex-row items-center justify-between w-full">
+                                                <div className="flex flex-row items-center space-x-2">
+                                                    <Image src={dpIcon} alt={selectLineup.username} width={30} height={30} />
+                                                    <Link href={`https://lineupsvalorant.com/profile/${selectLineup.username}`} className="text-lg text-valo font-semibold underline" target="_blank">{selectLineup.username}</Link>
+                                                </div>
+                                                <p>{selectLineup.date}</p>
+                                            </div>
+                                        </div>
+                                        {selectLineup.abilityIcon && selectLineup.displayIcon && (
+                                            <div className="p-5 bg-valo20 rounded-md flex flex-row w-full space-x-5">
+                                                <Image src={selectLineup.displayIcon} alt={selectLineup.ability} width={50} height={40} />
+                                                <Image src={selectLineup.abilityIcon} alt={selectLineup.ability} width={50} height={40} />
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                {/* Image */}
+                                <div className="image-slider relative max-w-[1300px] h-[750px]">
+                                    {selectLineup.images && selectLineup.images.length > 0 && (
+                                        <Image src={selectLineup.images[imageIndex].url} alt={selectLineup.title} width={1300} height={600} />
+                                    )}
+                                    <div className="overlay absolute inset-0 flex flex-row w-full justify-between items-center px-5">
+                                        {imageIndex > 0 && (
+                                            <div
+                                                className={`flex flex-row justify-start items-center py-2 px-4 rounded-md bg-black/60 cursor-pointer ${imageIndex > 0 ? 'w-fit' : 'w-full'}`} 
+                                                onClick={prevButton}
+                                            >
+                                                <FontAwesomeIcon icon={faAngleLeft} className="text-4xl" />
+                                            </div>
+                                        )}
+                                        {
+                                            imageIndex < selectLineup.images.length -1 && (
+                                                <div
+                                                    className={`flex flex-row justify-end items-center py-2 px-4 rounded-md bg-black/60 cursor-pointer ${imageIndex < selectLineup.images.length - 1  ? 'w-fit ml-auto' : 'w-full'}`}
+                                                    onClick={nextButton}
+                                                >
+                                                    <FontAwesomeIcon icon={faAngleRight} className="text-4xl" />
+                                                </div>
+                                            )
+                                        }
+                                    </div>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

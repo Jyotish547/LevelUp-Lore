@@ -94,22 +94,22 @@ interface Thumbnail {
 }
 
 
-// Map
-export type LineupMap = {
+// Lineup Map
+export type LineupData = {
   id: number;
   map: string;
-  agents: LineupAgent;
+  agents: LineupAgent[];
 }[];
 
-// Agent
+// Lineup Agent
 type LineupAgent = {
   id: number;
   name: string;
-  lineups: Lineup;
-}[];
+  lineups: Lineup[];
+};
 
 // Lineups
-type Lineup = {
+export type Lineup = {
   id: number;
   username: string;
   date: string;
@@ -120,12 +120,14 @@ type Lineup = {
   title: string;
   description: string[];
   side: boolean;
-  images: Images;
+  images: Images[];
   note?: string;
-}[];
+  displayIcon?: string;
+  abilityIcon?: string;
+};
 
 // Lineup images
 type Images = {
   id: number,
   url: string,
-}[]
+}

@@ -175,6 +175,10 @@ input[type='range']::-moz-range-thumb {
   color: var(--text-black);
 }
 
+.bg-valo20 {
+  background-color: #B181FF30;
+}
+
 /* Difficulty Tags Colors */
 
 .text-beginner {

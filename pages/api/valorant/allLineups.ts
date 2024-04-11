@@ -2,10 +2,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import dpIcon from '/public/assets/displayPicture.png';
 
-import { LineupMap } from "@/components/app/components/types/valorantType";
+import { LineupData } from "@/components/app/components/types/valorantType";
+
+
 
 export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
-    const lineups: LineupMap = [
+    const lineups: LineupData = [
         // Main Object
         {
             id: 1,
@@ -24,7 +26,7 @@ export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
                             source: "https://lineupsvalorant.com/?id=413",
                             ability: "Snake Bite",
                             location: ["A Lobby", "A Pyramids"],
-                            thumbnail: "https://lineupsvalorant.com/static/lineup_images/413/1.webp",
+                            thumbnail: "https://lineupsvalorant.com/static/lineup_images/413/3.webp",
                             title: "Viper Lineup from A Lobby to A Pyramids",
                             description: [
                                 "Walk Against the mettal piller in A Lobby",
@@ -142,7 +144,7 @@ export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
                             username: "Smoke",
                             date: "7/22/2022",
                             source: "https://lineupsvalorant.com/?id=1064",
-                            ability: "Incendiary",
+                            ability: "Snake Bite",
                             location: ["B Lobby", "B Site"],
                             thumbnail: "https://lineupsvalorant.com/static/lineup_images/1064/3.webp",
                             title: "B Lobby to B Site Deafult Plant",
@@ -249,4 +251,31 @@ export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
 
         }
     ]
+    res.status(200).json(lineups);
+}
+
+export async function fetchLineup() {
+    const agentUrl = "/api/valorant/allAgents";
+    const mapUrl = "/api/valorant/allMaps";
+    const lineupUrl = "/api/valorant/allLineups";
+
+    try {
+        const [agentRes, mapRes, lineupRes] = await Promise.all([
+            fetch(agentUrl),
+            fetch(mapUrl),
+            fetch(lineupUrl),
+        ]);
+
+        const [agents, maps, lineups] = await Promise.all([
+            agentRes.json(),
+            mapRes.json(),
+            lineupRes.json()
+        ]);
+
+        return { agents, maps, lineups };
+    }
+    catch(error) {
+        console.error("Failed to fetch data:", error);
+        return { agents: [], maps: [], lineups: [] };
+    }
 }

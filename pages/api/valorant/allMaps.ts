@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default async function handler (req: NextApiRequest, res: NextApiResponse) {
     try {
         const response = await axios.get('https://valorant-api.com/v1/maps');
-        res.status(200).json(response.data);
+        res.status(200).json(response.data.data);
     }
     catch(error) {
         console.log('Api call error: Maps', error)
