@@ -421,32 +421,34 @@ export const GuideList: React.FC = () => {
     }, [])
 
     return(
-        <div className='grid grid-cols-2 grid-flow-row gap-8 w-full'>
+        <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
-                <div key={index} className="valo-background w-full shadow-md shadow-violet-400/30 rounded-2xl px-8 py-6 flex flex-col items-start justify-between space-y-4">
+                <div key={index} className="valo-background w-full shadow-md shadow-violet-400/30 rounded-2xl flex flex-col items-start justify-between">
                     <div className="relative pt-[56.25%] w-full">
                         <iframe
                         src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
                         title={guide.snippet.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        className="absolute top-0 left-0 w-full h-full rounded-lg"
+                        className="absolute top-0 left-0 w-full h-full rounded-t-lg"
                         allowFullScreen
                         ></iframe>
                     </div>
-                    <h3 className="text-2xl text-wrap font-semibold text-valo">{guide.snippet.title}</h3>
-                    <div className="w-full flex flex-row items-center justify-between">
-                        <div className="flex flex-col space-y-3">
-                            <h4 className="text-lg">Creator: <Link href={`https://www.youtube.com/@${guide.snippet.channelTitle}`} target="_blank" className="font-semibold text-intermediate" >{guide.snippet.channelTitle}</Link></h4>
-                            <p className="text-lg">Date Posted: <span className="italic">{guide.snippet.publishedAt.substring(0, 10)}</span></p>
-                        </div>
-                        <div className="flex flex-row space-x-4 items-center">
-                            <div className="text-xl font-bold flex flex-row items-center space-x-3">
-                                <FontAwesomeIcon icon={faHeart} className="text-3xl text-intermediate" />
-                                <p>3.6k</p>
+                    <div className="px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
+                        <h3 className="text-xl text-wrap font-medium text-valo">{guide.snippet.title}</h3>
+                        <div className="w-full flex flex-row items-center justify-between">
+                            <div className="flex flex-col space-y-4">
+                                <h4 className="text-md">Uploaded By: <Link href={`https://www.youtube.com/@${guide.snippet.channelTitle}`} target="_blank" className="font-semibold text-intermediate" >{guide.snippet.channelTitle}</Link></h4>
+                                <p className="text-md">Date Posted: <span className="italic">{guide.snippet.publishedAt.substring(0, 10)}</span></p>
                             </div>
-                            <div className="text-xl font-bold flex flex-row items-center space-x-3">
-                                <FontAwesomeIcon icon={faShareNodes} className="text-3xl text-intermediate" />
-                                <p>0.7k</p>
+                            <div className="flex flex-col space-y-4 items-center">
+                                <div className="text-xl font-bold flex flex-row items-center space-x-2">
+                                    <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
+                                    <p>3.6k</p>
+                                </div>
+                                <div className="text-xl font-bold flex flex-row items-center space-x-2">
+                                    <FontAwesomeIcon icon={faShareNodes} className="text-2xl text-intermediate" />
+                                    <p>0.7k</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -604,7 +606,7 @@ export const LineupList: React.FC = () => {
                         {selectLineup && (
                             <>
                                 {/* Content */}
-                                <div className="h-auto flex flex-col justify-between p-8 valo-background">
+                                <div className="h-auto max-w-[500px] flex flex-col justify-between p-8 valo-background">
                                     <div className="text-lg space-y-4">
                                         <h2 className="text-2xl font-semibold text-valo">{selectLineup.title}</h2>
                                         <div className="space-y-1 font-regular">
@@ -651,7 +653,7 @@ export const LineupList: React.FC = () => {
                                     </div>
                                 </div>
                                 {/* Image */}
-                                <div className="image-slider relative max-w-[1300px] h-[750px]">
+                                <div className="image-slider relative max-w-[1300px] h-fit">
                                     {selectLineup.images && selectLineup.images.length > 0 && (
                                         <Image src={selectLineup.images[imageIndex].url} alt={selectLineup.title} width={1300} height={600} />
                                     )}

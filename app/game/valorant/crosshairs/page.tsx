@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import BorderButton from "@/components/app/components/buttons";
-import { faChessBoard } from "@fortawesome/free-solid-svg-icons";
+import { faChessBoard, faCrosshairs } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 import { CrosshairList } from "@/components/app/components/valoComp";
@@ -13,7 +13,7 @@ export default function Crosshairs() {
             {/* Header */}
             <header className="space-y-4">
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-valo w-fit shadow-md shadow-violet-300/30">
-                    <FontAwesomeIcon icon={faChessBoard} /> <span>Crosshairs</span>
+                    <FontAwesomeIcon icon={faCrosshairs} /> <span>Crosshairs</span>
                 </div>
                 <p className="text-lg font-normal">
                     Check out the most impressive crosshairs in Valorant from pro players and the community.                </p>

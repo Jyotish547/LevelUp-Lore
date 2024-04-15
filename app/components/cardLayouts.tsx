@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup, faEllipsisH, faPlusCircle, faCircleChevronRight, faAngleRight, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup, faEllipsisH, faPlusCircle, faCircleChevronRight, faAngleRight, faStar, faHeart, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 
 import Image from "next/image";
@@ -32,10 +32,7 @@ library.add(faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup);
 
 const games = [
     {src: fc24CL, alt: 'EAFC24', logo: fc24Logo, shadowColor: 'rgb(22 163 74)', href: '/game/fc24/formations'},
-    {src: lolCL, alt: 'LeagueOfLegends', logo: lolLogo, shadowColor: 'rgb(37 99 235)', href: '/game/fc24/formations'},
     {src: valorantCL, alt: 'Valorant', logo: valorantLogo, shadowColor: 'rgb(126 34 206)', href: '/game/valorant/agents'},
-    {src: rlCL, alt: 'RocketLeague', logo: rlLogo, shadowColor: 'rgb(234 88 12)', href: '/game/fc24/formations'},
-    {src: cs2CL, alt: 'CounterStrike2', logo: cs2Logo, shadowColor: 'rgb(250 204 21)', href: '/game/fc24/formations'},
 ]
 
 interface HomeGameProps {
@@ -105,7 +102,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
                     <FontAwesomeIcon icon={faCaretRight} />
                 </Link>
             </div>
-            <div ref={containerRef} className="home-container flex flex-row items-center space-x-4 mx-8 overflow-x-auto">
+            <div ref={containerRef} className="w-fit flex flex-row items-center space-x-4 mx-8 overflow-x-auto">
                 {games.map((game, index) => (
                     <Link key={index} ref={el => cardRefs.current[index] = el} href={game.href} className={`flex flex-col items-center flex-shrink-0 rounded-lg space-y-8`}>
                         <Image className={`rounded-lg homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={game.src} alt={game.alt} style={{ boxShadow: `3px 3px 8px ${game.shadowColor}`}}/>
@@ -722,5 +719,121 @@ export const SkillMoves: React.FC = () => {
             ))}
         </div>
     );
+}
+
+// Guides Page
+
+import { GuideData } from "./types/valorantType";
+
+export const GuideList: React.FC = () => {
+
+    const [guideData, setGuideData] = useState<GuideData[]>([])
+
+    useEffect(() => {
+        const fetchGuideData = async () => {
+            try {
+                const response = await axios.get<{data: GuideData[]}, any>('/api/fc24/allGuides');
+                setGuideData(response.data);
+                // console.log(response.data);
+            }
+            catch(error) {
+                console.log('Unable to fetch Guide Data', error);
+            }
+        }
+        fetchGuideData();
+    }, [])
+
+    return(
+        <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
+            {guideData.map((guide: any, index: any) => (
+                <div key={index} className="skill-background w-full shadow-md shadow-emerald-300/30 rounded-2xl flex flex-col items-start justify-between">
+                    <div className="z-10 relative pt-[56.25%] w-full">
+                        <iframe
+                        src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
+                        title={guide.snippet.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        className="absolute top-0 left-0 w-full h-full rounded-t-lg"
+                        allowFullScreen
+                        ></iframe>
+                    </div>
+                    <div className="z-10 px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
+                        <h3 className="text-xl text-wrap font-medium text-eafc">{guide.snippet.title}</h3>
+                        <div className="w-full flex flex-row items-center justify-between">
+                            <div className="flex flex-col space-y-4">
+                                <h4 className="text-md">Uploaded By: <Link href={`https://www.youtube.com/@THEGUIDE_bPG`} target="_blank" className="font-semibold text-intermediate" >{guide.snippet.channelTitle}</Link></h4>
+                                <p className="text-md">Date Posted: <span className="italic">{guide.snippet.publishedAt.substring(0, 10)}</span></p>
+                            </div>
+                            <div className="flex flex-col space-y-4 items-center">
+                                <div className="text-xl font-bold flex flex-row items-center space-x-2">
+                                    <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
+                                    <p>3.6k</p>
+                                </div>
+                                <div className="text-xl font-bold flex flex-row items-center space-x-2">
+                                    <FontAwesomeIcon icon={faShareNodes} className="text-2xl text-intermediate" />
+                                    <p>0.7k</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+export const HighlightList: React.FC = () => {
+
+    const [guideData, setGuideData] = useState<GuideData[]>([])
+
+    useEffect(() => {
+        const fetchGuideData = async () => {
+            try {
+                const response = await axios.get<{data: GuideData[]}, any>('/api/fc24/allHighlights');
+                setGuideData(response.data);
+                // console.log(response.data);
+            }
+            catch(error) {
+                console.log('Unable to fetch Guide Data', error);
+            }
+        }
+        fetchGuideData();
+    }, [])
+
+    return(
+        <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
+            {guideData.map((guide: any, index: any) => (
+                <div key={index} className="skill-background w-full shadow-md shadow-emerald-300/30 rounded-2xl flex flex-col items-start justify-between">
+                    <div className="z-10 relative pt-[56.25%] w-full">
+                        <iframe
+                        src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
+                        title={guide.snippet.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        className="absolute top-0 left-0 w-full h-full rounded-t-lg"
+                        allowFullScreen
+                        ></iframe>
+                    </div>
+                    <div className="z-10 px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
+                        <h3 className="text-xl text-wrap font-medium text-eafc">{guide.snippet.title.replace(/#\w+/g, '')}</h3>
+                        <div className="w-full flex flex-row items-center justify-between">
+                            <div className="flex flex-col space-y-4">
+                                <h4 className="text-md">Uploaded by: <Link href={`https://www.youtube.com/@EASPORTSFCPro`} target="_blank" className="font-semibold text-intermediate" >{guide.snippet.channelTitle}</Link></h4>
+                                <p className="text-md">Date Posted: <span className="italic">{guide.snippet.publishedAt.substring(0, 10)}</span></p>
+                            </div>
+                            <div className="flex flex-col space-y-4 items-center">
+                                <div className="text-xl font-bold flex flex-row items-center space-x-2">
+                                    <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
+                                    <p>3.6k</p>
+                                </div>
+                                <div className="text-xl font-bold flex flex-row items-center space-x-2">
+                                    <FontAwesomeIcon icon={faShareNodes} className="text-2xl text-intermediate" />
+                                    <p>0.7k</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
 }
   

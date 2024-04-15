@@ -1,7 +1,7 @@
 'use client'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightDots } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightDots, faBullseye } from "@fortawesome/free-solid-svg-icons";
 
 import { LineupList } from "@/components/app/components/valoComp";
 
@@ -18,11 +18,12 @@ export default function Lineups() {
             {/* Header */}
             <header className="space-y-4">
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-valo w-fit shadow-md shadow-violet-300/30">
-                    <FontAwesomeIcon icon={faArrowUpRightDots} /> <span>Guides</span>
+                    <FontAwesomeIcon icon={faBullseye} /> <span>Lineups</span>
                 </div>
                 <p className="text-lg font-normal">
-                    This is your go-to destination for mastering the game's mechanics, gaining strategic insights, and elevating your gameplay. This comprehensive collection of video tutorials covers a wide range of topics, from basic skills for beginners to advanced tactics for seasoned players. Whether you're looking to improve your shooting accuracy, learn about effective agent combinations, or discover new strategies for each map, these carefully curated guides have you covered.
-                </p>
+                Lineups are an essential resource for players aiming to optimize their agent's abilities for maximum impact. This page meticulously compiles images and detailed descriptions of precise ability placements for various agents, focusing on strategic advantages across all maps.
+                <br />
+                From Sova's recon arrows to Viper's toxic screens, the content is designed to enhance your tactical approach and ensure your team gains the upper hand. Explore the lineups to discover new, innovative ways to utilize each agent's kit effectively, bolstering your gameplay and team strategy in Valoran                </p>
             </header>
 
             <hr className="w-full rounded-lg" />

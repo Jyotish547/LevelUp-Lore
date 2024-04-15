@@ -2,7 +2,7 @@
 
 import { MapList } from "@/components/app/components/valoComp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChessBoard } from "@fortawesome/free-solid-svg-icons";
+import { faChessBoard, faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 export default function Maps() {
     return(
@@ -10,7 +10,7 @@ export default function Maps() {
             {/* Header */}
             <header className="space-y-4">
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-valo w-fit shadow-md shadow-violet-300/30">
-                    <FontAwesomeIcon icon={faChessBoard} /> <span>Maps</span>
+                    <FontAwesomeIcon icon={faMapLocationDot} /> <span>Maps</span>
                 </div>
                 <p className="text-lg font-normal">
                     Exploring Valorant's maps offers players a deep dive into the intricate arenas where battles unfold. Each map brings its own unique set of strategic opportunities and challenges, from tight corners for ambushes to open spaces for team skirmishes. Understanding the layout, key sightlines, and objective locations on these maps is crucial for planning effective tactics and outmaneuvering opponents. <br /> Mastery of map knowledge not only enhances gameplay experience but also significantly boosts a team's chances of securing victory by making informed decisions during intense matches.
