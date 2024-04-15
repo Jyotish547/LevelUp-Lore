@@ -50,7 +50,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="relative h-screen m-0 p-0 bg-cover background-transition" style={{ backgroundImage: `url(${backgroundHome})` }}>
+    <main className="relative h-screen m-0 p-0 bg-cover background-transition text-white" style={{ backgroundImage: `url(${backgroundHome})` }}>
       
       <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-row items-center">
         <div className='flex flex-col items-center justify-around w-screen h-screen'>
