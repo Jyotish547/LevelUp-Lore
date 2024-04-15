@@ -558,8 +558,8 @@ export const LineupList: React.FC = () => {
             {data.lineups.map((map: any) => (
                 map.agents.map((agent: any) => (
                     agent.lineups.map((lineup: any, lineIndex: number) => (
-                        <div key={lineIndex} className="w-fit rounded-lg shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
-                            <div className="image-container w-[350px] h-[196px] relative rounded-t-lg overflow-hidden">
+                        <div key={lineIndex} className="valo-background w-fit h-[316px] rounded-lg shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
+                            <div className="image-container w-[335px] h-[188px] relative rounded-t-lg overflow-hidden">
                                 <Image className="rounded-t-lg" src={lineup.thumbnail} alt={lineup.title} fill={true} />
                                 <div className="overlay absolute inset-0 flex flex-col justify-center items-center bg-gradient-to-b from-black/70 from-10% via-neutral-400/0 to-black/70 to-90% w-full h-full justify-between">
                                     <div className="flex flex-row justify-end items-start w-full">
@@ -588,7 +588,6 @@ export const LineupList: React.FC = () => {
                                     )
                                 }
                             </div>
-                            
                         </div>
                         
                     ))
