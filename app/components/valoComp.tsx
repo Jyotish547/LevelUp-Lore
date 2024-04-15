@@ -112,9 +112,9 @@ export const AgentList: React.FC = () => {
                                                             prefix = ""; // Default case, if needed
                                                     }
                                                     return(
-                                                        <div className="flex flex-row items-center space-x-3">
+                                                        <div key={abilityIndex} className="flex flex-row items-center space-x-3">
                                                             <span className={`font-bold ${abilityIndex === 3 ? 'text-intermediate' : ' text-valo'}`}>{prefix}</span>
-                                                            <Image key={abilityIndex} src={ability.displayIcon} alt={ability.displayName} width={40} height={40} />
+                                                            <Image src={ability.displayIcon} alt={ability.displayName} width={40} height={40} />
                                                         </div>
                                                     )
                                                 })}
@@ -611,7 +611,7 @@ export const LineupList: React.FC = () => {
                                         <h2 className="text-2xl font-semibold text-valo">{selectLineup.title}</h2>
                                         <div className="space-y-1 font-regular">
                                             {selectLineup.description.map((desc: any, index: number) => (
-                                                <p>
+                                                <p key={index}>
                                                     {index + 1}. {desc}
                                                 </p>
                                             ))}

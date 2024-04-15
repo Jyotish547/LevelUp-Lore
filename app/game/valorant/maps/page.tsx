@@ -13,7 +13,7 @@ export default function Maps() {
                     <FontAwesomeIcon icon={faMapLocationDot} /> <span>Maps</span>
                 </div>
                 <p className="text-lg font-normal">
-                    Exploring Valorant's maps offers players a deep dive into the intricate arenas where battles unfold. Each map brings its own unique set of strategic opportunities and challenges, from tight corners for ambushes to open spaces for team skirmishes. Understanding the layout, key sightlines, and objective locations on these maps is crucial for planning effective tactics and outmaneuvering opponents. <br /> Mastery of map knowledge not only enhances gameplay experience but also significantly boosts a team's chances of securing victory by making informed decisions during intense matches.
+                    Exploring Valorant&apos;s maps offers players a deep dive into the intricate arenas where battles unfold. Each map brings its own unique set of strategic opportunities and challenges, from tight corners for ambushes to open spaces for team skirmishes. Understanding the layout, key sightlines, and objective locations on these maps is crucial for planning effective tactics and outmaneuvering opponents. <br /> Mastery of map knowledge not only enhances gameplay experience but also significantly boosts a team&apos;s chances of securing victory by making informed decisions during intense matches.
                 </p>
             </header>
 

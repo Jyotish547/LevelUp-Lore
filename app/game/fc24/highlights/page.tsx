@@ -14,7 +14,7 @@ export default function Highlights() {
                     <FontAwesomeIcon icon={faFilm} /> <span>Highlights</span>
                 </div>
                 <p className="text-lg font-normal">
-                    The "Highlights" section of the FC 24 page features an exciting collection of clips from FC 24 Pro matches, showcasing the best moments from top-tier gameplay. These carefully selected highlights not only entertain but also serve as valuable learning tools. <br /> By observing the strategies, skills, and techniques employed by professional players, you can gain insights into advanced tactics and decision-making processes that can be applied to your own gameplay. This section is a fantastic resource for enhancing your understanding and performance in EA FC 24, helping you to elevate your play and achieve greater success in the game.
+                    The &quot;Highlights&quot; section of the FC 24 page features an exciting collection of clips from FC 24 Pro matches, showcasing the best moments from top-tier gameplay. These carefully selected highlights not only entertain but also serve as valuable learning tools. <br /> By observing the strategies, skills, and techniques employed by professional players, you can gain insights into advanced tactics and decision-making processes that can be applied to your own gameplay. This section is a fantastic resource for enhancing your understanding and performance in EA FC 24, helping you to elevate your play and achieve greater success in the game.
                 </p>
             </header>
 

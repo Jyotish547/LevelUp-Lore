@@ -21,9 +21,9 @@ export default function Lineups() {
                     <FontAwesomeIcon icon={faBullseye} /> <span>Lineups</span>
                 </div>
                 <p className="text-lg font-normal">
-                Lineups are an essential resource for players aiming to optimize their agent's abilities for maximum impact. This page meticulously compiles images and detailed descriptions of precise ability placements for various agents, focusing on strategic advantages across all maps.
+                Lineups are an essential resource for players aiming to optimize their agent&apos;s abilities for maximum impact. This page meticulously compiles images and detailed descriptions of precise ability placements for various agents, focusing on strategic advantages across all maps.
                 <br />
-                From Sova's recon arrows to Viper's toxic screens, the content is designed to enhance your tactical approach and ensure your team gains the upper hand. Explore the lineups to discover new, innovative ways to utilize each agent's kit effectively, bolstering your gameplay and team strategy in Valoran                </p>
+                From Sova&apos;s recon arrows to Viper&apos;s toxic screens, the content is designed to enhance your tactical approach and ensure your team gains the upper hand. Explore the lineups to discover new, innovative ways to utilize each agent&apos;s kit effectively, bolstering your gameplay and team strategy in Valoran                </p>
             </header>
 
             <hr className="w-full rounded-lg" />

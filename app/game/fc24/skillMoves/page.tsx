@@ -23,7 +23,7 @@ export default function TopCardsFC() {
                 <p className="text-lg font-normal">
                 This an essential guide for players seeking to improve their gameplay through effective dribbling and skillful maneuvers. It features a variety of moves rated from basic to advanced, complete with star levels and specific controller commands for seamless execution.
                 <br />
-                This resource aims to equip gamers with the techniques needed to navigate past opponents with ease, enhancing the tactical depth and enjoyment of matches. By mastering these skills, players can significantly boost their team's performance and enjoy a more dynamic and engaging football experience in EA FC 24.
+                This resource aims to equip gamers with the techniques needed to navigate past opponents with ease, enhancing the tactical depth and enjoyment of matches. By mastering these skills, players can significantly boost their team&apos;s performance and enjoy a more dynamic and engaging football experience in EA FC 24.
                 </p>
             </header>
 

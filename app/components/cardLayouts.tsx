@@ -32,7 +32,10 @@ library.add(faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup);
 
 const games = [
     {src: fc24CL, alt: 'EAFC24', logo: fc24Logo, shadowColor: 'rgb(22 163 74)', href: '/game/fc24/formations'},
+    {src: lolCL, alt: 'LeagueOfLegends', logo: lolLogo, shadowColor: 'rgb(37 99 235)', href: '/game/fc24/formations'},
     {src: valorantCL, alt: 'Valorant', logo: valorantLogo, shadowColor: 'rgb(126 34 206)', href: '/game/valorant/agents'},
+    {src: rlCL, alt: 'RocketLeague', logo: rlLogo, shadowColor: 'rgb(234 88 12)', href: '/game/fc24/formations'},
+    {src: cs2CL, alt: 'CounterStrike2', logo: cs2Logo, shadowColor: 'rgb(250 204 21)', href: '/game/fc24/formations'},
 ]
 
 interface HomeGameProps {
@@ -51,10 +54,6 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 
         return () => clearInterval(interval);
     }, []);
-
-    useEffect(() => {
-        scrollToActiveCard();
-    }, [activeIndex]);
 
     const scrollToActiveCard = () => {
         const activeCard = cardRefs.current[activeIndex];
@@ -75,6 +74,10 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
             }
         }
     };
+
+    useEffect(() => {
+        scrollToActiveCard();
+    }, [activeIndex, scrollToActiveCard]);
 
     const handleLeftScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
@@ -102,7 +105,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
                     <FontAwesomeIcon icon={faCaretRight} />
                 </Link>
             </div>
-            <div ref={containerRef} className="w-fit flex flex-row items-center space-x-4 mx-8 overflow-x-auto">
+            <div ref={containerRef} className="home-container flex flex-row items-center space-x-4 mx-8 overflow-x-auto">
                 {games.map((game, index) => (
                     <Link key={index} ref={el => cardRefs.current[index] = el} href={game.href} className={`flex flex-col items-center flex-shrink-0 rounded-lg space-y-8`}>
                         <Image className={`rounded-lg homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={game.src} alt={game.alt} style={{ boxShadow: `3px 3px 8px ${game.shadowColor}`}}/>
@@ -439,9 +442,9 @@ export const PlayerCards: React.FC = () => {
                                             </div> */}
                                             <div className='text-md font-semibold flex flex-row space-x-2'>
                                                 {
-                                                    player.alternatePositions?.map((pos) => {
+                                                    player.alternatePositions?.map((pos, index) => {
                                                         return(
-                                                            <div className='py-1 px-2 text-dark bg-eafc rounded-md'>
+                                                            <div key={index} className='py-1 px-2 text-dark bg-eafc rounded-md'>
                                                                 {pos.shortLabel}
                                                             </div>
                                                         )

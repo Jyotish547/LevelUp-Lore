@@ -1,6 +1,6 @@
 'use client'
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,7 +39,15 @@ export default function NavBar() {
     const isEafc24 = pathname.includes('fc24');
     const isValorant = pathname.includes('valorant');
 
-    const currentNav = isEafc24 ? eafc24Nav : isValorant ? valoNav : [];
+    const currentNav = useMemo(() => {
+        if (isEafc24) {
+          return eafc24Nav;
+        } else if (isValorant) {
+          return valoNav;
+        } else {
+          return [];
+        }
+      }, [isEafc24, isValorant]);
 
     useEffect(() => {
         // Find the nav item that matches the currentPage

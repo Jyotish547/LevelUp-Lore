@@ -16,7 +16,7 @@ export default function Agents() {
                     <FontAwesomeIcon icon={faUsersGear} /> <span>Agents</span>
                 </div>
                 <p className="text-lg font-normal">
-                    This is an overview of all the game's characters, detailing their skills and roles. It's a go-to for players looking to master different agents, providing key information on how to best use each one's abilities in battle. This page helps players craft strategies and improve their play, making it a vital tool for anyone aiming to excel in Valorant.
+                    This is an overview of all the game&apos;s characters, detailing their skills and roles. It&apos;s a go-to for players looking to master different agents, providing key information on how to best use each one&apos;s abilities in battle. This page helps players craft strategies and improve their play, making it a vital tool for anyone aiming to excel in Valorant.
                 </p>
             </header>
 

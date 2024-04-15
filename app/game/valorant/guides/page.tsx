@@ -14,7 +14,7 @@ export default function Guides() {
                     <FontAwesomeIcon icon={faArrowUpRightDots} /> <span>Guides</span>
                 </div>
                 <p className="text-lg font-normal">
-                    This is your go-to destination for mastering the game's mechanics, gaining strategic insights, and elevating your gameplay. This comprehensive collection of video tutorials covers a wide range of topics, from basic skills for beginners to advanced tactics for seasoned players. Whether you're looking to improve your shooting accuracy, learn about effective agent combinations, or discover new strategies for each map, these carefully curated guides have you covered.
+                    This is your go-to destination for mastering the game&apos;s mechanics, gaining strategic insights, and elevating your gameplay. This comprehensive collection of video tutorials covers a wide range of topics, from basic skills for beginners to advanced tactics for seasoned players. Whether you&apos;re looking to improve your shooting accuracy, learn about effective agent combinations, or discover new strategies for each map, these carefully curated guides have you covered.
                 </p>
             </header>
 
