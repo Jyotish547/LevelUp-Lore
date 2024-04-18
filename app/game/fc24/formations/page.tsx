@@ -28,6 +28,7 @@ import { FormType, DiffType } from "@/components/app/components/types/fc24Type";
 
 export default function Formations() {
     const [selectedForms, setSelectedForms] = useState<FormType[]>([]);
+    const [selectedDiffs, setSelectedDiffs] = useState<DiffType[]>([]);
     const [formationData, setFormationData] = useState<SingleFormationData[]>([]);
 
     useEffect(() => {
@@ -60,10 +61,10 @@ export default function Formations() {
 
             {/* Filter */}
 
-            <F1Filter selectForm={selectedForms} setSelectForm={setSelectedForms} />
+            <F1Filter selectForm={selectedForms} setSelectForm={setSelectedForms} selectDiff={selectedDiffs} setSelectDiff={setSelectedDiffs} />
 
             <div className="grid grid-cols-3 grid-flow-row gap-y-8">
-                <FormationsEAFC formationData={formationData?.filter(f => selectedForms.length > 0 ? selectedForms.toString().includes(f.flow): f)} setFormationData={setFormationData} />
+                <FormationsEAFC formationData={formationData?.filter(f => selectedForms.length > 0 || selectedDiffs.length > 0 ? selectedForms.toString().includes(f.flow) || selectedDiffs.toString().includes(f.difficulty) : f)} setFormationData={setFormationData} />
             </div>
 
         </section>

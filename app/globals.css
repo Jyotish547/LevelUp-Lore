@@ -194,7 +194,7 @@ input[type='range']::-moz-range-thumb {
 }
 
 .bg-beginner {
-  background-color: #68DE3E;
+  background-color: #7BC0E5;
 }
 
 .bg-intermediate {
@@ -202,7 +202,7 @@ input[type='range']::-moz-range-thumb {
 }
 
 .bg-advanced {
-  background-color: #FF5447;
+  background-color: #F88379;
 }
 
 .border-beginner {

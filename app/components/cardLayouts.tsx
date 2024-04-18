@@ -6,8 +6,8 @@ import axios from 'axios';
 import Link from 'next/link';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup, faEllipsisH, faPlusCircle, faCircleChevronRight, faAngleRight, faStar, faHeart, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import { IconProp, library } from "@fortawesome/fontawesome-svg-core";
+import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup, faEllipsisH, faPlusCircle, faCircleChevronRight, faAngleRight, faStar, faHeart, faShareNodes, faShieldHalved, faPlaneUp } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 
 import Image from "next/image";
@@ -607,6 +607,31 @@ type StatSectionProps = {
 const StatSection: React.FC<StatSectionProps> = ({ title, stats, statKeys }) => {
     const mainStatKey = title.substring(0, 3).toLowerCase();
 
+    function getIconForm(form: FormType): IconProp {
+        switch (form) {
+            case 'Balanced':
+                return faShieldHalved;
+            case 'Offensive':
+                return faStar;
+            case 'Defensive':
+                return faShieldHalved;
+            default:
+                return faStar;
+        }
+    }
+    function getIconDiff(form: DiffType): IconProp {
+        switch (form) {
+            case 'Beginner':
+                return faShieldHalved;
+            case 'Intermediate':
+                return faStar;
+            case 'Advanced':
+                return faPlaneUp;
+            default:
+                return faStar;
+        }
+    }
+
     return (
         <div className='flex flex-col h-full w-48 space-y-2'>
             <div className='flex flex-row w-full justify-between items-center'>
@@ -639,7 +664,7 @@ function toCamelCase(str: string): string {
       .join(''); // Join them back together without spaces
 }
 
-function getBgColorClass(value: number) {
+export function getBgColorClass(value: number) {
     if (value >= 70) {
       return "bg-beginner"; 
     } else if (value >= 50 && value < 70) {
