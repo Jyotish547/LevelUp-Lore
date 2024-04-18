@@ -5,8 +5,44 @@ import { faChessBoard, faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 
 import BorderButton from '../../../components/buttons';
 import { FormationsEAFC } from "../../../components/cardLayouts";
+import { F1Filter } from "@/components/app/components/filterComp";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+const matchedElements: HTMLElement[] = []
+
+// Change matchedElements
+
+function filterElementsByCategory(targetCategory: string) {
+    matchedElements.forEach((element: any) => {
+        if (element.classList.contains(targetCategory)) {
+            element.classList.remove('hidden');
+        } else {
+            element.classList.add('hidden');
+        } 
+    });
+}
+
+import { SingleFormationData } from "@/components/pages/api/allFormations";
+import { FormType, DiffType } from "@/components/app/components/types/fc24Type";
 
 export default function Formations() {
+    const [selectedForms, setSelectedForms] = useState<FormType[]>([]);
+    const [formationData, setFormationData] = useState<SingleFormationData[]>([]);
+
+    useEffect(() => {
+        const fetchFormationData = async () => {
+            try {
+                const response = await axios.get<{content: SingleFormationData[]}>('/api/allFormations');
+                setFormationData(response.data.content);
+            } catch (error) {
+                console.error('Error fetching formation data:', error);
+            }
+        };
+
+        fetchFormationData();
+    }, []);
+
     
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
@@ -22,18 +58,12 @@ export default function Formations() {
 
             <hr className="w-full rounded-lg" />
 
-            <div className="flex flex-row space-x-12">
-                {/* Check portfolio for toggle and categorizing button functioning */}
-                <BorderButton label="Popular" />
-                <div className="flex flex-row space-x-4">
-                    <BorderButton label="Balanced" />
-                    <BorderButton label="Offensive" />
-                    <BorderButton label="Defensive" />
-                </div>
-            </div>
+            {/* Filter */}
+
+            <F1Filter selectForm={selectedForms} setSelectForm={setSelectedForms} />
 
             <div className="grid grid-cols-3 grid-flow-row gap-y-8">
-                <FormationsEAFC />
+                <FormationsEAFC formationData={formationData?.filter(f => selectedForms.length > 0 ? selectedForms.toString().includes(f.flow): f)} setFormationData={setFormationData} />
             </div>
 
         </section>

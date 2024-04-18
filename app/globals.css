@@ -313,3 +313,17 @@ input[type='range']::-moz-range-thumb {
   background-repeat: no-repeat;
   position: relative;
 }
+
+/* Filters */
+
+.bg-balanced {
+  background-color: #177245;
+}
+
+.bg-offensive {
+  background-color: #c14d00;
+}
+
+.bg-defensive {
+  background-color: #0033CC;
+}

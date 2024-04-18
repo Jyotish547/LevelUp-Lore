@@ -121,16 +121,16 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 
 import { TypeTags, DifficultyTags } from './tags';
 import { useRouter } from 'next/navigation';
-import { SingleFormationData as FormationData } from '@/components/pages/api/formationDetailsByID/[id]';
+import { SingleFormationData as FormationData } from '@/components/pages/api/allFormations';
 
 // interface FormationsEAFCProps {
 //     onPageChange: (pageName: string) => void;
 // }
 
-export const FormationsEAFC: React.FC = () => {
-    const router = useRouter();
+import { FormType, DiffType } from "./types/fc24Type";
 
-    const [formationData, setFormationData] = useState<FormationData[]>([]);
+export const FormationsEAFC: React.FC<{ formationData: FormationData[], setFormationData: React.Dispatch<React.SetStateAction<FormationData[]>> }> = ({ formationData, setFormationData }) => {
+    const router = useRouter();
 
     useEffect(() => {
             const fetchFormationData = async () => {
@@ -158,6 +158,19 @@ export const FormationsEAFC: React.FC = () => {
     // goToFormation(formation.formation)
     // onPageChange(`/api/eafc24/formations`)
 
+    function getBackgroundClass(flow: string): string {
+        switch (flow) {
+            case 'Balanced':
+                return 'bg-balanced';
+            case 'Offensive':
+                return 'bg-offensive';
+            case 'Defensive':
+                return 'bg-defensive';
+            default:
+                return '';
+        }
+    }
+
     return formationData.map((formation, index) => (
         <div key={index} onClick={() =>goToFormation(formation.formation)} className='w-11/12 py-4 px-5 bg-black space-y-3 flex flex-col items-start justify-between rounded-lg shadow-md shadow-green-300/30'>
             <Image src={formation.image} alt={formation.formation} className='w-full rounded-md' />
@@ -167,7 +180,7 @@ export const FormationsEAFC: React.FC = () => {
             </div>
             <p className='text-base'>{formation.caption}</p>
             <div className='flex flex-row justify-between w-full font-semibold text-sm'>
-                <TypeTags label={formation.flow} bgColor="bg-eafc" textColor="text-dark" borderColor='' border="" />
+                <TypeTags label={formation.flow} bgColor={getBackgroundClass(formation.flow)} textColor="text-white" borderColor='' border="" />
                 <DifficultyTags level={formation.difficulty} />
             </div>
         </div>

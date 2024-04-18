@@ -5,7 +5,7 @@ import formation433 from '/public/assets/eafc24/formations/433.jpg';
 import formation4321 from '/public/assets/eafc24/formations/4321.jpg';
 import formation41212 from '/public/assets/eafc24/formations/41212.jpg';
 
-type SingleFormationData = {
+export type SingleFormationData = {
     key: any,
     formation: string,
     caption: string,
@@ -30,7 +30,7 @@ type SingleFormationData = {
     disadvantages: string[],
 };
   
-type FormationData = { 
+export type FormationData = { 
     gameName: string,
     section: string,
     content: SingleFormationData[]

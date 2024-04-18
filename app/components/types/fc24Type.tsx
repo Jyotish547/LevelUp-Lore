@@ -111,4 +111,8 @@ export type StatDetail = {
     value: number;
     diff?: number;
   };
+
+// Filters
+export type FormType = 'Balanced' | 'Offensive' | 'Defensive';
+export type DiffType = 'Beginner' | 'Intermediate' | 'Advanced';
   
