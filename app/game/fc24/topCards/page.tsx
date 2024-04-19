@@ -18,19 +18,30 @@ export default function TopCardsFC() {
     const [gen, setGen] = useState<GenType>(GenType.All);
     const [filteredData, setFilteredData] = useState<PlayersData[]>([]);
 
-    // useEffect(() => {
-    //     const fetchPlayerData = async () => {
-    //         try {
-    //             const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
-    //             setPlayerData(response.data.items);
-    //             // console.log(playerData[0].playStyle);
-    //         }
-    //         catch(error) {
-    //             console.log('Error fetching players data:', error);
-    //         }
-    //     };
-    //     fetchPlayerData();
-    // }, []);
+    const handleSetGen = (genStr: string) => {
+        setGen(genStr as GenType);
+    };
+
+    useEffect(() => {
+        const fetchPlayerData = async () => {
+            try {
+                const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
+                setPlayerData(response.data.items);
+                // console.log(playerData[0].playStyle);
+            }
+            catch(error) {
+                console.log('Error fetching players data:', error);
+            }
+        };
+        fetchPlayerData();
+    }, []);
+
+    useEffect(() => {
+        setFilteredData(playerData.filter(player => 
+            // Add filters here
+            (gen ? player.gender.label === gen : true)
+        ))
+    })
 
     // useEffect(() => {
     //     const fetchPlayerData = async () => {
@@ -46,16 +57,16 @@ export default function TopCardsFC() {
     //     fetchPlayerData();
     // });
 
-    // useEffect(() => {
-    //     const filterData = () => {
-    //         if (gen === 'All') {
-    //             setFilteredData(playerData);
-    //         } else {
-    //             setFilteredData(playerData.filter(player => gen.includes(player.gender.label)));
-    //         }
-    //     };
-    //     filterData();
-    // }, [gen, filteredData]);
+    useEffect(() => {
+        const filterData = () => {
+            if (gen === 'All') {
+                setFilteredData(playerData);
+            } else {
+                setFilteredData(playerData.filter(player => gen.includes(player.gender.label)));
+            }
+        };
+        filterData();
+    }, [gen, filteredData]);
 
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
@@ -71,9 +82,9 @@ export default function TopCardsFC() {
 
             <hr className="w-full rounded-lg" />
 
-            <F2Filter gender={gen} setGender={setGen} />
+            <F2Filter setGen={handleSetGen} />
 
-            <PlayerCards playerData={filteredData} setPlayerData={setFilteredData}  />
+            <PlayerCards items={filteredData}  />
         </section>
     )
 }

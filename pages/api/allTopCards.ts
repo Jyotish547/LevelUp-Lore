@@ -1,7 +1,9 @@
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+import { PlayersData } from '@/components/app/components/types/fc24Type';
+
+export default async function allTopCards(req: NextApiRequest, res: NextApiResponse) {
   try {
     // Forward the request to the external API
     const response = await axios.get('https://drop-api.ea.com/rating/fc-24');

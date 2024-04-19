@@ -142,18 +142,19 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
     )
 }
 
-export const F2Filter: React.FC<{
-    gender: GenType, 
-    setGender: React.Dispatch<React.SetStateAction<GenType>>
-    }> = ({ gender, setGender }) => {
+interface F2Props {
+    setGen: (gen: string) => void;
+}
 
-    const [isPopular, setIsPopular] = useState<boolean>(false);
+export const F2Filter: React.FC<F2Props> = ({ setGen }) => {
 
-    const togglePopular = () => setIsPopular(!isPopular);
+    // const [isPopular, setIsPopular] = useState<boolean>(false);
 
-    const handleGen = (gen: GenType) => {
-        setGender(gen)
-    };
+    // const togglePopular = () => setIsPopular(!isPopular);
+
+    // const handleGen = (gen: GenType) => {
+    //     setGender(gen)
+    // };
     // console.log(gender)
 
     // function getBackgroundForm(form: FormType): string {
@@ -214,24 +215,21 @@ export const F2Filter: React.FC<{
                     
                     className={
                         `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
-                        ${isPopular ? 'popular-f1 active-f1 shadow-md shadow-emerald-700/50': 'bg-black'}
+                        ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black'}
                     `}
                 >
                     {Object.values(GenType).map((gen, index) => (
-                        <button
+                        <label
                             key={index}
-                            onClick={() => handleGen(gen)}
                             className={
                                 `py-3 px-4 align-center text-sm font-regular border-r-2 border-gray-800
-                                ${gender === gen ? `text-dark bg-intermediate` : 'text-white'}
-                                ${index === 0 && gender.includes(gen) ? 'rounded-l-md' : ''}
-                                ${index === 2 ? 'rounded-r-md border-none' : ''}
+                                ${`text-dark bg-intermediate text-white`}
+                                ${'rounded-l-md'}
+                                ${'rounded-r-md border-none'}
                                 `}
                         >
-                            {gen.split(' ')[0]}
-                            <br />
-                            {gen?.split(' ')[1]}
-                        </button>
+                            <input type="radio" name="type" value={gen} onChange={(e) => setGen(e.target.value)} />{gen.split(' ')[0]}<br />{gen?.split(' ')[1]}
+                        </label>
                     ))}
                 </div>
             </div>

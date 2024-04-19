@@ -196,23 +196,31 @@ import { formatDate } from './infoDesign';
 import rankingTitle1 from '../../public/assets/eafc24/illustrations/rankingTitle1.png'
 import rankingTitle2 from '../../public/assets/eafc24/illustrations/rankingTitle2.png'
 
-export const PlayerCards: React.FC<{ playerData: PlayersData[], setPlayerData: React.Dispatch<React.SetStateAction<PlayersData[]>> }> = ({ playerData, setPlayerData }) => {
+import topCards from '@/components/pages/api/allTopCards';
+
+interface topCardsProps {
+    items: PlayersData[]
+}
+
+export const PlayerCards: React.FC<topCardsProps> = ({ items }) => {
 
     // const router = useRouter();
 
-    useEffect(() => {
-        const fetchPlayerData = async () => {
-            try {
-                const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
-                setPlayerData(response.data.items);
-                // console.log(response.data.items[5])
-            }
-            catch(error) {
-                console.log('Error fetching players data:', error);
-            }
-        };
-        fetchPlayerData();
-    });
+    // useEffect(() => {
+    //     const fetchPlayerData = async () => {
+    //         try {
+    //             const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
+    //             setPlayerData(response.data.items);
+    //             // console.log(response.data.items[5])
+    //         }
+    //         catch(error) {
+    //             console.log('Error fetching players data:', error);
+    //         }
+    //     };
+    //     fetchPlayerData();
+    // });
+
+    console.log(items);
 
     const [expandedId, setExpandedId] = useState<number | null>(null);
 
@@ -228,7 +236,7 @@ export const PlayerCards: React.FC<{ playerData: PlayersData[], setPlayerData: R
         // href={`/game/fc24/topCards/${player.rank}`}
 
         <div className='grid grid-cols-2 grid-flow-row gap-8 justify-items-stretch w-full auto-rows-min' style={{ gridAutoRows: 'minmax(100px, auto)' }}>
-            {playerData.slice(0, 20).map((player, index) => (
+            {items.slice(0, 20).map((player, index) => (
                 <div
                     key={index}
                     className={`h-full w-full playerCard-background rounded-xl shadow-lg shadow-emerald-500/30 cursor-pointer ${expandedId === player.id ? 'col-span-2 row-span-2 flex flex-col space-y-8 py-16' : 'col-span-1 row-span-1 flex flex-row items-center justify-between py-6'}`}
