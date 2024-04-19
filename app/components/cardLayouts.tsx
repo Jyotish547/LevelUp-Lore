@@ -196,11 +196,9 @@ import { formatDate } from './infoDesign';
 import rankingTitle1 from '../../public/assets/eafc24/illustrations/rankingTitle1.png'
 import rankingTitle2 from '../../public/assets/eafc24/illustrations/rankingTitle2.png'
 
-export const PlayerCards: React.FC = () => {
+export const PlayerCards: React.FC<{ playerData: PlayersData[], setPlayerData: React.Dispatch<React.SetStateAction<PlayersData[]>> }> = ({ playerData, setPlayerData }) => {
 
     // const router = useRouter();
-
-    const [playerData, setPlayerData] = useState<PlayersData[]>([]);
 
     useEffect(() => {
         const fetchPlayerData = async () => {
@@ -229,7 +227,7 @@ export const PlayerCards: React.FC = () => {
 
         // href={`/game/fc24/topCards/${player.rank}`}
 
-        <div className='grid grid-cols-2 grid-flow-row gap-8 justify-items-stretch auto-rows-min' style={{ gridAutoRows: 'minmax(100px, auto)' }}>
+        <div className='grid grid-cols-2 grid-flow-row gap-8 justify-items-stretch w-full auto-rows-min' style={{ gridAutoRows: 'minmax(100px, auto)' }}>
             {playerData.slice(0, 20).map((player, index) => (
                 <div
                     key={index}

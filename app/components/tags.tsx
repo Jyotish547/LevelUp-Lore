@@ -15,9 +15,9 @@ export const TypeTags = ({label, bgColor, textColor, borderColor, border}: typeT
 }
 
 const difficulty = [
-    {level: "Beginner", bgColor: "bg-beginner", textColor: "text-dark"},
-    {level: "Intermediate", bgColor: "bg-intermediate", textColor: "text-dark"},
-    {level: "Advanced", bgColor: "bg-advanced", textColor: "text-white"}
+    {level: "Beginner", bgColor: "bg-beginner"},
+    {level: "Intermediate", bgColor: "bg-intermediate"},
+    {level: "Advanced", bgColor: "bg-advanced"}
 ]
 
 interface DifficultyTagsProps {
@@ -34,7 +34,7 @@ export const DifficultyTags = ({ level }: DifficultyTagsProps) => {
     }
 
     return(
-        <div className={`${difficultyObj.bgColor} ${difficultyObj.textColor} py-2 px-4 rounded-md flex justify-center`}>
+        <div className={`${difficultyObj.bgColor} text-dark py-2 px-4 rounded-md flex justify-center`}>
             {difficultyObj.level} 
         </div>
     );

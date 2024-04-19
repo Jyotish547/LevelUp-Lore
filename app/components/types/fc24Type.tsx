@@ -19,7 +19,7 @@ export type PlayersData = {
     alternatePositions: AlternatePosition[];
     playStyle: PlayStyle[];
     playStylePlus: PlayStylePlus[];
-    gender: Gender;
+    gender: FCGender;
     nationality: Nationality;
     team: Team;
     position: Position;
@@ -40,7 +40,7 @@ export type PlayersData = {
   
   type PlayStylePlus = PlayStyle; // Assuming PlayStylePlus has the same structure as PlayStyle
   
-  type Gender = {
+  export type FCGender = {
     id: number;
     label: string;
   };
@@ -115,4 +115,21 @@ export type StatDetail = {
 // Filters
 export type FormType = 'Balanced' | 'Offensive' | 'Defensive';
 export type DiffType = 'Beginner' | 'Intermediate' | 'Advanced';
+
+export enum GenType {
+  All = 'All',
+  MensFootball = "Men's Football",
+  WomensFootball = "Women's Football"
+}
+
+export type CardsType = {
+  rank: number;
+  overallRating: number;
+  leagueName: string;
+  gender: FCGender;
+  nationality: Nationality;
+  team: Team;
+  position: Position;
+  stats: Stats;
+};
   

@@ -53,7 +53,7 @@ export default function Formations() {
                     <FontAwesomeIcon icon={faChessBoard} /> <span>Team Tactics</span>
                 </div>
                 <p className="text-lg font-normal">
-                    Team Tactics in football define the positioning and roles of players, influenced by the team&apos;s strategy, strengths, and opponent&apos;s style. It dictates the balance between defense, midfield, and attack through a numerical representation, highlighting the distribution of players across the field. <br /> <br /> These strategic blueprints guide teams in executing their playstyle, whether focusing on defense, possession, or attack, and can be adapted during the match to respond to various situations.
+                    Team Tactics in football define the positioning and roles of players, influenced by the team&apos;s strategy, strengths, and opponent&apos;s style. It dictates the balance between defense, midfield, and attack through a numerical representation, highlighting the distribution of players across the field. <br />These strategic blueprints guide teams in executing their playstyle, whether focusing on defense, possession, or attack, and can be adapted during the match to respond to various situations.
                 </p>
             </header>
 
