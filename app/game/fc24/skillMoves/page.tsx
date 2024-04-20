@@ -3,15 +3,35 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
 
-import { PlayersData } from "@/components/app/components/types/fc24Type";
+import { RateType } from "@/components/app/components/types/fc24Type";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 import { SkillMoves } from "@/components/app/components/cardLayouts";
+import { SkillMove } from "@/components/pages/api/allSkillMoves";
 
-export default function TopCardsFC() {
+import { F3Filter } from "@/components/app/components/filterComp";
+
+export default function SkillMovesFC() {
+
+    const [rating, setRating] = useState<RateType[]>([]);
+    const [skillData, setSkillData] = useState<SkillMove[]>([])
+
+    useEffect(() => {
+        const fetchSkillData = async () => {
+            try {
+                const response = await axios.get<SkillMove[]>(`/api/allSkillMoves`);
+                setSkillData(response.data);
+            } catch(error) {
+                console.log('Unable to fetch skills data:', error);
+            }
+        }
+        fetchSkillData();
+    }, [])
+
+    // console.log(rating)
 
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
@@ -31,11 +51,9 @@ export default function TopCardsFC() {
 
             <div className="w-full">
                 {/* Filter Div */}
-                <div>
+                <F3Filter selectRate={rating} setSelectRate={setRating} />
 
-                </div>
-
-                <SkillMoves />
+                <SkillMoves skillData={skillData.filter(r => rating.length > 0 ? rating.toString().includes(r.star) : r)} setSkillData={setSkillData} />
             </div>
         </section>
     )

@@ -44,6 +44,8 @@ export default function Formations() {
         fetchFormationData();
     }, []);
 
+    // console.log(selectedForms);
+
     
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">

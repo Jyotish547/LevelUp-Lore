@@ -272,7 +272,14 @@ export const F2Filter: React.FC<F2Props> = ({ gen, setGen }) => {
     )
 }
 
-export const F3Filter: React.FC<F2Props> = ({ gen, setGen }) => {
+// interface F3Props {
+//     selectRate: RateType[];
+//     setSelectRate: (gen: RateType[]) => void;
+// }
+
+import { RateType } from "./types/fc24Type";
+
+export const F3Filter: React.FC<{ selectRate: RateType[], setSelectRate: React.Dispatch<React.SetStateAction<RateType[]>> }> = ({ selectRate, setSelectRate }) => {
     
     // const [natId, setNatId] = useState<number | null>(null);
     // const [leaId, setLeaId] = useState<number | null>(null);
@@ -309,18 +316,18 @@ export const F3Filter: React.FC<F2Props> = ({ gen, setGen }) => {
     // }, [])
     // console.log(leagueData);
 
-    function getIconGen(gen: GenType): IconProp {
-        switch (gen) {
-            case GenType.All:
-                return faMarsAndVenus;
-            case GenType.MensFootball:
-                return faMars;
-            case GenType.WomensFootball:
-                return faVenus;
-            default:
-                return faStar;
-        }
-    }
+    // function getIconGen(rate: RateType): IconProp {
+    //     switch (gen) {
+    //         case GenType.All:
+    //             return faMarsAndVenus;
+    //         case GenType.MensFootball:
+    //             return faMars;
+    //         case GenType.WomensFootball:
+    //             return faVenus;
+    //         default:
+    //             return faStar;
+    //     }
+    // }
     // function getIconDiff(form: DiffType): IconProp {
     //     switch (form) {
     //         case 'Beginner':
@@ -350,41 +357,46 @@ export const F3Filter: React.FC<F2Props> = ({ gen, setGen }) => {
     // const filterLea = leagueData.leagues.filter(league => league.nationId === natId);
     // const filterClub = leagueData.clubs.filter(club => club.league === leaId);
 
+    const handleRate = (rate: RateType) => {
+        setSelectRate(prevRate =>
+            prevRate.includes(rate) ? prevRate.filter(r => r !== rate) : [...prevRate, rate]
+        );
+    };
+
+    function getBackgroundRate(rate: RateType): string {
+        switch (rate) {
+            case '2':
+                return 'bg-eafc';
+            case '3':
+                return 'bg-intermediate';
+            case '4':
+                return 'bg-advanced';
+            default:
+                return '';
+        }
+    }
+
     return(
         <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
             {/* Filters */}
             {/* Gender */}
             <div className="flex flex-col items-start space-y-2">
-                <h3 className="text-intermediate font-semibold">Filters:</h3>
-                <div
-                    
-                    className={
-                        `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
-                        ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black'}
-                    `}
-                >
-                    {Object.values(GenType).map((genValue, index) => (
-                        <label
+                <h3 className="text-eafc font-semibold">Rating:</h3>
+                <div className="flex flex-row justify-between items-center w-fit h-full rounded-md shadow-md shadow-gray-800/50">
+                    {(['2', '3', '4'] as RateType[]).map((rate, index)=> (
+                        <button
                             key={index}
+                            onClick={() => handleRate(rate)}
                             className={
-                                ` flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2 appearance-none
-                                ${gen === genValue ? `text-dark bg-intermediate` : `text-white`}
-                                ${index === 0 ? 'rounded-l-md' : ''}
-                                ${index === Object.values(GenType).length - 1 ? 'rounded-r-md border-none' : ''}
+                                `py-2 px-4 border-r-2 border-gray-800 space-x-2 h-full bg-clip-padding font-semibold flex flex-row items-center
+                                ${selectRate.includes(rate) ? `${getBackgroundRate(rate)} text-dark` : 'text-white'}
+                                ${index === 0 && selectRate.includes(rate) ? 'rounded-l-md' : ''}
+                                ${index === 2 ? 'rounded-r-md border-none' : ''}
                                 `}
                         >
-                            <FontAwesomeIcon icon={getIconGen(genValue)} />
-                            <input
-                                type="radio"
-                                name="type"
-                                value={genValue}
-                                onChange={(e) => setGen(e.target.value)}
-                                checked={gen === genValue}
-                                className=
-                                {`appearance-none`}
-                            />
-                            {genValue}
-                        </label>
+                            <FontAwesomeIcon icon={faStar} />
+                            <span className="">{rate[0]} Star</span>
+                        </button>
                     ))}
                 </div>
             </div>

@@ -659,30 +659,14 @@ export function getBgColorClass(value: number) {
 
 import type { SkillMove } from '@/components/pages/api/allSkillMoves';
 
-export const SkillMoves: React.FC = () => {
-
-    const [skillData, setSkillData] = useState<SkillMove[]>([])
-
-    useEffect(() => {
-        const fetchSkillData = async () => {
-            try {
-                const response = await axios.get<SkillMove[]>('/api/allSkillMoves');
-                setSkillData(response.data)
-                // console.log(response.data);
-            }
-            catch(error) {
-                console.log('Error fetching Skill Moves:', error);
-            }
-        }
-        fetchSkillData();
-    }, []);
+export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.Dispatch<React.SetStateAction<SkillMove[]>> }> = ({ skillData, setSkillData }) => {
 
     return(
         <div className='grid grid-cols-3 grid-flow-row gap-12'>
             {skillData.map((skill: any, index: any) => (
-                <div key={index} className={`skill-background border-1 flex flex-col font-base w-full items-center space-y-4 p-6 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-emerald-400/30'}`}>
+                <div key={index} className={`skill-background border-1 flex flex-col font-base w-fit py-6 items-center space-y-4 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-emerald-400/30'}`}>
                     {/* Title */}
-                    <div className={`z-10 flex flex-row justify-between items-center w-full`}>
+                    <div className={`z-10 flex flex-row justify-between items-center w-full px-6`}>
                         <p className={`font-semibold text-eafc text-xl ${ skill.star >= 3 ? 'text-intermediate' : 'text-beginner' }`}>
                             {skill.name}
                         </p>
@@ -698,7 +682,7 @@ export const SkillMoves: React.FC = () => {
                     {
                         skill.video && (
                             <iframe
-                                width="400"
+                                width="450"
                                 height="200"
                                 src={`https://www.youtube.com/embed/${skill.video.id};start=${skill.video.start}&end=${skill.video.stop}`}
                                 title="YouTube video player"
@@ -709,7 +693,7 @@ export const SkillMoves: React.FC = () => {
                         )
                     }
                     {/* PS controls */}
-                    <div className='z-10 flex flex-col w-full space-y-1'>
+                    <div className='z-10 flex flex-col w-full space-y-1 px-6'>
                         <div className='flex flex-row w-full justify-between items-center'>
                             <span>
                                 <Image src={skill.psControls.icon} alt="PlayStation" className='w-full' />
@@ -724,7 +708,7 @@ export const SkillMoves: React.FC = () => {
                     </div>
                     <hr className='z-10 border-1 border-white w-full rounded-md' />
                     {/* XBOX Controls */}
-                    <div className='z-10 flex flex-col w-full space-y-1'>
+                    <div className='z-10 flex flex-col w-full space-y-1 px-6'>
                         <div className='flex flex-row w-full justify-between items-center'>
                             <span>
                                 <Image src={skill.xboxControls.icon} alt="PlayStation" className='w-full' />

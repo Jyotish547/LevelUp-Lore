@@ -116,6 +116,8 @@ export type StatDetail = {
 export type FormType = 'Balanced' | 'Offensive' | 'Defensive';
 export type DiffType = 'Beginner' | 'Intermediate' | 'Advanced';
 
+export type RateType = '2' | '3' | '4';
+
 export enum GenType {
   All = 'All',
   MensFootball = "Men's Football",
