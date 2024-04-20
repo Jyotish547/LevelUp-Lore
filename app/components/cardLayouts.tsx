@@ -204,32 +204,7 @@ interface topCardsProps {
 
 export const PlayerCards: React.FC<topCardsProps> = ({ items }) => {
 
-    // const router = useRouter();
-
-    // useEffect(() => {
-    //     const fetchPlayerData = async () => {
-    //         try {
-    //             const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
-    //             setPlayerData(response.data.items);
-    //             // console.log(response.data.items[5])
-    //         }
-    //         catch(error) {
-    //             console.log('Error fetching players data:', error);
-    //         }
-    //     };
-    //     fetchPlayerData();
-    // });
-
-    console.log(items);
-
     const [expandedId, setExpandedId] = useState<number | null>(null);
-
-    // const goToPlayer = (player: string) {
-    //     if(router) {
-    //         router.push(`/game/fc24/topCards/${player}`);
-    //     }
-    // }
-      
 
     return (
 

@@ -12,61 +12,85 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { PlayerCards } from "@/components/app/components/cardLayouts";
 import { F2Filter } from "@/components/app/components/filterComp";
 
+import { LeagueFilter } from "@/components/app/components/types/fc24Type";
+
 export default function TopCardsFC() {
 
     const [playerData, setPlayerData] = useState<PlayersData[]>([]);
-    const [gen, setGen] = useState<GenType>(GenType.All);
+
+    const [gen, setGen] = useState<string>('All');
+    const [leagueData, setLeagueData] = useState<LeagueFilter>({
+        clubs: [],
+        leagues: [],
+        nations: []
+      });
+
     const [filteredData, setFilteredData] = useState<PlayersData[]>([]);
 
     const handleSetGen = (genStr: string) => {
         setGen(genStr as GenType);
     };
 
+    // Fetch for filter
+
     useEffect(() => {
         const fetchPlayerData = async () => {
             try {
                 const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
                 setPlayerData(response.data.items);
-                // console.log(playerData[0].playStyle);
+                setFilteredData(response.data.items);
             }
             catch(error) {
                 console.log('Error fetching players data:', error);
             }
         };
+
+        const fetchLeagueData = async() => {
+            try {
+                const response = await axios.get<LeagueFilter>(`/api/fc24/allFilters`);
+                setLeagueData(response.data);
+            }
+            catch(error) {
+                console.log('Error fetching leagues data:', error);
+            }
+        }
+        
+
         fetchPlayerData();
+        // fetchLeagueData();
     }, []);
 
-    useEffect(() => {
-        setFilteredData(playerData.filter(player => 
-            // Add filters here
-            (gen ? player.gender.label === gen : true)
-        ))
-    })
-
-    // useEffect(() => {
-    //     const fetchPlayerData = async () => {
-    //         try {
-    //             const response = await axios.get<{items: PlayersData[]}, any>(`/api/allTopCards`);
-    //             setPlayerData(response.data.items);
-    //             // console.log(response.data.items[5])
-    //         }
-    //         catch(error) {
-    //             console.log('Error fetching players data:', error);
-    //         }
-    //     };
-    //     fetchPlayerData();
-    // });
+    // Filter functions
 
     useEffect(() => {
-        const filterData = () => {
-            if (gen === 'All') {
+        // Gender
+        const filterGen = () => {
+            if (gen === 'All' || !gen) {
                 setFilteredData(playerData);
+                // console.log(filteredData);
             } else {
                 setFilteredData(playerData.filter(player => gen.includes(player.gender.label)));
             }
         };
-        filterData();
-    }, [gen, filteredData]);
+
+        
+
+        // Implementation
+        filterGen();
+    }, [gen]);
+
+    // Filtered Data
+
+    // useEffect(() => {
+    //     setFilteredData(playerData.filter(player => 
+    //         // Add filters here
+    //         (gen ? player.gender.label === gen : true)
+    //     ))
+    // })
+
+    // console.log(gen);
+
+    // console.log(filteredData);
 
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
@@ -82,7 +106,7 @@ export default function TopCardsFC() {
 
             <hr className="w-full rounded-lg" />
 
-            <F2Filter setGen={handleSetGen} />
+            <F2Filter gen={gen} setGen={handleSetGen} />
 
             <PlayerCards items={filteredData}  />
         </section>

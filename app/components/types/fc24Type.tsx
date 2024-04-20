@@ -132,4 +132,31 @@ export type CardsType = {
   position: Position;
   stats: Stats;
 };
+
+// For league items
+export type League = {
+  id: number,
+  name: string,
+  nationId?: number,
+  gender: string
+};
+
+// For nation items
+export type Nation = {
+  id: number,
+  name: string,
+};
+
+// For club items
+export type Club = {
+  id: number,
+  name: string,
+  league?: number,
+};
+
+export type LeagueFilter = {
+  clubs: Club[],
+  leagues: League[],
+  nations: Nation[],
+}
   
