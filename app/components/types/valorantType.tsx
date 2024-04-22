@@ -14,7 +14,7 @@ export type AgentData = {
   abilities: Ability[];
 };
 
-type Ability = {
+export type Ability = {
   slot: string;
   displayName: string;
   description: string;
@@ -35,6 +35,17 @@ export type AgentDataExtended = AgentData & {
 
 export interface AgentListProps {
   agentData: AgentDataExtended[];
+}
+
+export type MapFilter = {
+  displayName: string;
+  splash: string;
+}
+
+export type AgentFilter = {
+  displayName: string;
+  displayIcon: string;
+  abilities: Ability[];
 }
 
 export type MapData = {
@@ -138,6 +149,16 @@ export type Lineup = {
 type Images = {
   id: number,
   url: string,
+}
+
+export type LineupDatabase = {
+  agents: AgentData[],
+  maps: MapData[],
+  lineups: LineupData[]
+}
+
+export interface LineupFilterProps {
+  data: LineupDatabase;
 }
 
 export type RoleType = 'All' | 'Initiator' | 'Duelist' | 'Controller' | 'Sentinel';

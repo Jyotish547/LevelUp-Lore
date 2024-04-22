@@ -461,20 +461,14 @@ export const GuideList: React.FC = () => {
 
 import { LineupData } from "./types/valorantType";
 // Per Lineup
-import { Lineup } from "./types/valorantType";
+import { Lineup, LineupFilterProps } from "./types/valorantType";
 import { fetchLineup } from "@/components/pages/api/valorant/allLineups";
 
 import dpIcon from '../../public/assets/displayPicture.png';
 
-export const LineupList: React.FC = () => {
+export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
 
     // All Data
-
-    const [data, setData] = useState<{ agents: AgentData[]; maps: MapData[]; lineups: LineupData[] }>({
-        agents: [],
-        maps: [],
-        lineups: [],
-    })
 
     const [selectLineup, setSelectLineup] = useState<Lineup | null>(null);
     const [active, setActive] = useState(false);
@@ -538,21 +532,13 @@ export const LineupList: React.FC = () => {
       };
 
     useEffect(() => {
-        fetchLineup().then(data => {
-            const updatedData = prepareLineups(data.lineups, data.agents);
-            setData({
-                agents: data.agents,
-                maps: data.maps,
-                lineups: updatedData,
-            })
-        });
         document.addEventListener('mousedown', handleClick);
         return () => {
             document.removeEventListener('mousedown', handleClick);
         };
     }, [])
 
-    console.log(selectLineup);
+    // console.log(selectLineup);
 
     return(
         <div className='grid grid-cols-4 grid-flow-row gap-8 w-full'>

@@ -411,7 +411,7 @@ interface V1Props {
     setSelectRole: (selectRole: string) => void;
 }
 
-import { RoleType } from "./types/valorantType";
+import { Ability, AgentData, AgentFilter, MapData, MapFilter, RoleType } from "./types/valorantType";
 
 import sentinel from "../../public/assets/valorant/roles/Sentinel.png";
 import controller from "../../public/assets/valorant/roles/Controller.png";
@@ -528,6 +528,45 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
         }
     }
 
+    const [maps, setMaps] = useState<MapFilter[]>([]);
+    const [agents, setAgents] = useState<AgentData[]>([]);
+    // Not needed once refer
+    // const [ability, setAbility] = useState<Ability[]>([]);
+    const [side, setSide] = useState<boolean>(false);
+
+    useEffect(() => {
+        const fetchMapData = async () => {
+            try {
+                const response = await axios.get<{data: MapFilter[]}, any>(`/api/valorant/allMaps`);
+                const filter = response.data.map((map: MapFilter) => ({
+                    displayName: map.displayName,
+                    splash: map.splash
+                }));
+                setMaps(filter);
+            } catch(error) {
+                console.log('Error fetching filter map data', error);
+            }
+        }
+        const fetchAgentData = async () => {
+            try {
+                const response = await axios.get<{data: AgentFilter[]}, any>(`/api/valorant/allAgents`);
+                const filter = response.data.map((agent: AgentFilter) => ({
+                    displayName: agent.displayName,
+                    displayIcon: agent.displayIcon,
+                    abilities: agent.abilities,
+                }));
+                setAgents(filter);
+            } catch(error) {
+                console.log('Error fetching filter agent data', error);
+            }
+        }
+
+        fetchMapData();
+        fetchAgentData()
+    }, [])
+
+    // console.log(maps);
+
     // const toggleDropdown = () => setIsOpen(!isOpen);
     // const handleSelectRole = (role: RoleType[]) => {
     //     setSelectRole(role);
@@ -539,7 +578,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
             {/* Filters */}
             {/* Gender */}
             <div className="flex flex-col items-start space-y-2">
-                <h3 className="text-intermediate font-semibold">Filters:</h3>
+                <h3 className="text-intermediate font-semibold">Map:</h3>
                 <div
                     
                     className={
@@ -547,7 +586,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                         ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black w-full'}
                     `}
                 >
-                    {(['All', 'Initiator', 'Duelist', 'Controller', 'Sentinel']).map((role, index) => (
+                    {/* {(['All', 'Initiator', 'Duelist', 'Controller', 'Sentinel']).map((role, index) => (
                         // <label
                         //     key={index}
                         //     className={
@@ -567,12 +606,27 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                         //     />
                         //     {role}
                         // </label>
-                        <div>
-                        </div>
+                    ))} */}
+                    {maps.map((map, index) => (
+                        <label
+                            key={index}
+                            className={
+                            `text-lg flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                            
+                            `}
+                        >
+                            <Image src={map.splash} alt={map.displayName} width={100} height={100} />
+                            <input
+                                type="radio"
+                                name="maps"
+                                value={map.displayName}
+                                
+                            />
+                            {map.displayName}
+                        </label>
                     ))}
                 </div>
             </div>
-            {/* League */}
             
         </div> 
     )
