@@ -6,8 +6,59 @@ import { faChessBoard, faUsersGear } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 import { AgentList } from "@/components/app/components/valoComp";
+import { useEffect, useState } from "react";
+import { AgentData, AgentDataExtended } from "@/components/app/components/types/valorantType";
+
+import { V1Filter } from "@/components/app/components/filterComp";
+import { RoleType } from "@/components/app/components/types/valorantType";
+
 
 export default function Agents() {
+
+    const [roles, setRoles] = useState<string>('All');
+    const [agentData, setAgentData] = useState<(AgentDataExtended & { defaultAbility: string })[]>([]);
+
+    const [filteredData, setFilteredData] = useState<AgentDataExtended[]>([]);
+
+    useEffect(() => {
+        const fetchAgentData = async () => {
+            try {
+                const response = await axios.get<{data: AgentDataExtended[]}, any>(`/api/valorant/allAgents`);
+                const dataWithSelectedDesc = response.data.map((agent: AgentDataExtended) => ({
+                    ...agent,
+                    defaultAbility: agent.abilities[0]?.description || ''
+                }))
+                setAgentData(dataWithSelectedDesc);
+                setFilteredData(dataWithSelectedDesc);
+
+            }
+            catch(error) {
+                console.log('Unable to Fetch Agent Details', error);
+            }
+        }
+        fetchAgentData();
+    }, []);
+
+    console.log(roles);
+
+    const handleSetRole = (roleStr: string) => {
+        setRoles(roleStr);
+        console.log(roleStr);
+    }
+
+    useEffect(() => {
+        const filterRole = () => {
+            if(roles === 'All' || !roles) {
+                setFilteredData(agentData);
+            } else {
+                setFilteredData(agentData.filter(agent => agent.isPlayableCharacter && agent.role.displayName === roles));
+                // console.log(amb);
+            }
+        }
+
+        filterRole();
+    }, [roles]);
+
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
             {/* Header */}
@@ -23,12 +74,10 @@ export default function Agents() {
             <hr className="w-full rounded-lg" />
             
             {/* Filters */}
-            <div className="flex flex-row space-x-12">
-
-            </div>
+            <V1Filter selectRole={roles} setSelectRole={handleSetRole} />
             
             {/* Card Layout */}
-                <AgentList />
+            <AgentList agentData={filteredData} />
 
         </section>
     )

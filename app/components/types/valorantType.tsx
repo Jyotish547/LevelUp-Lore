@@ -29,6 +29,14 @@ type Role = {
   assetPath: string;
 };
 
+export type AgentDataExtended = AgentData & {
+  defaultAbility: string;
+};
+
+export interface AgentListProps {
+  agentData: AgentDataExtended[];
+}
+
 export type MapData = {
   uuid: string;
   displayName: string;
@@ -131,3 +139,5 @@ type Images = {
   id: number,
   url: string,
 }
+
+export type RoleType = 'All' | 'Initiator' | 'Duelist' | 'Controller' | 'Sentinel';

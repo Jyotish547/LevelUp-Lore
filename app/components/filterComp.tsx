@@ -1,12 +1,12 @@
 'use client'
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import '../globals.css'
 
 import BorderButton from "./buttons";
 import { IconButton } from "./buttons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faMars, faMarsAndVenus, faPlaneUp, faShieldHalved, faStar, faVenus } from "@fortawesome/free-solid-svg-icons";
+import { faEarthAmericas, faMars, faMarsAndVenus, faPlaneUp, faShieldHalved, faStar, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const iconsMap: { [key: string]: IconProp } = {
     star: faStar,
@@ -397,6 +397,178 @@ export const F3Filter: React.FC<{ selectRate: RateType[], setSelectRate: React.D
                             <FontAwesomeIcon icon={faStar} />
                             <span className="">{rate[0]} Star</span>
                         </button>
+                    ))}
+                </div>
+            </div>
+            {/* League */}
+            
+        </div> 
+    )
+}
+
+interface V1Props {
+    selectRole: string;
+    setSelectRole: (selectRole: string) => void;
+}
+
+import { RoleType } from "./types/valorantType";
+
+import sentinel from "../../public/assets/valorant/roles/Sentinel.png";
+import controller from "../../public/assets/valorant/roles/Controller.png";
+import duelist from "../../public/assets/valorant/roles/Duelist.png";
+import initiator from "../../public/assets/valorant/roles/Initiator.png";
+import { StaticImageData } from "next/image";
+
+import Image from "next/image";
+
+interface V2Props {
+    selectMap: string;
+    setSelectMap: (selectRole: string) => void;
+    selectAgent: string;
+    setSelectAgent: (selectRole: string) => void;
+    selectAbility: string;
+    setSelectAbility: (selectRole: string) => void;
+    selectSide: string;
+    setSelectSide: (selectRole: string) => void;
+}
+
+export const V1Filter: React.FC<V1Props> = ({ selectRole, setSelectRole }) => {
+    
+    // const [isOpen, setIsOpen] = useState(false);
+
+    function getIconRole(role: string): StaticImageData {
+        switch (role) {
+            case 'Initiator':
+                return initiator;
+            case 'Duelist':
+                return duelist;
+            case 'Controller':
+                return controller;
+            case 'Sentinel':
+                return sentinel;
+            default:
+                return duelist;
+        }
+    }
+
+    // const toggleDropdown = () => setIsOpen(!isOpen);
+    // const handleSelectRole = (role: RoleType[]) => {
+    //     setSelectRole(role);
+    //     setIsOpen(false);
+    // }
+
+    return(
+        <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
+            {/* Filters */}
+            {/* Gender */}
+            <div className="flex flex-col items-start space-y-2">
+                <h3 className="text-intermediate font-semibold">Filters:</h3>
+                <div
+                    
+                    className={
+                        `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
+                        ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black w-full'}
+                    `}
+                >
+                    {(['All', 'Initiator', 'Duelist', 'Controller', 'Sentinel']).map((role, index) => (
+                        <label
+                            key={index}
+                            className={
+                                `text-lg flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                ${selectRole === role ? 'bg-intermediate text-dark' : ''}
+                                `}
+                        >
+                            {index === 0 ? (<FontAwesomeIcon icon={faEarthAmericas} className="text-xl" />) : (<Image src={getIconRole(role)} alt={role} width={25} height={25} />)}
+                            
+                            <input
+                                type="radio"
+                                name="type"
+                                value={role}
+                                onChange={(e) => setSelectRole(e.target.value)}
+                                checked={selectRole === role}
+                                className={`appearance-none`}
+                            />
+                            {role}
+                        </label>
+                    ))}
+                </div>
+            </div>
+            {/* League */}
+            
+        </div> 
+    )
+}
+
+interface V2Props {
+    selectMap: string;
+    setSelectMap: (selectRole: string) => void;
+    selectAgent: string;
+    setSelectAgent: (selectRole: string) => void;
+    selectAbility: string;
+    setSelectAbility: (selectRole: string) => void;
+    selectSide: string;
+    setSelectSide: (selectRole: string) => void;
+}
+export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAgent, setSelectAgent, selectAbility, setSelectAbility, selectSide, setSelectSide }) => {
+    
+    // const [isOpen, setIsOpen] = useState(false);
+
+    function getIconRole(role: string): StaticImageData {
+        switch (role) {
+            case 'Initiator':
+                return initiator;
+            case 'Duelist':
+                return duelist;
+            case 'Controller':
+                return controller;
+            case 'Sentinel':
+                return sentinel;
+            default:
+                return duelist;
+        }
+    }
+
+    // const toggleDropdown = () => setIsOpen(!isOpen);
+    // const handleSelectRole = (role: RoleType[]) => {
+    //     setSelectRole(role);
+    //     setIsOpen(false);
+    // }
+
+    return(
+        <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
+            {/* Filters */}
+            {/* Gender */}
+            <div className="flex flex-col items-start space-y-2">
+                <h3 className="text-intermediate font-semibold">Filters:</h3>
+                <div
+                    
+                    className={
+                        `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
+                        ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black w-full'}
+                    `}
+                >
+                    {(['All', 'Initiator', 'Duelist', 'Controller', 'Sentinel']).map((role, index) => (
+                        // <label
+                        //     key={index}
+                        //     className={
+                        //         `text-lg flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                        //         ${selectRole === role ? 'bg-intermediate text-dark' : ''}
+                        //         `}
+                        // >
+                        //     {index === 0 ? (<FontAwesomeIcon icon={faEarthAmericas} className="text-xl" />) : (<Image src={getIconRole(role)} alt={role} width={25} height={25} />)}
+                            
+                        //     <input
+                        //         type="radio"
+                        //         name="type"
+                        //         value={role}
+                        //         onChange={(e) => setSelectRole(e.target.value)}
+                        //         checked={selectRole === role}
+                        //         className={`appearance-none`}
+                        //     />
+                        //     {role}
+                        // </label>
+                        <div>
+                        </div>
                     ))}
                 </div>
             </div>

@@ -2,39 +2,38 @@
 
 import { useState, useEffect, useRef } from "react"
 import axios from "axios";
-import { AgentData } from "./types/valorantType"
+import { AgentData, AgentDataExtended, AgentListProps } from "./types/valorantType"
 import { MapData } from "./types/valorantType";
 import Image from "next/image";
 import Link from "next/link";
 
-export const AgentList: React.FC = () => {
-    const [agentData, setAgentData] = useState<(AgentData & { defaultAbility: string })[]>([]);
+export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
 
-    useEffect(() => {
-        const fetchAgentData = async () => {
-            try {
-                const response = await axios.get<{data: AgentData[]}, any>(`/api/valorant/allAgents`);
-                const dataWithSelectedDesc = response.data.map((agent: AgentData) => ({
-                    ...agent,
-                    defaultAbility: agent.abilities[0]?.description || ''
-                }))
-                setAgentData(dataWithSelectedDesc);
-                console.log(dataWithSelectedDesc);
+    // useEffect(() => {
+    //     const fetchAgentData = async () => {
+    //         try {
+    //             const response = await axios.get<{data: AgentData[]}, any>(`/api/valorant/allAgents`);
+    //             const dataWithSelectedDesc = response.data.map((agent: AgentData) => ({
+    //                 ...agent,
+    //                 defaultAbility: agent.abilities[0]?.description || ''
+    //             }))
+    //             setAgentData(dataWithSelectedDesc);
+    //             // console.log(dataWithSelectedDesc);
 
-            }
-            catch(error) {
-                console.log('Unable to Fetch Agent Details', error);
-            }
-        }
-        fetchAgentData();
-    }, []);
+    //         }
+    //         catch(error) {
+    //             console.log('Unable to Fetch Agent Details', error);
+    //         }
+    //     }
+    //     fetchAgentData();
+    // }, []);
 
-    const abilityClick = (agentIndex: number, description: string) => {
-        setAgentData(currentData =>
-            currentData.map((agent, index) => 
-                index === agentIndex ? { ...agent, defaultAbility: description } : agent
-            ))
-    };
+    // const abilityClick = (agentIndex: number, description: string) => {
+    //     setAgentData(currentData =>
+    //         currentData.map((agent, index) => 
+    //             index === agentIndex ? { ...agent, defaultAbility: description } : agent
+    //         ))
+    // };
 
     const [expandedId, setExpandedId] = useState<number | null>(null);
 
@@ -59,7 +58,7 @@ export const AgentList: React.FC = () => {
                                         </div>
                                         <div className="flex flex-row w-full justify-between border-b-2 border-valo">
                                             {agent.abilities.slice(0, 4).map((ability: any, abilityIndex: any) => (
-                                                <div key={abilityIndex} className={`p-4 cursor-pointer ${agent.defaultAbility === ability.description ? 'bg-valo' : ''}`} onClick={() => abilityClick(index, ability.description)}>
+                                                <div key={abilityIndex} className={`p-4 cursor-pointer ${agent.defaultAbility === ability.description ? 'bg-valo' : ''}`}>
                                                     <Image src={ability.displayIcon} alt={agent.displayName} width={30} height={30} />
                                                 </div>
                                             ))}
@@ -181,69 +180,71 @@ export const MapList: React.FC = () => {
     return(
         <div className="grid grid-cols-1 grid-flow-row w-full gap-8">
             {mapData.map((map: any, index: any) => (
-                <div
-                    key={index}
-                    className="row-span-1 valo-background flex flex-col p-8 rounded-lg shadow-md shadow-violet-400/30 space-y-8"
-                    onClick={() => setExpandedId(expandedId === map.uuid ? null : map.uuid)}
-                    >
-                    <div className="flex flex-row w-full justify-between items-center space-x-8">
-                        <Image src={map.splash} alt={map.displayName} width={520} height={500} className="rounded-lg" />
-                        <div className="flex flex-col items-start justify-between h-full py-2">
-                            <span className="text-3xl font-semibold tracking-wider text-valo">
-                                {map.displayName.toUpperCase()}
-                            </span>
-                            <div className="flex flex-col space-y-1">
-                                <p className="text-xl font-semibold text-valo">Description:</p>
-                                <p className="text-md">{map.narrativeDescription}</p>
-                            </div>
-                            <div className="flex flex-row space-x-3 items-center text-xl">
-                                <p className="font-semibold text-valo">Plant Sites:</p>
-                                <p>{map.tacticalDescription}</p>
-                            </div>
-                            <div className="flex flex-row space-x-3 items-center text-xl">
-                                <p className="font-semibold text-valo">Coordinates:</p>
-                                <p>{map.coordinates}</p>
+                map.narrativeDescription && (
+                    <div
+                        key={index}
+                        className="row-span-1 valo-background flex flex-col p-8 rounded-lg shadow-md shadow-violet-400/30 space-y-8"
+                        onClick={() => setExpandedId(expandedId === map.uuid ? null : map.uuid)}
+                        >
+                        <div className="flex flex-row w-full justify-between items-center space-x-8">
+                            <Image src={map.splash} alt={map.displayName} width={520} height={500} className="rounded-lg" />
+                            <div className="flex flex-col items-start justify-between h-full py-2">
+                                <span className="text-3xl font-semibold tracking-wider text-valo">
+                                    {map.displayName.toUpperCase()}
+                                </span>
+                                <div className="flex flex-col space-y-1">
+                                    <p className="text-xl font-semibold text-valo">Description:</p>
+                                    <p className="text-md">{map.narrativeDescription}</p>
+                                </div>
+                                <div className="flex flex-row space-x-3 items-center text-xl">
+                                    <p className="font-semibold text-valo">Plant Sites:</p>
+                                    <p>{map.tacticalDescription}</p>
+                                </div>
+                                <div className="flex flex-row space-x-3 items-center text-xl">
+                                    <p className="font-semibold text-valo">Coordinates:</p>
+                                    <p>{map.coordinates}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {
-                        expandedId === map.uuid && (
-                            <div className="flex flex-row items-start justify-between">
-                                <div className="flex flex-col items-start space-y-2">
-                                    <p className="text-xl font-semibold text-valo">Map Outline:</p>
-                                    <span className="text-md mb-4">
-                                        Highlighed Areas are Spike Plant regions
-                                    </span>
-                                    <div className="h-[600px] overflow-y-auto px-4 py-2 space-y-4">
-                                        {map.callouts.map((call: any, index: any) => (
-                                            <div key={index} className="flex flex-row space-x-4 items-center">
-                                                <div className="px-3 py-1 text-dark font-bold text-lg bg-intermediate flex flex-row items-center h-fit rounded-md">
-                                                    {index + 1}
+                        {
+                            expandedId === map.uuid && (
+                                <div className="flex flex-row items-start justify-between">
+                                    <div className="flex flex-col items-start space-y-2">
+                                        <p className="text-xl font-semibold text-valo">Map Outline:</p>
+                                        <span className="text-md mb-4">
+                                            Highlighed Areas are Spike Plant regions
+                                        </span>
+                                        <div className="h-[600px] overflow-y-auto px-4 py-2 space-y-4">
+                                            {map.callouts.map((call: any, index: any) => (
+                                                <div key={index} className="flex flex-row space-x-4 items-center">
+                                                    <div className="px-3 py-1 text-dark font-bold text-lg bg-intermediate flex flex-row items-center h-fit rounded-md">
+                                                        {index + 1}
+                                                    </div>
+                                                    <div className="flex flex-col space-y-2 h-fit">
+                                                        <p className="text-valo">Region Name: <span className="font-semibold text-white ml-2">{call.regionName}</span></p>
+                                                        <p className="text-valo">Super Region Name: <span className="font-semibold text-white ml-2">{call.superRegionName}</span></p>
+                                                    </div>
                                                 </div>
-                                                <div className="flex flex-col space-y-2 h-fit">
-                                                    <p className="text-valo">Region Name: <span className="font-semibold text-white ml-2">{call.regionName}</span></p>
-                                                    <p className="text-valo">Super Region Name: <span className="font-semibold text-white ml-2">{call.superRegionName}</span></p>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            ))}
+                                        </div>
                                     </div>
+                                    {/* Callout Calculation */}
+                                    {/* <div style={{ position: 'relative', width:'50%', height: '100%', backgroundImage: `url(${map.displayIcon})`, backgroundSize: 'cover' }}>
+                                        {map.callouts.map((call: any, index: any) => {
+                                            // const { relativeX, relativeY } = calcPos(map, call.location.x, call.location.y);
+                                            return(
+                                                <div key={index} style={{ position: 'absolute', left:  `${relativeX}%`, top: `${relativeY}%`, transform: 'translate(-50%, -50%)', padding: '5px', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}>
+                                                    {call.regionName}
+                                                </div>
+                                            )
+                                        })}
+                                    </div> */}
+                                    <Image src={map.displayIcon} alt={map.displayName} width={700} height={500} />
                                 </div>
-                                {/* Callout Calculation */}
-                                {/* <div style={{ position: 'relative', width:'50%', height: '100%', backgroundImage: `url(${map.displayIcon})`, backgroundSize: 'cover' }}>
-                                    {map.callouts.map((call: any, index: any) => {
-                                        // const { relativeX, relativeY } = calcPos(map, call.location.x, call.location.y);
-                                        return(
-                                            <div key={index} style={{ position: 'absolute', left:  `${relativeX}%`, top: `${relativeY}%`, transform: 'translate(-50%, -50%)', padding: '5px', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: 'white' }}>
-                                                {call.regionName}
-                                            </div>
-                                        )
-                                    })}
-                                </div> */}
-                                <Image src={map.displayIcon} alt={map.displayName} width={700} height={500} />
-                            </div>
-                        )
-                    }
-                </div>
+                            )
+                        }
+                    </div>
+                ) 
             ))}
         </div>
     );
