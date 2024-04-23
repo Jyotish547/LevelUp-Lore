@@ -32,7 +32,7 @@ export default function Lineups() {
     const [map, setMap] = useState<string>('All');
     const [agent, setAgent] = useState<string>('All');
     const [ability, setAbility] = useState<string>('');
-    const [side, setSide] = useState<string>('0');
+    const [side, setSide] = useState<string>('Attack');
 
     // Icons & API Organization
 

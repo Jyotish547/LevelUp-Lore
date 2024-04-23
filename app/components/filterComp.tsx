@@ -581,21 +581,21 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
     // }
 
     return(
-        <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
+        <div className="flex flex-row justify-between items-center formation-filters w-full h-fit space-x-8">
             {/* Filters */}
             {/* Maps */}
-            <div className="flex flex-col items-start space-y-2">
+            <div className="flex flex-col w-fit items-start space-y-2">
                 <h3 className="text-intermediate font-semibold">Select Map:</h3>
                 <div
                     
                     className={
-                        `flex flex-col items-stretch rounded-md border-2 border-intermediate font-semibold
+                        `flex flex-col w-36 rounded-md border-2 border-intermediate font-semibold
                         ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black w-full'}
                     `}
                 >
                     <label
                         className={
-                        `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                        `text-lg flex flex-row w-full text-xl py-3 px-4 items-center text-sm font-regular space-x-2
                         ${selectMap === 'All' ? 'bg-intermediate' : ''}
                         `}
                     >
@@ -614,7 +614,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                 <label
                                     key={index}
                                     className={
-                                    `text-lg flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                    `text-lg flex flex-row w-full text-xl py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
                                     ${selectMap === map.displayName ? 'bg-intermediate' : ''}
                                     `}
                                 >
@@ -633,20 +633,20 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                 </div>
             </div>
             {/* Sub filter div */}
-            <div className="flex flex-col items-start space-y-2">
+            <div className="flex flex-col w-full items-start space-y-2">
                 {/* Agents */}
                 <div className="flex flex-col items-start">
                     <h3 className="text-intermediate font-semibold">Select Agent:</h3>
                     <div
                         
                         className={
-                            `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
-                            ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black w-full'}
+                            `flex flex-row flex-wrap items-center justify-start rounded-md border-intermediate font-semibold
+                            ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black'}
                         `}
                     >
                         <label
                             className={
-                            `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                            `text-lg flex flex-col w-20 h-20 justify-center items-center text-xl py-3 px-4 self-stretch text-sm font-regular border-gray-800 space-x-2
                             ${selectAgent === 'All' ? 'bg-intermediate' : ''}
                             `}
                         >
@@ -654,7 +654,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                 type="radio"
                                 name="agents"
                                 value='All'
-                                className={`appearance-none`}
+                                className={`appearance-none `}
                                 onChange={(e) => setSelectAgent(e.target.value)}
                                 checked={selectAgent === 'All'}
                             />
@@ -665,7 +665,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                     <label
                                         key={index}
                                         className={
-                                        `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                        `text-lg flex flex-col w-20 h-20 justify-center items-center text-lg py-3 px-4  text-sm font-regular
                                         ${selectAgent === agent.displayName ? 'bg-intermediate': ''}
                                         `}
                                     >
@@ -691,40 +691,19 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                         <div
                             
                             className={
-                                `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
-                                ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black w-full'}
+                                `flex flex-row items-stretch rounded-md border-intermediate font-semibold
+                                ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black'}
                             `}
                         >
-                            {/* {agents.abilities.map((agent, index) => (
-                                    agent.isPlayableCharacter && (
-                                        <label
-                                            key={index}
-                                            className={
-                                            `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
-                                            
-                                            `}
-                                        >
-                                            <Image src={agent.displayIcon} alt={agent.displayName} width={40} height={40} />
-                                            <input
-                                                type="radio"
-                                                name="agents"
-                                                value={agent.displayName}
-                                                className={``}
-                                                onChange={(e) => setSelectAgent(e.target.value)}
-                                                checked={selectAgent === agent.displayName}
-                                            />
-                                        </label>
-                                    )
-                            ))} */}
                             {matchAgent?.abilities.slice(0,4).map((ab, index) => (
                                 <label
                                     key={index}
                                     className={
-                                        `text-lg flex flex-col flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                        `text-lg flex flex-col flex-wrap w-fit text-lg py-3 px-4 items-center justify-center text-sm font-regular border-r-2 border-gray-800 space-x-2
                                         ${selectAbility === ab.displayName ? 'bg-intermediate': ''}
                                     `}
                                 >
-                                    <Image src={ab.displayIcon} alt={ab.displayName} width={30} height={30} />
+                                    <Image src={ab.displayIcon} alt={ab.displayName} width={40} height={40} />
                                     <input
                                         type="radio"
                                         name="abilities"
