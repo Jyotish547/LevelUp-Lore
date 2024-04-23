@@ -32,10 +32,10 @@ export type SkillMove = {
         start: number,
         stop: number
     }
-}[]
+};
 
 export default function skillMovesAPI (req: NextApiRequest, res: NextApiResponse) {
-    const skillMoves: SkillMove = [
+    const skillMoves: SkillMove[] = [
         // Skill Moves Data here
         {
             key: 1,

@@ -53,7 +53,7 @@ export default function SkillMovesFC() {
                 {/* Filter Div */}
                 <F3Filter selectRate={rating} setSelectRate={setRating} />
 
-                <SkillMoves skillData={skillData.filter(r => rating.length > 0 ? rating.toString().includes(r.star) : r)} setSkillData={setSkillData} />
+                <SkillMoves skillData={skillData.filter(r => rating.length > 0 ? rating.some(rate => rate === r.star.toString()) : true)} setSkillData={setSkillData} />
             </div>
         </section>
     )
