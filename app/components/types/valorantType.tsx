@@ -40,12 +40,14 @@ export interface AgentListProps {
 export type MapFilter = {
   displayName: string;
   splash: string;
+  narrativeDescription?: string;
 }
 
 export type AgentFilter = {
   displayName: string;
   displayIcon: string;
   abilities: Ability[];
+  isPlayableCharacter: boolean;
 }
 
 export type MapData = {
@@ -112,23 +114,15 @@ interface Thumbnail {
   height: number
 }
 
-
-// Lineup Map
-export type LineupData = {
-  id: number;
-  map: string;
-  agents: LineupAgent[];
-}[];
-
 // Lineup Agent
-type LineupAgent = {
+interface LineupAgent {
   id: number;
   name: string;
   lineups: Lineup[];
 };
 
 // Lineups
-export type Lineup = {
+export interface Lineup {
   id: number;
   username: string;
   date: string;
@@ -138,7 +132,7 @@ export type Lineup = {
   thumbnail: string;
   title: string;
   description: string[];
-  side: boolean;
+  side: string;
   images: Images[];
   note?: string;
   displayIcon?: string;
@@ -146,10 +140,17 @@ export type Lineup = {
 };
 
 // Lineup images
-type Images = {
+interface Images {
   id: number,
   url: string,
 }
+
+// Lineup Map
+export interface LineupData {
+  id: number;
+  map: string;
+  agents: LineupAgent[];
+};
 
 export type LineupDatabase = {
   agents: AgentData[],

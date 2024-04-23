@@ -228,6 +228,8 @@ export const F2Filter: React.FC<F2Props> = ({ gen, setGen }) => {
     // const filterLea = leagueData.leagues.filter(league => league.nationId === natId);
     // const filterClub = leagueData.clubs.filter(club => club.league === leaId);
 
+    
+
     return(
         <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
             {/* Filters */}
@@ -534,13 +536,16 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
     // const [ability, setAbility] = useState<Ability[]>([]);
     const [side, setSide] = useState<boolean>(false);
 
+
+
     useEffect(() => {
         const fetchMapData = async () => {
             try {
                 const response = await axios.get<{data: MapFilter[]}, any>(`/api/valorant/allMaps`);
                 const filter = response.data.map((map: MapFilter) => ({
                     displayName: map.displayName,
-                    splash: map.splash
+                    splash: map.splash,
+                    narrativeDescription: map.narrativeDescription,
                 }));
                 setMaps(filter);
             } catch(error) {
@@ -554,6 +559,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                     displayName: agent.displayName,
                     displayIcon: agent.displayIcon,
                     abilities: agent.abilities,
+                    isPlayableCharacter: agent.isPlayableCharacter
                 }));
                 setAgents(filter);
             } catch(error) {
@@ -576,58 +582,107 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
     return(
         <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
             {/* Filters */}
-            {/* Gender */}
+            {/* Maps */}
             <div className="flex flex-col items-start space-y-2">
-                <h3 className="text-intermediate font-semibold">Map:</h3>
+                <h3 className="text-intermediate font-semibold">Select Map:</h3>
                 <div
                     
                     className={
-                        `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
+                        `flex flex-col items-stretch rounded-md border-2 border-intermediate font-semibold
                         ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black w-full'}
                     `}
                 >
-                    {/* {(['All', 'Initiator', 'Duelist', 'Controller', 'Sentinel']).map((role, index) => (
-                        // <label
-                        //     key={index}
-                        //     className={
-                        //         `text-lg flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
-                        //         ${selectRole === role ? 'bg-intermediate text-dark' : ''}
-                        //         `}
-                        // >
-                        //     {index === 0 ? (<FontAwesomeIcon icon={faEarthAmericas} className="text-xl" />) : (<Image src={getIconRole(role)} alt={role} width={25} height={25} />)}
-                            
-                        //     <input
-                        //         type="radio"
-                        //         name="type"
-                        //         value={role}
-                        //         onChange={(e) => setSelectRole(e.target.value)}
-                        //         checked={selectRole === role}
-                        //         className={`appearance-none`}
-                        //     />
-                        //     {role}
-                        // </label>
-                    ))} */}
+                    <label
+                        className={
+                        `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                        
+                        `}
+                    >
+                        <input
+                            type="radio"
+                            name="maps"
+                            value='All'
+                            className={``}
+                            onChange={(e) => setSelectMap(e.target.value)}
+                            checked={selectMap === 'All'}
+                        />
+                        All Maps
+                    </label>
                     {maps.map((map, index) => (
-                        <label
-                            key={index}
-                            className={
-                            `text-lg flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
-                            
-                            `}
-                        >
-                            <Image src={map.splash} alt={map.displayName} width={100} height={100} />
-                            <input
-                                type="radio"
-                                name="maps"
-                                value={map.displayName}
-                                
-                            />
-                            {map.displayName}
-                        </label>
+                            map.narrativeDescription && (
+                                <label
+                                    key={index}
+                                    className={
+                                    `text-lg flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                    
+                                    `}
+                                >
+                                    <input
+                                        type="radio"
+                                        name="maps"
+                                        value={map.displayName}
+                                        onChange={(e) => setSelectMap(e.target.value)}
+                                        checked={selectMap === map.displayName}
+                                    />
+                                    {map.displayName}
+                                </label>
+                            )
                     ))}
                 </div>
             </div>
-            
+            {/* Sub filter div */}
+            <div className="flex flex-col items-start space-y-2">
+                {/* Agents */}
+                <div className="flex flex-col items-start">
+                    <h3 className="text-intermediate font-semibold">Map:</h3>
+                    <div
+                        
+                        className={
+                            `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
+                            ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black w-full'}
+                        `}
+                    >
+                        <label
+                            className={
+                            `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                            
+                            `}
+                        >
+                            <FontAwesomeIcon icon={faStar} />
+                            <input
+                                type="radio"
+                                name="agents"
+                                value='All'
+                                className={``}
+                                onChange={(e) => setSelectMap(e.target.value)}
+                                checked={selectAgent === 'All'}
+                            />
+                            All Agents
+                        </label>
+                        {agents.map((agent, index) => (
+                                agent.isPlayableCharacter && (
+                                    <label
+                                        key={index}
+                                        className={
+                                        `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                        
+                                        `}
+                                    >
+                                        <Image src={agent.displayIcon} alt={agent.displayName} width={40} height={40} />
+                                        <input
+                                            type="radio"
+                                            name="agents"
+                                            value={agent.displayName}
+                                            className={``}
+                                            onChange={(e) => setSelectAgent(e.target.value)}
+                                            checked={selectAgent === agent.displayName}
+                                        />
+                                    </label>
+                                )
+                        ))}
+                    </div>
+                </div>
+            </div>
         </div> 
     )
 }

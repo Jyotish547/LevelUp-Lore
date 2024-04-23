@@ -7,7 +7,7 @@ import { LineupData } from "@/components/app/components/types/valorantType";
 
 
 export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
-    const lineups: LineupData = [
+    const lineups: LineupData[] = [
         // Main Object
         {
             id: 1,
@@ -33,7 +33,7 @@ export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
                                 "Align the star of your molly with the edge of the tube",
                                 "simple shoot"
                             ],
-                            side: true,
+                            side: '1',
                             note: "If you aim to low you molly will hit the roof",
                             images: [
                                 {
@@ -64,7 +64,7 @@ export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
                                 "Align your crosshair with the bottom of the leaf sticking out.",
                                 "Left click."
                             ],
-                            side: true,
+                            side: '1',
                             note: "If you hear the enemy tap the spike it's already too late if you throw it during that time due to travel time.",
                             images: [
                                 {
@@ -111,7 +111,7 @@ export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
                                 "Aim your crosshair with bottom cable but between intersection of cable-rooftop and edge of building wall as shown in (Image 3)",
                                 "Shoot your molly and it will land perfectly in planted spike (Image 4)"
                             ],
-                            side: true,
+                            side: '1',
                             images: [
                                 {
                                     id: 1,
@@ -153,7 +153,7 @@ export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
                                 "Align the second line of your HUD like the image above with the corner of the box sticking out.",
                                 "Left click (No run-up or jump needed)",
                             ],
-                            side: true,
+                            side: '1',
                             images: [
                                 {
                                     id: 1,
@@ -199,7 +199,7 @@ export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
                                 "Aim your crosshair a bit to the right of the corner (image 2).",
                                 "Left click to throw, it lands perfectly in default plant spot of C site."
                             ],
-                            side: true,
+                            side: '1',
                             images: [
                                 {
                                     id: 1,
@@ -229,7 +229,7 @@ export default function lineupAPI (req: NextApiRequest, res: NextApiResponse) {
                                 "Line up left distal hud with roof corner.",
                                 "Simple left click."
                             ],
-                            side: true,
+                            side: '1',
                             images: [
                                 {
                                     id: 1,

@@ -499,38 +499,6 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
         }
     }
 
-    const prepareLineups = (lineups: LineupData[], agents: AgentData[]): LineupData[] => {
-        return lineups.map((lineupData :any) => ({
-          ...lineupData,
-          agents: lineupData.agents.map((agent: any) => {
-            // Matching Agent
-            const match = agents.find((a: any) => a.displayName === agent.name);
-            
-            if(!match) {
-                return {
-                    ...agent,
-                    matchAbility: null,
-                };
-            }
-
-            console.log(match);
-
-            return {
-              ...agent,
-              lineups: agent.lineups.map((lineup: any) => {
-                const ability = match?.abilities.find((ab: any) => ab.displayName === lineup.ability)
-                return {
-                    ...lineup,
-                    displayIcon: match ? match.displayIcon : null,
-                    abilityIcon: ability ? ability.displayIcon : null,
-                }
-              })
-              
-            };
-          }),
-        }));
-      };
-
     useEffect(() => {
         document.addEventListener('mousedown', handleClick);
         return () => {

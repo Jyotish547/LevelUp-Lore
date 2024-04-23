@@ -18,15 +18,21 @@ export default function Lineups() {
     // All Data
 
     const [data, setData] = useState<LineupDatabase>({
+        agents: [] as AgentData[],
+        maps: [] as MapData[],
+        lineups: [] as LineupData[],
+    })
+
+    const [filterData, setFilterData] = useState<LineupDatabase>({
         agents: [],
         maps: [],
         lineups: [],
     })
 
-    const [map, setMap] = useState<string>('');
-    const [agent, setAgent] = useState<string>('');
+    const [map, setMap] = useState<string>('All');
+    const [agent, setAgent] = useState<string>('All');
     const [ability, setAbility] = useState<string>('');
-    const [side, setSide] = useState<string>('');
+    const [side, setSide] = useState<string>('0');
 
     // Icons & API Organization
 
@@ -60,20 +66,148 @@ export default function Lineups() {
             };
           }),
         }));
-      };
+    };
+
+    const handleMap = (mapStr: string) => {
+        setMap(mapStr);
+    }
+
+    const handleAgent = (agentStr: string) => {
+        setAgent(agentStr);
+    }
+
+    const handleAbility = (abStr: string) => {
+        setAbility(abStr);
+    }
+
+    const handleSide = (sideStr: string) => {
+        setSide(sideStr);
+    }
+
+    const fetchData = async () => {
+        const fetchedData = await fetchLineup();
+        const updatedData = prepareLineups(fetchedData.lineups, fetchedData.agents);
+        setData({
+            agents: fetchedData.agents,
+            maps: fetchedData.maps,
+            lineups: updatedData
+        })
+        setFilterData({
+            agents: fetchedData.agents,
+            maps: fetchedData.maps,
+            lineups: updatedData
+        })
+    }
+
+    const fetchAndFilterData = () => {
+
+        let updatedLineups = [...data.lineups]
+
+        // Assuming 'map' is a state that may change and should trigger filtering
+        // if (map === 'All') {
+        //     setFilterData({
+        //         agents: fetchedData.agents,
+        //         maps: fetchedData.maps,
+        //         lineups: updatedData,
+        //     })
+        // } else {
+        //     const filteredMaps = updatedData.filter(line => line.map === map);
+        //     setFilterData({
+        //         ...fetchedData,
+        //         lineups: filteredMaps
+        //     });
+        // }
+
+        if(map !== 'All') {
+            updatedLineups = updatedLineups.filter(line => line.map === map);
+        }
+
+        // if(agent === 'All') {
+        //     setFilterData({
+        //         agents: fetchedData.agents,
+        //         maps: fetchedData.maps,
+        //         lineups: updatedData,
+        //     });
+        // } else {
+        //     const filteredAgents = updatedData.filter(line => line.agents.some(obj => obj.id === 1))
+        //     setFilterData(prevData => ({
+        //         ...prevData,
+        //         lineups: filteredAgents
+        //     }))
+        // }
+
+        if(agent !== 'All') {
+            updatedLineups = updatedLineups.filter(line =>
+                line.agents.some(obj => obj.name === agent)
+            )
+        }
+
+        setFilterData(prevData => ({
+            ...prevData,
+            lineups: updatedLineups
+        }))
+
+    };
+
+    console.log(`${map}, ${agent} and `, filterData);
 
     useEffect(() => {
-        fetchLineup().then(data => {
-            const updatedData = prepareLineups(data.lineups, data.agents);
-            setData({
-                agents: data.agents,
-                maps: data.maps,
-                lineups: updatedData,
-            })
-        });
-    });
-    
+        fetchData();
+    }, [])
 
+    useEffect(() => {
+        // fetchLineup().then(data => {
+        //     setData({
+        //         agents: data.agents,
+        //         maps: data.maps,
+        //         lineups: updatedData,
+        //     });
+        //     setFilterData(data);
+            
+        // });
+
+        
+
+        // const filterAbility = () => {
+        //     if(!ability) {
+        //         setFilterData(prevData => ({
+        //             ...prevData,
+        //             lineups: data.lineups
+        //         }));
+        //     } else {
+        //         setFilterData(prevData => ({
+        //             ...prevData,
+        //             lineups: data.lineups.filter(
+        //                 line => line.agents.some(
+        //                     line => line.lineups.some(
+        //                         l => l.ability ? l.ability === ability : false
+        //                     )
+        //                 )
+        //             )
+        //         }))
+        //     }
+        // }
+
+        // const toggleSide = () => {
+        //     setFilterData(prevData => ({
+        //         ...prevData,
+        //         lineups: data.lineups.filter(
+        //             line => line.agents.some(
+        //                 l => l.lineups.some(
+        //                     s => s.side === side 
+        //                 )
+        //             )
+        //         )
+        //     }))
+        // }
+
+        fetchAndFilterData();
+        // filterAbility();
+        // toggleSide();
+    }, [map, agent, data.lineups]);
+    
+    // console.log(`${agent} and `, filterData.lineups);
+    // console.log(`New`, filterData.lineups)
 
     return(
         <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
@@ -91,10 +225,10 @@ export default function Lineups() {
             <hr className="w-full rounded-lg" />
             
             {/* Filters */}
-            <V2Filter />
+            <V2Filter selectMap={map} setSelectMap={handleMap} selectAgent={agent} setSelectAgent={handleAgent} selectAbility={ability} setSelectAbility={handleAbility} selectSide={side} setSelectSide={handleSide} />
             
             {/* Card Layout */}
-            <LineupList data={data} />
+            <LineupList data={filterData} />
 
         </section>
     )
