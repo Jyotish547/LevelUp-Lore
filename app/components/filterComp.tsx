@@ -536,7 +536,8 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
     // const [ability, setAbility] = useState<Ability[]>([]);
     const [side, setSide] = useState<boolean>(false);
 
-
+    const matchAgent = agents.find(a => a.displayName === selectAgent && a.isPlayableCharacter);
+    console.log(matchAgent);
 
     useEffect(() => {
         const fetchMapData = async () => {
@@ -595,14 +596,14 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                     <label
                         className={
                         `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
-                        
+                        ${selectMap === 'All' ? 'bg-intermediate' : ''}
                         `}
                     >
                         <input
                             type="radio"
                             name="maps"
                             value='All'
-                            className={``}
+                            className={`appearance-none`}
                             onChange={(e) => setSelectMap(e.target.value)}
                             checked={selectMap === 'All'}
                         />
@@ -614,13 +615,14 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                     key={index}
                                     className={
                                     `text-lg flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
-                                    
+                                    ${selectMap === map.displayName ? 'bg-intermediate' : ''}
                                     `}
                                 >
                                     <input
                                         type="radio"
                                         name="maps"
                                         value={map.displayName}
+                                        className={`appearance-none`}
                                         onChange={(e) => setSelectMap(e.target.value)}
                                         checked={selectMap === map.displayName}
                                     />
@@ -634,7 +636,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
             <div className="flex flex-col items-start space-y-2">
                 {/* Agents */}
                 <div className="flex flex-col items-start">
-                    <h3 className="text-intermediate font-semibold">Map:</h3>
+                    <h3 className="text-intermediate font-semibold">Select Agent:</h3>
                     <div
                         
                         className={
@@ -645,19 +647,18 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                         <label
                             className={
                             `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
-                            
+                            ${selectAgent === 'All' ? 'bg-intermediate' : ''}
                             `}
                         >
-                            <FontAwesomeIcon icon={faStar} />
                             <input
                                 type="radio"
                                 name="agents"
                                 value='All'
-                                className={``}
-                                onChange={(e) => setSelectMap(e.target.value)}
+                                className={`appearance-none`}
+                                onChange={(e) => setSelectAgent(e.target.value)}
                                 checked={selectAgent === 'All'}
                             />
-                            All Agents
+                            All
                         </label>
                         {agents.map((agent, index) => (
                                 agent.isPlayableCharacter && (
@@ -665,20 +666,105 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                         key={index}
                                         className={
                                         `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
-                                        
+                                        ${selectAgent === agent.displayName ? 'bg-intermediate': ''}
                                         `}
                                     >
-                                        <Image src={agent.displayIcon} alt={agent.displayName} width={40} height={40} />
+                                        <Image src={agent.displayIcon} alt={agent.displayName} width={50} height={50} />
                                         <input
                                             type="radio"
                                             name="agents"
                                             value={agent.displayName}
-                                            className={``}
+                                            className={`appearance-none`}
                                             onChange={(e) => setSelectAgent(e.target.value)}
                                             checked={selectAgent === agent.displayName}
                                         />
                                     </label>
                                 )
+                        ))}
+                    </div>
+                </div>
+
+                {/* Abilities */}
+                {selectAgent !== 'All' && (
+                    <div className="flex flex-col items-start">
+                        <h3 className="text-intermediate font-semibold">Select Ability:</h3>
+                        <div
+                            
+                            className={
+                                `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
+                                ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black w-full'}
+                            `}
+                        >
+                            {/* {agents.abilities.map((agent, index) => (
+                                    agent.isPlayableCharacter && (
+                                        <label
+                                            key={index}
+                                            className={
+                                            `text-lg flex flex-row flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                            
+                                            `}
+                                        >
+                                            <Image src={agent.displayIcon} alt={agent.displayName} width={40} height={40} />
+                                            <input
+                                                type="radio"
+                                                name="agents"
+                                                value={agent.displayName}
+                                                className={``}
+                                                onChange={(e) => setSelectAgent(e.target.value)}
+                                                checked={selectAgent === agent.displayName}
+                                            />
+                                        </label>
+                                    )
+                            ))} */}
+                            {matchAgent?.abilities.slice(0,4).map((ab, index) => (
+                                <label
+                                    key={index}
+                                    className={
+                                        `text-lg flex flex-col flex-wrap w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                        ${selectAbility === ab.displayName ? 'bg-intermediate': ''}
+                                    `}
+                                >
+                                    <Image src={ab.displayIcon} alt={ab.displayName} width={30} height={30} />
+                                    <input
+                                        type="radio"
+                                        name="abilities"
+                                        className={`appearance-none`}
+                                        value={ab.displayName}
+                                        onChange={(e) => setSelectAbility(e.target.value)}
+                                    />
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Side */}
+                <div className="flex flex-col">
+                    <h3 className="text-intermediate font-semibold">Select Map:</h3>
+                    <div
+                        className={
+                            `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
+                            ${'popular-f1 active-f1 shadow-md shadow-emerald-700/50 bg-black'}
+                        `}
+                    >
+                        {(['Attack', 'Defense']).map((side, index) => (
+                            <label
+                                key={index}
+                                className={
+                                `text-lg flex flex-row w-fit text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                ${selectSide === side ? 'bg-intermediate text-dark': ''}
+                                `}
+                            >
+                                <input
+                                    type="radio"
+                                    name="agents"
+                                    value={side}
+                                    className={`appearance-none`}
+                                    onChange={(e) => setSelectSide(e.target.value)}
+                                    checked={selectSide === side}
+                                />
+                                {side}
+                            </label>
                         ))}
                     </div>
                 </div>

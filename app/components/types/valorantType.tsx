@@ -119,6 +119,7 @@ interface LineupAgent {
   id: number;
   name: string;
   lineups: Lineup[];
+  abilities?: Ability[];
 };
 
 // Lineups

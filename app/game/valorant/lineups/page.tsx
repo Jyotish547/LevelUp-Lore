@@ -54,6 +54,7 @@ export default function Lineups() {
 
             return {
               ...agent,
+              abilities: match.abilities,
               lineups: agent.lineups.map((lineup: any) => {
                 const ability = match?.abilities.find((ab: any) => ab.displayName === lineup.ability)
                 return {
@@ -101,73 +102,47 @@ export default function Lineups() {
 
     const fetchAndFilterData = () => {
 
-        let updatedLineups = [...data.lineups]
+    let updatedLineups = [...data.lineups];
 
-        // Assuming 'map' is a state that may change and should trigger filtering
-        // if (map === 'All') {
-        //     setFilterData({
-        //         agents: fetchedData.agents,
-        //         maps: fetchedData.maps,
-        //         lineups: updatedData,
-        //     })
-        // } else {
-        //     const filteredMaps = updatedData.filter(line => line.map === map);
-        //     setFilterData({
-        //         ...fetchedData,
-        //         lineups: filteredMaps
-        //     });
-        // }
-
-        if(map !== 'All') {
+        if (map !== 'All') {
             updatedLineups = updatedLineups.filter(line => line.map === map);
         }
 
-        // if(agent === 'All') {
-        //     setFilterData({
-        //         agents: fetchedData.agents,
-        //         maps: fetchedData.maps,
-        //         lineups: updatedData,
-        //     });
-        // } else {
-        //     const filteredAgents = updatedData.filter(line => line.agents.some(obj => obj.id === 1))
-        //     setFilterData(prevData => ({
-        //         ...prevData,
-        //         lineups: filteredAgents
-        //     }))
-        // }
-
-        if(agent !== 'All') {
+        
+        if (agent !== 'All') {
             updatedLineups = updatedLineups.filter(line =>
-                line.agents.some(obj => obj.name === agent)
-            )
+                line.agents.some(a => a.name === agent)
+            ).map(line => ({
+                ...line,
+                agents: line.agents.filter(a => a.name === agent) // This ensures only matching agents are kept in the data
+            }));
+        }
+
+        if(ability) {
+            updatedLineups = updatedLineups.filter(line =>
+                line.agents.some(a => a.name === agent)
+            ).map(line => ({
+                ...line,
+                agents: line.agents.filter(a => a.name === agent).map(agent => ({
+                    ...agent,
+                    lineups: agent.lineups.filter(l => l.ability)
+                }))
+            }))
         }
 
         setFilterData(prevData => ({
             ...prevData,
             lineups: updatedLineups
-        }))
-
+        }));
     };
 
-    console.log(`${map}, ${agent} and `, filterData);
+    console.log(`${map}, ${ability} and `, filterData.lineups);
 
     useEffect(() => {
         fetchData();
     }, [])
 
     useEffect(() => {
-        // fetchLineup().then(data => {
-        //     setData({
-        //         agents: data.agents,
-        //         maps: data.maps,
-        //         lineups: updatedData,
-        //     });
-        //     setFilterData(data);
-            
-        // });
-
-        
-
         // const filterAbility = () => {
         //     if(!ability) {
         //         setFilterData(prevData => ({
@@ -202,8 +177,6 @@ export default function Lineups() {
         // }
 
         fetchAndFilterData();
-        // filterAbility();
-        // toggleSide();
     }, [map, agent, data.lineups]);
     
     // console.log(`${agent} and `, filterData.lineups);
