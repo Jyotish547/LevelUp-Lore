@@ -65,7 +65,7 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
     
 
     return  (
-        <div className="flex flex-col items-start justify-center w-full space-y-6">
+        <div className="flex flex-col items-start justify-center w-full space-y-6 leading-relaxed">
             {/* Header */}
             <header className="space-y-4 w-full">
                 <div className="space-x-1 font-medium">
