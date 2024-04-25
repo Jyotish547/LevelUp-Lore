@@ -1,4 +1,5 @@
 import { Lato } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const lato = Lato({ 
   subsets: ["latin"],
