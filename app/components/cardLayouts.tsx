@@ -96,20 +96,20 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
 
     return (
         <div className="flex flex-col items-center font-semibold text-3xl">
-            <div className="flex flex-row justify-between items-center w-1/2 mb-8 border-y-2 py-8 yellow-border">
-                <Link href="#" onClick={handleLeftScroll} className="flex flex-row justify-center px-5 py-3 yellow-bg rounded-lg text-stone-800 text-3xl">
+            <div className="flex flex-row justify-between items-center w-fit mb-8 space-x-12 py-8">
+                <Link href="#" onClick={handleLeftScroll} className="flex flex-row justify-center px-4 py-2 bg-primary transition ease-out-in hover:bg-neutral-900 hover:text-amber-500 duration-300 rounded-sm text-stone-800 text-3xl">
                     <FontAwesomeIcon icon={faCaretLeft} />
                 </Link>
                 <p className='text-4xl font-semibold flex flex-row items-center'> <FontAwesomeIcon icon={faPuzzlePiece} className='mr-4 yellow-text' /> <span>Select Game</span> </p>
-                <Link href="#" onClick={handleRightScroll} className="flex flex-row justify-center px-5 py-3 yellow-bg rounded-lg text-stone-800 text-3xl">
+                <Link href="#" onClick={handleRightScroll} className="flex flex-row justify-center px-4 py-2 bg-primary transition ease-out-in hover:bg-neutral-900 hover:text-amber-500 duration-300 rounded-sm text-stone-800 text-3xl">
                     <FontAwesomeIcon icon={faCaretRight} />
                 </Link>
             </div>
-            <div ref={containerRef} className="home-container flex flex-row items-center space-x-4 mx-8 overflow-x-auto">
+            <div ref={containerRef} className="home-container flex flex-row items-start space-x-4 mx-8">
                 {games.map((game, index) => (
-                    <Link key={index} ref={el => cardRefs.current[index] = el} href={game.href} className={`flex flex-col items-center flex-shrink-0 rounded-lg space-y-8`}>
-                        <Image className={`rounded-lg homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={game.src} alt={game.alt} style={{ boxShadow: `3px 3px 8px ${game.shadowColor}`}}/>
-                        <Image className={`${index === activeIndex ? 'block' : 'hidden'}`} src={game.logo} alt={game.alt} width={300} />
+                    <Link key={index} ref={el => cardRefs.current[index] = el} href={game.href} className={`flex flex-col transition ease-out-in hover:saturate-100 duration-300 items-center flex-shrink-0 rounded-md space-y-8 ${index === activeIndex ? 'saturate-100' : 'saturate-50'}`}>
+                        <Image className={`rounded-md homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={game.src} alt={game.alt} style={{ boxShadow: `3px 3px 8px ${game.shadowColor}`}}/>
+                        <Image className={`${index === activeIndex ? 'opacity-100' : 'opacity-20 saturate-0'}`} src={game.logo} alt={game.alt} width={300} />
                     </Link>
                 ))}
             </div>

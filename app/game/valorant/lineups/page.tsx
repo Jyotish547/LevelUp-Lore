@@ -186,10 +186,10 @@ export default function Lineups() {
         <section className="flex flex-col items-start justify-center w-full space-y-6">
             {/* Header */}
             <header className="space-y-4">
-                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-valo w-fit shadow-md shadow-violet-300/30">
+                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-valo w-fit">
                     <FontAwesomeIcon icon={faBullseye} /> <span>Lineups</span>
                 </div>
-                <p className="text-lg font-normal">
+                <p className="text-base text-neutral-300 font-normal leading-relaxed">
                 Lineups are an essential resource for players aiming to optimize their agent&apos;s abilities for maximum impact. This page meticulously compiles images and detailed descriptions of precise ability placements for various agents, focusing on strategic advantages across all maps.
                 <br />
                 From Sova&apos;s recon arrows to Viper&apos;s toxic screens, the content is designed to enhance your tactical approach and ensure your team gains the upper hand. Explore the lineups to discover new, innovative ways to utilize each agent&apos;s kit effectively, bolstering your gameplay and team strategy in Valoran                </p>

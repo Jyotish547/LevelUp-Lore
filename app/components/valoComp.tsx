@@ -9,32 +9,6 @@ import Link from "next/link";
 
 export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
 
-    // useEffect(() => {
-    //     const fetchAgentData = async () => {
-    //         try {
-    //             const response = await axios.get<{data: AgentData[]}, any>(`/api/valorant/allAgents`);
-    //             const dataWithSelectedDesc = response.data.map((agent: AgentData) => ({
-    //                 ...agent,
-    //                 defaultAbility: agent.abilities[0]?.description || ''
-    //             }))
-    //             setAgentData(dataWithSelectedDesc);
-    //             // console.log(dataWithSelectedDesc);
-
-    //         }
-    //         catch(error) {
-    //             console.log('Unable to Fetch Agent Details', error);
-    //         }
-    //     }
-    //     fetchAgentData();
-    // }, []);
-
-    // const abilityClick = (agentIndex: number, description: string) => {
-    //     setAgentData(currentData =>
-    //         currentData.map((agent, index) => 
-    //             index === agentIndex ? { ...agent, defaultAbility: description } : agent
-    //         ))
-    // };
-
     const [expandedId, setExpandedId] = useState<number | null>(null);
 
     return(
@@ -43,13 +17,13 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                 agent.isPlayableCharacter && (
                     <div
                         key={index}
-                        className={`flex p-6 valo-background shadow-md shadow-violet-400/30 rounded-lg ${expandedId === agent.uuid ? 'col-span-2 row-span-2 w-full' : 'col-span-1 row-span-1 w-fit'}`}
+                        className={`flex p-6 valo-background shadow-md shadow-violet-400/30 rounded-md ${expandedId === agent.uuid ? 'col-span-2 row-span-2 w-full' : 'col-span-1 row-span-1 w-fit'}`}
                         onClick={() => setExpandedId(expandedId === agent.uuid ? null : agent.uuid)}
                         >
                         {
                             expandedId !== agent.uuid && (
                                 <div className="flex flex-row w-full">
-                                    <Image src={agent.fullPortrait} alt={agent.displayName} width={500} height={500} style={{overflow: 'hidden', clipPath: 'rect(auto 220px auto 50px)'}} />
+                                    <Image src={agent.fullPortrait} alt={agent.displayName} width={500} height={500} className="-ml-12" style={{overflow: 'hidden', clipPath: 'rect(auto 300px auto 50px)'}} />
                                     <div className="flex flex-col h-full justify-between w-full">
                                         <span className="font-semibold text-valo text-2xl tracking-wider">{agent.displayName.toUpperCase()}</span>
                                         <div className="flex flex-row space-x-2 items-center">
@@ -58,12 +32,12 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                                         </div>
                                         <div className="flex flex-row w-full justify-between border-b-2 border-valo">
                                             {agent.abilities.slice(0, 4).map((ability: any, abilityIndex: any) => (
-                                                <div key={abilityIndex} className={`p-4 cursor-pointer ${agent.defaultAbility === ability.description ? 'bg-valo' : ''}`}>
+                                                <div key={abilityIndex} className={`p-4 cursor-pointer rounded-t-sm ${agent.defaultAbility === ability.description ? 'bg-valo90' : 'bg-valo30'}`}>
                                                     <Image src={ability.displayIcon} alt={agent.displayName} width={30} height={30} />
                                                 </div>
                                             ))}
                                         </div>
-                                        <div className="text-wrap line-clamp-3 w-full">
+                                        <div className="text-wrap line-clamp-3 w-full text-base">
                                             {agent.defaultAbility}
                                         </div>
                                     </div>
@@ -74,7 +48,7 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                             expandedId === agent.uuid && (
                                 <div className="flex flex-col justify-between w-full h-fit">
                                     <div className="flex flex-row w-full justify-between items-center">
-                                        <Image src={agent.fullPortrait} alt={agent.displayName} width={500} height={500}style={{overflow: 'hidden', clipPath: 'rect(auto 450px auto 50px)'}} />
+                                        <Image src={agent.fullPortrait} alt={agent.displayName} width={500} height={500} className="-ml-12" style={{overflow: 'hidden', clipPath: 'rect(auto 300px auto 50px)'}} />
                                         <div className="flex flex-col space-y-6">
                                             <div className="flex flex-col space-y-4">
                                                 <div className="flex flex-row items-center space-x-3">
@@ -85,8 +59,8 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                                             </div>
                                             <div className="flex flex-col space-y-4">
                                                 <div className="flex flex-row items-center space-x-3">
-                                                    <Image src={agent.role.displayIcon} alt={agent.role.displayName} width={30} height={30} />
-                                                    <span className="font-medium text-white text-2xl">{agent.role.displayName}</span>
+                                                    <Image src={agent.role.displayIcon} alt={agent.role.displayName} width={25} height={25} />
+                                                    <span className="font-medium text-white text-xl">{agent.role.displayName}</span>
                                                 </div>
                                                 <p>{agent.role.description}</p>
                                             </div>
@@ -118,7 +92,7 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                                                     )
                                                 })}
                                             </div>
-                                            <span className="font-light text-sm">*These are default key bindings</span>
+                                            <span className="text-xs">*These are default key bindings</span>
                                         </div>
                                         <Image src={agent.background} alt={agent.displayName} width={200} height={500} />
                                     </div>
@@ -127,7 +101,7 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                                         {agent.abilities.slice(0, 4).map((ability: any, abilityIndex: number) => (
                                             <div key={abilityIndex} className="flex flex-col space-y-4">
                                                 <div className="flex flex-row space-x-3 items-center">
-                                                    <div className={`p-3 cursor-pointer rounded-md ${abilityIndex === 3 ? 'bg-intermediate' : 'bg-valo'}`}>
+                                                    <div className={`p-3 cursor-pointer rounded-sm ${abilityIndex === 3 ? 'bg-primary' : 'bg-valo90'}`}>
                                                         <Image src={ability.displayIcon} alt={agent.displayName} width={30} height={30} />
                                                     </div>
                                                     <p className={`font-semibold text-valo text-2xl ${abilityIndex === 3 ? 'text-intermediate' : 'text-valo'}`}>{ability.displayName}</p>
@@ -183,24 +157,24 @@ export const MapList: React.FC = () => {
                 map.narrativeDescription && (
                     <div
                         key={index}
-                        className="row-span-1 valo-background flex flex-col p-8 rounded-lg shadow-md shadow-violet-400/30 space-y-8"
+                        className={`row-span-1 valo-background flex flex-col rounded-lg shadow-md shadow-violet-400/30 space-y-8 ${expandedId === map.uuid ? 'p-8' : ''}`}
                         onClick={() => setExpandedId(expandedId === map.uuid ? null : map.uuid)}
                         >
                         <div className="flex flex-row w-full justify-between items-center space-x-8">
-                            <Image src={map.splash} alt={map.displayName} width={520} height={500} className="rounded-lg" />
-                            <div className="flex flex-col items-start justify-between h-full py-2">
+                            <Image src={map.splash} alt={map.displayName} width={520} height={500} className={`${expandedId === map.uuid ? 'rounded-sm' : 'rounded-l-md'}`} />
+                            <div className="flex flex-col items-start justify-between h-full py-8">
                                 <span className="text-3xl font-semibold tracking-wider text-valo">
                                     {map.displayName.toUpperCase()}
                                 </span>
                                 <div className="flex flex-col space-y-1">
-                                    <p className="text-xl font-semibold text-valo">Description:</p>
+                                    <p className="text-lg font-semibold text-valo">Description:</p>
                                     <p className="text-md">{map.narrativeDescription}</p>
                                 </div>
-                                <div className="flex flex-row space-x-3 items-center text-xl">
+                                <div className="flex flex-row space-x-3 items-center text-lg">
                                     <p className="font-semibold text-valo">Plant Sites:</p>
                                     <p>{map.tacticalDescription}</p>
                                 </div>
-                                <div className="flex flex-row space-x-3 items-center text-xl">
+                                <div className="flex flex-row space-x-3 items-center text-lg">
                                     <p className="font-semibold text-valo">Coordinates:</p>
                                     <p>{map.coordinates}</p>
                                 </div>
@@ -208,16 +182,16 @@ export const MapList: React.FC = () => {
                         </div>
                         {
                             expandedId === map.uuid && (
-                                <div className="flex flex-row items-start justify-between">
+                                <div className="flex flex-row items-start justify-around">
                                     <div className="flex flex-col items-start space-y-2">
                                         <p className="text-xl font-semibold text-valo">Map Outline:</p>
                                         <span className="text-md mb-4">
                                             Highlighed Areas are Spike Plant regions
                                         </span>
-                                        <div className="h-[600px] overflow-y-auto px-4 py-2 space-y-4">
+                                        <div className="h-[600px] scrollbar-custom overflow-y-scroll px-4 py-2 space-y-4 bg-neutral-950 rounded-md shadow-sm shadow-violet-500/40">
                                             {map.callouts.map((call: any, index: any) => (
                                                 <div key={index} className="flex flex-row space-x-4 items-center">
-                                                    <div className="px-3 py-1 text-dark font-bold text-lg bg-intermediate flex flex-row items-center h-fit rounded-md">
+                                                    <div className="px-3 py-1 text-white font-bold text-lg bg-valo30 flex flex-row items-center h-fit rounded-md">
                                                         {index + 1}
                                                     </div>
                                                     <div className="flex flex-col space-y-2 h-fit">
@@ -310,42 +284,44 @@ export const CrosshairList: React.FC = () => {
     }, []);
 
     return(
-        <div className='grid grid-cols-3 grid-flow-row gap-12 w-full'>
+        <div className='grid grid-cols-4 grid-flow-row gap-4 w-full'>
             {crosshairData.map((cross: any, index: number) => (
-                <div key={index} className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-lg w-fit p-8 space-y-5" onClick={() => handlePreview(cross)}>
-                    <Image src={cross.crosshair} alt={cross.title} width={400} height={212} className="border-2 border-valo rounded-lg shadow-lg shadow-violet-400/30" />
-                    <p className="font-semibold text-xl w-full">{cross.title}</p>
-                    <div className="w-full flex flex-row justify-between items-center">
-                        <div className="flex flex-row items-center space-x-3">
-                            <Image src={cross.displayIcon} alt={cross.username} width={30} height={30} />
-                            <span className="font-medium text-valo text-lg">{cross.username}</span>
+                <div key={index} className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-md w-fit" onClick={() => handlePreview(cross)}>
+                    <Image src={cross.crosshair} alt={cross.title} width={600} height={212} className="rounded-t-md" />
+                    <div className="flex flex-col items-start justify-between space-y-5 w-full p-5">
+                        <p className="font-semibold text-xl w-full">{cross.title}</p>
+                        <div className="w-full flex flex-row justify-between items-center">
+                            <div className="flex flex-row items-center space-x-3">
+                                <Image src={cross.displayIcon} alt={cross.username} width={30} height={30} />
+                                <span className="font-medium text-valo text-base">{cross.username}</span>
+                            </div>
+                            <Image src={cross.rank} alt={cross.username} width={30} height={30} />
                         </div>
-                        <Image src={cross.rank} alt={cross.username} width={30} height={30} />
-                    </div>
-                    <div className="w-full flex flex-row justify-between items-center">
-                        <div className="text-lg font-bold flex flex-row items-center space-x-3">
-                            <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
-                            <p>3.6k</p>
+                        <div className="w-full flex flex-row justify-between items-center">
+                            <div className="text-base font-bold flex flex-row items-center space-x-2">
+                                <FontAwesomeIcon icon={faHeart} className="text-xl text-intermediate" />
+                                <p>3.6k</p>
+                            </div>
+                            <div className="text-base font-bold flex flex-row items-center space-x-3">
+                                <FontAwesomeIcon icon={faShareNodes} className="text-xl text-intermediate" />
+                                <p>0.7k</p>
+                            </div>
                         </div>
-                        <div className="text-lg font-bold flex flex-row items-center space-x-3">
-                            <FontAwesomeIcon icon={faShareNodes} className="text-2xl text-intermediate" />
-                            <p>0.7k</p>
-                        </div>
-                    </div>
-                    <div className="w-full flex flex-row justify-between items-center">
-                        <div
-                            className="text-lg text-dark font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-intermediate rounded-md"
-                            onClick={() => handleCopy(cross.code)}
-                        >
-                            <FontAwesomeIcon icon={faCopy} className="text-2xl" />
-                            <p>Copy</p>
-                        </div>
-                        <div
-                            className="text-lg text-dark font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-intermediate rounded-md"
-                            onClick={() => handlePreview(cross)}
-                        >
-                            <FontAwesomeIcon icon={faCirclePlay} className="text-2xl" />
-                            <p>Preview</p>
+                        <div className="w-full flex flex-row justify-between items-center">
+                            <div
+                                className="text-base text-dark font-bold flex flex-row cursor-pointer items-center rounded-sm space-x-3 py-2 px-3 bg-primary opacity-30 transition hover:opacity-100 ease-in-out duration-600"
+                                onClick={() => handleCopy(cross.code)}
+                            >
+                                <FontAwesomeIcon icon={faCopy} className="text-xl" />
+                                <p>Copy</p>
+                            </div>
+                            <div
+                                className="text-base text-dark font-bold flex flex-row cursor-pointer items-center rounded-sm space-x-3 py-2 px-3 bg-valo opacity-30 transition hover:opacity-100 ease-in-out duration-600"
+                                onClick={() => handlePreview(cross)}
+                            >
+                                <FontAwesomeIcon icon={faCirclePlay} className="text-xl" />
+                                <p>Preview</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -424,30 +400,30 @@ export const GuideList: React.FC = () => {
     return(
         <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
-                <div key={index} className="valo-background w-full shadow-md shadow-violet-400/30 rounded-2xl flex flex-col items-start justify-between">
+                <div key={index} className="valo-background w-full shadow-md shadow-violet-400/30 rounded-md flex flex-col items-start justify-between">
                     <div className="relative pt-[56.25%] w-full">
                         <iframe
                         src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
                         title={guide.snippet.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        className="absolute top-0 left-0 w-full h-full rounded-t-lg"
+                        className="absolute top-0 left-0 w-full h-full rounded-t-md"
                         allowFullScreen
                         ></iframe>
                     </div>
                     <div className="px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
-                        <h3 className="text-xl text-wrap font-medium text-valo">{guide.snippet.title}</h3>
+                        <h3 className="text-lg text-wrap font-medium text-valo">{guide.snippet.title}</h3>
                         <div className="w-full flex flex-row items-center justify-between">
                             <div className="flex flex-col space-y-4">
                                 <h4 className="text-md">Uploaded By: <Link href={`https://www.youtube.com/@${guide.snippet.channelTitle}`} target="_blank" className="font-semibold text-intermediate" >{guide.snippet.channelTitle}</Link></h4>
                                 <p className="text-md">Date Posted: <span className="italic">{guide.snippet.publishedAt.substring(0, 10)}</span></p>
                             </div>
                             <div className="flex flex-col space-y-4 items-center">
-                                <div className="text-xl font-bold flex flex-row items-center space-x-2">
-                                    <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
+                                <div className="text-lg font-bold flex flex-row items-center space-x-2">
+                                    <FontAwesomeIcon icon={faHeart} className="text-xl text-intermediate" />
                                     <p>3.6k</p>
                                 </div>
-                                <div className="text-xl font-bold flex flex-row items-center space-x-2">
-                                    <FontAwesomeIcon icon={faShareNodes} className="text-2xl text-intermediate" />
+                                <div className="text-lg font-bold flex flex-row items-center space-x-2">
+                                    <FontAwesomeIcon icon={faShareNodes} className="text-xl text-intermediate" />
                                     <p>0.7k</p>
                                 </div>
                             </div>
@@ -513,7 +489,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
             {data.lineups.map((map: any) => (
                 map.agents.map((agent: any) => (
                     agent.lineups.map((lineup: any, lineIndex: number) => (
-                        <div key={lineIndex} className="valo-background w-[335px] h-[316px] rounded-lg shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
+                        <div key={lineIndex} className="valo-background w-[335px] h-[316px] rounded-md shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
                             <div className="image-container w-[335px] h-[188px] relative rounded-t-lg overflow-hidden">
                                 
                                 <Image className="rounded-t-lg" src={lineup.thumbnail} alt={lineup.title} fill={true} />
@@ -531,16 +507,16 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                 </div>
                             </div>
                             <div className="flex flex-col items-start space-y-2 p-5">
-                                <p className="text-xl tracking-wide">{lineup.title}</p>
+                                <p className="text-lg tracking-wide">{lineup.title}</p>
                                 
                                 {
                                     lineup.location === 1 ?
                                     (
-                                        <p className="font-base">For {lineup.location[0]}</p>
+                                        <p className="font-normal">For {lineup.location[0]}</p>
                                     )
                                     :
                                     (
-                                        <p className="font-base">From <span className="text-valo mx-1">{lineup.location[0]}</span> to <span className="text-valo mx-1">{lineup.location[1]}</span></p>
+                                        <p className="font-normal">From <span className="text-valo mx-1">{lineup.location[0]}</span> to <span className="text-valo mx-1">{lineup.location[1]}</span></p>
                                     )
                                 }
                             </div>
@@ -557,13 +533,13 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
             ))} */}
             {active && (
                 <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center">
-                    <div className="flex flex-row shadow-md shadow-violet-400/30" ref={overlayRef}>
+                    <div className="flex flex-row rounded-lg shadow-md shadow-violet-400/30" ref={overlayRef}>
                         {selectLineup && (
                             <>
                                 {/* Content */}
                                 <div className="h-auto max-w-[500px] flex flex-col justify-between p-8 valo-background">
-                                    <div className="text-lg space-y-4">
-                                        <h2 className="text-2xl font-semibold text-valo">{selectLineup.title}</h2>
+                                    <div className="text-base space-y-4">
+                                        <h2 className="text-xl font-semibold text-valo">{selectLineup.title}</h2>
                                         <div className="space-y-1 font-regular">
                                             {selectLineup.description.map((desc: any, index: number) => (
                                                 <p key={index}>
@@ -579,15 +555,15 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                     </div>
                                     <div className="flex flex-col items-start space-y-6">
                                         <div className="flex flex-row space-x-4 items-center">
-                                            <div className="text-xl font-bold flex flex-row items-center space-x-3">
-                                                <FontAwesomeIcon icon={faHeart} className="text-3xl text-intermediate" />
+                                            <div className="text-lg font-bold flex flex-row items-center space-x-3">
+                                                <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
                                                 <p>3.6k</p>
                                             </div>
-                                            <div className="text-xl font-bold flex flex-row items-center space-x-3">
-                                                <FontAwesomeIcon icon={faShareNodes} className="text-3xl text-intermediate" />
+                                            <div className="text-lg font-bold flex flex-row items-center space-x-3">
+                                                <FontAwesomeIcon icon={faShareNodes} className="text-2xl text-intermediate" />
                                                 <p>0.7k</p>
                                             </div>
-                                            <FontAwesomeIcon icon={faBookmark} className={`text-3xl text-intermediate`} />
+                                            <FontAwesomeIcon icon={faBookmark} className={`text-2xl text-intermediate`} />
                                         </div>
                                         <div className="flex flex-col items-start w-full space-y-3">
                                             <p>Uploaded By:</p>
@@ -596,11 +572,11 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                                     <Image src={dpIcon} alt={selectLineup.username} width={30} height={30} />
                                                     <Link href={`https://lineupsvalorant.com/profile/${selectLineup.username}`} className="text-lg text-valo font-semibold underline" target="_blank">{selectLineup.username}</Link>
                                                 </div>
-                                                <p>{selectLineup.date}</p>
+                                                <p className="text-sm">{selectLineup.date}</p>
                                             </div>
                                         </div>
                                         {selectLineup.abilityIcon && selectLineup.displayIcon && (
-                                            <div className="p-5 bg-valo20 rounded-md flex flex-row w-full space-x-5">
+                                            <div className="p-5 bg-valo30 rounded-sm flex flex-row w-full space-x-5">
                                                 <Image src={selectLineup.displayIcon} alt={selectLineup.ability} width={50} height={40} />
                                                 <Image src={selectLineup.abilityIcon} alt={selectLineup.ability} width={50} height={40} />
                                             </div>
@@ -615,7 +591,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                     <div className="overlay absolute inset-0 flex flex-row w-full justify-between items-center px-5">
                                         {imageIndex > 0 && (
                                             <div
-                                                className={`flex flex-row justify-start items-center py-2 px-4 rounded-md bg-black/60 cursor-pointer ${imageIndex > 0 ? 'w-fit' : 'w-full'}`} 
+                                                className={`flex flex-row justify-start items-center py-2 px-4 rounded-sm bg-valo text-dark cursor-pointer ${imageIndex > 0 ? 'w-fit' : 'w-full'}`} 
                                                 onClick={prevButton}
                                             >
                                                 <FontAwesomeIcon icon={faAngleLeft} className="text-4xl" />
@@ -624,7 +600,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                         {
                                             imageIndex < selectLineup.images.length -1 && (
                                                 <div
-                                                    className={`flex flex-row justify-end items-center py-2 px-4 rounded-md bg-black/60 cursor-pointer ${imageIndex < selectLineup.images.length - 1  ? 'w-fit ml-auto' : 'w-full'}`}
+                                                    className={`flex flex-row justify-end items-center py-2 px-4 rounded-sm bg-valo text-dark cursor-pointer ${imageIndex < selectLineup.images.length - 1  ? 'w-fit ml-auto' : 'w-full'}`}
                                                     onClick={nextButton}
                                                 >
                                                     <FontAwesomeIcon icon={faAngleRight} className="text-4xl" />

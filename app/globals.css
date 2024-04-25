@@ -177,6 +177,14 @@ input[type='range']::-moz-range-thumb {
   background-color: var(--valo-color);
 }
 
+.bg-valo30 {
+  background-color: #B181FF30;
+}
+
+.bg-valo90 {
+  background-color: #B181FF90;
+}
+
 .button-hover-valo:hover {
   background-color: var(--valo-color);
   color: var(--text-black);
@@ -184,10 +192,6 @@ input[type='range']::-moz-range-thumb {
 
 .bg-eafc20 {
   background-color: #14F57B20;
-}
-
-.bg-valo20 {
-  background-color: #B181FF30;
 }
 
 /* Difficulty Tags Colors */
@@ -255,6 +259,7 @@ input[type='range']::-moz-range-thumb {
 
 .home-container {
   width: 1470px;
+  height: 400px;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -334,6 +339,7 @@ input[type='range']::-moz-range-thumb {
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
+  border-radius: 2%;
 }
 
 /* Filters */

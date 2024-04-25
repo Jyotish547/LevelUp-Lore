@@ -12,19 +12,14 @@ export default function Crosshairs() {
         <section className="flex flex-col items-start justify-center w-full space-y-6">
             {/* Header */}
             <header className="space-y-4">
-                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-valo w-fit shadow-md shadow-violet-300/30">
+                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 w-fit text-valo">
                     <FontAwesomeIcon icon={faCrosshairs} /> <span>Crosshairs</span>
                 </div>
-                <p className="text-lg font-normal">
+                <p className="text-base text-neutral-300 font-normal leading-relaxed">
                     Check out the most impressive crosshairs in Valorant from pro players and the community.                </p>
             </header>
 
             <hr className="w-full rounded-lg" />
-            
-            {/* Filters */}
-            <div className="flex flex-row space-x-12">
-
-            </div>
             
             {/* Card Layout */}
             <CrosshairList />

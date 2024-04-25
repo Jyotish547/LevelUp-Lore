@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRankingStar, faStarHalfStroke, faArrowUpRightDots, faCrosshairs, faChessBoard, faMapLocationDot, faBullseye, faUsersGear, faFilm, faChevronRight, faChevronCircleRight, faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faRankingStar, faStarHalfStroke, faArrowUpRightDots, faCrosshairs, faChessBoard, faMapLocationDot, faBullseye, faUsersGear, faFilm, faChevronRight, faChevronCircleRight, faChevronCircleLeft, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 import { valorantLogo, cs2Logo, fc24Logo, lolLogo, rlLogo } from "./components/cardLayouts";
 import dpIcon from '../public/assets/displayPicture.png';
@@ -60,7 +60,7 @@ export default function NavBar() {
     
     const colorClasses: ColorClasses = {
         eafc: 'text-eafc border-eafc shadow-green-300/30 bg-eafc20',
-        valo: 'text-valo border-valo shadow-violet-400/40 bg-valo20',
+        valo: 'text-valo border-valo shadow-violet-400/40 bg-valo30',
     };
 
     // Determine the current color class based on the active navigation item
@@ -70,11 +70,11 @@ export default function NavBar() {
     const [textColorClass, borderColorClass, shadowColorClass, bgColorClass] = currentColorClass.split(' ');
 
     links = (
-        <div className="flex flex-col text-xl space-y-3 h-full w-full justify-start py-8">
+        <div className="flex flex-col text-xl space-y-3 h-full w-full justify-start py-12">
             {currentNav.map((nav, index) => (
                 <Link key={index} href={nav.href}
-                    className={`p-3 navItem ${
-                    active === nav.href ? `active-${nav.slug}` : ""
+                    className={`p-3 navItem rounded-r-sm ${
+                    active === nav.href ? `active-${nav.slug}` : "bg-white/5 border-l-2 border-white/10"
                     }`}
                     onClick={() => setActive(nav.href)}
                 >
@@ -92,12 +92,12 @@ export default function NavBar() {
             {links}
             {/* Dynamic Change based on game */}
             <div className="flex flex-col items-center space-y-4 w-full">
-                <Link href="/" className={`flex flex-row space-x-2 text-lg items-center justify-between w-full px-4 py-5 border-l-2 ${borderColorClass} ${bgColorClass}`}>
-                        <FontAwesomeIcon icon={faChevronCircleLeft} className={``} />
-                        <Image src={currentNav[0]?.game || fc24Logo} alt="Game Logo" width={160} />
-                    </Link>
+                <Link href="/" className={`flex flex-row space-x-2 rounded-r-md text-lg items-center justify-start space-x-4 w-full px-4 py-5 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}>
+                    <FontAwesomeIcon icon={faChevronLeft} className={``} />
+                    <Image src={currentNav[0]?.game || fc24Logo} alt="Game Logo" width={160} />
+                </Link>
                 <div className="w-full">
-                    <Link href="" className={`flex flex-row items-center justify-start space-x-4 w-full py-3 px-4 border-l-2 ${borderColorClass} ${bgColorClass}`}>
+                    <Link href="" className={`flex flex-row items-center rounded-r-md justify-start space-x-4 w-full py-3 px-4 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}>
                         <Image src={dpIcon} alt="" width="48" />
                         <div className="flex flex-col">
                             <span className={`text-lg font-semibold ${textColorClass}`}>Reggae547</span>

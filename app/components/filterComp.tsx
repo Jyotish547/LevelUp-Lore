@@ -402,19 +402,22 @@ export const V1Filter: React.FC<V1Props> = ({ selectRole, setSelectRole }) => {
                 <div
                     
                     className={
-                        `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
-                        ${'popular-f1 active-f1  bg-black w-full'}
+                        `flex flex-row items-stretch rounded-sm font-semibold
+                        ${'popular-f1 active-f1 w-full'}
                     `}
                 >
                     {(['All', 'Initiator', 'Duelist', 'Controller', 'Sentinel']).map((role, index) => (
                         <label
                             key={index}
                             className={
-                                `text-lg flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
-                                ${selectRole === role ? 'bg-intermediate text-dark' : ''}
+                                `text-sm flex flex-row py-3 px-4 items-center font-regular border-r-2 border-gray-800 space-x-2
+                                ${selectRole === role ? 'bg-valo text-white' : 'text-neutral-500 bg-valo30'}
+                                ${index === 0 ? 'rounded-l-sm' : ''}
+                                ${selectRole === role && index === 0 ? 'rounded-l-sm text-dark' : ''}
+                                ${index === 4 ? 'rounded-r-sm border-none' : ''}
                                 `}
                         >
-                            {index === 0 ? (<FontAwesomeIcon icon={faEarthAmericas} className="text-xl" />) : (<Image src={getIconRole(role)} alt={role} width={25} height={25} />)}
+                            {index === 0 ? (<FontAwesomeIcon icon={faEarthAmericas} className="text-xl" />) : (<Image src={getIconRole(role)} className={`${selectRole === role ? 'opacity-100' : 'opacity-30'}`} alt={role} width={20} height={20} />)}
                             
                             <input
                                 type="radio"
@@ -515,7 +518,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
     // }
 
     return(
-        <div className="flex bg-neutral-950 p-6 rounded-lg flex-row justify-between items-center formation-filters w-full h-fit space-x-8 text-stone-200">
+        <div className="flex bg-neutral-950 p-6 rounded-md flex-row justify-between items-center shadow-md shadow-violet-500/40 formation-filters w-full h-fit space-x-8 text-neutral-300">
             {/* Filters */}
             {/* Maps */}
             <div className="flex flex-col w-fit items-start space-y-4">
@@ -529,8 +532,8 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                 >
                     <label
                         className={
-                        `text-lg flex flex-row w-11/12 text-xl py-3 px-6 items-center text-sm font-regular space-x-2
-                        ${selectMap === 'All' ? 'border-y-2 border-valo shadow-sm shadow-violet-700/50 font-semibold' : ''}
+                        `text-lg flex flex-row w-11/12 py-3 px-6 items-center font-regular space-x-2
+                        ${selectMap === 'All' ? 'border-l-2 border-valo text-valo bg-valo30 font-semibold' : ''}
                         `}
                     >
                         <input
@@ -548,9 +551,9 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                 <label
                                     key={index}
                                     className={
-                                    `text-lg flex flex-row w-11/12 text-xl py-3 px-6 items-center text-sm font-regular space-x-2
-                                    ${selectMap === map.displayName ? 'border-y-2 border-valo shadow-sm shadow-violet-700/50 font-semibold' : ''}
-                                    `}
+                                        `text-lg flex flex-row w-11/12 py-3 px-6 items-center font-regular space-x-2
+                                        ${selectMap === map.displayName ? 'border-l-2 border-valo text-valo bg-valo30 font-semibold' : ''}
+                                        `}
                                 >
                                     <input
                                         type="radio"
@@ -583,8 +586,8 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                     <label
                                         key={index}
                                         className={
-                                        `text-lg flex flex-col w-20 h-20 justify-center items-center text-lg p-2  text-sm font-regular
-                                        ${selectAgent === agent.displayName ? 'border-y-2 border-valo shadow-sm shadow-violet-700/50': ''}
+                                        `text-lg flex flex-col w-20 h-20 justify-center items-center p-2 font-regular
+                                        ${selectAgent === agent.displayName ? 'border-l-2 border-valo text-valo bg-valo30': ''}
                                         `}
                                     >
                                         <Image src={agent.displayIcon} alt={agent.displayName} width={60} height={60} />
@@ -617,8 +620,8 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                 <label
                                     key={index}
                                     className={
-                                        `text-lg flex flex-col flex-wrap w-fit text-lg py-3 px-4 items-center justify-center text-sm font-regular space-x-2
-                                        ${selectAbility === ab.displayName ? 'border-y-2 border-valo shadow-sm shadow-violet-700/50': ''}
+                                        `text-lg flex flex-col flex-wrap w-fit py-3 px-4 items-center justify-center font-regular space-x-2
+                                        ${selectAbility === ab.displayName ? 'border-l-2 border-valo text-valo bg-valo30': ''}
                                     `}
                                 >
                                     <Image src={ab.displayIcon} alt={ab.displayName} width={40} height={40} />
@@ -648,8 +651,8 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                             <label
                                 key={index}
                                 className={
-                                `text-lg flex flex-row w-fit text-lg py-3 px-4 items-center text-sm font-regular space-x-2
-                                ${selectSide === side ? 'border-y-2 border-valo shadow-sm shadow-violet-700/50': ''}
+                                `text-base flex flex-row w-fit py-3 px-4 items-center font-regular space-x-2
+                                ${selectSide === side ? 'border-l-2 border-valo text-valo bg-valo30 font-semibold': ''}
                                 `}
                             >
                                 <input
