@@ -6,7 +6,11 @@ export default async function handler (req: NextApiRequest, res: NextApiResponse
         const apiKey = process.env.YOUTUBE_API_KEY;
         const playlist = "PLsmsVY17ANMxC15ypy_ar8jNGddXswakw"
         const response = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlist}&key=${apiKey}&maxResults=24`);
-        res.status(200).json(response.data.items);
+        if (response.data && response.data.items) {
+            res.status(200).json(response.data.items);
+        } else {
+            throw new Error('No items found in the response');
+        }
     }
     catch(error) {
         console.log('Api call error: Maps', error)
