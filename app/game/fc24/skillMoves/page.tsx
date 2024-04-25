@@ -37,10 +37,10 @@ export default function SkillMovesFC() {
         <section className="flex flex-col items-start justify-center w-full space-y-6">
             {/* Header */}
             <header className="space-y-4">
-                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-eafc w-fit shadow-md shadow-green-300/30">
+                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-eafc w-fit">
                     <FontAwesomeIcon icon={faRankingStar} /> <span>Skill Moves</span>
                 </div>
-                <p className="text-lg font-normal">
+                <p className="text-base text-neutral-300 font-normal leading-relaxed">
                 This an essential guide for players seeking to improve their gameplay through effective dribbling and skillful maneuvers. It features a variety of moves rated from basic to advanced, complete with star levels and specific controller commands for seamless execution.
                 <br />
                 This resource aims to equip gamers with the techniques needed to navigate past opponents with ease, enhancing the tactical depth and enjoyment of matches. By mastering these skills, players can significantly boost their team&apos;s performance and enjoy a more dynamic and engaging football experience in EA FC 24.

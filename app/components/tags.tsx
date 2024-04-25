@@ -8,7 +8,7 @@ interface typeTagsProps {
 
 export const TypeTags = ({label, bgColor, textColor, borderColor, border}: typeTagsProps) => {
     return(
-        <div className={`${bgColor} ${textColor} ${borderColor} ${border} py-2 px-3 rounded-md text-xs flex items-center justify-center`}>
+        <div className={`${bgColor} ${textColor} ${borderColor} ${border} py-2 px-3 rounded-sm text-xs flex items-center justify-center`}>
             {label} 
         </div>
     )
@@ -34,7 +34,7 @@ export const DifficultyTags = ({ level }: DifficultyTagsProps) => {
     }
 
     return(
-        <div className={`${difficultyObj.bgColor} text-dark py-2 px-3 rounded-md text-xs flex items-center justify-center`}>
+        <div className={`${difficultyObj.bgColor} text-dark py-2 px-3 rounded-sm text-xs flex items-center justify-center`}>
             {difficultyObj.level} 
         </div>
     );

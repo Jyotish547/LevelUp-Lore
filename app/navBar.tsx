@@ -73,7 +73,7 @@ export default function NavBar() {
         <div className="flex flex-col text-xl space-y-3 h-full w-full justify-start py-8">
             {currentNav.map((nav, index) => (
                 <Link key={index} href={nav.href}
-                    className={`p-2 px-3 navItem ${
+                    className={`p-3 navItem ${
                     active === nav.href ? `active-${nav.slug}` : ""
                     }`}
                     onClick={() => setActive(nav.href)}
@@ -92,12 +92,12 @@ export default function NavBar() {
             {links}
             {/* Dynamic Change based on game */}
             <div className="flex flex-col items-center space-y-4 w-full">
-                <Link href="/" className={`flex flex-row space-x-2 text-lg items-center justify-between w-full p-4 ${bgColorClass}`}>
-                        <FontAwesomeIcon icon={faChevronCircleLeft} className={`${textColorClass}`} />
+                <Link href="/" className={`flex flex-row space-x-2 text-lg items-center justify-between w-full px-4 py-5 border-l-2 ${borderColorClass} ${bgColorClass}`}>
+                        <FontAwesomeIcon icon={faChevronCircleLeft} className={``} />
                         <Image src={currentNav[0]?.game || fc24Logo} alt="Game Logo" width={160} />
                     </Link>
                 <div className="w-full">
-                    <Link href="" className={`flex flex-row items-center justify-start space-x-4 w-full py-3 px-4 ${bgColorClass}`}>
+                    <Link href="" className={`flex flex-row items-center justify-start space-x-4 w-full py-3 px-4 border-l-2 ${borderColorClass} ${bgColorClass}`}>
                         <Image src={dpIcon} alt="" width="48" />
                         <div className="flex flex-col">
                             <span className={`text-lg font-semibold ${textColorClass}`}>Reggae547</span>

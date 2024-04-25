@@ -47,6 +47,18 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
                 return '';
         }
     }
+    function getDefaulForm(form: FormType): string {
+        switch (form) {
+            case 'Balanced':
+                return 'bg-balanced30';
+            case 'Offensive':
+                return 'bg-offensive30';
+            case 'Defensive':
+                return 'bg-defensive30';
+            default:
+                return '';
+        }
+    }
     function getBackgroundDiff(diff: DiffType): string {
         switch (diff) {
             case 'Beginner':
@@ -55,6 +67,19 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
                 return 'bg-intermediate';
             case 'Advanced':
                 return 'bg-advanced';
+            default:
+                return '';
+        }
+    }
+    
+    function getDefaultDiff(diff: DiffType): string {
+        switch (diff) {
+            case 'Beginner':
+                return 'bg-beginner30';
+            case 'Intermediate':
+                return 'bg-intermediate30';
+            case 'Advanced':
+                return 'bg-advanced30';
             default:
                 return '';
         }
@@ -93,23 +118,23 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
                     label="Popular"
                     icon={iconsMap['star']}
                     onClick={togglePopular}
-                    className={`flex flex-row items-center py-2 px-4 rounded-md border-2 border-intermediate font-semibold space-x-2 ${isPopular ? 'popular-f1 active-f1 bg-intermediate  text-dark': 'bg-black'}`}
+                    className={`flex flex-row items-center py-2 px-4 font-semibold space-x-2 rounded-sm ${isPopular ? 'popular-f1 active-f1 bg-amber-500 text-dark': 'bg-amber-500/30 text-neutral-500'}`}
                 />
             </div>
             
             {/* Form */}
             <div className="flex flex-col items-start space-y-2">
                 <h3 className="text-eafc font-semibold">Style:</h3>
-                <div className="flex flex-row justify-between items-center w-fit h-full rounded-md shadow-md shadow-gray-800/50">
+                <div className="flex flex-row justify-between items-center w-fit h-full">
                     {(['Defensive', 'Balanced', 'Offensive'] as FormType[]).map((form, index)=> (
                         <button
-                            key={form}
+                            key={index}
                             onClick={() => handleForm(form)}
                             className={
                                 `py-2 px-4 border-r-2 border-gray-800 space-x-2 h-full bg-clip-padding
-                                ${selectForm.includes(form) ? getBackgroundForm(form) : ''}
-                                ${index === 0 && selectForm.includes(form) ? 'rounded-l-md' : ''}
-                                ${index === 2 ? 'rounded-r-md border-none' : ''}
+                                ${selectForm.includes(form) ? getBackgroundForm(form) : `${getDefaulForm(form)} text-neutral-500`}
+                                ${index === 0 ? 'rounded-l-sm' : ''}
+                                ${index === 2 ? 'border-none' : 'rounded-r-sm'}
                                 `}
                         >
                             <FontAwesomeIcon icon={getIconForm(form)} />
@@ -121,20 +146,20 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
             {/* Difficulty */}
             <div className="flex flex-col items-start space-y-2">
                 <h3 className="text-eafc font-semibold">Complexity:</h3>
-                <div className="flex flex-row font-medium justify-between items-center w-fit h-full rounded-md shadow-md shadow-gray-800/50">
+                <div className="flex flex-row font-medium justify-between items-center w-fit h-full">
                     {(['Beginner', 'Intermediate', 'Advanced'] as DiffType[]).map((diff, index) => (
                         <button
                             key={diff}
                             onClick={() => handleDiff(diff)}
                             className={
                                 `py-2 px-4  border-r-2 border-gray-800 space-x-2 h-full bg-clip-padding
-                                ${selectDiff.includes(diff) ? `text-dark ${getBackgroundDiff(diff)}` : 'text-white'}
-                                ${index === 0 && selectDiff.includes(diff) ? 'rounded-l-md' : ''}
-                                ${index === 2 ? 'rounded-r-md border-none' : ''}
+                                ${selectDiff.includes(diff) ? `text-dark ${getBackgroundDiff(diff)}` : `${getDefaultDiff(diff)} text-neutral-500`}
+                                ${index === 0 ? 'rounded-l-sm' : ''}
+                                ${index === 2 ? 'border-none' : 'rounded-r-sm'}
                                 `}
                         >
                             <FontAwesomeIcon icon={getIconDiff(diff)} />
-                            <span>{diff}</span>
+                            <span className="opacity-100">{diff}</span>
                         </button>
                     ))}
                 </div>
@@ -151,6 +176,8 @@ interface F2Props {
 import { LeagueFilter } from "./types/fc24Type";
 
 export const F2Filter: React.FC<F2Props> = ({ gen, setGen }) => {
+
+    // League Filter - Scope
     
     // const [natId, setNatId] = useState<number | null>(null);
     // const [leaId, setLeaId] = useState<number | null>(null);
@@ -199,36 +226,6 @@ export const F2Filter: React.FC<F2Props> = ({ gen, setGen }) => {
                 return faStar;
         }
     }
-    // function getIconDiff(form: DiffType): IconProp {
-    //     switch (form) {
-    //         case 'Beginner':
-    //             return faShieldHalved;
-    //         case 'Intermediate':
-    //             return faStar;
-    //         case 'Advanced':
-    //             return faPlaneUp;
-    //         default:
-    //             return faStar;
-    //     }
-    // }
-
-    // Nation change
-    // const natChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //     const nationId = parseInt(e.target.value);
-    //     setNatId(nationId);
-    //     setLeaId(null);
-    // }
-
-    // // League change
-    // const leaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //     const leagueId = parseInt(e.target.value);
-    //     setLeaId(leagueId);
-    // }
-
-    // const filterLea = leagueData.leagues.filter(league => league.nationId === natId);
-    // const filterClub = leagueData.clubs.filter(club => club.league === leaId);
-
-    
 
     return(
         <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
@@ -239,18 +236,18 @@ export const F2Filter: React.FC<F2Props> = ({ gen, setGen }) => {
                 <div
                     
                     className={
-                        `flex flex-row items-stretch rounded-md border-2 border-intermediate font-semibold
-                        ${'popular-f1 active-f1  bg-black'}
+                        `flex flex-row items-stretch font-semibold rounded-sm
+                        ${'popular-f1 active-f1 bg-primary30'}
                     `}
                 >
                     {Object.values(GenType).map((genValue, index) => (
                         <label
                             key={index}
                             className={
-                                ` flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2 appearance-none
-                                ${gen === genValue ? `text-dark bg-intermediate` : `text-white`}
-                                ${index === 0 ? 'rounded-l-md' : ''}
-                                ${index === Object.values(GenType).length - 1 ? 'rounded-r-md border-none' : ''}
+                                ` flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                ${gen === genValue ? `text-dark bg-primary` : `text-neutral-500`}
+                                ${index === 0 ? 'rounded-sm' : ''}
+                                ${index === Object.values(GenType).length - 1 ? 'border-none' : ''}
                                 `}
                         >
                             <FontAwesomeIcon icon={getIconGen(genValue)} />
@@ -283,82 +280,6 @@ import { RateType } from "./types/fc24Type";
 
 export const F3Filter: React.FC<{ selectRate: RateType[], setSelectRate: React.Dispatch<React.SetStateAction<RateType[]>> }> = ({ selectRate, setSelectRate }) => {
     
-    // const [natId, setNatId] = useState<number | null>(null);
-    // const [leaId, setLeaId] = useState<number | null>(null);
-
-
-    // const [leagueData, setLeagueData] = useState<LeagueFilter>({
-    //     clubs: [],
-    //     leagues: [],
-    //     nations: []
-    //   });
-    
-    // const [cache, setCache] = useState<{ [key: string]: LeagueFilter }>({});
-
-    // useEffect(() => {
-    //     const fetchLeagueData = async() => {
-    //         const cacheKey = 'allFilters';
-    //         if (cache[cacheKey]) {
-    //             setLeagueData(cache[cacheKey]);
-    //             return;
-    //         }
-    //         try {
-    //             const response = await axios.get<LeagueFilter>(`/api/fc24/allFilters`);
-    //             setLeagueData(response.data);
-    //             setCache(currentCache => ({
-    //                 ...currentCache,
-    //                 [cacheKey]: response.data
-    //             }));
-    //         }
-    //         catch(error) {
-    //             console.error('Error fetching league data:', error);
-    //         }
-    //     }
-    //     fetchLeagueData();
-    // }, [])
-    // console.log(leagueData);
-
-    // function getIconGen(rate: RateType): IconProp {
-    //     switch (gen) {
-    //         case GenType.All:
-    //             return faMarsAndVenus;
-    //         case GenType.MensFootball:
-    //             return faMars;
-    //         case GenType.WomensFootball:
-    //             return faVenus;
-    //         default:
-    //             return faStar;
-    //     }
-    // }
-    // function getIconDiff(form: DiffType): IconProp {
-    //     switch (form) {
-    //         case 'Beginner':
-    //             return faShieldHalved;
-    //         case 'Intermediate':
-    //             return faStar;
-    //         case 'Advanced':
-    //             return faPlaneUp;
-    //         default:
-    //             return faStar;
-    //     }
-    // }
-
-    // Nation change
-    // const natChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //     const nationId = parseInt(e.target.value);
-    //     setNatId(nationId);
-    //     setLeaId(null);
-    // }
-
-    // // League change
-    // const leaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //     const leagueId = parseInt(e.target.value);
-    //     setLeaId(leagueId);
-    // }
-
-    // const filterLea = leagueData.leagues.filter(league => league.nationId === natId);
-    // const filterClub = leagueData.clubs.filter(club => club.league === leaId);
-
     const handleRate = (rate: RateType) => {
         setSelectRate(prevRate =>
             prevRate.includes(rate) ? prevRate.filter(r => r !== rate) : [...prevRate, rate]
@@ -368,11 +289,24 @@ export const F3Filter: React.FC<{ selectRate: RateType[], setSelectRate: React.D
     function getBackgroundRate(rate: RateType): string {
         switch (rate) {
             case '2':
-                return 'bg-eafc';
+                return 'bg-lime-500 text-dark';
             case '3':
-                return 'bg-intermediate';
+                return 'bg-intermediate text-dark';
             case '4':
-                return 'bg-advanced';
+                return 'bg-rose-700';
+            default:
+                return '';
+        }
+    }
+
+    function getDefaultRate(rate: RateType): string {
+        switch (rate) {
+            case '2':
+                return 'bg-lime-500/30 text-neutral-500';
+            case '3':
+                return 'bg-intermediate30 text-neutral-500';
+            case '4':
+                return 'bg-rose-700/30 text-neutral-500';
             default:
                 return '';
         }
@@ -381,19 +315,19 @@ export const F3Filter: React.FC<{ selectRate: RateType[], setSelectRate: React.D
     return(
         <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
             {/* Filters */}
-            {/* Gender */}
+            {/* Rating */}
             <div className="flex flex-col items-start space-y-2">
                 <h3 className="text-eafc font-semibold">Rating:</h3>
-                <div className="flex flex-row justify-between items-center w-fit h-full rounded-md shadow-md shadow-gray-800/50">
+                <div className="flex flex-row justify-between items-center w-fit h-full">
                     {(['2', '3', '4'] as RateType[]).map((rate, index)=> (
                         <button
                             key={index}
                             onClick={() => handleRate(rate)}
                             className={
                                 `py-2 px-4 border-r-2 border-gray-800 space-x-2 h-full bg-clip-padding font-semibold flex flex-row items-center
-                                ${selectRate.includes(rate) ? `${getBackgroundRate(rate)} text-dark` : 'text-white'}
-                                ${index === 0 && selectRate.includes(rate) ? 'rounded-l-md' : ''}
-                                ${index === 2 ? 'rounded-r-md border-none' : ''}
+                                ${selectRate.includes(rate) ? `${getBackgroundRate(rate)}` : `${getDefaultRate(rate)}`}
+                                ${index === 0 ? 'rounded-l-sm' : ''}
+                                ${index === 2 ? 'rounded-r-sm border-none' : ''}
                                 `}
                         >
                             <FontAwesomeIcon icon={faStar} />

@@ -14,7 +14,8 @@
   --text-black: rgb(38, 38, 38);
   --eafc24-color: #14F57B;
   --valo-color: #B181FF;
-
+  --background-primary: rgb(245 158 11);
+  --background-primary30: rgb(245 158 11 0.3);
 }
 
 html, body {
@@ -51,6 +52,7 @@ body {
 
 .active-eafc {
   border-left: 3px solid var(--eafc24-color);
+  background-color: #14F57B20;
 }
 
 .active-eafc > span {
@@ -59,6 +61,7 @@ body {
 
 .active-valo {
   border-left: 3px solid var(--valo-color);
+  background-color: #B181FF30;
 }
 
 .active-valo > span {
@@ -66,6 +69,12 @@ body {
 }
 
 /* Color Themes */
+.bg-primary {
+  background-color: var(--background-primary);
+}
+.bg-primary30 {
+  background-color: rgb(245, 158, 11, 0.3);
+}
 
 .yellow-bg {
   background-color: var(--background-yellow);
@@ -198,13 +207,22 @@ input[type='range']::-moz-range-thumb {
 .bg-beginner {
   background-color: #7BC0E5;
 }
+.bg-beginner30 {
+  background-color: #7BC0E530;
+}
 
 .bg-intermediate {
   background-color: var(--background-yellow);
 }
+.bg-intermediate30 {
+  background-color: rgb(251, 177, 60, 0.3);
+}
 
 .bg-advanced {
   background-color: #F88379;
+}
+.bg-advanced30 {
+  background-color: #F8837930;
 }
 
 .border-beginner {
@@ -269,6 +287,7 @@ input[type='range']::-moz-range-thumb {
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
+  border-radius: 2%;
 }
 
 .playerCard-background::before {
@@ -280,6 +299,7 @@ input[type='range']::-moz-range-thumb {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
   z-index: 1;
+  border-radius: 2%;
 }
 
 .playerRank-bg {
@@ -294,7 +314,7 @@ input[type='range']::-moz-range-thumb {
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  border-radius: 5%;
+  border-radius: 2%;
 }
 
 .skill-background::before {
@@ -306,7 +326,7 @@ input[type='range']::-moz-range-thumb {
   bottom: 0;
   background: rgba(0, 0, 0, 0.8); /* Black overlay with 50% opacity */
   z-index: 1;
-  border-radius: 5%;
+  border-radius: 2%;
 }
 
 .valo-background {
@@ -321,13 +341,22 @@ input[type='range']::-moz-range-thumb {
 .bg-balanced {
   background-color: #177245;
 }
+.bg-balanced30 {
+  background-color: #17724530;
+}
 
 .bg-offensive {
   background-color: #c14d00;
 }
+.bg-offensive30 {
+  background-color: #c14d0030;
+}
 
 .bg-defensive {
   background-color: #0033CC;
+}
+.bg-defensive30 {
+  background-color: #0033CC30;
 }
 
 /* Custom Scrollbar Styles */

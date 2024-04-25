@@ -96,10 +96,10 @@ export default function TopCardsFC() {
         <section className="flex flex-col items-start justify-center w-full space-y-6">
             {/* Header */}
             <header className="space-y-4">
-                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-eafc w-fit shadow-md shadow-green-300/30">
+                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-eafc w-fit">
                     <FontAwesomeIcon icon={faRankingStar} /> <span>Top Players</span>
                 </div>
-                <p className="text-lg font-normal">
+                <p className="text-base text-neutral-300 font-normal leading-relaxed">
                     Coveted for their ability to enhance gameplay, these high-caliber cards offer a powerful mix of speed, strength, and skill, mirroring the players&apos; real-world performances. <br /> As a strategic guide for building an ultimate team, this page points gamers toward the star athletes capable of changing the course of any match. It&apos;s an essential resource for players aiming to gain an edge in EA FC 24 competitions.
                 </p>
             </header>
