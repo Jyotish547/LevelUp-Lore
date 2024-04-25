@@ -92,12 +92,12 @@ export default function NavBar() {
             {links}
             {/* Dynamic Change based on game */}
             <div className="flex flex-col items-center space-y-4 w-full">
-                <Link href="/" className={`flex flex-row space-x-2 rounded-r-md text-lg items-center justify-start space-x-4 w-full px-4 py-5 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}>
+                <Link href="/" className={`flex flex-row space-x-2 rounded-r-sm text-lg items-center justify-start space-x-4 w-full px-4 py-5 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}>
                     <FontAwesomeIcon icon={faChevronLeft} className={``} />
                     <Image src={currentNav[0]?.game || fc24Logo} alt="Game Logo" width={160} />
                 </Link>
                 <div className="w-full">
-                    <Link href="" className={`flex flex-row items-center rounded-r-md justify-start space-x-4 w-full py-3 px-4 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}>
+                    <Link href="" className={`flex flex-row items-center rounded-r-sm justify-start space-x-4 w-full py-3 px-4 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}>
                         <Image src={dpIcon} alt="" width="48" />
                         <div className="flex flex-col">
                             <span className={`text-lg font-semibold ${textColorClass}`}>Reggae547</span>

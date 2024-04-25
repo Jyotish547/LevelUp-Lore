@@ -172,7 +172,7 @@ export const FormationsEAFC: React.FC<{ formationData: FormationData[], setForma
     }
 
     return formationData.map((formation, index) => (
-        <div key={index} onClick={() =>goToFormation(formation.formation)} className='w-11/12 bg-black flex flex-col items-start justify-between rounded-xl shadow-md shadow-green-300/30'>
+        <div key={index} onClick={() =>goToFormation(formation.formation)} className='cursor-pointer w-11/12 bg-black flex flex-col items-start justify-between rounded-xl shadow-md shadow-green-300/30'>
             <Image src={formation.image} alt={formation.formation} className='w-full rounded-t-md' />
             <div className='playerCard-background flex flex-col items-start w-full px-6 py-5 justify-between space-y-3 rounded-b-md'>
                 <div className='z-10 flex flex-col items-start w-fit'>

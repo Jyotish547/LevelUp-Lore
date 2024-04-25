@@ -489,11 +489,10 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
             {data.lineups.map((map: any) => (
                 map.agents.map((agent: any) => (
                     agent.lineups.map((lineup: any, lineIndex: number) => (
-                        <div key={lineIndex} className="valo-background w-[335px] h-[316px] rounded-md shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
-                            <div className="image-container w-[335px] h-[188px] relative rounded-t-lg overflow-hidden">
-                                
-                                <Image className="rounded-t-lg" src={lineup.thumbnail} alt={lineup.title} fill={true} />
-                                <div className="overlay absolute inset-0 flex flex-col justify-center items-center bg-gradient-to-b from-black/70 from-10% via-neutral-400/0 to-black/70 to-90% w-full h-full justify-between">
+                        <div key={lineIndex} className="valo-background w-fit h-full rounded-md shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
+                            <div className="image-container flex justify-center items-center w-96 lg:w-full h-[205px] relative rounded-t-lg overflow-hidden">
+                                <Image className="rounded-t-lg" src={lineup.thumbnail} alt={lineup.title} width={395} height={365} />
+                                <div className="overlay absolute inset-0 flex flex-col justify-center items-stretch bg-gradient-to-b from-black/70 from-10% via-neutral-400/0 to-black/70 to-90% w-full h-full justify-between">
                                     <div className="flex flex-row justify-end items-start w-full">
                                         {lineup.abilityIcon && (
                                             <Image src={lineup.abilityIcon} alt={lineup.ability} width={55} height={40} className="p-2 bg-valo20 rounded-md mt-2 mr-2" />
@@ -506,7 +505,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-col items-start space-y-2 p-5">
+                            <div className="flex flex-col h-full items-start space-y-2 p-5">
                                 <p className="text-lg tracking-wide">{lineup.title}</p>
                                 
                                 {
