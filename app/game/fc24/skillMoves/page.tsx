@@ -34,7 +34,7 @@ export default function SkillMovesFC() {
     // console.log(rating)
 
     return(
-        <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
+        <section className="flex flex-col items-start justify-center w-full space-y-6">
             {/* Header */}
             <header className="space-y-4">
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-eafc w-fit shadow-md shadow-green-300/30">

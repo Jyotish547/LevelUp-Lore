@@ -65,14 +65,14 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
     
 
     return  (
-        <div className="flex flex-col items-start justify-center w-4/5 space-y-6">
+        <div className="flex flex-col items-start justify-center w-full space-y-6">
             {/* Header */}
             <header className="space-y-4 w-full">
                 <div className="space-x-1 font-medium">
                     <Link href="/game" className="underline  underline-offset-4">Formations</Link> <span>&lt;</span><Link href="#" className="text-eafc">{formation.formation}</Link>
                 </div>
                 <div className="flex flex-row justify-between items-center">
-                    <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-eafc w-fit shadow-md shadow-green-300/30">
+                    <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-eafc w-fit">
                         <FontAwesomeIcon icon={faPeopleGroup} /> <span>{formation.formation} Formation</span>
                     </div>
                     <div className="flex flex-row space-x-4 font-medium text-md">
@@ -87,7 +87,7 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
                         
                     </div>
                 </div>
-                <p className="text-lg font-normal">
+                <p className="text-base font-normal">
                     {formation.caption}
                 </p>
             </header>
@@ -95,7 +95,7 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
             <hr className="w-full rounded-lg" />
 
             {/* Content */}
-            <div className="flex flex-col items-start w-full">
+            <div className="flex flex-col items-start w-full text-base">
                 <div className="flex flex-row justify-between items-start w-full space-x-12">
                     {/* Left Column */}
                     <div className="flex flex-col w-full space-y-8">
@@ -150,11 +150,11 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
 
                     {/* Right Column */}
                     <div className="flex flex-col w-full space-y-8">
-                        <div id="overview" className="flex flex-col space-y-6">
+                        <div id="overview" className="flex flex-col space-y-4">
                             <HeaderBanner label="Overview" style="eafc" />
                             {/* Similar way to split paragraphs, add '||' wherever paragraph split required */}
                             {formation.overview.split('||').map((paragraph: string, index: number) => (
-                                <p key={index} className="text-lg">{paragraph.trim()}</p>
+                                <p key={index} className="">{paragraph.trim()}</p>
                             ))}
                         </div>
                         {/* Suggested Tactics */}
@@ -164,7 +164,7 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
                                 <span className="text-xl flex flex-row items-center text-eafc">
                                     <FontAwesomeIcon icon={faShieldHalved} className="mr-1"/> Defense
                                 </span>
-                                <p className="text-lg">
+                                <p className="  ">
                                     {formation.customTactics.defenseCap}
                                 </p>
                                 <div className="flex flex-col text-lg w-full space-y-2">

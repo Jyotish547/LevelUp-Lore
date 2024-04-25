@@ -48,13 +48,13 @@ export default function Formations() {
 
     
     return(
-        <section className="flex flex-col items-start justify-center w-4/5 space-y-6">
+        <section className="flex flex-col items-start justify-center w-full space-y-6 ">
             {/* Header */}
             <header className="space-y-4">
-                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 bg-black py-3 px-4 rounded-xl text-eafc w-fit shadow-md shadow-green-300/30">
+                <div className="text-3xl font-semibold flex flex-row items-center space-x-2 rounded-xl text-eafc w-fit ">
                     <FontAwesomeIcon icon={faChessBoard} /> <span>Team Tactics</span>
                 </div>
-                <p className="text-lg font-normal">
+                <p className="text-base text-neutral-300 font-normal leading-relaxed">
                     Team Tactics in football define the positioning and roles of players, influenced by the team&apos;s strategy, strengths, and opponent&apos;s style. It dictates the balance between defense, midfield, and attack through a numerical representation, highlighting the distribution of players across the field. <br />These strategic blueprints guide teams in executing their playstyle, whether focusing on defense, possession, or attack, and can be adapted during the match to respond to various situations.
                 </p>
             </header>

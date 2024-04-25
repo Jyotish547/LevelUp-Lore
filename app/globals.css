@@ -50,8 +50,7 @@ body {
 /* NavBar */
 
 .active-eafc {
-  border-bottom: 3px solid var(--eafc24-color);
-  border-radius: 5px;
+  border-left: 3px solid var(--eafc24-color);
 }
 
 .active-eafc > span {
@@ -59,8 +58,7 @@ body {
 }
 
 .active-valo {
-  border-bottom: 3px solid var(--valo-color);
-  border-radius: 5px;
+  border-left: 3px solid var(--valo-color);
 }
 
 .active-valo > span {
@@ -173,6 +171,10 @@ input[type='range']::-moz-range-thumb {
 .button-hover-valo:hover {
   background-color: var(--valo-color);
   color: var(--text-black);
+}
+
+.bg-eafc20 {
+  background-color: #14F57B20;
 }
 
 .bg-valo20 {

@@ -172,16 +172,18 @@ export const FormationsEAFC: React.FC<{ formationData: FormationData[], setForma
     }
 
     return formationData.map((formation, index) => (
-        <div key={index} onClick={() =>goToFormation(formation.formation)} className='w-11/12 py-4 px-5 bg-black space-y-3 flex flex-col items-start justify-between rounded-lg shadow-md shadow-green-300/30'>
-            <Image src={formation.image} alt={formation.formation} className='w-full rounded-md' />
-            <div className='flex flex-col items-start'>
-                <span className='text-sm text-eafc'>Formation</span>
-                <span className='text-xl font-semibold tracking-wider'>{formation.formation}</span>
-            </div>
-            <p className='text-base'>{formation.caption}</p>
-            <div className='flex flex-row justify-between w-full font-semibold text-sm'>
-                <TypeTags label={formation.flow} bgColor={getBackgroundClass(formation.flow)} textColor="text-white" borderColor='' border="" />
-                <DifficultyTags level={formation.difficulty} />
+        <div key={index} onClick={() =>goToFormation(formation.formation)} className='w-11/12 bg-black flex flex-col items-start justify-between rounded-lg shadow-md shadow-green-300/30'>
+            <Image src={formation.image} alt={formation.formation} className='w-full rounded-t-md' />
+            <div className='playerCard-background flex flex-col items-start w-full px-6 py-5 justify-between space-y-3'>
+                <div className='z-10 flex flex-col items-start w-fit'>
+                    <span className='text-sm text-eafc'>Formation</span>
+                    <span className='text-xl font-bold tracking-wider'>{formation.formation}</span>
+                </div>
+                <p className='z-10 text-sm leading-relaxed'>{formation.caption}</p>
+                <div className='z-10 flex flex-row justify-between w-full font-semibold text-sm mt-1'>
+                    <TypeTags label={formation.flow} bgColor={getBackgroundClass(formation.flow)} textColor="text-white" borderColor='' border="" />
+                    <DifficultyTags level={formation.difficulty} />
+                </div>
             </div>
         </div>
     ))
