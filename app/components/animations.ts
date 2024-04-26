@@ -135,3 +135,49 @@ export const appear: Variants = {
         }
     }
 }
+
+// Page Animations
+
+export const agentAnim: Variants = {
+    hidden: { opacity: 0.3 },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: "inertia",
+            ease: "",
+            opacity: 1,
+            duration: 1
+        }
+    },
+    tap: {
+      transition: {
+        transition: {
+            type: "tween",
+            ease: "easeIn",
+            duration: 1,
+        }
+      }  
+    }
+}
+
+export const overlays: Variants = {
+    hidden: { opacity: 0.3 },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: "inertia",
+            ease: "",
+            opacity: 1,
+            duration: 0.5
+        }
+    },
+    tap: {
+      transition: {
+        transition: {
+            type: "tween",
+            ease: "easeIn",
+            duration: 1,
+        }
+      }  
+    }
+}

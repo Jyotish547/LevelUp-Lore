@@ -7,6 +7,9 @@ import { MapData } from "./types/valorantType";
 import Image from "next/image";
 import Link from "next/link";
 
+import { motion } from "framer-motion";
+import { upHome, downHome, agentAnim, overlays } from "./animations";
+
 export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
 
     const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -15,7 +18,7 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
         <div className='grid grid-cols-2 grid-flow-row gap-12 w-full'>
             {agentData.map((agent: any, index: any) => (
                 agent.isPlayableCharacter && (
-                    <div
+                    <motion.div
                         key={index}
                         className={`flex p-6 valo-background shadow-md shadow-violet-400/30 rounded-md ${expandedId === agent.uuid ? 'col-span-2 row-span-2 w-full' : 'col-span-1 row-span-1 w-fit'}`}
                         onClick={() => setExpandedId(expandedId === agent.uuid ? null : agent.uuid)}
@@ -46,7 +49,13 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                         }
                         {
                             expandedId === agent.uuid && (
-                                <div className="flex flex-col justify-between w-full h-fit">
+                                <motion.div className="flex flex-col justify-between w-full h-fit"
+                                    variants={agentAnim}
+                                    initial="hidden"
+                                    animate="visible"
+                                    whileTap="tap"
+                                    exit="hidden"
+                                >
                                     <div className="flex flex-row w-full justify-between items-center">
                                         <Image src={agent.fullPortrait} alt={agent.displayName} width={500} height={500} className="-ml-12" style={{overflow: 'hidden', clipPath: 'rect(auto 300px auto 50px)'}} />
                                         <div className="flex flex-col space-y-6">
@@ -112,10 +121,10 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                                             </div>
                                         ))}
                                     </div>
-                                </div>
+                                </motion.div>
                             )
                         }
-                    </div>
+                    </motion.div>
                 )
             ))}
         </div>
@@ -160,7 +169,10 @@ export const MapList: React.FC = () => {
                         className={`row-span-1 valo-background flex flex-col rounded-lg shadow-md shadow-violet-400/30 space-y-8 ${expandedId === map.uuid ? 'p-8' : ''}`}
                         onClick={() => setExpandedId(expandedId === map.uuid ? null : map.uuid)}
                         >
-                        <div className="flex flex-row w-full justify-between items-center space-x-8">
+                        <motion.div className="flex flex-row w-full justify-between items-center space-x-8"
+                            variants={agentAnim}
+                            whileTap="tap"
+                        >
                             <Image src={map.splash} alt={map.displayName} width={520} height={500} className={`${expandedId === map.uuid ? 'rounded-sm' : 'rounded-l-md'}`} />
                             <div className="flex flex-col items-start justify-between h-full py-8">
                                 <span className="text-3xl font-semibold tracking-wider text-valo">
@@ -179,10 +191,16 @@ export const MapList: React.FC = () => {
                                     <p>{map.coordinates}</p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                         {
                             expandedId === map.uuid && (
-                                <div className="flex flex-row items-start justify-around">
+                                <motion.div className="flex flex-row items-start justify-around"
+                                    variants={agentAnim}
+                                    initial="hidden"
+                                    animate="visible"
+                                    whileTap="tap"
+                                    exit="hidden"
+                                >
                                     <div className="flex flex-col items-start space-y-2">
                                         <p className="text-xl font-semibold text-valo">Map Outline:</p>
                                         <span className="text-md mb-4">
@@ -214,7 +232,7 @@ export const MapList: React.FC = () => {
                                         })}
                                     </div> */}
                                     <Image src={map.displayIcon} alt={map.displayName} width={700} height={500} />
-                                </div>
+                                </motion.div>
                             )
                         }
                     </div>
@@ -286,7 +304,7 @@ export const CrosshairList: React.FC = () => {
     return(
         <div className='grid grid-cols-4 grid-flow-row gap-4 w-full'>
             {crosshairData.map((cross: any, index: number) => (
-                <div key={index} className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-md w-fit" onClick={() => handlePreview(cross)}>
+                <motion.div key={index} className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-md w-fit" onClick={() => handlePreview(cross)}>
                     <Image src={cross.crosshair} alt={cross.title} width={600} height={212} className="rounded-t-md" />
                     <div className="flex flex-col items-start justify-between space-y-5 w-full p-5">
                         <p className="font-semibold text-xl w-full">{cross.title}</p>
@@ -324,11 +342,15 @@ export const CrosshairList: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             ))}
 
             {preview && (
-                <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center">
+                <motion.div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center"
+                    variants={overlays}
+                    initial="hidden"
+                    animate="visible"
+                >
                     <div className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-lg w-fit p-8 space-y-5" ref={overlayRef}>
                         {selectCrosshair && (
                             <>
@@ -370,7 +392,7 @@ export const CrosshairList: React.FC = () => {
                             </>
                         )}
                     </div>
-                </div>
+                </motion.div>
             )}
         </div>
     )
@@ -441,6 +463,7 @@ import { Lineup, LineupFilterProps } from "./types/valorantType";
 import { fetchLineup } from "@/components/pages/api/valorant/allLineups";
 
 import dpIcon from '../../public/assets/displayPicture.png';
+import { tap } from "node:test/reporters";
 
 export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
 
@@ -489,7 +512,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
             {data.lineups.map((map: any) => (
                 map.agents.map((agent: any) => (
                     agent.lineups.map((lineup: any, lineIndex: number) => (
-                        <div key={lineIndex} className="valo-background w-fit h-full rounded-md shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
+                        <motion.div key={lineIndex} className="valo-background w-fit h-full rounded-md shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
                             <div className="image-container flex justify-center items-center w-96 lg:w-full h-[205px] relative rounded-t-lg overflow-hidden">
                                 <Image className="rounded-t-lg" src={lineup.thumbnail} alt={lineup.title} width={395} height={365} />
                                 <div className="overlay absolute inset-0 flex flex-col justify-center items-stretch bg-gradient-to-b from-black/70 from-10% via-neutral-400/0 to-black/70 to-90% w-full h-full justify-between">
@@ -519,7 +542,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                     )
                                 }
                             </div>
-                        </div>
+                        </motion.div>
                         
                     ))
                 ))
@@ -531,7 +554,11 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                     </ol>
             ))} */}
             {active && (
-                <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center">
+                <motion.div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center"
+                    variants={overlays}
+                    initial="hidden"
+                    animate="visible"
+                >
                     <div className="flex flex-row rounded-lg shadow-md shadow-violet-400/30" ref={overlayRef}>
                         {selectLineup && (
                             <>
@@ -611,7 +638,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                             </>
                         )}
                     </div>
-                </div>
+                </motion.div>
             )}
         </div>
     )
