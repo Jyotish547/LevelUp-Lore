@@ -107,7 +107,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
             </div>
             <div ref={containerRef} className="home-container flex flex-row items-start space-x-4 mx-8">
                 {games.map((game, index) => (
-                    <Link key={index} ref={el => cardRefs.current[index] = el} href={game.href} className={`flex flex-col transition ease-out-in hover:saturate-100 duration-300 items-center flex-shrink-0 rounded-md space-y-8 ${index === activeIndex ? 'saturate-100' : 'saturate-50'}`}>
+                    <Link key={index} ref={el => { cardRefs.current[index] = el; }} href={game.href} className={`flex flex-col transition ease-out-in hover:saturate-100 duration-300 items-center flex-shrink-0 rounded-md space-y-8 ${index === activeIndex ? 'saturate-100' : 'saturate-50'}`}>
                         <Image className={`rounded-md homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={game.src} alt={game.alt} style={{ boxShadow: `3px 3px 8px ${game.shadowColor}`}}/>
                         <Image className={`${index === activeIndex ? 'opacity-100' : 'opacity-20 saturate-0'}`} src={game.logo} alt={game.alt} width={300} />
                     </Link>
