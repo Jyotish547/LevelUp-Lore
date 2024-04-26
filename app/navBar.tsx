@@ -86,14 +86,14 @@ export default function NavBar() {
         >
             {currentNav.map((nav, index) => (
                 <motion.div id="" key={index}
-                    className={`p-3 navItem rounded-r-sm w-full cursor-pointer ${
+                    className={`z-10 navItem flex items-center rounded-r-sm w-full cursor-pointer ${
                     active === nav.href ? `active-${nav.slug}` : "bg-white/5 border-l-2 border-white/10"
                     }`}
                     onClick={() => setActive(nav.href)}
                     variants={navItemAnim}
                     
                 >
-                    <Link href={nav.href} className="w-full h-full">
+                    <Link href={nav.href} className="w-full p-3 h-full">
                         <FontAwesomeIcon icon={nav.icon} className="mr-2" />
                         <span className="text-neutral-300 w-full">
                             {nav.label}
@@ -107,10 +107,10 @@ export default function NavBar() {
     return(
         <nav
             id="navbar"
-            className={`fixed top-1/2 transform -translate-y-1/2 bg-neutral-950/80 shadow-lg ${shadowColorClass} flex flex-col items-center px-8 py-10 justify-between h-full w-72`}
+            className={`fixed top-1/2 transform -translate-y-1/2 nav-background shadow-lg shadow-teal-500/50 flex flex-col items-center px-8 py-10 justify-between h-full w-72`}
             
         >
-            <motion.div className="text-4xl font-semibold w-full text-center"
+            <motion.div className="z-10 text-4xl font-semibold w-full text-center"
                 initial={{ y: -100, opacity: 0}}
                 animate={{ 
                     y: 0, 
@@ -122,12 +122,14 @@ export default function NavBar() {
                     } 
                 }}
             >
-                <Image src={logos.white} alt="LevelUp Lore" />
+                <Link href="/" className="w-full">
+                    <Image src={logos.white} alt="LevelUp Lore" />
+                </Link>
             </motion.div>
             {links}
             {/* Dynamic Change based on game */}
             <motion.div
-                className="flex flex-col items-center space-y-4 w-full"
+                className="z-10 flex flex-col items-center space-y-4 w-full"
                 variants={navEndAnim}
                 initial="hidden"
                 animate="visible"

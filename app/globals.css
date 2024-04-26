@@ -96,6 +96,10 @@ body {
   color: var(--text-black);
 }
 
+.bg-dark {
+  background-color: var(--text-black);
+}
+
 /* Slider */
 
 input[type='range']::-webkit-slider-thumb {
@@ -285,14 +289,14 @@ input[type='range']::-moz-range-thumb {
 /* Backgrounds */
 
 .game-background {
-  background-image: url("/assets/gamePageBackground.png");
+  background-image: url("/assets/gameBackground.png");
   background-size: cover;
   background-repeat: repeat-y;
   position: fixed;
 }
 
 .playerCard-background {
-  background-image: url("/assets/gamePageBackground.png");
+  background-image: url("/assets/gameBackground.png");
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
@@ -306,9 +310,29 @@ input[type='range']::-moz-range-thumb {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+  background: rgba(0, 0, 0, 0.6); /* Black overlay with 50% opacity */
   z-index: 1;
   border-radius: 2%;
+}
+
+.nav-background {
+  background-image: url("/assets/navBackgroundR.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 2%;
+}
+
+.nav-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Black overlay with 50% opacity */
+  z-index: 1;
+  border-radius: 2%;
+  
 }
 
 .playerRank-bg {
@@ -319,7 +343,7 @@ input[type='range']::-moz-range-thumb {
 }
 
 .skill-background {
-  background-image: url("/assets/gamePageBackground.png");
+  background-image: url("/assets/navBackground.png");
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
@@ -333,16 +357,28 @@ input[type='range']::-moz-range-thumb {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8); /* Black overlay with 50% opacity */
+  background: rgba(0, 0, 0, 0.6); /* Black overlay with 50% opacity */
   z-index: 1;
   border-radius: 2%;
 }
 
 .valo-background {
-  background-image: url("/assets/valorant/valoBG.png");
+  background-image: url("/assets/gameBackground.png");
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
+  border-radius: 2%;
+}
+
+.valo-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* Black overlay with 50% opacity */
+  z-index: 1;
   border-radius: 2%;
 }
 

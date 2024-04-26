@@ -25,7 +25,7 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                         >
                         {
                             expandedId !== agent.uuid && (
-                                <div className="flex flex-row w-full">
+                                <div className="z-10 flex flex-row w-full">
                                     <Image src={agent.fullPortrait} alt={agent.displayName} width={500} height={500} className="-ml-12" style={{overflow: 'hidden', clipPath: 'rect(auto 300px auto 50px)'}} />
                                     <div className="flex flex-col h-full justify-between w-full">
                                         <span className="font-semibold text-valo text-2xl tracking-wider">{agent.displayName.toUpperCase()}</span>
@@ -49,7 +49,7 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                         }
                         {
                             expandedId === agent.uuid && (
-                                <motion.div className="flex flex-col justify-between w-full h-fit"
+                                <motion.div className="z-10 flex flex-col justify-between w-full h-fit"
                                     variants={agentAnim}
                                     initial="hidden"
                                     animate="visible"
@@ -169,7 +169,7 @@ export const MapList: React.FC = () => {
                         className={`row-span-1 valo-background flex flex-col rounded-lg shadow-md shadow-violet-400/30 space-y-8 ${expandedId === map.uuid ? 'p-8' : ''}`}
                         onClick={() => setExpandedId(expandedId === map.uuid ? null : map.uuid)}
                         >
-                        <motion.div className="flex flex-row w-full justify-between items-center space-x-8"
+                        <motion.div className="z-10 flex flex-row w-full justify-between items-center space-x-8"
                             variants={agentAnim}
                             whileTap="tap"
                         >
@@ -194,7 +194,7 @@ export const MapList: React.FC = () => {
                         </motion.div>
                         {
                             expandedId === map.uuid && (
-                                <motion.div className="flex flex-row items-start justify-around"
+                                <motion.div className="z-10 flex flex-row items-start justify-around"
                                     variants={agentAnim}
                                     initial="hidden"
                                     animate="visible"
@@ -305,8 +305,8 @@ export const CrosshairList: React.FC = () => {
         <div className='grid grid-cols-4 grid-flow-row gap-4 w-full'>
             {crosshairData.map((cross: any, index: number) => (
                 <motion.div key={index} className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-md w-fit" onClick={() => handlePreview(cross)}>
-                    <Image src={cross.crosshair} alt={cross.title} width={600} height={212} className="rounded-t-md" />
-                    <div className="flex flex-col items-start justify-between space-y-5 w-full p-5">
+                    <Image src={cross.crosshair} alt={cross.title} width={600} height={212} className="z-10 rounded-t-md" />
+                    <div className="z-10 flex flex-col items-start justify-between space-y-5 w-full p-5">
                         <p className="font-semibold text-xl w-full">{cross.title}</p>
                         <div className="w-full flex flex-row justify-between items-center">
                             <div className="flex flex-row items-center space-x-3">
@@ -346,47 +346,49 @@ export const CrosshairList: React.FC = () => {
             ))}
 
             {preview && (
-                <motion.div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center"
+                <motion.div className="fixed inset-0 z-20 bg-black bg-opacity-80 flex justify-center items-center"
                     variants={overlays}
                     initial="hidden"
                     animate="visible"
                 >
-                    <div className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-lg w-fit p-8 space-y-5" ref={overlayRef}>
+                    <div className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-md" ref={overlayRef}>
                         {selectCrosshair && (
                             <>
-                                <Image src={selectCrosshair.crosshair} alt={selectCrosshair.title} width={400} height={212} className="border-2 border-valo rounded-lg shadow-lg shadow-violet-400/30" />
-                                <p className="font-semibold text-xl w-full">{selectCrosshair.title}</p>
-                                <div className="w-full flex flex-row justify-between items-center">
-                                    <div className="flex flex-row items-center space-x-3">
-                                        <Image src={selectCrosshair.displayIcon} alt={selectCrosshair.username} width={30} height={30} />
-                                        <span className="font-medium text-valo text-lg">{selectCrosshair.username}</span>
+                                <Image src={selectCrosshair.crosshair} alt={selectCrosshair.title} width={500} height={212} className="z-10 rounded-t-md shadow-lg shadow-violet-400/30" />
+                                <div className="flex flex-col w-full h-full px-8 py-7 space-y-4">
+                                    <p className="z-10 font-semibold text-xl w-full">{selectCrosshair.title}</p>
+                                    <div className="z-10 w-full flex flex-row justify-between items-center">
+                                        <div className="flex flex-row items-center space-x-3">
+                                            <Image src={selectCrosshair.displayIcon} alt={selectCrosshair.username} width={30} height={30} />
+                                            <span className="font-medium text-valo text-base">{selectCrosshair.username}</span>
+                                        </div>
+                                        <Image src={selectCrosshair.rank} alt={selectCrosshair.username} width={30} height={30} />
                                     </div>
-                                    <Image src={selectCrosshair.rank} alt={selectCrosshair.username} width={30} height={30} />
-                                </div>
-                                <div className="w-full flex flex-row justify-between items-center">
-                                    <div className="text-lg font-bold flex flex-row items-center space-x-3">
-                                        <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
-                                        <p>3.6k</p>
+                                    <div className="z-10 w-full flex flex-row justify-between items-center">
+                                        <div className="text-base font-bold flex flex-row items-center space-x-3">
+                                            <FontAwesomeIcon icon={faHeart} className="text-xl text-intermediate" />
+                                            <p>3.6k</p>
+                                        </div>
+                                        <div className="text-base font-bold flex flex-row items-center space-x-3">
+                                            <FontAwesomeIcon icon={faShareNodes} className="text-xl text-intermediate" />
+                                            <p>0.7k</p>
+                                        </div>
                                     </div>
-                                    <div className="text-lg font-bold flex flex-row items-center space-x-3">
-                                        <FontAwesomeIcon icon={faShareNodes} className="text-2xl text-intermediate" />
-                                        <p>0.7k</p>
-                                    </div>
-                                </div>
-                                <div className="w-full flex flex-row justify-between items-center">
-                                    <div
-                                        className="text-lg text-dark font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-intermediate rounded-md"
-                                        onClick={() => handleCopy(selectCrosshair.code)}
-                                    >
-                                        <FontAwesomeIcon icon={faCopy} className="text-2xl" />
-                                        <p>Copy</p>
-                                    </div>
-                                    <div
-                                        className="text-lg font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-advanced rounded-md"
-                                        onClick={() => handleClick(selectCrosshair)}
-                                    >
-                                        <FontAwesomeIcon icon={faXmark} className="text-2xl" />
-                                        <p>Close</p>
+                                    <div className="z-10 w-full flex flex-row justify-between items-center">
+                                        <div
+                                            className="text-base text-dark font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-intermediate rounded-md"
+                                            onClick={() => handleCopy(selectCrosshair.code)}
+                                        >
+                                            <FontAwesomeIcon icon={faCopy} className="text-xl" />
+                                            <p>Copy</p>
+                                        </div>
+                                        <div
+                                            className="text-base font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-advanced rounded-md"
+                                            onClick={() => handleClick(selectCrosshair)}
+                                        >
+                                            <FontAwesomeIcon icon={faXmark} className="text-xl" />
+                                            <p>Close</p>
+                                        </div>
                                     </div>
                                 </div>
                             </>
@@ -422,7 +424,7 @@ export const GuideList: React.FC = () => {
     return(
         <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
-                <div key={index} className="valo-background w-full shadow-md shadow-violet-400/30 rounded-md flex flex-col items-start justify-between">
+                <div key={index} className="w-full shadow-md shadow-violet-400/30 rounded-md flex flex-col items-start justify-between">
                     <div className="relative pt-[56.25%] w-full">
                         <iframe
                         src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
@@ -432,9 +434,9 @@ export const GuideList: React.FC = () => {
                         allowFullScreen
                         ></iframe>
                     </div>
-                    <div className="px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
-                        <h3 className="text-lg text-wrap font-medium text-valo">{guide.snippet.title}</h3>
-                        <div className="w-full flex flex-row items-center justify-between">
+                    <div className="valo-background px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
+                        <h3 className="z-10 text-lg text-wrap font-medium text-valo">{guide.snippet.title}</h3>
+                        <div className="z-10 w-full flex flex-row items-center justify-between">
                             <div className="flex flex-col space-y-4">
                                 <h4 className="text-md">Uploaded By: <Link href={`https://www.youtube.com/@${guide.snippet.channelTitle}`} target="_blank" className="font-semibold text-intermediate" >{guide.snippet.channelTitle}</Link></h4>
                                 <p className="text-md">Date Posted: <span className="italic">{guide.snippet.publishedAt.substring(0, 10)}</span></p>
@@ -513,32 +515,32 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                 map.agents.map((agent: any) => (
                     agent.lineups.map((lineup: any, lineIndex: number) => (
                         <motion.div key={lineIndex} className="valo-background w-fit h-full rounded-md shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
-                            <div className="image-container flex justify-center items-center w-96 lg:w-full h-[205px] relative rounded-t-lg overflow-hidden">
+                            <div className="image-container z-10 flex justify-center items-center w-96 lg:w-full h-[205px] relative rounded-t-lg overflow-hidden">
                                 <Image className="rounded-t-lg" src={lineup.thumbnail} alt={lineup.title} width={395} height={365} />
                                 <div className="overlay absolute inset-0 flex flex-col justify-center items-stretch bg-gradient-to-b from-black/70 from-10% via-neutral-400/0 to-black/70 to-90% w-full h-full justify-between">
                                     <div className="flex flex-row justify-end items-start w-full">
                                         {lineup.abilityIcon && (
-                                            <Image src={lineup.abilityIcon} alt={lineup.ability} width={55} height={40} className="p-2 bg-valo20 rounded-md mt-2 mr-2" />
+                                            <Image src={lineup.abilityIcon} alt={lineup.ability} width={55} height={40} className="p-2 bg-valo30 rounded-md mt-2 mr-2" />
                                         )}
                                     </div>
                                     <div className="flex flex-row justify-start items-end w-full">
                                         {lineup.displayIcon && (
-                                            <Image src={lineup.displayIcon} alt={lineup.displayName} width={80} height={40} className="p-2 bg-valo20 rounded-md mb-2 ml-2" />
+                                            <Image src={lineup.displayIcon} alt={lineup.displayName} width={80} height={40} className="p-2 bg-valo30 rounded-md mb-2 ml-2" />
                                         )}
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex flex-col h-full items-start space-y-2 p-5">
-                                <p className="text-lg tracking-wide">{lineup.title}</p>
+                            <div className="z-10 flex flex-col h-full items-start space-y-2 p-5">
+                                <p className="z-10 text-lg tracking-wide">{lineup.title}</p>
                                 
                                 {
                                     lineup.location === 1 ?
                                     (
-                                        <p className="font-normal">For {lineup.location[0]}</p>
+                                        <p className="z-10 font-normal">For {lineup.location[0]}</p>
                                     )
                                     :
                                     (
-                                        <p className="font-normal">From <span className="text-valo mx-1">{lineup.location[0]}</span> to <span className="text-valo mx-1">{lineup.location[1]}</span></p>
+                                        <p className="z-10 font-normal">From <span className="text-valo mx-1">{lineup.location[0]}</span> to <span className="text-valo mx-1">{lineup.location[1]}</span></p>
                                     )
                                 }
                             </div>
@@ -554,7 +556,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                     </ol>
             ))} */}
             {active && (
-                <motion.div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center"
+                <motion.div className="fixed z-10 inset-0 bg-black bg-opacity-80 flex justify-center items-center"
                     variants={overlays}
                     initial="hidden"
                     animate="visible"
@@ -564,7 +566,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                             <>
                                 {/* Content */}
                                 <div className="h-auto max-w-[500px] flex flex-col justify-between p-8 valo-background">
-                                    <div className="text-base space-y-4">
+                                    <div className="z-10 text-base space-y-4">
                                         <h2 className="text-xl font-semibold text-valo">{selectLineup.title}</h2>
                                         <div className="space-y-1 font-regular">
                                             {selectLineup.description.map((desc: any, index: number) => (
@@ -579,7 +581,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                             </p>
                                         )}
                                     </div>
-                                    <div className="flex flex-col items-start space-y-6">
+                                    <div className="z-10 flex flex-col items-start space-y-6">
                                         <div className="flex flex-row space-x-4 items-center">
                                             <div className="text-lg font-bold flex flex-row items-center space-x-3">
                                                 <FontAwesomeIcon icon={faHeart} className="text-2xl text-intermediate" />
@@ -617,7 +619,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                     <div className="overlay absolute inset-0 flex flex-row w-full justify-between items-center px-5">
                                         {imageIndex > 0 && (
                                             <div
-                                                className={`flex flex-row justify-start items-center py-2 px-4 rounded-sm bg-valo text-dark cursor-pointer ${imageIndex > 0 ? 'w-fit' : 'w-full'}`} 
+                                                className={`flex flex-row justify-start items-center py-2 px-4 rounded-sm bg-primary text-dark hover:bg-[#262626] hover:text-teal-500 transition ease-in-out duration-300 cursor-pointer ${imageIndex > 0 ? 'w-fit' : 'w-full'}`} 
                                                 onClick={prevButton}
                                             >
                                                 <FontAwesomeIcon icon={faAngleLeft} className="text-4xl" />
@@ -626,7 +628,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                         {
                                             imageIndex < selectLineup.images.length -1 && (
                                                 <div
-                                                    className={`flex flex-row justify-end items-center py-2 px-4 rounded-sm bg-valo text-dark cursor-pointer ${imageIndex < selectLineup.images.length - 1  ? 'w-fit ml-auto' : 'w-full'}`}
+                                                    className={`flex flex-row justify-end items-center py-2 px-4 rounded-sm bg-primary text-dark hover:bg-[#262626] hover:text-teal-500 transition ease-in-out duration-300 cursor-pointer ${imageIndex < selectLineup.images.length - 1  ? 'w-fit ml-auto' : 'w-full'}`}
                                                     onClick={nextButton}
                                                 >
                                                     <FontAwesomeIcon icon={faAngleRight} className="text-4xl" />

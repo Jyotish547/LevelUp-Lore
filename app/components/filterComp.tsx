@@ -518,7 +518,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
     // }
 
     return(
-        <div className="flex bg-neutral-950 p-6 rounded-md flex-row justify-between items-center shadow-md shadow-violet-500/40 formation-filters w-full h-fit space-x-8 text-neutral-300">
+        <div className="flex bg-neutral-950 p-6 rounded-md flex-row justify-between items-center shadow-md shadow-violet-500/40 formation-filters w-full h-full space-x-8 text-neutral-300">
             {/* Filters */}
             {/* Maps */}
             <div className="flex flex-col w-fit items-start space-y-4">

@@ -709,7 +709,7 @@ export const GuideList: React.FC = () => {
     return(
         <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
-                <div key={index} className="skill-background w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
+                <div key={index} className="w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
                     <div className="z-10 relative pt-[56.25%] w-full">
                         <iframe
                         src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
@@ -719,9 +719,9 @@ export const GuideList: React.FC = () => {
                         allowFullScreen
                         ></iframe>
                     </div>
-                    <div className="z-10 px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
-                        <h3 className="text-lg text-wrap font-medium text-eafc">{guide.snippet.title}</h3>
-                        <div className="w-full flex flex-row items-center justify-between">
+                    <div className="skill-background px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
+                        <h3 className="z-10 text-lg text-wrap font-medium text-eafc">{guide.snippet.title}</h3>
+                        <div className="z-10 w-full flex flex-row items-center justify-between">
                             <div className="flex flex-col space-y-4">
                                 <h4 className="text-md">Uploaded By: <Link href={`https://www.youtube.com/@THEGUIDE_bPG`} target="_blank" className="font-semibold text-intermediate" >{guide.snippet.channelTitle}</Link></h4>
                                 <p className="text-md">Date Posted: <span className="italic">{guide.snippet.publishedAt.substring(0, 10)}</span></p>
@@ -765,7 +765,7 @@ export const HighlightList: React.FC = () => {
     return(
         <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
-                <div key={index} className="skill-background w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
+                <div key={index} className="w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
                     <div className="z-10 relative pt-[56.25%] w-full">
                         <iframe
                         src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
@@ -775,9 +775,9 @@ export const HighlightList: React.FC = () => {
                         allowFullScreen
                         ></iframe>
                     </div>
-                    <div className="z-10 px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
-                        <h3 className="text-lg text-wrap font-medium text-eafc">{guide.snippet.title.replace(/#\w+/g, '')}</h3>
-                        <div className="w-full flex flex-row items-center justify-between">
+                    <div className="skill-background px-6 py-6 space-y-3 flex flex-col justify-between h-full w-full">
+                        <h3 className="z-10 text-lg text-wrap font-medium text-eafc">{guide.snippet.title.replace(/#\w+/g, '')}</h3>
+                        <div className="z-10 w-full flex flex-row items-center justify-between">
                             <div className="flex flex-col space-y-4">
                                 <h4 className="text-md">Uploaded by: <Link href={`https://www.youtube.com/@EASPORTSFCPro`} target="_blank" className="font-semibold text-intermediate" >{guide.snippet.channelTitle}</Link></h4>
                                 <p className="text-md">Date Posted: <span className="italic">{guide.snippet.publishedAt.substring(0, 10)}</span></p>
