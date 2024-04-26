@@ -84,16 +84,16 @@ export default function NavBar() {
         >
             {currentNav.map((nav, index) => (
                 <motion.div id="" key={index}
-                    className={`p-3 navItem rounded-r-sm ${
+                    className={`p-3 navItem rounded-r-sm w-full cursor-pointer ${
                     active === nav.href ? `active-${nav.slug}` : "bg-white/5 border-l-2 border-white/10"
                     }`}
                     onClick={() => setActive(nav.href)}
                     variants={navItemAnim}
                     
                 >
-                    <Link href={nav.href}>
+                    <Link href={nav.href} className="w-full h-full">
                         <FontAwesomeIcon icon={nav.icon} className="mr-2" />
-                        <span className="text-neutral-300">
+                        <span className="text-neutral-300 w-full">
                             {nav.label}
                         </span>
                     </Link>

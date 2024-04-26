@@ -12,6 +12,8 @@ import { AgentData, AgentDataExtended } from "@/components/app/components/types/
 import { V1Filter } from "@/components/app/components/filterComp";
 import { RoleType } from "@/components/app/components/types/valorantType";
 
+import { motion } from "framer-motion";
+import { pageItem, pageList } from "@/components/app/components/animations";
 
 export default function Agents() {
 
@@ -60,25 +62,34 @@ export default function Agents() {
     }, [roles]);
 
     return(
-        <section className="flex flex-col items-start justify-center w-full space-y-6">
+        <motion.section className="flex flex-col items-start justify-center w-full space-y-6"
+            variants={pageList}
+            initial="hidden"
+            animate="visible"
+        >
             {/* Header */}
-            <header className="space-y-4">
+            <motion.header variants={pageItem} className="space-y-4">
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-valo w-fit">
                     <FontAwesomeIcon icon={faUsersGear} /> <span>Agents</span>
                 </div>
                 <p className="text-base text-neutral-300 font-normal leading-relaxed">
                     This is an overview of all the game&apos;s characters, detailing their skills and roles. It&apos;s a go-to for players looking to master different agents, providing key information on how to best use each one&apos;s abilities in battle. This page helps players craft strategies and improve their play, making it a vital tool for anyone aiming to excel in Valorant.
                 </p>
-            </header>
+            </motion.header>
 
-            <hr className="w-full rounded-lg" />
+            <motion.hr variants={pageItem} className="w-full rounded-lg" />
             
             {/* Filters */}
-            <V1Filter selectRole={roles} setSelectRole={handleSetRole} />
+            <motion.div className="w-full" variants={pageItem}>
+                <V1Filter selectRole={roles} setSelectRole={handleSetRole} />
+            </motion.div>
             
             {/* Card Layout */}
-            <AgentList agentData={filteredData} />
+            <motion.div className="w-full" variants={pageItem}>            
+                <AgentList agentData={filteredData} />
+            </motion.div>
+            
 
-        </section>
+        </motion.section>
     )
 }

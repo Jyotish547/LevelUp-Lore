@@ -14,6 +14,11 @@ import { faBomb as offensive } from "@fortawesome/free-solid-svg-icons";
 import { SingleFormationData as FormationData } from "@/components/pages/api/formationDetailsByID/[id]";
 import { getIconForPosition } from "../../../../components/infoDesign";
 
+import React from "react";
+
+import { motion } from "framer-motion"; 
+import { pageItem, pageList, downChild } from "@/components/app/components/animations";
+
 const getIconForType = (type: string) => {
     switch(type) {
         case "defensive":
@@ -65,9 +70,15 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
     
 
     return  (
-        <div className="flex flex-col items-start justify-center w-full space-y-6 leading-relaxed">
+        <div className="flex flex-col items-start justify-center w-full space-y-6 leading-relaxed"
+            // variants={pageList}
+            // initial="hidden"
+            // animate="visible"
+        >
             {/* Header */}
-            <header className="space-y-4 w-full">
+            <header
+            // variants={pageItem}
+            className="space-y-4 w-full">
                 <div className="space-x-1 font-medium">
                     <Link href="/game" className="underline  underline-offset-4">Formations</Link> <span>&lt;</span><Link href="#" className="text-eafc">{formation.formation}</Link>
                 </div>
@@ -92,13 +103,19 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
                 </p>
             </header>
 
-            <hr className="w-full rounded-lg" />
+            <hr 
+            // variants={pageItem} 
+            className="w-full rounded-lg" />
 
             {/* Content */}
-            <div className="flex flex-col items-start w-full text-base">
+            <div 
+            // variants={pageItem} 
+            className="flex flex-col items-start w-full text-base">
                 <div className="flex flex-row justify-between items-start w-full space-x-12">
                     {/* Left Column */}
-                    <div className="flex flex-col w-full space-y-8">
+                    <div 
+                    // variants={downChild} 
+                    className="flex flex-col w-full space-y-8">
                         <Image src={formation.image} alt={formation.formation} className="w-full" />
                         <div id="tactical-insights" className="flex flex-col space-y-6">
                             <HeaderBanner label="Tactical Insights" style="eafc" />
@@ -149,7 +166,9 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
                     </div> 
 
                     {/* Right Column */}
-                    <div className="flex flex-col w-full space-y-8">
+                    <div 
+                    //variants={downChild} 
+                    className="flex flex-col w-full space-y-8">
                         <div id="overview" className="flex flex-col space-y-4">
                             <HeaderBanner label="Overview" style="eafc" />
                             {/* Similar way to split paragraphs, add '||' wherever paragraph split required */}
@@ -250,7 +269,9 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
                     </div>
                 </div>
                 {/* Counter Section */}
-                <div className="flex flex-col w-full space-y-8 my-6">
+                <div 
+                //variants={downChild}
+                className="flex flex-col w-full space-y-8 my-6">
                     <HeaderBanner label={`Countering ${formation.formation} Formation`} style="eafc" />
                     <ul className="list-disc">
                         {formation.counter.map((counter: string, index: number) => {
@@ -271,7 +292,9 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
                     </ul>
                 </div>
                 {/* Counter Formations */}
-                <div className="flex flex-row w-3/4 text-lg justify-between mb-6">
+                <div
+                // variants={downChild} 
+                className="flex flex-row w-3/4 text-lg justify-between mb-6">
                     <p className="font-semibold text-eafc">
                         Suggested Counter Formations:
                     </p>

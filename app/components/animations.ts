@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import { animate, stagger } from "framer-motion";
 import { Variants } from "framer-motion";
 
-const navItem = document.querySelector('navItem');
-
 // Navbar
 
 export const navLinkAnim: Variants = {
@@ -45,6 +43,94 @@ export const navEndItem: Variants = {
         transition: {
             type: "tween",
             ease: "easeOut",
+            duration: 0.6
+        }
+    }
+}
+
+// Default Page load
+
+export const pageList: Variants = {
+    hidden: { },
+    visible: {
+        transition: {
+            staggerChildren: 0.15,
+        }
+    }
+}
+
+export const pageItem: Variants = {
+    hidden: { opacity: 0, x: 400 },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            type: "tween",
+            ease: "easeInOut",
+            duration: 0.6
+        }
+    }
+}
+
+export const downChild: Variants = {
+    hidden: { opacity: 0, y: 400 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            type: "tween",
+            ease: "easeInOut",
+            duration: 0.6
+        }
+    }
+}
+
+export const downHome: Variants = {
+    hidden: { opacity: 0, y: 400 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            type: "tween",
+            ease: "easeInOut",
+            duration: 0.5
+        }
+    }
+}
+
+export const upChild: Variants = {
+    hidden: { opacity: 0, y: -400 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            type: "tween",
+            ease: "easeInOut",
+            duration: 0.6
+        }
+    }
+}
+
+export const upHome: Variants = {
+    hidden: { opacity: 0, y: -400 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            type: "tween",
+            ease: "easeInOut",
+            duration: 0.5
+        }
+    }
+} 
+
+export const appear: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            type: "tween",
+            ease: "easeInOut",
             duration: 0.6
         }
     }

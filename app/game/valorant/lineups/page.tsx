@@ -13,6 +13,9 @@ import { useEffect, useState } from "react";
 
 import { V2Filter } from "@/components/app/components/filterComp";
 
+import { motion } from "framer-motion";
+import { pageItem, pageList } from "@/components/app/components/animations";
+
 export default function Lineups() {
 
     // All Data
@@ -183,9 +186,13 @@ export default function Lineups() {
     // console.log(`New`, filterData.lineups)
 
     return(
-        <section className="flex flex-col items-start justify-center w-full space-y-6">
+        <motion.section className="flex flex-col items-start justify-center w-full space-y-6"
+            variants={pageList}
+            initial="hidden"
+            animate="visible"
+        >
             {/* Header */}
-            <header className="space-y-4">
+            <motion.header className="space-y-4" variants={pageItem}>
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-valo w-fit">
                     <FontAwesomeIcon icon={faBullseye} /> <span>Lineups</span>
                 </div>
@@ -193,16 +200,21 @@ export default function Lineups() {
                 Lineups are an essential resource for players aiming to optimize their agent&apos;s abilities for maximum impact. This page meticulously compiles images and detailed descriptions of precise ability placements for various agents, focusing on strategic advantages across all maps.
                 <br />
                 From Sova&apos;s recon arrows to Viper&apos;s toxic screens, the content is designed to enhance your tactical approach and ensure your team gains the upper hand. Explore the lineups to discover new, innovative ways to utilize each agent&apos;s kit effectively, bolstering your gameplay and team strategy in Valoran                </p>
-            </header>
+            </motion.header>
 
-            <hr className="w-full rounded-lg" />
+            <motion.hr variants={pageItem} className="w-full rounded-lg" />
             
             {/* Filters */}
-            <V2Filter selectMap={map} setSelectMap={handleMap} selectAgent={agent} setSelectAgent={handleAgent} selectAbility={ability} setSelectAbility={handleAbility} selectSide={side} setSelectSide={handleSide} />
+            <motion.div className="w-full" variants={pageItem}>
+                <V2Filter selectMap={map} setSelectMap={handleMap} selectAgent={agent} setSelectAgent={handleAgent} selectAbility={ability} setSelectAbility={handleAbility} selectSide={side} setSelectSide={handleSide} />
+            </motion.div>
             
             {/* Card Layout */}
-            <LineupList data={filterData} />
+            <motion.div className="w-full" variants={pageItem}>
+                <LineupList data={filterData} />
+            </motion.div>
+            
 
-        </section>
+        </motion.section>
     )
 }

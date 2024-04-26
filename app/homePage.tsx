@@ -21,6 +21,9 @@ const homeBackgrounds: HomeBackgrounds = {
   // Add other games and their background image paths here
 };
 
+import { motion } from 'framer-motion';
+import { upHome, downHome, pageList, appear } from './components/animations';
+
 export default function HomePage() {
   const [selectedGame, setSelectedGame] = useState('Valorant');
 
@@ -50,21 +53,37 @@ export default function HomePage() {
   }
 
   return (
-    <main className="relative h-screen m-0 p-0 bg-cover background-transition text-white" style={{ backgroundImage: `url(${backgroundHome})` }}>
+    <motion.main className="relative h-screen m-0 p-0 bg-cover background-transition text-white" style={{ backgroundImage: `url(${backgroundHome})` }}
+      
+    >
       
       <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-row items-center">
         <div className='flex flex-col items-center justify-around w-screen h-screen'>
-            <div className='flex flex-col items-center'>
+            <motion.div className='flex flex-col items-center'
+              variants={upHome}
+              initial="hidden"
+              animate="visible"
+              >
                 <h1 className='text-5xl font-bold my-6'>
                     LevelUp Lore
                 </h1>
                 <p className='text-xl w-3/4 text-center'>
                     Welcome to LevelUp Lore, your ultimate gateway to the universe of gaming! Dive into a meticulously curated collection of game guides, strategies, and lineups, all designed to elevate your gameplay.
                 </p>
-            </div>
+            </motion.div>
+            <motion.div className='w-fit'
+              variants={appear}
+              initial="hidden"
+              animate="visible"
+            >
+              <HomeGames onGameChange = {handleGameChange} />
+            </motion.div>
             
-            <HomeGames onGameChange = {handleGameChange} />
-            <div className='flex flex-col items-center text-xl'>
+            <motion.div className='flex flex-col items-center text-xl'
+              variants={downHome}
+              initial="hidden"
+              animate="visible"
+            >
                 <p className='mb-6'>Ready to level up? Join us or sign in to start your adventure.</p>
                 <div className='flex flex-row justify-between w-7/12'>
                     <button className='yellow-bg text-dark px-4 py-3 rounded-md font-semibold'>
@@ -74,9 +93,9 @@ export default function HomePage() {
                         <FontAwesomeIcon icon={faUserPlus} className='mr-2' /> Register
                     </button>
                 </div>
-            </div>
+            </motion.div>
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 }

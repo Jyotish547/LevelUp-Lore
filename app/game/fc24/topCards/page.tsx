@@ -14,6 +14,9 @@ import { F2Filter } from "@/components/app/components/filterComp";
 
 import { LeagueFilter } from "@/components/app/components/types/fc24Type";
 
+import { motion } from "framer-motion";
+import { pageItem, pageList } from "@/components/app/components/animations"; 
+
 export default function TopCardsFC() {
 
     const [playerData, setPlayerData] = useState<PlayersData[]>([]);
@@ -93,22 +96,31 @@ export default function TopCardsFC() {
     // console.log(filteredData);
 
     return(
-        <section className="flex flex-col items-start justify-center w-full space-y-6">
+        <motion.section className="flex flex-col items-start justify-center w-full space-y-6"
+            variants={pageList}
+            initial="hidden"
+            animate="visible"
+        >
             {/* Header */}
-            <header className="space-y-4">
+            <motion.header className="space-y-4" variants={pageItem}>
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-eafc w-fit">
                     <FontAwesomeIcon icon={faRankingStar} /> <span>Top Players</span>
                 </div>
                 <p className="text-base text-neutral-300 font-normal leading-relaxed">
                     Coveted for their ability to enhance gameplay, these high-caliber cards offer a powerful mix of speed, strength, and skill, mirroring the players&apos; real-world performances. <br /> As a strategic guide for building an ultimate team, this page points gamers toward the star athletes capable of changing the course of any match. It&apos;s an essential resource for players aiming to gain an edge in EA FC 24 competitions.
                 </p>
-            </header>
+            </motion.header>
 
-            <hr className="w-full rounded-lg" />
+            
+            <motion.hr className="w-full rounded-lg" variants={pageItem} />
 
-            <F2Filter gen={gen} setGen={handleSetGen} />
+            <motion.div variants={pageItem} className="w-full h-fit flex justify-between">
+                <F2Filter gen={gen} setGen={handleSetGen} />
+            </motion.div>
 
-            <PlayerCards items={filteredData}  />
-        </section>
+            <motion.div variants={pageItem} className="w-full h-fit">
+                <PlayerCards items={filteredData}  />
+            </motion.div>
+        </motion.section>
     )
 }

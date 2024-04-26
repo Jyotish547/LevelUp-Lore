@@ -172,7 +172,7 @@ export const FormationsEAFC: React.FC<{ formationData: FormationData[], setForma
     }
 
     return formationData.map((formation, index) => (
-        <div key={index} onClick={() =>goToFormation(formation.formation)} className='cursor-pointer w-11/12 bg-black flex flex-col items-start justify-between rounded-xl shadow-md shadow-green-300/30'>
+        <div key={index} onClick={() =>goToFormation(formation.formation)} className='cursor-pointer bg-black flex flex-col items-start justify-between rounded-xl shadow-md shadow-green-300/30'>
             <Image src={formation.image} alt={formation.formation} className='w-full rounded-t-md' />
             <div className='playerCard-background flex flex-col items-start w-full px-6 py-5 justify-between space-y-3 rounded-b-md'>
                 <div className='z-10 flex flex-col items-start w-fit'>
@@ -619,7 +619,7 @@ import type { SkillMove } from '@/components/pages/api/allSkillMoves';
 export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.Dispatch<React.SetStateAction<SkillMove[]>> }> = ({ skillData, setSkillData }) => {
 
     return(
-        <div className='grid grid-cols-3 grid-flow-row gap-12'>
+        <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {skillData.map((skill: any, index: any) => (
                 <div key={index} className={`skill-background border-1 flex flex-col font-base w-fit py-6 items-center space-y-4 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-lime-500/30'}`}>
                     {/* Title */}
@@ -639,7 +639,7 @@ export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.
                     {
                         skill.video && (
                             <iframe
-                                width="450"
+                                width="470"
                                 height="200"
                                 src={`https://www.youtube.com/embed/${skill.video.id};start=${skill.video.start}&end=${skill.video.stop}`}
                                 title="YouTube video player"

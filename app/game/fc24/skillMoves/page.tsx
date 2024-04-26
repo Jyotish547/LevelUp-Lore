@@ -14,6 +14,9 @@ import { SkillMove } from "@/components/pages/api/allSkillMoves";
 
 import { F3Filter } from "@/components/app/components/filterComp";
 
+import { motion } from "framer-motion";
+import { pageItem, pageList } from "@/components/app/components/animations"; 
+
 export default function SkillMovesFC() {
 
     const [rating, setRating] = useState<RateType[]>([]);
@@ -34,9 +37,13 @@ export default function SkillMovesFC() {
     // console.log(rating)
 
     return(
-        <section className="flex flex-col items-start justify-center w-full space-y-6">
+        <motion.section className="flex flex-col items-start justify-center w-full space-y-6"
+            variants={pageList}
+            initial="hidden"
+            animate="visible"
+        >
             {/* Header */}
-            <header className="space-y-4">
+            <motion.header className="space-y-4" variants={pageItem}>
                 <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-eafc w-fit">
                     <FontAwesomeIcon icon={faRankingStar} /> <span>Skill Moves</span>
                 </div>
@@ -45,16 +52,17 @@ export default function SkillMovesFC() {
                 <br />
                 This resource aims to equip gamers with the techniques needed to navigate past opponents with ease, enhancing the tactical depth and enjoyment of matches. By mastering these skills, players can significantly boost their team&apos;s performance and enjoy a more dynamic and engaging football experience in EA FC 24.
                 </p>
-            </header>
+            </motion.header>
 
-            <hr className="w-full rounded-lg" />
+            <motion.hr className="w-full rounded-lg" variants={pageItem} />
 
-            <div className="w-full">
+            <motion.div className="w-full" variants={pageItem}>
                 {/* Filter Div */}
                 <F3Filter selectRate={rating} setSelectRate={setRating} />
-
+            </motion.div>
+            <motion.div className="w-full" variants={pageItem}>
                 <SkillMoves skillData={skillData.filter(r => rating.length > 0 ? rating.some(rate => rate === r.star.toString()) : true)} setSkillData={setSkillData} />
-            </div>
-        </section>
+            </motion.div>
+        </motion.section>
     )
 }
