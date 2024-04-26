@@ -100,7 +100,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
                 <Link href="#" onClick={handleLeftScroll} className="flex flex-row justify-center px-4 py-2 bg-primary transition ease-out-in hover:bg-neutral-900 hover:text-amber-500 duration-300 rounded-sm text-stone-800 text-3xl">
                     <FontAwesomeIcon icon={faCaretLeft} />
                 </Link>
-                <p className='text-4xl font-semibold flex flex-row items-center'> <FontAwesomeIcon icon={faPuzzlePiece} className='mr-4 yellow-text' /> <span>Select Game</span> </p>
+                <p className='text-4xl font-semibold flex flex-row items-center'> <FontAwesomeIcon icon={faPuzzlePiece} className='mr-4 text-primary' /> <span>Select Game</span> </p>
                 <Link href="#" onClick={handleRightScroll} className="flex flex-row justify-center px-4 py-2 bg-primary transition ease-out-in hover:bg-neutral-900 hover:text-amber-500 duration-300 rounded-sm text-stone-800 text-3xl">
                     <FontAwesomeIcon icon={faCaretRight} />
                 </Link>

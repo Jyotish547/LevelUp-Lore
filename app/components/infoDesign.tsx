@@ -2,6 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShieldHalved, faSoccerBall, faRunning, faChessKnight } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
+import logoIcon from '../../public/assets/logos/LULIcon.svg';
+import logoDef from '../../public/assets/logos/LULDefault.svg';
+import logoWhite from '../../public/assets/logos/LULWhite.svg';
+
+export const logos = {
+  def: logoDef,
+  white: logoWhite,
+  icon: logoIcon
+}
 
 export const getIconForPosition = (position: string): IconDefinition => {
     switch (position) {

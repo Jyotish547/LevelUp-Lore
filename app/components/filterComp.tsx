@@ -232,7 +232,7 @@ export const F2Filter: React.FC<F2Props> = ({ gen, setGen }) => {
             {/* Filters */}
             {/* Gender */}
             <div className="flex flex-col items-start space-y-2">
-                <h3 className="text-intermediate font-semibold">Filters:</h3>
+                <h3 className="text-primary font-semibold">Filters:</h3>
                 <div
                     
                     className={
@@ -398,7 +398,7 @@ export const V1Filter: React.FC<V1Props> = ({ selectRole, setSelectRole }) => {
             {/* Filters */}
             {/* Gender */}
             <div className="flex flex-col items-start space-y-2">
-                <h3 className="text-intermediate font-semibold">Filters:</h3>
+                <h3 className="text-valo font-semibold">Filters:</h3>
                 <div
                     
                     className={

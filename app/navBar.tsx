@@ -15,6 +15,8 @@ import dpIcon from '../public/assets/displayPicture.png';
 // Animation Imports
 import { navEndAnim, navEndItem, navItemAnim, navLinkAnim } from "./components/animations";
 
+import { logos } from "./components/infoDesign";
+
 const eafc24Nav = [
     {icon: faChessBoard, label: "Team Tactics", href: "/game/fc24/formations", slug: 'eafc', game: fc24Logo},
     {icon: faRankingStar, label: "Top Players", href: "/game/fc24/topCards", slug: 'eafc'},
@@ -77,7 +79,7 @@ export default function NavBar() {
 
     links = (
         <motion.div
-            className="navLinks flex flex-col text-xl space-y-3 h-full w-full justify-start py-12"
+            className="navLinks flex flex-col text-xl space-y-3 h-full w-full justify-start py-8"
             variants={navLinkAnim}
             initial="hidden"
             animate="visible"
@@ -120,7 +122,7 @@ export default function NavBar() {
                     } 
                 }}
             >
-                LevelUp Lore
+                <Image src={logos.white} alt="LevelUp Lore" />
             </motion.div>
             {links}
             {/* Dynamic Change based on game */}
@@ -142,7 +144,7 @@ export default function NavBar() {
                 <motion.div className="w-full"
                     variants={navEndItem}
                 >
-                    <Link href=""
+                    <Link href="/"
                         className={`flex flex-row items-center rounded-r-sm justify-start space-x-4 w-full py-3 px-4 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}
                     
                     >

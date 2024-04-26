@@ -14,8 +14,8 @@
   --text-black: rgb(38, 38, 38);
   --eafc24-color: #14F57B;
   --valo-color: #B181FF;
-  --background-primary: rgb(245 158 11);
-  --background-primary30: rgb(245 158 11 0.3);
+  --background-primary: rgb(20 184 166);
+  --background-gold: rgb(245 158 11);
 }
 
 html, body {
@@ -73,7 +73,11 @@ body {
   background-color: var(--background-primary);
 }
 .bg-primary30 {
-  background-color: rgb(245, 158, 11, 0.3);
+  background-color: rgb(20, 184, 166, 0.3);
+}
+
+.text-primary {
+  color: var(--background-primary);
 }
 
 .yellow-bg {

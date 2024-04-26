@@ -4,6 +4,7 @@ import { HomeGames } from './components/cardLayouts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faUserPlus, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 library.add(faUser, faUserPlus, faPuzzlePiece);
 
@@ -23,6 +24,8 @@ const homeBackgrounds: HomeBackgrounds = {
 
 import { motion } from 'framer-motion';
 import { upHome, downHome, pageList, appear } from './components/animations';
+
+import { logos } from './components/infoDesign';
 
 export default function HomePage() {
   const [selectedGame, setSelectedGame] = useState('Valorant');
@@ -57,17 +60,15 @@ export default function HomePage() {
       
     >
       
-      <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-row items-center">
-        <div className='flex flex-col items-center justify-around w-screen h-screen'>
-            <motion.div className='flex flex-col items-center'
+      <div className="absolute inset-0 bg-black bg-opacity-85 flex flex-row items-center">
+        <div className='flex flex-col items-center justify-evenly w-screen h-screen'>
+            <motion.div className='flex flex-col items-center space-y-4'
               variants={upHome}
               initial="hidden"
               animate="visible"
               >
-                <h1 className='text-5xl font-bold my-6'>
-                    LevelUp Lore
-                </h1>
-                <p className='text-xl w-3/4 text-center'>
+                <Image src={logos.white} alt="LevelUp Lore" width={250} />
+                <p className='text-lg w-3/4 text-center'>
                     Welcome to LevelUp Lore, your ultimate gateway to the universe of gaming! Dive into a meticulously curated collection of game guides, strategies, and lineups, all designed to elevate your gameplay.
                 </p>
             </motion.div>
@@ -86,10 +87,10 @@ export default function HomePage() {
             >
                 <p className='mb-6'>Ready to level up? Join us or sign in to start your adventure.</p>
                 <div className='flex flex-row justify-between w-7/12'>
-                    <button className='yellow-bg text-dark px-4 py-3 rounded-md font-semibold'>
+                    <button className='bg-teal-500 text-dark px-4 py-3 rounded-md font-semibold'>
                         <FontAwesomeIcon icon={faUser} className='mr-2' /> Login
                     </button>
-                    <button className='border-white border-2 text-white px-4 py-3 rounded-md font-semibold'>
+                    <button className='border-teal-500 border-2 text-teal-500 px-4 py-3 rounded-md font-semibold'>
                         <FontAwesomeIcon icon={faUserPlus} className='mr-2' /> Register
                     </button>
                 </div>
