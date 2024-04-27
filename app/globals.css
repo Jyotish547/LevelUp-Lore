@@ -50,6 +50,15 @@ body {
 
 /* NavBar */
 
+.logo > img {
+  scale: 1;
+  transition: ease-out 0.2s;
+}
+
+.logo:hover > img {
+  scale: 1.05
+}
+
 .active-eafc {
   border-left: 3px solid var(--eafc24-color);
   background-color: #14F57B20;
@@ -66,6 +75,72 @@ body {
 
 .active-valo > span {
   color: var(--valo-color);
+}
+
+.hover-eafc {
+  box-shadow: inset 0 0 0 0 var(--eafc24-color);
+  transition: ease-in 0.3s;
+  outline: none;
+}
+
+.hover-eafc:hover {
+  box-shadow: inset 500px 0 0 0 var(--eafc24-color);
+  color: #262626;
+}
+
+.hover-valo {
+  box-shadow: inset 0 0 0 0 var(--valo-color);
+  transition: ease-in 0.3s;
+  outline: none;
+}
+
+.hover-valo:hover {
+  box-shadow: inset 500px 0 0 0 var(--valo-color);
+  color: #262626;
+}
+
+.child {
+  color: white;
+  transition: ease-in 0.3s;
+}
+
+.hover-eafc:hover .child {
+  color: #262626;
+}
+
+.hover-valo:hover .child {
+  color: #262626;
+}
+
+.hover-navMain {
+  box-shadow: inset 0 0 0 0 var(--background-primary);
+  transition: ease-in 0.3s;
+  outline: none;
+}
+
+.navImg img {
+  transition: ease-in 0.3s;
+}
+
+.navImg-eafc:hover img {
+  filter: invert();
+}
+
+.navImg-valo:hover img {
+  filter: brightness(0%);
+}
+
+.hover-navMain:hover {
+  box-shadow: inset 500px 0 0 0 var(--background-primary);
+}
+
+.hover-navMain:hover > .child {
+  color: #262626;
+}
+
+.hover-valo:hover {
+  box-shadow: inset 500px 0 0 0 var(--valo-color);
+  color: #262626;
 }
 
 /* Color Themes */

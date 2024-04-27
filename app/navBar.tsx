@@ -67,15 +67,15 @@ export default function NavBar() {
 
     
     const colorClasses: ColorClasses = {
-        eafc: 'text-eafc border-eafc shadow-green-300/30 bg-eafc20',
-        valo: 'text-valo border-valo shadow-violet-400/40 bg-valo30',
+        eafc: 'text-eafc border-eafc hover-eafc bg-eafc20 navImg-eafc',
+        valo: 'text-valo border-valo hover-valo bg-valo30 navImg-valo',
     };
 
     // Determine the current color class based on the active navigation item
     const currentColorClass = colorClasses[currentNav[0]?.slug] || 'text-default border-default';
 
     // Split the classes for separate use
-    const [textColorClass, borderColorClass, shadowColorClass, bgColorClass] = currentColorClass.split(' ');
+    const [textColorClass, borderColorClass, hoverClass, bgColorClass, navImg] = currentColorClass.split(' ');
 
     links = (
         <motion.div
@@ -86,16 +86,16 @@ export default function NavBar() {
         >
             {currentNav.map((nav, index) => (
                 <motion.div id="" key={index}
-                    className={`z-10 navItem flex items-center rounded-r-sm w-full cursor-pointer ${
+                    className={`z-10 navItem flex items-center text-neutral-300 rounded-r-sm w-full cursor-pointer ${hoverClass} hover:font-semibold ${
                     active === nav.href ? `active-${nav.slug}` : "bg-white/5 border-l-2 border-white/10"
                     }`}
                     onClick={() => setActive(nav.href)}
                     variants={navItemAnim}
                     
                 >
-                    <Link href={nav.href} className="w-full p-3 h-full">
-                        <FontAwesomeIcon icon={nav.icon} className="mr-2" />
-                        <span className="text-neutral-300 w-full">
+                    <Link href={nav.href} className="w-full p-3 h-full flex items-center">
+                        <FontAwesomeIcon icon={nav.icon} className="text-2xl mr-3" />
+                        <span className="w-full flex flex-row">
                             {nav.label}
                         </span>
                     </Link>
@@ -122,8 +122,8 @@ export default function NavBar() {
                     } 
                 }}
             >
-                <Link href="/" className="w-full">
-                    <Image src={logos.white} alt="LevelUp Lore" />
+                <Link href="/" className="w-full logo">
+                    <Image src={logos.white} alt="LevelUp Lore" className="" />
                 </Link>
             </motion.div>
             {links}
@@ -135,7 +135,7 @@ export default function NavBar() {
                 animate="visible"
             >
                 <motion.div
-                    className={`flex flex-row space-x-2 rounded-r-sm text-lg items-center justify-start space-x-4 w-full px-4 py-5 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}
+                    className={`${hoverClass} navImg ${navImg} flex flex-row space-x-2 rounded-r-sm text-lg items-center justify-start space-x-4 w-full px-4 py-5 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}
                     variants={navEndItem}
                 >
                     <Link href="/" className="flex flex-row w-full h-full items-center justify-between">
@@ -143,17 +143,17 @@ export default function NavBar() {
                         <Image src={currentNav[0]?.game || fc24Logo} alt="Game Logo" width={160} />
                     </Link>
                 </motion.div>
-                <motion.div className="w-full"
+                <motion.div className={`w-full hover:text-neutral-900`}
                     variants={navEndItem}
                 >
                     <Link href="/"
-                        className={`flex flex-row items-center rounded-r-sm justify-start space-x-4 w-full py-3 px-4 border-l-2 border-white/10 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}
+                        className={` flex flex-row ${hoverClass} items-center rounded-r-sm ${textColorClass} justify-start space-x-4 w-full py-3 px-4 border-l-2 border-white/10 hover:text-neutral-900 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}
                     
                     >
                         <Image src={dpIcon} alt="" width="48" />
                         <div className="flex flex-col">
-                            <span className={`text-lg font-semibold ${textColorClass}`}>Reggae547</span>
-                            <span className="text-sm font-light">Aimbot</span>
+                            <span className={`text-lg font-semibold`}>Reggae547</span>
+                            <span className="child text-sm">Aimbot</span>
                         </div>
                     </Link>
                 </motion.div>
