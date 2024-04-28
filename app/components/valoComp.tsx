@@ -7,8 +7,8 @@ import { MapData } from "./types/valorantType";
 import Image from "next/image";
 import Link from "next/link";
 
-import { motion } from "framer-motion";
-import { upHome, downHome, agentAnim, overlays } from "./animations";
+import { AnimatePresence, Variant, Variants, motion } from "framer-motion";
+import { upHome, downHome, agentAnim, overlays, imageSliderLeft, imageSliderRight } from "./animations";
 
 export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
 
@@ -20,7 +20,7 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                 agent.isPlayableCharacter && (
                     <motion.div
                         key={index}
-                        className={`flex p-6 valo-background shadow-md shadow-violet-400/30 rounded-md ${expandedId === agent.uuid ? 'col-span-2 row-span-2 w-full' : 'col-span-1 row-span-1 w-fit'}`}
+                        className={`flex p-6 valo-background shadow-md shadow-violet-400/30 rounded-md ${expandedId === agent.uuid ? 'col-span-2 row-span-2 w-full' : 'col-span-1 row-span-1 w-fit hoverScale-valo'}`}
                         onClick={() => setExpandedId(expandedId === agent.uuid ? null : agent.uuid)}
                         >
                         {
@@ -35,7 +35,7 @@ export const AgentList: React.FC<AgentListProps> = ({ agentData }) => {
                                         </div>
                                         <div className="flex flex-row w-full justify-between border-b-2 border-valo">
                                             {agent.abilities.slice(0, 4).map((ability: any, abilityIndex: any) => (
-                                                <div key={abilityIndex} className={`p-4 cursor-pointer rounded-t-sm ${agent.defaultAbility === ability.description ? 'bg-valo90' : 'bg-valo30'}`}>
+                                                <div key={abilityIndex} className={`hover-valo-icon p-4 cursor-pointer rounded-t-sm ${agent.defaultAbility === ability.description ? 'bg-valo90' : 'bg-valo30'}`}>
                                                     <Image src={ability.displayIcon} alt={agent.displayName} width={30} height={30} />
                                                 </div>
                                             ))}
@@ -166,7 +166,7 @@ export const MapList: React.FC = () => {
                 map.narrativeDescription && (
                     <div
                         key={index}
-                        className={`row-span-1 valo-background flex flex-col rounded-lg shadow-md shadow-violet-400/30 space-y-8 ${expandedId === map.uuid ? 'p-8' : ''}`}
+                        className={`row-span-1 valo-background flex flex-col rounded-lg shadow-md shadow-violet-400/30 space-y-8 ${expandedId === map.uuid ? 'p-8' : 'hoverMap-valo'}`}
                         onClick={() => setExpandedId(expandedId === map.uuid ? null : map.uuid)}
                         >
                         <motion.div className="z-10 flex flex-row w-full justify-between items-center space-x-8"
@@ -304,7 +304,7 @@ export const CrosshairList: React.FC = () => {
     return(
         <div className='grid grid-cols-4 grid-flow-row gap-4 w-full'>
             {crosshairData.map((cross: any, index: number) => (
-                <motion.div key={index} className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-md w-fit" onClick={() => handlePreview(cross)}>
+                <motion.div key={index} className="hoverCross-valo flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-md w-fit" onClick={() => handlePreview(cross)}>
                     <Image src={cross.crosshair} alt={cross.title} width={600} height={212} className="z-10 rounded-t-md" />
                     <div className="z-10 flex flex-col items-start justify-between space-y-5 w-full p-5">
                         <p className="font-semibold text-xl w-full">{cross.title}</p>
@@ -327,14 +327,14 @@ export const CrosshairList: React.FC = () => {
                         </div>
                         <div className="w-full flex flex-row justify-between items-center">
                             <div
-                                className="text-base text-dark font-bold flex flex-row cursor-pointer items-center rounded-sm space-x-3 py-2 px-3 bg-primary opacity-30 transition hover:opacity-100 ease-in-out duration-600"
+                                className="hoverButton-valo text-base text-dark font-bold flex flex-row cursor-pointer items-center rounded-sm space-x-3 py-2 px-3"
                                 onClick={() => handleCopy(cross.code)}
                             >
                                 <FontAwesomeIcon icon={faCopy} className="text-xl" />
                                 <p>Copy</p>
                             </div>
                             <div
-                                className="text-base text-dark font-bold flex flex-row cursor-pointer items-center rounded-sm space-x-3 py-2 px-3 bg-valo opacity-30 transition hover:opacity-100 ease-in-out duration-600"
+                                className="hoverButton-valo text-base text-dark font-bold flex flex-row cursor-pointer items-center rounded-sm space-x-3 py-2 px-3"
                                 onClick={() => handlePreview(cross)}
                             >
                                 <FontAwesomeIcon icon={faCirclePlay} className="text-xl" />
@@ -350,6 +350,7 @@ export const CrosshairList: React.FC = () => {
                     variants={overlays}
                     initial="hidden"
                     animate="visible"
+                    exit="exit"
                 >
                     <div className="flex flex-col items-center valo-background shadow-md shadow-violet-400/30 rounded-md" ref={overlayRef}>
                         {selectCrosshair && (
@@ -376,14 +377,14 @@ export const CrosshairList: React.FC = () => {
                                     </div>
                                     <div className="z-10 w-full flex flex-row justify-between items-center">
                                         <div
-                                            className="text-base text-dark font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-intermediate rounded-md"
+                                            className="hoverButton-valo text-base text-dark font-bold flex flex-row items-center space-x-3 py-2 px-3 rounded-sm cursor-pointer"
                                             onClick={() => handleCopy(selectCrosshair.code)}
                                         >
                                             <FontAwesomeIcon icon={faCopy} className="text-xl" />
                                             <p>Copy</p>
                                         </div>
                                         <div
-                                            className="text-base font-bold flex flex-row items-center space-x-3 py-2 px-3 bg-advanced rounded-md"
+                                            className="hoverClose text-base font-bold flex flex-row items-center space-x-3 py-2 px-3 rounded-sm cursor-pointer"
                                             onClick={() => handleClick(selectCrosshair)}
                                         >
                                             <FontAwesomeIcon icon={faXmark} className="text-xl" />
@@ -424,7 +425,7 @@ export const GuideList: React.FC = () => {
     return(
         <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
-                <div key={index} className="w-full shadow-md shadow-violet-400/30 rounded-md flex flex-col items-start justify-between">
+                <div key={index} className="hoverMap-valo w-full shadow-md shadow-violet-400/30 rounded-md flex flex-col items-start justify-between">
                     <div className="relative pt-[56.25%] w-full">
                         <iframe
                         src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
@@ -473,16 +474,19 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
 
     const [selectLineup, setSelectLineup] = useState<Lineup | null>(null);
     const [active, setActive] = useState(false);
+    const [imageSlider, setImageSlider] = useState<Variants>(imageSliderLeft);
 
     // Image Slider
     const [imageIndex, setImageIndex] = useState(0);
 
     const prevButton = () => {
         setImageIndex((prev) => prev - 1);
+        setImageSlider(imageSliderLeft);
     };
 
     const nextButton = () => {
         setImageIndex((next) => next + 1);
+        setImageSlider(imageSliderRight);
     };
 
     // Lineup Overlay
@@ -514,7 +518,7 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
             {data.lineups.map((map: any) => (
                 map.agents.map((agent: any) => (
                     agent.lineups.map((lineup: any, lineIndex: number) => (
-                        <motion.div key={lineIndex} className="valo-background w-fit h-full rounded-md shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
+                        <motion.div key={lineIndex} className="hoverScale-valo valo-background w-fit h-full rounded-md shadow-md shadow-violet-400/30" onClick={() => handleLineup(lineup)}>
                             <div className="image-container z-10 flex justify-center items-center w-96 lg:w-full h-[205px] relative rounded-t-lg overflow-hidden">
                                 <Image className="rounded-t-lg" src={lineup.thumbnail} alt={lineup.title} width={395} height={365} />
                                 <div className="overlay absolute inset-0 flex flex-col justify-center items-stretch bg-gradient-to-b from-black/70 from-10% via-neutral-400/0 to-black/70 to-90% w-full h-full justify-between">
@@ -614,28 +618,50 @@ export const LineupList: React.FC<LineupFilterProps> = ({ data }) => {
                                 {/* Image */}
                                 <div className="image-slider relative max-w-[1300px] h-fit">
                                     {selectLineup.images && selectLineup.images.length > 0 && (
-                                        <Image src={selectLineup.images[imageIndex].url} alt={selectLineup.title} width={1300} height={600} />
-                                    )}
-                                    <div className="overlay absolute inset-0 flex flex-row w-full justify-between items-center px-5">
-                                        {imageIndex > 0 && (
-                                            <div
-                                                className={`flex flex-row justify-start items-center py-2 px-4 rounded-sm bg-primary text-dark hover:bg-[#262626] hover:text-teal-500 transition ease-in-out duration-300 cursor-pointer ${imageIndex > 0 ? 'w-fit' : 'w-full'}`} 
-                                                onClick={prevButton}
+                                        <AnimatePresence>
+                                            <motion.div
+                                                key={imageIndex}
+                                                variants={imageSlider}
+                                                initial="hidden"
+                                                animate="visible"
+                                                exit="exit"
                                             >
-                                                <FontAwesomeIcon icon={faAngleLeft} className="text-4xl" />
-                                            </div>
-                                        )}
-                                        {
-                                            imageIndex < selectLineup.images.length -1 && (
+                                                <Image src={selectLineup.images[imageIndex].url} alt={selectLineup.title} width={1300} height={600} />
+                                            </motion.div>
+                                            <div className="overlay absolute inset-0 flex flex-col w-full h-1/2 justify-between items-end px-8 pt-8">
                                                 <div
-                                                    className={`flex flex-row justify-end items-center py-2 px-4 rounded-sm bg-primary text-dark hover:bg-[#262626] hover:text-teal-500 transition ease-in-out duration-300 cursor-pointer ${imageIndex < selectLineup.images.length - 1  ? 'w-fit ml-auto' : 'w-full'}`}
-                                                    onClick={nextButton}
+                                                    className="hoverClose text-base font-bold flex flex-row items-center space-x-3 py-2 px-3 rounded-sm cursor-pointer"
+                                                    onClick={() => handleClick(selectLineup)}
                                                 >
-                                                    <FontAwesomeIcon icon={faAngleRight} className="text-4xl" />
+                                                    <FontAwesomeIcon icon={faXmark} className="text-xl" />
+                                                    <p>Close</p>
                                                 </div>
-                                            )
-                                        }
-                                    </div>
+                                                <div className="flex flex-row w-full justify-between items-center">
+                                                    {imageIndex > 0 && (
+                                                        <div
+                                                            className={`flex flex-row justify-start items-center py-2 px-4 rounded-sm text-dark bg-dark hoverIconButton-valo cursor-pointer ${imageIndex > 0 ? 'w-fit' : 'w-full'}`} 
+                                                            onClick={prevButton}
+                                                        >
+                                                            <FontAwesomeIcon icon={faAngleLeft} className="text-4xl" />
+                                                        </div>
+                                                    )}
+                                                    {
+                                                        imageIndex < selectLineup.images.length -1 && (
+                                                            <div
+                                                                className={`flex flex-row justify-end items-center py-2 px-4 rounded-sm text-dark bg-dark hoverIconButton-valo cursor-pointer ${imageIndex < selectLineup.images.length - 1  ? 'w-fit ml-auto' : 'w-full'}`}
+                                                                onClick={nextButton}
+                                                            >
+                                                                <FontAwesomeIcon icon={faAngleRight} className="text-4xl" />
+                                                            </div>
+                                                        )
+                                                    }
+                                                </div>
+                                            </div>
+                                        </AnimatePresence>
+                                        
+                                        
+                                    )}
+                                    
                                 </div>
                             </>
                         )}

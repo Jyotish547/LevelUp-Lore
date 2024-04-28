@@ -87,10 +87,10 @@ export default function HomePage() {
             >
                 <p className='mb-6'>Ready to level up? Join us or sign in to start your adventure.</p>
                 <div className='flex flex-row justify-between w-7/12'>
-                    <button className='bg-teal-500 text-dark px-4 py-3 rounded-md font-semibold'>
+                    <button className='bg-teal-500 text-dark px-4 py-3 rounded-sm font-semibold hoverButton'>
                         <FontAwesomeIcon icon={faUser} className='mr-2' /> Login
                     </button>
-                    <button className='border-teal-500 border-2 text-teal-500 px-4 py-3 rounded-md font-semibold'>
+                    <button className='border-teal-500 border-2 text-teal-500 px-4 py-3 rounded-sm font-semibold hoverStrokeButton'>
                         <FontAwesomeIcon icon={faUserPlus} className='mr-2' /> Register
                     </button>
                 </div>

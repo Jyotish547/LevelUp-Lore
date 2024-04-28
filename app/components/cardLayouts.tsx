@@ -33,9 +33,9 @@ library.add(faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup);
 const games = [
     {src: fc24CL, alt: 'EAFC24', logo: fc24Logo, shadowColor: 'rgb(22 163 74)', href: '/game/fc24/formations'},
     {src: lolCL, alt: 'LeagueOfLegends', logo: lolLogo, shadowColor: 'rgb(37 99 235)', href: '/game/fc24/formations'},
-    {src: valorantCL, alt: 'Valorant', logo: valorantLogo, shadowColor: 'rgb(126 34 206)', href: '/game/valorant/agents'},
-    {src: rlCL, alt: 'RocketLeague', logo: rlLogo, shadowColor: 'rgb(234 88 12)', href: '/game/fc24/formations'},
-    {src: cs2CL, alt: 'CounterStrike2', logo: cs2Logo, shadowColor: 'rgb(250 204 21)', href: '/game/fc24/formations'},
+    {src: valorantCL, alt: 'Valorant', logo: valorantLogo, shadowColor: 'rgb(126 34 206)', href: '/game/valorant/lineups'},
+    {src: rlCL, alt: 'RocketLeague', logo: rlLogo, shadowColor: 'rgb(234 88 12)', href: '/game/valorant/lineups'},
+    {src: cs2CL, alt: 'CounterStrike2', logo: cs2Logo, shadowColor: 'rgb(250 204 21)', href: '/game/valorant/lineups'},
 ]
 
 interface HomeGameProps {
@@ -97,17 +97,17 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
     return (
         <div className="flex flex-col items-center font-semibold text-3xl">
             <div className="flex flex-row justify-between items-center w-fit mb-8 space-x-12 py-8">
-                <Link href="#" onClick={handleLeftScroll} className="flex flex-row justify-center px-4 py-2 bg-primary transition ease-out-in hover:bg-neutral-900 hover:text-amber-500 duration-300 rounded-sm text-stone-800 text-3xl">
+                <Link href="#" onClick={handleLeftScroll} className="flex flex-row justify-center px-4 py-2 bg-primary hoverIconButton rounded-sm text-stone-800 text-3xl">
                     <FontAwesomeIcon icon={faCaretLeft} />
                 </Link>
                 <p className='text-4xl font-semibold flex flex-row items-center'> <FontAwesomeIcon icon={faPuzzlePiece} className='mr-4 text-primary' /> <span>Select Game</span> </p>
-                <Link href="#" onClick={handleRightScroll} className="flex flex-row justify-center px-4 py-2 bg-primary transition ease-out-in hover:bg-neutral-900 hover:text-amber-500 duration-300 rounded-sm text-stone-800 text-3xl">
+                <Link href="#" onClick={handleRightScroll} className="flex flex-row justify-center px-4 py-2 bg-primary hoverIconButton rounded-sm text-stone-800 text-3xl">
                     <FontAwesomeIcon icon={faCaretRight} />
                 </Link>
             </div>
             <div ref={containerRef} className="home-container flex flex-row items-start space-x-4 mx-8">
                 {games.map((game, index) => (
-                    <Link key={index} ref={el => { cardRefs.current[index] = el; }} href={game.href} className={`flex flex-col transition ease-out-in hover:saturate-100 duration-300 items-center flex-shrink-0 rounded-md space-y-8 ${index === activeIndex ? 'saturate-100' : 'saturate-50'}`}>
+                    <Link key={index} ref={el => { cardRefs.current[index] = el; }} href={game.href} className={`flex flex-col transition ease-out-in hover:saturate-100 hoverCard hover:translate-y-4 duration-300 items-center flex-shrink-0 rounded-md space-y-8 ${index === activeIndex ? 'saturate-100' : 'saturate-50'}`}>
                         <Image className={`rounded-md homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={game.src} alt={game.alt} style={{ boxShadow: `3px 3px 8px ${game.shadowColor}`}}/>
                         <Image className={`${index === activeIndex ? 'opacity-100' : 'opacity-20 saturate-0'}`} src={game.logo} alt={game.alt} width={300} />
                     </Link>
@@ -172,7 +172,7 @@ export const FormationsEAFC: React.FC<{ formationData: FormationData[], setForma
     }
 
     return formationData.map((formation, index) => (
-        <div key={index} onClick={() =>goToFormation(formation.formation)} className='cursor-pointer bg-black flex flex-col items-start justify-between rounded-xl shadow-md shadow-green-300/30'>
+        <div key={index} onClick={() =>goToFormation(formation.formation)} className='hoverPlayer-eafc cursor-pointer bg-black flex flex-col items-start justify-between rounded-xl shadow-md shadow-green-300/30'>
             <Image src={formation.image} alt={formation.formation} className='w-full rounded-t-md' />
             <div className='playerCard-background flex flex-col items-start w-full px-6 py-5 justify-between space-y-3 rounded-b-md'>
                 <div className='z-10 flex flex-col items-start w-fit'>
@@ -216,7 +216,7 @@ export const PlayerCards: React.FC<topCardsProps> = ({ items }) => {
             {items.slice(0, 20).map((player, index) => (
                 <div
                     key={index}
-                    className={`h-full w-full playerCard-background shadow-lg shadow-emerald-500/30 cursor-pointer ${expandedId === player.id ? 'col-span-2 row-span-2 flex flex-col space-y-8 py-16' : 'col-span-1 row-span-1 flex flex-row items-center justify-between py-6'}`}
+                    className={`hoverPlayer-eafc h-full w-full playerCard-background shadow-lg shadow-emerald-500/30 cursor-pointer ${expandedId === player.id ? 'col-span-2 row-span-2 flex flex-col space-y-8 py-16' : 'col-span-1 row-span-1 flex flex-row items-center justify-between py-6'}`}
                     onClick={() => setExpandedId(expandedId === player.id ? null : player.id)}
                 >
                     <div
@@ -239,7 +239,7 @@ export const PlayerCards: React.FC<topCardsProps> = ({ items }) => {
                                         ) : (
                                             <Image src={rankingTitle2} alt={`${player.rank}`} width={100} />
                                     )}
-                                    <div className='absolute top-0 bottom-4 left-0 right-3 flex items-center justify-center'>
+                                    <div className='absolute top-0 bottom-4 left-0 right-3 flex items-center justify-center text-3xl'>
                                         {player.rank}
                                     </div>
                                 </div>
@@ -621,7 +621,7 @@ export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.
     return(
         <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {skillData.map((skill: any, index: any) => (
-                <div key={index} className={`skill-background border-1 flex flex-col font-base w-fit py-6 items-center space-y-4 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-lime-500/30'}`}>
+                <div key={index} className={`hoverPlayer-eafc skill-background border-1 flex flex-col font-base w-fit py-6 items-center space-y-4 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-lime-500/30'}`}>
                     {/* Title */}
                     <div className={`z-10 flex flex-row justify-between items-center w-full px-6`}>
                         <p className={`font-semibold text-eafc text-xl ${ skill.star >= 3 ? 'text-intermediate' : 'text-beginner' }`}>
@@ -709,7 +709,7 @@ export const GuideList: React.FC = () => {
     return(
         <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
-                <div key={index} className="w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
+                <div key={index} className="hoverPlayer-eafc w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
                     <div className="z-10 relative pt-[56.25%] w-full">
                         <iframe
                         src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}
@@ -765,7 +765,7 @@ export const HighlightList: React.FC = () => {
     return(
         <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
-                <div key={index} className="w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
+                <div key={index} className="hoverPlayer-eafc w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
                     <div className="z-10 relative pt-[56.25%] w-full">
                         <iframe
                         src={`https://www.youtube.com/embed/${guide.snippet.resourceId.videoId}`}

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { animate, stagger } from "framer-motion";
 import { Variants } from "framer-motion";
 
@@ -179,5 +179,51 @@ export const overlays: Variants = {
             duration: 1,
         }
       }  
+    },
+    exit: {
+        opacity: 0.3,
+        transition: {
+            type: "inertia",
+            ease: "",
+            opacity: 1,
+            duration: 0.5
+        }
     }
 }
+
+export const imageSliderLeft: Variants = {
+    hidden: { y: -900, opacity: 0.5, position: "absolute" },
+    visible: {
+        opacity: 1,
+        y: 0,
+        position: "relative",
+        transition: {
+            type: "tween",
+            ease: "easeInOut",
+            duration: 0.4,
+        }
+    },
+    exit: {
+        opacity: 0,
+        position: "absolute",
+    }
+}
+
+export const imageSliderRight: Variants = {
+    hidden: { y: 900, opacity: 0.5, position: "absolute" },
+    visible: {
+        opacity: 1,
+        y: 0,
+        position: "relative",
+        transition: {
+            type: "tween",
+            ease: "easeInOut",
+            duration: 0.4,
+        }
+    },
+    exit: {
+        opacity: 0,
+        position: "absolute",
+    }
+}
+

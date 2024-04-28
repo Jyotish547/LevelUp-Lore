@@ -113,12 +113,12 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
         <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
             {/* Filters */}
             <div className="flex flex-col items-start space-y-2">
-                <h3 className="text-intermediate font-semibold">Filters:</h3>
+                <h3 className="text-eafc font-semibold">Filters:</h3>
                 <IconButton
                     label="Popular"
                     icon={iconsMap['star']}
                     onClick={togglePopular}
-                    className={`flex flex-row items-center py-2 px-4 font-semibold space-x-2 rounded-sm ${isPopular ? 'popular-f1 active-f1 bg-amber-500 text-dark': 'bg-amber-500/30 text-neutral-500'}`}
+                    className={`flex flex-row items-center py-2 px-4 font-semibold space-x-2 rounded-sm ${isPopular ? 'popular-f1 active-f1 bg-amber-500 text-dark': 'hoverPopular-eafc text-neutral-500'}`}
                 />
             </div>
             
@@ -232,20 +232,20 @@ export const F2Filter: React.FC<F2Props> = ({ gen, setGen }) => {
             {/* Filters */}
             {/* Gender */}
             <div className="flex flex-col items-start space-y-2">
-                <h3 className="text-primary font-semibold">Filters:</h3>
+                <h3 className="text-eafc font-semibold">Filters:</h3>
                 <div
                     
                     className={
                         `flex flex-row items-stretch font-semibold rounded-sm
-                        ${'popular-f1 active-f1 bg-primary30'}
+                        ${'popular-f1 active-f1'}
                     `}
                 >
                     {Object.values(GenType).map((genValue, index) => (
                         <label
                             key={index}
                             className={
-                                ` flex flex-row text-lg py-3 px-4 items-center text-sm font-regular border-r-2 border-gray-800 space-x-2
-                                ${gen === genValue ? `text-dark bg-primary` : `text-neutral-500`}
+                                ` flex flex-row text-lg py-3 px-4 ${gen ? 'text-neutral-400' : ''} bg-[#22C55E40] items-center hoverButton-eafc text-sm font-regular border-r-2 border-gray-800 space-x-2
+                                ${gen === genValue ? `bg-eafc text-dark` : ``}
                                 ${index === 0 ? 'rounded-sm' : ''}
                                 ${index === Object.values(GenType).length - 1 ? 'border-none' : ''}
                                 `}
@@ -302,11 +302,11 @@ export const F3Filter: React.FC<{ selectRate: RateType[], setSelectRate: React.D
     function getDefaultRate(rate: RateType): string {
         switch (rate) {
             case '2':
-                return 'bg-lime-500/30 text-neutral-500';
+                return 'bg-2skill30 text-neutral-500';
             case '3':
-                return 'bg-intermediate30 text-neutral-500';
+                return 'bg-3skill30 text-neutral-500';
             case '4':
-                return 'bg-rose-700/30 text-neutral-500';
+                return 'bg-4skill30 text-neutral-500';
             default:
                 return '';
         }
@@ -410,14 +410,14 @@ export const V1Filter: React.FC<V1Props> = ({ selectRole, setSelectRole }) => {
                         <label
                             key={index}
                             className={
-                                `text-sm flex flex-row py-3 px-4 items-center font-regular border-r-2 border-gray-800 space-x-2
-                                ${selectRole === role ? 'bg-valo text-white' : 'text-neutral-500 bg-valo30'}
+                                `hoverImageFilter text-sm flex flex-row py-3 px-4 items-center font-regular border-r-2 border-gray-800 space-x-2
+                                ${selectRole === role ? 'bg-valo text-dark' : 'text-neutral-500 bg-valo30'}
                                 ${index === 0 ? 'rounded-l-sm' : ''}
                                 ${selectRole === role && index === 0 ? 'rounded-l-sm text-dark' : ''}
                                 ${index === 4 ? 'rounded-r-sm border-none' : ''}
                                 `}
                         >
-                            {index === 0 ? (<FontAwesomeIcon icon={faEarthAmericas} className="text-xl" />) : (<Image src={getIconRole(role)} className={`${selectRole === role ? 'opacity-100' : 'opacity-30'}`} alt={role} width={20} height={20} />)}
+                            {index === 0 ? (<FontAwesomeIcon icon={faEarthAmericas} className="text-xl" />) : (<Image src={getIconRole(role)} className={`${selectRole === role ? 'opacity-100 brightness-0' : 'opacity-30'}`} alt={role} width={20} height={20} />)}
                             
                             <input
                                 type="radio"
@@ -532,7 +532,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                 >
                     <label
                         className={
-                        `text-lg flex flex-row w-11/12 py-3 px-6 items-center font-regular space-x-2
+                        `hover-valo text-lg flex flex-row w-11/12 py-3 px-6 items-center font-regular space-x-2
                         ${selectMap === 'All' ? 'border-l-2 border-valo text-valo bg-valo30 font-semibold' : ''}
                         `}
                     >
@@ -551,8 +551,9 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                 <label
                                     key={index}
                                     className={
-                                        `text-lg flex flex-row w-11/12 py-3 px-6 items-center font-regular space-x-2
-                                        ${selectMap === map.displayName ? 'border-l-2 border-valo text-valo bg-valo30 font-semibold' : ''}
+                                        `hover-valo text-lg flex flex-row w-11/12 py-3 px-6 items-center font-regular space-x-2
+                                        ${selectMap === map.displayName ? 'border-l-2 border-valo text-valo bg-valo30 font-semibold border-b-0' : ''}
+                                        ${map.displayName === 'Breeze' || map.displayName === 'Ascent' ? 'border-b-2 border-teal-500' : ''}
                                         `}
                                 >
                                     <input
@@ -586,8 +587,9 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                     <label
                                         key={index}
                                         className={
-                                        `text-lg flex flex-col w-20 h-20 justify-center items-center p-2 font-regular
-                                        ${selectAgent === agent.displayName ? 'border-l-2 border-valo text-valo bg-valo30': ''}
+                                        `text-lg hover-valo-icon flex flex-col w-20 h-20 justify-center items-center p-2 font-regular
+                                        ${selectAgent === agent.displayName ? 'border-l-2 border-valo text-valo bg-valo30 border-b-0': ''}
+                                        ${agent.displayName === 'Viper' || agent.displayName === 'Brimstone' ? 'border-b-2 border-teal-500 w-fit' : ''}
                                         `}
                                     >
                                         <Image src={agent.displayIcon} alt={agent.displayName} width={60} height={60} />
@@ -620,7 +622,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                 <label
                                     key={index}
                                     className={
-                                        `text-lg flex flex-col flex-wrap w-fit py-3 px-4 items-center justify-center font-regular space-x-2
+                                        `hover-valo-icon text-lg flex flex-col flex-wrap w-fit py-3 px-4 items-center justify-center font-regular space-x-2
                                         ${selectAbility === ab.displayName ? 'border-l-2 border-valo text-valo bg-valo30': ''}
                                     `}
                                 >
@@ -651,7 +653,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                             <label
                                 key={index}
                                 className={
-                                `text-base flex flex-row w-fit py-3 px-4 items-center font-regular space-x-2
+                                `hover-valo-icon text-base flex flex-row w-fit py-3 px-4 items-center font-regular space-x-2
                                 ${selectSide === side ? 'border-l-2 border-valo text-valo bg-valo30 font-semibold': ''}
                                 `}
                             >

@@ -12,10 +12,11 @@
   --background-blue: rgb(64, 80, 175);
   --background-teal: rgb(151, 216, 196);
   --text-black: rgb(38, 38, 38);
-  --eafc24-color: #14F57B;
-  --valo-color: #B181FF;
+  --eafc24-color: #22C55E;
+  --valo-color: #818CF8;
   --background-primary: rgb(20 184 166);
-  --background-gold: rgb(245 158 11);
+  --background-gold: rgb(245, 158, 11);
+  --red-color: #FF4655;
 }
 
 html, body {
@@ -61,7 +62,7 @@ body {
 
 .active-eafc {
   border-left: 3px solid var(--eafc24-color);
-  background-color: #14F57B20;
+  background-color: #22C55E20;
 }
 
 .active-eafc > span {
@@ -70,7 +71,7 @@ body {
 
 .active-valo {
   border-left: 3px solid var(--valo-color);
-  background-color: #B181FF30;
+  background-color: #818CF830;
 }
 
 .active-valo > span {
@@ -92,6 +93,7 @@ body {
   box-shadow: inset 0 0 0 0 var(--valo-color);
   transition: ease-in 0.3s;
   outline: none;
+  font-weight: 700;
 }
 
 .hover-valo:hover {
@@ -261,11 +263,11 @@ input[type='range']::-moz-range-thumb {
 }
 
 .bg-valo30 {
-  background-color: #B181FF30;
+  background-color: #818CF830;
 }
 
 .bg-valo90 {
-  background-color: #B181FF90;
+  background-color: #818CF890;
 }
 
 .button-hover-valo:hover {
@@ -274,7 +276,7 @@ input[type='range']::-moz-range-thumb {
 }
 
 .bg-eafc20 {
-  background-color: #14F57B20;
+  background-color: #22C55E20;
 }
 
 /* Difficulty Tags Colors */
@@ -294,8 +296,16 @@ input[type='range']::-moz-range-thumb {
 .bg-beginner {
   background-color: #7BC0E5;
 }
+
 .bg-beginner30 {
   background-color: #7BC0E530;
+  box-shadow: inset 0 0 0 0 #7BC0E5;
+  transition: ease-in 0.3s;
+}
+
+.bg-beginner30:hover {
+  box-shadow: inset 0 300px 0 0 #7BC0E5;
+  color: #262626;
 }
 
 .bg-intermediate {
@@ -303,6 +313,13 @@ input[type='range']::-moz-range-thumb {
 }
 .bg-intermediate30 {
   background-color: rgb(251, 177, 60, 0.3);
+  box-shadow: inset 0 0 0 0 rgb(251, 177, 60);
+  transition: ease-in 0.3s;
+}
+
+.bg-intermediate30:hover {
+  box-shadow: inset 0 300px 0 0 rgb(251, 177, 60);
+  color: #262626;
 }
 
 .bg-advanced {
@@ -310,6 +327,13 @@ input[type='range']::-moz-range-thumb {
 }
 .bg-advanced30 {
   background-color: #F8837930;
+  box-shadow: inset 0 0 0 0 #F88379;
+  transition: ease-in 0.3s;
+}
+
+.bg-advanced30:hover {
+  box-shadow: inset 0 300px 0 0 #F88379;
+  color: #262626;
 }
 
 .border-beginner {
@@ -464,6 +488,13 @@ input[type='range']::-moz-range-thumb {
 }
 .bg-balanced30 {
   background-color: #17724530;
+  box-shadow: inset 0 0 0 0 #177245;
+  transition: ease-in 0.3s;
+}
+
+.bg-balanced30:hover {
+  box-shadow: inset 0 300px 0 0 #177245;
+  color: #ffffff;
 }
 
 .bg-offensive {
@@ -471,6 +502,13 @@ input[type='range']::-moz-range-thumb {
 }
 .bg-offensive30 {
   background-color: #c14d0030;
+  box-shadow: inset 0 0 0 0 #c14d00;
+  transition: ease-in 0.3s;
+}
+
+.bg-offensive30:hover {
+  box-shadow: inset 0 300px 0 0 #c14d00;
+  color: #ffffff;
 }
 
 .bg-defensive {
@@ -478,6 +516,13 @@ input[type='range']::-moz-range-thumb {
 }
 .bg-defensive30 {
   background-color: #0033CC30;
+  box-shadow: inset 0 0 0 0 #0033CC;
+  transition: ease-in 0.3s;
+}
+
+.bg-defensive30:hover {
+  box-shadow: inset 0 300px 0 0 #0033CC;
+  color: #ffffff;
 }
 
 /* Custom Scrollbar Styles */
@@ -498,4 +543,230 @@ input[type='range']::-moz-range-thumb {
   background-color: var(--valo-color); /* color of the scroll thumb */
   border-radius: 20px; /* roundness of the scroll thumb */
   border: 2px solid #0c0b0b; /* creates padding around scroll thumb */
+}
+
+/* All Transitions */
+
+.hoverCard:hover {
+  scale: 1.03;
+  transition: ease-in 0.15s;
+}
+
+.hoverCard:hover img {
+  opacity: 1;
+  filter: saturate(100%);
+  transition: ease-in 0.15s;
+}
+
+.hoverButton {
+  box-shadow: inset 0 0 0 0 #262626;
+  transition: ease-in 0.2s;
+}
+
+.hoverButton:hover {
+  box-shadow: inset 300px 0 0 0 #262626;
+  color: var(--background-primary);
+}
+
+.hoverIconButton {
+  box-shadow: inset 0 0 0 0 #262626;
+  transition: ease-in 0.2s;
+}
+
+.hoverIconButton:hover {
+  box-shadow: inset 100px 0 0 0 #262626;
+  color: var(--background-primary);
+}
+
+.hoverStrokeButton {
+  box-shadow: inset 0 0 0 0 var(--background-primary);
+  transition: ease-in 0.2s;
+}
+
+.hoverStrokeButton:hover {
+  box-shadow: inset 300px 0 0 0 var(--background-primary);
+  color: #262626;
+}
+
+/* EAFC 24 */
+
+.hoverButton-eafc {
+  box-shadow: inset 0 0 0 0 var(--eafc24-color);
+  transition: ease-in 0.3s;
+}
+
+.hoverButton-eafc:hover {
+  box-shadow: inset 0 300px 0 0 var(--eafc24-color);
+  color: #262626;
+}
+
+.hoverScale-eafc {
+  scale: 1;
+  transition: ease-in 0.1s;
+}
+
+.hoverScale-eafc:hover {
+  scale: 1.1;
+}
+
+.hoverColor-eafc:hover {
+  color: var(--eafc24-color);
+  transition: ease-in 0.1s
+}
+
+.hoverPlayer-eafc {
+  scale: 1;
+  transition: ease-in 0.1s;
+}
+
+.hoverPlayer-eafc:hover {
+  scale: 1.05;
+}
+
+.hoverPopular-eafc {
+  background-color: #f59e0b30;
+  box-shadow: inset 0 0 0 0 #f59e0b;
+  transition: ease-in 0.3s;
+  border-radius: 1%;
+}
+.hoverPopular-eafc:hover {
+  box-shadow: inset 0 300px 0 0 #f59e0b;
+  color: #262626;
+}
+
+.bg-2skill {
+  background-color: #84cc16;
+}
+
+.bg-2skill30 {
+  background-color: #84cc1630;
+  box-shadow: inset 0 0 0 0 #84cc16;
+  border-radius: 1%;
+  transition: ease-in 0.3s;
+}
+
+.bg-2skill30:hover {
+  box-shadow: inset 0 300px 0 0 #84cc16;
+  color: #262626;
+}
+
+.bg-3skill30 {
+  background-color: #fbb13c30;
+  box-shadow: inset 0 0 0 0 #fbb13c;
+  border-radius: 1%;
+  transition: ease-in 0.3s;
+}
+
+.bg-3skill30:hover {
+  box-shadow: inset 0 300px 0 0 #fbb13c;
+  color: #262626;
+}
+
+.bg-4skill {
+  background-color: #be123c;
+}
+
+.bg-4skill30 {
+  background-color: #be123c30;
+  box-shadow: inset 0 0 0 0 #be123c;
+  border-radius: 1%;
+  transition: ease-in 0.3s;
+}
+
+.bg-4skill30:hover {
+  box-shadow: inset 0 300px 0 0 #be123c;
+  color: white;
+}
+
+/* Valorant */
+
+.hover-valo-icon {
+  box-shadow: inset 0 0 0 0 #818CF830;
+  outline: none;
+  transition: ease-in 0.3s;
+}
+
+.hover-valo-icon:hover {
+  box-shadow: inset 0 300px 0 0 #818CF830;
+}
+
+.hoverScale-valo {
+  scale: 1;
+  transition: ease-in 0.1s;
+}
+
+.hoverScale-valo:hover {
+  scale: 1.1;
+}
+
+.hoverMap-valo {
+  scale: 1;
+  transition: ease-in 0.1s;
+}
+
+.hoverMap-valo:hover {
+  scale: 1.05;
+}
+
+.hoverCross-valo {
+  scale: 1;
+  transition: ease-in 0.1s;
+}
+
+.hoverCross-valo:hover {
+  scale: 1.03;
+}
+
+.hoverButton-valo {
+  box-shadow: inset 0 0 0 0 #818CF8;
+  transition: ease-in 0.3s;
+  background-color: var(--background-primary);
+}
+
+.hoverButton-valo:hover {
+  box-shadow: inset 300px 0 0 0 #818CF8;
+}
+
+.hoverIconButton-valo {
+  box-shadow: inset 0 0 0 0 #818CF8;
+  transition: ease-in 0.3s;
+  background-color: #262626;
+  color: var(--valo-color)
+}
+
+.hoverIconButton-valo:hover {
+  box-shadow: inset 200px 0 0 0 #818CF8;
+  color: #262626
+}
+
+.hoverImageFilter {
+  box-shadow: inset 0 0 0 0 #818CF8;
+  outline: none;
+  transition: ease-in 0.3s;
+}
+
+.hoverImageFilter:hover {
+  box-shadow: inset 0 300px 0 0 #818CF8;
+  color: #262626;
+  font-weight: 700;
+}
+
+.hoverImageFilter img {
+  transition: ease-in 0.2s
+}
+
+.hoverImageFilter:hover img {
+  filter: brightness(0%);
+  opacity: 1;
+}
+
+.hoverClose {
+  box-shadow: inset 0 0 0 0 #FF4655;
+  transition: ease-in 0.3s;
+  background-color: #DC2626;
+
+}
+
+.hoverClose:hover {
+  box-shadow: inset 300px 0 0 0 #EF4444;
 }

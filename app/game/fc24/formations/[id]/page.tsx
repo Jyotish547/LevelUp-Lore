@@ -80,7 +80,7 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
             // variants={pageItem}
             className="space-y-4 w-full">
                 <div className="space-x-1 font-medium">
-                    <Link href="/game" className="underline  underline-offset-4">Formations</Link> <span>&lt;</span><Link href="#" className="text-eafc">{formation.formation}</Link>
+                    <Link href="/game/fc24/formations" className="underline underline-offset-4 hoverColor-eafc">Formations</Link> <span>&lt;</span><Link href="#" className="text-eafc">{formation.formation}</Link>
                 </div>
                 <div className="flex flex-row justify-between items-center">
                     <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-eafc w-fit">
