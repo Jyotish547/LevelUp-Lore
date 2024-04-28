@@ -181,7 +181,7 @@ export const FormationsEAFC: React.FC<{ formationData: FormationData[], setForma
                 </div>
                 <p className='z-10 text-sm leading-relaxed'>{formation.caption}</p>
                 <div className='z-10 flex flex-row justify-between w-full font-semibold text-sm mt-1'>
-                    <TypeTags label={formation.flow} bgColor={getBackgroundClass(formation.flow)} textColor="text-white" borderColor='' border="" />
+                    <TypeTags label={formation.flow} bgColor={getBackgroundClass(formation.flow)} textColor="text-white" borderColor='' border="" icon={getIconForType(formation.flow.toLowerCase())} />
                     <DifficultyTags level={formation.difficulty} />
                 </div>
             </div>
@@ -687,6 +687,7 @@ export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.
 // Guides Page
 
 import { GuideData } from "./types/valorantType";
+import { getIconForType } from '../game/fc24/formations/[id]/page';
 
 export const GuideList: React.FC = () => {
 

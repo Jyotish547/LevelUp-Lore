@@ -1,23 +1,29 @@
+import { IconDefinition, IconName, IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faRankingStar, faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 interface typeTagsProps {
     label: string;
     bgColor: string;
     textColor: string;
     borderColor: string;
     border: string;
+    icon: IconDefinition
 }
 
-export const TypeTags = ({label, bgColor, textColor, borderColor, border}: typeTagsProps) => {
+export const TypeTags = ({label, bgColor, textColor, borderColor, border, icon}: typeTagsProps) => {
     return(
-        <div className={`${bgColor} ${textColor} ${borderColor} ${border} py-2 px-3 rounded-sm text-xs flex items-center justify-center`}>
-            {label} 
+        <div className={`${bgColor} ${textColor} ${borderColor} ${border} py-2 px-3 rounded-sm text-xs flex flex-row items-center justify-center`}>
+            <FontAwesomeIcon icon={icon} className="text-lg mr-2" />
+            <span className="">{label}</span> 
         </div>
     )
 }
 
 const difficulty = [
-    {level: "Beginner", bgColor: "bg-beginner"},
-    {level: "Intermediate", bgColor: "bg-intermediate"},
-    {level: "Advanced", bgColor: "bg-advanced"}
+    {level: "Beginner", bgColor: "bg-beginner", icon: faStarHalf},
+    {level: "Intermediate", bgColor: "bg-intermediate", icon: faStar},
+    {level: "Advanced", bgColor: "bg-advanced", icon: faRankingStar}
 ]
 
 interface DifficultyTagsProps {
@@ -35,7 +41,8 @@ export const DifficultyTags = ({ level }: DifficultyTagsProps) => {
 
     return(
         <div className={`${difficultyObj.bgColor} text-dark py-2 px-3 rounded-sm text-xs flex items-center justify-center`}>
-            {difficultyObj.level} 
+            <FontAwesomeIcon icon={difficultyObj.icon} className="text-lg mr-2" />
+            <span>{difficultyObj.level}</span>
         </div>
     );
 };

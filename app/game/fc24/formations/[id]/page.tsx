@@ -19,7 +19,7 @@ import React from "react";
 import { motion } from "framer-motion"; 
 import { pageItem, pageList, downChild } from "@/components/app/components/animations";
 
-const getIconForType = (type: string) => {
+export const getIconForType = (type: string) => {
     switch(type) {
         case "defensive":
             return defensive;
@@ -37,7 +37,7 @@ import { faStar as intermediate } from "@fortawesome/free-solid-svg-icons";
 import { faRankingStar as advanced } from "@fortawesome/free-solid-svg-icons";
 import { faQuestionCircle as defaultIcon } from "@fortawesome/free-solid-svg-icons";
 
-const getIconForDifficulty = (difficulty: string) => {
+export const getIconForDifficulty = (difficulty: string) => {
     switch (difficulty) {
       case "beginner":
         return beginner;
@@ -87,13 +87,11 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
                         <FontAwesomeIcon icon={faPeopleGroup} /> <span>{formation.formation} Formation</span>
                     </div>
                     <div className="flex flex-row space-x-4 font-medium text-md">
-                        <div className="flex flex-row border-eafc border-2 items-center rounded-md pl-4 text-eafc">
-                            <FontAwesomeIcon icon={getIconForType(formation.flow.toLowerCase())} />
-                            <TypeTags label={formation.flow} bgColor="" textColor="text-eafc" borderColor="" border="" />
+                        <div className="flex flex-row border-eafc border-2 items-center rounded-sm text-eafc">
+                            <TypeTags label={formation.flow} bgColor="" textColor="text-eafc" borderColor="" border="" icon={getIconForType(formation.flow.toLowerCase())} />
                         </div>
-                        <div className={`flex flex-row border-${formation.difficulty.toLowerCase()} text-${formation.difficulty.toLowerCase()} border-2 items-center rounded-md pl-4`}>
-                            <FontAwesomeIcon icon={getIconForDifficulty(formation.difficulty.toLowerCase())} />
-                            <TypeTags label={formation.difficulty} bgColor="" textColor="" borderColor="" border="" />
+                        <div className={`flex flex-row border-${formation.difficulty.toLowerCase()} text-${formation.difficulty.toLowerCase()} border-2 items-center rounded-sm`}>
+                            <TypeTags label={formation.difficulty} bgColor="" textColor="" borderColor="" border="" icon={getIconForDifficulty(formation.difficulty.toLowerCase())} />
                         </div>
                         
                     </div>
@@ -210,7 +208,7 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
                                 {Object.entries(instructions).map(([position, instructionsArray]) => (
                                     instructionsArray.length > 0 && ( // Check if instructionsArray is not empty
                                         <div key={position} className="h-fit flex flex-col items-start w-fit gap-3 mb-12">
-                                            <h3 className="text-xl flex flex-row items-center space-x-2 py-1 px-2 bg-eafc text-dark w-fit rounded-md font-semibold">
+                                            <h3 className="text-xl flex flex-row items-center space-x-2 py-1 px-2 bg-eafc text-dark w-fit rounded-sm font-semibold">
                                                 <FontAwesomeIcon icon={getIconForPosition(position)} />
                                                 <span>{position}</span>
                                             </h3>

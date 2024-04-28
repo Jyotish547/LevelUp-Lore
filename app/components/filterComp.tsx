@@ -6,7 +6,7 @@ import '../globals.css'
 import BorderButton from "./buttons";
 import { IconButton } from "./buttons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faEarthAmericas, faMars, faMarsAndVenus, faPlaneUp, faShieldHalved, faStar, faVenus } from "@fortawesome/free-solid-svg-icons";
+import { faEarthAmericas, faFire, faFireFlameCurved, faMars, faMarsAndVenus, faPlaneUp, faShieldHalved, faStar, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const iconsMap: { [key: string]: IconProp } = {
     star: faStar,
@@ -16,6 +16,8 @@ const iconsMap: { [key: string]: IconProp } = {
 import { FormType, DiffType, CardsType, GenType, PlayersData } from "./types/fc24Type";
 import { getBgColorClass } from "./cardLayouts";
 import axios from "axios";
+
+import { getIconForType, getIconForDifficulty } from "../game/fc24/formations/[id]/page";
 
 export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.Dispatch<React.SetStateAction<FormType[]>>, selectDiff: DiffType[], setSelectDiff: React.Dispatch<React.SetStateAction<DiffType[]>> }> = ({ selectForm, setSelectForm, selectDiff, setSelectDiff }) => {
 
@@ -116,7 +118,7 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
                 <h3 className="text-eafc font-semibold">Filters:</h3>
                 <IconButton
                     label="Popular"
-                    icon={iconsMap['star']}
+                    icon={faFireFlameCurved}
                     onClick={togglePopular}
                     className={`flex flex-row items-center py-2 px-4 font-semibold space-x-2 rounded-sm ${isPopular ? 'popular-f1 active-f1 bg-amber-500 text-dark': 'hoverPopular-eafc text-neutral-500'}`}
                 />
@@ -137,7 +139,7 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
                                 ${index === 2 ? 'border-none' : 'rounded-r-sm'}
                                 `}
                         >
-                            <FontAwesomeIcon icon={getIconForm(form)} />
+                            <FontAwesomeIcon icon={getIconForType(form.toLowerCase())} />
                             <span>{form}</span>
                         </button>
                     ))}
@@ -158,7 +160,7 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
                                 ${index === 2 ? 'border-none' : 'rounded-r-sm'}
                                 `}
                         >
-                            <FontAwesomeIcon icon={getIconDiff(diff)} />
+                            <FontAwesomeIcon icon={getIconForDifficulty(diff.toLowerCase())} />
                             <span className="opacity-100">{diff}</span>
                         </button>
                     ))}
