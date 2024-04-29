@@ -62,13 +62,13 @@ export default function HomePage() {
       
       <div className="absolute inset-0 bg-black bg-opacity-85 flex flex-row items-center">
         <div className='flex flex-col items-center justify-evenly w-screen h-screen'>
-            <motion.div className='flex flex-col items-center space-y-4'
+            <motion.div className='flex flex-col items-center space-y-8 xl:space-y-4'
               variants={upHome}
               initial="hidden"
               animate="visible"
               >
                 <Image src={logos.white} alt="LevelUp Lore" width={250} />
-                <p className='text-lg w-3/4 text-center'>
+                <p className='text-md lg:text-lg w-3/4 text-center'>
                     Welcome to LevelUp Lore, your ultimate gateway to the universe of gaming! Dive into a meticulously curated collection of game guides, strategies, and lineups, all designed to elevate your gameplay.
                 </p>
             </motion.div>
@@ -85,7 +85,7 @@ export default function HomePage() {
               initial="hidden"
               animate="visible"
             >
-                <p className='mb-6'>Ready to level up? Join us or sign in to start your adventure.</p>
+                <p className='text-md lg:text-lg mb-6'>Ready to level up? Join us or sign in to start your adventure.</p>
                 <div className='flex flex-row justify-between w-7/12'>
                     <button className='bg-teal-500 text-dark px-4 py-3 rounded-sm font-semibold hoverButton'>
                         <FontAwesomeIcon icon={faUser} className='mr-2' /> Login

@@ -100,7 +100,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
                 <Link href="#" onClick={handleLeftScroll} className="flex flex-row justify-center px-4 py-2 bg-primary hoverIconButton rounded-sm text-stone-800 text-3xl">
                     <FontAwesomeIcon icon={faCaretLeft} />
                 </Link>
-                <p className='text-4xl font-semibold flex flex-row items-center'> <FontAwesomeIcon icon={faPuzzlePiece} className='mr-4 text-primary' /> <span>Select Game</span> </p>
+                <p className='text-3xl xl:text-4xl font-semibold flex flex-row items-center'> <FontAwesomeIcon icon={faPuzzlePiece} className='mr-4 text-primary' /> <span>Select Game</span> </p>
                 <Link href="#" onClick={handleRightScroll} className="flex flex-row justify-center px-4 py-2 bg-primary hoverIconButton rounded-sm text-stone-800 text-3xl">
                     <FontAwesomeIcon icon={faCaretRight} />
                 </Link>
@@ -109,7 +109,7 @@ export const HomeGames: NextPage<HomeGameProps> = ({onGameChange}) => {
                 {games.map((game, index) => (
                     <Link key={index} ref={el => { cardRefs.current[index] = el; }} href={game.href} className={`flex flex-col transition ease-out-in hover:saturate-100 hoverCard hover:translate-y-4 duration-300 items-center flex-shrink-0 rounded-md space-y-8 ${index === activeIndex ? 'saturate-100' : 'saturate-50'}`}>
                         <Image className={`rounded-md homeCL ${index === activeIndex ? 'activeCL' : ''}`} src={game.src} alt={game.alt} style={{ boxShadow: `3px 3px 8px ${game.shadowColor}`}}/>
-                        <Image className={`${index === activeIndex ? 'opacity-100' : 'opacity-20 saturate-0'}`} src={game.logo} alt={game.alt} width={300} />
+                        <Image className={`CLlogo ${index === activeIndex ? 'opacity-100' : 'opacity-20 saturate-0'}`} src={game.logo} alt={game.alt} />
                     </Link>
                 ))}
             </div>

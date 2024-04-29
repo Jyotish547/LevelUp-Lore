@@ -16,10 +16,10 @@ export default function Maps() {
         >
             {/* Header */}
             <motion.header className="space-y-4" variants={pageItem}>
-                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-valo w-fit">
+                <div className="text-2xl xl:text-3xl font-semibold flex flex-row items-center space-x-3 text-valo w-fit">
                     <FontAwesomeIcon icon={faMapLocationDot} /> <span>Maps</span>
                 </div>
-                <p className="text-base text-neutral-300 font-normal leading-relaxed">
+                <p className="text-sm xl:text-base text-neutral-300 font-normal leading-relaxed">
                     Exploring Valorant&apos;s maps offers players a deep dive into the intricate arenas where battles unfold. Each map brings its own unique set of strategic opportunities and challenges, from tight corners for ambushes to open spaces for team skirmishes. Understanding the layout, key sightlines, and objective locations on these maps is crucial for planning effective tactics and outmaneuvering opponents. <br /> Mastery of map knowledge not only enhances gameplay experience but also significantly boosts a team&apos;s chances of securing victory by making informed decisions during intense matches.
                 </p>
             </motion.header>

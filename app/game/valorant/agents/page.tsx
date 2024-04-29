@@ -69,10 +69,10 @@ export default function Agents() {
         >
             {/* Header */}
             <motion.header variants={pageItem} className="space-y-4">
-                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-valo w-fit">
+                <div className="text-2xl xl:text-3xl font-semibold flex flex-row items-center space-x-3 text-valo w-fit">
                     <FontAwesomeIcon icon={faUsersGear} /> <span>Agents</span>
                 </div>
-                <p className="text-base text-neutral-300 font-normal leading-relaxed">
+                <p className="text-sm xl:text-base text-neutral-300 font-normal leading-relaxed">
                     This is an overview of all the game&apos;s characters, detailing their skills and roles. It&apos;s a go-to for players looking to master different agents, providing key information on how to best use each one&apos;s abilities in battle. This page helps players craft strategies and improve their play, making it a vital tool for anyone aiming to excel in Valorant.
                 </p>
             </motion.header>

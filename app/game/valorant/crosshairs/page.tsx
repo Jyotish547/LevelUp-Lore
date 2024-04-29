@@ -19,10 +19,10 @@ export default function Crosshairs() {
         >
             {/* Header */}
             <motion.header className="space-y-4" variants={pageItem}>
-                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 w-fit text-valo">
+                <div className="text-2xl xl:text-3xl font-semibold flex flex-row items-center space-x-3 w-fit text-valo">
                     <FontAwesomeIcon icon={faCrosshairs} /> <span>Crosshairs</span>
                 </div>
-                <p className="text-base text-neutral-300 font-normal leading-relaxed">
+                <p className="text-sm xl:text-base text-neutral-300 font-normal leading-relaxed">
                     Check out the most impressive crosshairs in Valorant from pro players and the community.                </p>
             </motion.header>
 

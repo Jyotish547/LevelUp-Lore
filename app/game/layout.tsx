@@ -46,7 +46,7 @@ export default function GamePageLayout({
         <div className="fixed z-0 inset-0 bg-black bg-opacity-75 w-screen h-screen"></div>
         <div className="relative z-10 py-10 flex flex-row items-start justify-start h-fit w-screen text-neutral-300">
           <NavBar />  
-          <div className="w-full flex ml-72 px-16">
+          <div className="w-full flex ml-64 xl:ml-72 px-8 xl:px-16">
             {children}
           </div>
         </div>

@@ -358,6 +358,10 @@ input[type='range']::-moz-range-thumb {
   transition: all 0.2s ease-out;
 }
 
+.CLlogo {
+  width: 300px;
+}
+
 .activeCL {
   height: 248px;
   width: 438px;
@@ -418,7 +422,6 @@ input[type='range']::-moz-range-thumb {
   background-image: url("/assets/navBackgroundR.png");
   background-size: cover;
   background-repeat: no-repeat;
-  border-radius: 2%;
 }
 
 .nav-background::before {
@@ -430,8 +433,14 @@ input[type='range']::-moz-range-thumb {
   bottom: 0;
   background: rgba(0, 0, 0, 0.6); /* Black overlay with 50% opacity */
   z-index: 1;
-  border-radius: 2%;
-  
+}
+
+.navGame {
+  width: 160px;
+}
+
+.navDP {
+  width: 486px
 }
 
 .playerRank-bg {
@@ -769,4 +778,53 @@ input[type='range']::-moz-range-thumb {
 
 .hoverClose:hover {
   box-shadow: inset 300px 0 0 0 #EF4444;
+}
+
+/* Media Queries */
+
+/* Min width is lg, mid-width: xl in TailwindCSS */
+
+/* Least Width */
+
+@media (max-width: 1280px) {
+  .home-container {
+    width: 800px;
+    height: 300px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .homeCL {
+    width: 300px;
+    height: 170px;
+    transition: all 0.2s ease-out;
+  }
+  .CLlogo {
+    width: 250px;
+  }
+  .navGame {
+    width: 130px;
+  }
+  .navDP {
+    width: 36px
+  }
+}
+
+/* Mid Width */
+
+
+@media (min-width: 1281px) and (max-width: 1536px) {
+  .home-container {
+    width: 1100px;
+    height: 350px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .homeCL {
+    width: 350px;
+    height: 198px;
+    transition: all 0.2s ease-out;
+  }
+  .CLlogo {
+    width: 250px;
+  }
 }

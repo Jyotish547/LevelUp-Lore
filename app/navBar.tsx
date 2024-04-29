@@ -107,7 +107,7 @@ export default function NavBar() {
     return(
         <nav
             id="navbar"
-            className={`fixed top-1/2 transform -translate-y-1/2 nav-background shadow-lg shadow-teal-500/50 flex flex-col items-center px-8 py-10 justify-between h-full w-72`}
+            className={`fixed top-1/2 transform -translate-y-1/2 nav-background shadow-lg shadow-teal-500/50 flex flex-col items-center px-8 py-10 justify-between h-full w-64 xl:w-72`}
             
         >
             <motion.div className="z-10 text-4xl font-semibold w-full text-center"
@@ -140,7 +140,7 @@ export default function NavBar() {
                 >
                     <Link href="/" className="flex flex-row w-full h-full items-center justify-between">
                         <FontAwesomeIcon icon={faChevronLeft} className={``} />
-                        <Image src={currentNav[0]?.game || fc24Logo} alt="Game Logo" width={160} />
+                        <Image src={currentNav[0]?.game || fc24Logo} alt="Game Logo" className="navGame" />
                     </Link>
                 </motion.div>
                 <motion.div className={`w-full hover:text-neutral-900`}
@@ -150,7 +150,7 @@ export default function NavBar() {
                         className={` flex flex-row ${hoverClass} items-center rounded-r-sm ${textColorClass} justify-start space-x-4 w-full py-3 px-4 border-l-2 border-white/10 hover:text-neutral-900 hover:${borderColorClass} bg-white/5 hover:${bgColorClass} transition-colors duration-300`}
                     
                     >
-                        <Image src={dpIcon} alt="" width="48" />
+                        <Image src={dpIcon} alt="" className="navDP" />
                         <div className="flex flex-col">
                             <span className={`text-lg font-semibold`}>Reggae547</span>
                             <span className="child text-sm">Aimbot</span>

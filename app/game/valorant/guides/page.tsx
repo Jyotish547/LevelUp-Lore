@@ -17,10 +17,10 @@ export default function Guides() {
         >
             {/* Header */}
             <motion.header className="space-y-4" variants={pageItem}>
-                <div className="text-3xl font-semibold flex flex-row items-center space-x-3 text-valo w-fit">
+                <div className="text-2xl xl:text-3xl font-semibold flex flex-row items-center space-x-3 text-valo w-fit">
                     <FontAwesomeIcon icon={faArrowUpRightDots} /> <span>Guides</span>
                 </div>
-                <p className="text-base text-neutral-300 font-normal leading-relaxed">
+                <p className="text-sm xl:text-base text-neutral-300 font-normal leading-relaxed">
                     This is your go-to destination for mastering the game&apos;s mechanics, gaining strategic insights, and elevating your gameplay. This comprehensive collection of video tutorials covers a wide range of topics, from basic skills for beginners to advanced tactics for seasoned players. Whether you&apos;re looking to improve your shooting accuracy, learn about effective agent combinations, or discover new strategies for each map, these carefully curated guides have you covered.
                 </p>
             </motion.header>
