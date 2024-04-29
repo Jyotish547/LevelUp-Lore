@@ -112,7 +112,7 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
     }
 
     return(
-        <div className="flex flex-row justify-between items-center formation-filters w-full h-fit">
+        <div className="flex flex-col 2xl:flex-row justify-between items-start space-y-4 2xl:space-y-0 2xl:items-center formation-filters w-full h-fit">
             {/* Filters */}
             <div className="flex flex-col items-start space-y-2">
                 <h3 className="text-eafc font-semibold">Filters:</h3>

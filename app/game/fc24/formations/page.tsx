@@ -60,7 +60,7 @@ export default function Formations() {
                 <F1Filter selectForm={selectedForms} setSelectForm={setSelectedForms} selectDiff={selectedDiffs} setSelectDiff={setSelectedDiffs} />
             </motion.div>
 
-            <motion.div className="grid grid-cols-3 grid-flow-row gap-8 w-full" variants={pageItem}>
+            <motion.div className="grid grid-cols-2 2xl:grid-cols-3 grid-flow-row gap-8 w-full" variants={pageItem}>
                 <FormationsEAFC formationData={formationData?.filter(f => selectedForms.length > 0 || selectedDiffs.length > 0 ? selectedForms.toString().includes(f.flow) || selectedDiffs.toString().includes(f.difficulty) : f)} setFormationData={setFormationData} />
             </motion.div>
 

@@ -212,7 +212,7 @@ export const PlayerCards: React.FC<topCardsProps> = ({ items }) => {
 
         // href={`/game/fc24/topCards/${player.rank}`}
 
-        <div className='grid grid-cols-2 grid-flow-row gap-8 justify-items-stretch w-full auto-rows-min' style={{ gridAutoRows: 'minmax(100px, auto)' }}>
+        <div className='grid grid-cols-1 2xl:grid-cols-2 grid-flow-row gap-8 justify-items-stretch w-full auto-rows-min' style={{ gridAutoRows: 'minmax(100px, auto)' }}>
             {items.slice(0, 20).map((player, index) => (
                 <div
                     key={index}
@@ -220,7 +220,7 @@ export const PlayerCards: React.FC<topCardsProps> = ({ items }) => {
                     onClick={() => setExpandedId(expandedId === player.id ? null : player.id)}
                 >
                     <div
-                        className={`flex flex-row items-center h-full ${expandedId !== player.id ? 'w-full justify-around' : 'justify-between px-16'}`}
+                        className={`flex flex-row-wrap space-x-6 2xl:space-x-0 2xl:flex-row items-center h-full ${expandedId !== player.id ? 'w-full justify-around' : 'justify-between px-6 2xl:px-16'}`}
                     >
                         {/* Default Card */}
                         <div className='flex flex-col z-10 items-center h-full justify-between'>
@@ -246,7 +246,7 @@ export const PlayerCards: React.FC<topCardsProps> = ({ items }) => {
                             </div>
                             <Image src={player.shieldUrl} alt={player.lastName} width={205} height={290} />
                         </div>
-                        <div className=' z-10 flex flex-col justify-between w-[290px] h-full space-y-4'>
+                        <div className='z-10 flex flex-col justify-between w-[290px] h-full space-y-4'>
                             <div className='flex flex-row h-full space-x-4 justify-between'>
                                 <div className='flex flex-col h-full justify-between'>
                                     <div className='flex flex-col space-y-1'>
@@ -488,7 +488,7 @@ export const PlayerCards: React.FC<topCardsProps> = ({ items }) => {
                     </div>
                     {
                         expandedId === player.id && (
-                            <div className={`z-10 flex flex-col w-full items-center px-16 space-y-8`}>
+                            <div className={`z-10 flex flex-col w-full items-center px-6 2xl:px-16 space-y-8`}>
                                 {/* PlayStyles */}
                                 <div className='flex flex-col w-full space-y-4'>
                                     <hr className='z-10 w-full border-1 border-white rounded-xl items-center' />
@@ -511,7 +511,7 @@ export const PlayerCards: React.FC<topCardsProps> = ({ items }) => {
                                     </div>
                                 </div>
                                 {/* Statistics */}
-                                <div className='flex flex-row text-lg w-full items-start justify-between'>
+                                <div className='flex flex-row-wrap space-x-4 2xl:space-x-0 text-lg w-full items-start justify-between'>
                                     {/* Pace */}
                                     <StatSection 
                                         title="Pace"
@@ -619,7 +619,7 @@ import type { SkillMove } from '@/components/pages/api/allSkillMoves';
 export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.Dispatch<React.SetStateAction<SkillMove[]>> }> = ({ skillData, setSkillData }) => {
 
     return(
-        <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
+        <div className='grid grid-cols-2 2xl:grid-cols-3 grid-flow-row gap-8 w-full'>
             {skillData.map((skill: any, index: any) => (
                 <div key={index} className={`hoverPlayer-eafc skill-background border-1 flex flex-col font-base w-fit py-6 items-center space-y-4 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-lime-500/30'}`}>
                     {/* Title */}
@@ -708,7 +708,7 @@ export const GuideList: React.FC = () => {
     }, [])
 
     return(
-        <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
+        <div className='grid grid-cols-2 2xl:grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
                 <div key={index} className="hoverPlayer-eafc w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
                     <div className="z-10 relative pt-[56.25%] w-full">
@@ -764,7 +764,7 @@ export const HighlightList: React.FC = () => {
     }, [])
 
     return(
-        <div className='grid grid-cols-3 grid-flow-row gap-8 w-full'>
+        <div className='grid grid-cols-2 2xl:grid-cols-3 grid-flow-row gap-8 w-full'>
             {guideData.map((guide: any, index: any) => (
                 <div key={index} className="hoverPlayer-eafc w-full shadow-md shadow-emerald-300/30 rounded-md flex flex-col items-start justify-between">
                     <div className="z-10 relative pt-[56.25%] w-full">
