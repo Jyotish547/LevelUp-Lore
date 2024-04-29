@@ -9,7 +9,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { downChild, pageItem, pageList } from "@/components/app/components/animations";
 
-export default function Maps() {
+export default function Gameplay() {
     return(
         <motion.section className="flex flex-col items-start justify-center w-full space-y-6"
             variants={pageList}
