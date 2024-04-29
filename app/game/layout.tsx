@@ -21,7 +21,9 @@ export default function GamePageLayout({
 
   let title= gameName ? getTitleFromGame(gameName) : 'LevelUp Lore';
 
-  document.title = title;
+  useEffect(() => {
+    document.title = title;
+  }, [])
   
   return (
     <main className="m-0 p-0 game-background w-screen h-screen overflow-x-hidden">
