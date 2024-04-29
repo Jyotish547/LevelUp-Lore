@@ -109,7 +109,7 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
             <div 
             // variants={pageItem} 
             className="flex flex-col items-start w-full text-base">
-                <div className="flex flex-row justify-between items-start w-full space-x-12">
+                <div className="flex flex-col 2xl:flex-row justify-between items-start w-full space-y-8 2xl:space-y-0 2xl:space-x-12">
                     {/* Left Column */}
                     <div 
                     // variants={downChild} 

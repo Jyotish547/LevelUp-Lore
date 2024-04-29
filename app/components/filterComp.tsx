@@ -112,7 +112,7 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
     }
 
     return(
-        <div className="flex flex-col 2xl:flex-row justify-between items-start space-y-4 2xl:space-y-0 2xl:items-center formation-filters w-full h-fit">
+        <div className="grid grid-cols-2 gap-4 xl:flex xl:flex-row xl:justify-between xl:items-start xl:space-y-0 xl:items-center formation-filters w-full h-fit">
             {/* Filters */}
             <div className="flex flex-col items-start space-y-2">
                 <h3 className="text-eafc font-semibold">Filters:</h3>
@@ -120,7 +120,7 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
                     label="Popular"
                     icon={faFireFlameCurved}
                     onClick={togglePopular}
-                    className={`flex flex-row items-center py-2 px-4 font-semibold space-x-2 rounded-sm ${isPopular ? 'popular-f1 active-f1 bg-amber-500 text-dark': 'hoverPopular-eafc text-neutral-500'}`}
+                    className={`flex flex-row items-center py-2 px-4 font-semibold space-x-2 rounded-sm text-sm 2xl:text-base ${isPopular ? 'popular-f1 active-f1 bg-amber-500 text-dark': 'hoverPopular-eafc text-neutral-500'}`}
                 />
             </div>
             
@@ -133,7 +133,7 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
                             key={index}
                             onClick={() => handleForm(form)}
                             className={
-                                `py-2 px-4 border-r-2 border-gray-800 space-x-2 h-full bg-clip-padding
+                                `py-2 px-4 border-r-2 border-gray-800 space-x-2 h-full bg-clip-padding text-sm 2xl:text-base
                                 ${selectForm.includes(form) ? getBackgroundForm(form) : `${getDefaulForm(form)} text-neutral-500`}
                                 ${index === 0 ? 'rounded-l-sm' : ''}
                                 ${index === 2 ? 'border-none' : 'rounded-r-sm'}
@@ -154,7 +154,7 @@ export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.D
                             key={diff}
                             onClick={() => handleDiff(diff)}
                             className={
-                                `py-2 px-4  border-r-2 border-gray-800 space-x-2 h-full bg-clip-padding
+                                `py-2 px-4 text-sm 2xl:text-base border-r-2 border-gray-800 space-x-2 h-full bg-clip-padding
                                 ${selectDiff.includes(diff) ? `text-dark ${getBackgroundDiff(diff)}` : `${getDefaultDiff(diff)} text-neutral-500`}
                                 ${index === 0 ? 'rounded-l-sm' : ''}
                                 ${index === 2 ? 'border-none' : 'rounded-r-sm'}

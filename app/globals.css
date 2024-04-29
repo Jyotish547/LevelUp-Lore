@@ -440,7 +440,7 @@ input[type='range']::-moz-range-thumb {
 }
 
 .navDP {
-  width: 486px
+  width: 48px
 }
 
 .playerRank-bg {
@@ -818,10 +818,10 @@ input[type='range']::-moz-range-thumb {
 
 /* Mid Width */
 
-/* 
+
 @media (min-width: 1281px) and (max-width: 1536px) {
   .home-container {
-    width: 1100px;
+    width: 1200px;
     height: 350px;
     overflow-x: auto;
     white-space: nowrap;
@@ -834,4 +834,4 @@ input[type='range']::-moz-range-thumb {
   .CLlogo {
     width: 250px;
   }
-} */
+}

@@ -619,9 +619,9 @@ import type { SkillMove } from '@/components/pages/api/allSkillMoves';
 export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.Dispatch<React.SetStateAction<SkillMove[]>> }> = ({ skillData, setSkillData }) => {
 
     return(
-        <div className='grid grid-cols-2 2xl:grid-cols-3 grid-flow-row gap-8 w-full'>
+        <div className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 grid-flow-row gap-8 w-full'>
             {skillData.map((skill: any, index: any) => (
-                <div key={index} className={`hoverPlayer-eafc skill-background border-1 flex flex-col font-base w-fit py-6 items-center space-y-4 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-lime-500/30'}`}>
+                <div key={index} className={`hoverPlayer-eafc skill-background border-1 flex flex-col font-base w-full xl:w-fit py-6 items-center space-y-4 ${ skill.star >= 3 ? 'shadow-lg shadow-amber-600/30' : 'shadow-lg shadow-lime-500/30'}`}>
                     {/* Title */}
                     <div className={`z-10 flex flex-row justify-between items-center w-full px-6`}>
                         <p className={`font-semibold text-eafc text-xl ${ skill.star >= 3 ? 'text-intermediate' : 'text-beginner' }`}>
@@ -645,7 +645,7 @@ export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.
                                 title="YouTube video player"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
-                                className='z-10'
+                                className='z-10 w-full xl:w-[420px] 2xl:w-full'
                             ></iframe>
                         )
                     }

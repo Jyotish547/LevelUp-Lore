@@ -194,14 +194,14 @@ export const MapList: React.FC = () => {
                         </motion.div>
                         {
                             expandedId === map.uuid && (
-                                <motion.div className="z-10 flex flex-col 2xl:flex-row items-center 2xl:items-start justify-around space-y-4 2xl: space-y-0"
+                                <motion.div className="z-10 flex flex-col 2xl:flex-row items-center 2xl:items-start justify-around space-y-4 2xl:space-y-0"
                                     variants={agentAnim}
                                     initial="hidden"
                                     animate="visible"
                                     whileTap="tap"
                                     exit="hidden"
                                 >
-                                    <div className="flex flex-col items-center 2xl:items-start space-y-2">
+                                    <div className="flex flex-col items-center xl:items-start space-y-2">
                                         <div className="flex flex-col space-y-2 mb-4">
                                             <p className="text-xl font-semibold text-valo">Map Outline:</p>
                                             <span className="text-md">
