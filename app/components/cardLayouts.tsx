@@ -6,8 +6,8 @@ import axios from 'axios';
 import Link from 'next/link';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconProp, library } from "@fortawesome/fontawesome-svg-core";
-import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup, faEllipsisH, faPlusCircle, faCircleChevronRight, faAngleRight, faStar, faHeart, faShareNodes, faShieldHalved, faPlaneUp, faAngleDown, faMarsStrokeRight, faChevronCircleDown, faArrowDown, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition, IconProp, library } from "@fortawesome/fontawesome-svg-core";
+import { faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup, faEllipsisH, faPlusCircle, faCircleChevronRight, faAngleRight, faStar, faHeart, faShareNodes, faShieldHalved, faPlaneUp, faAngleDown, faMarsStrokeRight, faChevronCircleDown, faArrowDown, faChevronDown, faQuestionCircle, faBomb, faScaleBalanced, faShieldHeart } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 
 import Image from "next/image";
@@ -687,7 +687,21 @@ export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.
 // Guides Page
 
 import { GuideData } from "./types/valorantType";
-import { getIconForType } from '../game/fc24/formations/[id]/page';
+
+
+const getIconForType = (type: string): IconDefinition => {
+    switch(type) {
+        case "defensive":
+            return faShieldHeart;
+        case "balanced":
+            return faScaleBalanced;
+        case "offensive":
+            return faBomb;
+        default:
+            return faQuestionCircle;
+    }
+}
+
 
 export const GuideList: React.FC = () => {
 

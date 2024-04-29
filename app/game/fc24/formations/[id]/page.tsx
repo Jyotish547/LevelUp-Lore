@@ -6,10 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPeopleGroup, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
-import { faShieldHeart as defensive } from "@fortawesome/free-solid-svg-icons";
-import { faScaleBalanced as balanced } from "@fortawesome/free-solid-svg-icons";
-import { faBomb as offensive } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition, faPeopleGroup, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
+
 
 import { SingleFormationData as FormationData } from "@/components/pages/api/formationDetailsByID/[id]";
 import { getIconForPosition } from "../../../../components/infoDesign";
@@ -19,14 +17,18 @@ import React from "react";
 import { motion } from "framer-motion"; 
 import { pageItem, pageList, downChild } from "@/components/app/components/animations";
 
-export const getIconForType = (type: string) => {
+import { faShieldHeart } from "@fortawesome/free-solid-svg-icons";
+import { faScaleBalanced } from "@fortawesome/free-solid-svg-icons";
+import { faBomb } from "@fortawesome/free-solid-svg-icons";
+
+const getIconForType = (type: string): IconDefinition => {
     switch(type) {
         case "defensive":
-            return defensive;
+            return faShieldHeart;
         case "balanced":
-            return balanced;
+            return faScaleBalanced;
         case "offensive":
-            return offensive;
+            return faBomb;
         default:
             return defaultIcon;
     }

@@ -5,8 +5,8 @@ import '../globals.css'
 
 import BorderButton from "./buttons";
 import { IconButton } from "./buttons";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faEarthAmericas, faFire, faFireFlameCurved, faMars, faMarsAndVenus, faPlaneUp, faShieldHalved, faStar, faVenus } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition, IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faBomb, faEarthAmericas, faFire, faFireFlameCurved, faMars, faMarsAndVenus, faPlaneUp, faQuestionCircle, faScaleBalanced, faShieldHalved, faShieldHeart, faStar, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const iconsMap: { [key: string]: IconProp } = {
     star: faStar,
@@ -17,7 +17,20 @@ import { FormType, DiffType, CardsType, GenType, PlayersData } from "./types/fc2
 import { getBgColorClass } from "./cardLayouts";
 import axios from "axios";
 
-import { getIconForType, getIconForDifficulty } from "../game/fc24/formations/[id]/page";
+import { getIconForDifficulty } from "../game/fc24/formations/[id]/page";
+
+const getIconForType = (type: string): IconDefinition => {
+    switch(type) {
+        case "defensive":
+            return faShieldHeart;
+        case "balanced":
+            return faScaleBalanced;
+        case "offensive":
+            return faBomb;
+        default:
+            return faQuestionCircle;
+    }
+}
 
 export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.Dispatch<React.SetStateAction<FormType[]>>, selectDiff: DiffType[], setSelectDiff: React.Dispatch<React.SetStateAction<DiffType[]>> }> = ({ selectForm, setSelectForm, selectDiff, setSelectDiff }) => {
 
