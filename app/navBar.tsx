@@ -33,6 +33,30 @@ const valoNav = [
     {icon: faArrowUpRightDots, label: "Guides", href: "/game/valorant/guides", slug: 'valo'}
 ];
 
+const lolNav = [
+    {icon: faBullseye, label: "Champion Guide", href: "/game/leagueOfLegends/champions", slug: 'lol', game: lolLogo},
+    {icon: faUsersGear, label: "Gameplay Tips", href: "/game/leagueOfLegends/gameplay", slug: 'lol'},
+    {icon: faMapLocationDot, label: "Meta Insights", href: "/game/leagueOfLegends/metaInsights", slug: 'lol'},
+    {icon: faCrosshairs, label: "Highlights", href: "/game/leagueOfLegends/highlights", slug: 'lol'},
+    {icon: faArrowUpRightDots, label: "Vision Control", href: "/game/leagueOfLegends/visionControl", slug: 'lol'}
+];
+
+const rlNav = [
+    {icon: faBullseye, label: "Car Catalog", href: "/game/rocketLeague/cars", slug: 'rl', game: rlLogo},
+    {icon: faUsersGear, label: "Aerial Academy", href: "/game/rocketLeague/aerialAcademy", slug: 'rl'},
+    {icon: faMapLocationDot, label: "Arena Guide", href: "/game/rocketLeague/arenaGuide", slug: 'rl'},
+    {icon: faCrosshairs, label: "Team Tactics", href: "/game/rocketLeague/teamTactics", slug: 'rl'},
+    {icon: faArrowUpRightDots, label: "Skill Training", href: "/game/rocketLeague/skillTraining", slug: 'rl'}
+];
+
+const cs2Nav = [
+    {icon: faBullseye, label: "Weapons Hub", href: "/game/counterStrike2/weapons", slug: 'cs2', game: cs2Logo},
+    {icon: faUsersGear, label: "Map Tactics", href: "/game/counterStrike2/mapTactics", slug: 'cs2'},
+    {icon: faMapLocationDot, label: "Pro Insights", href: "/game/counterStrike2/proInsights", slug: 'cs2'},
+    {icon: faCrosshairs, label: "Economy Guide", href: "/game/counterStrike2/economy", slug: 'cs2'},
+    {icon: faArrowUpRightDots, label: "Tactical Plays", href: "/game/counterStrike2/tacticalPlays", slug: 'cs2'}
+];
+
 interface ColorClasses {
     [key: string]: string; // This is the index signature
 }
@@ -46,16 +70,25 @@ export default function NavBar() {
 
     const isEafc24 = pathname.includes('fc24');
     const isValorant = pathname.includes('valorant');
+    const isLol = pathname.includes('leagueOfLegends');
+    const isRl = pathname.includes('rocketLeague');
+    const isCs2 = pathname.includes('counterStrike2');
 
     const currentNav = useMemo(() => {
         if (isEafc24) {
           return eafc24Nav;
         } else if (isValorant) {
           return valoNav;
+        } else if (isLol) {
+          return lolNav;
+        } else if (isRl) {
+            return rlNav;
+        } else if (isCs2) {
+            return cs2Nav;
         } else {
           return [];
         }
-      }, [isEafc24, isValorant]);
+      }, [isEafc24, isValorant, isLol, isRl, isCs2]);
 
     useEffect(() => {
         // Find the nav item that matches the currentPage
@@ -69,6 +102,9 @@ export default function NavBar() {
     const colorClasses: ColorClasses = {
         eafc: 'text-eafc border-eafc hover-eafc bg-eafc20 navImg-eafc',
         valo: 'text-valo border-valo hover-valo bg-valo30 navImg-valo',
+        lol: 'text-lol border-lol hover-lol bg-lol30 navImg-lol',
+        rl: 'text-rl border-rl hover-rl bg-rl30 navImg-rl',
+        cs2: 'text-cs2 border-cs2 hover-cs2 bg-cs230 navImg-cs2',
     };
 
     // Determine the current color class based on the active navigation item

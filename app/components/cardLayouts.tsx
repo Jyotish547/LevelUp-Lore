@@ -32,10 +32,10 @@ library.add(faCaretLeft, faCaretRight, faPuzzlePiece, faPeopleGroup);
 
 const games = [
     {src: fc24CL, alt: 'EAFC24', logo: fc24Logo, shadowColor: 'rgb(22 163 74)', href: '/game/fc24/formations'},
-    {src: lolCL, alt: 'LeagueOfLegends', logo: lolLogo, shadowColor: 'rgb(37 99 235)', href: '/game/fc24/formations'},
+    {src: lolCL, alt: 'LeagueOfLegends', logo: lolLogo, shadowColor: 'rgb(37 99 235)', href: '/game/leagueOfLegends/champions'},
     {src: valorantCL, alt: 'Valorant', logo: valorantLogo, shadowColor: 'rgb(126 34 206)', href: '/game/valorant/lineups'},
-    {src: rlCL, alt: 'RocketLeague', logo: rlLogo, shadowColor: 'rgb(234 88 12)', href: '/game/valorant/lineups'},
-    {src: cs2CL, alt: 'CounterStrike2', logo: cs2Logo, shadowColor: 'rgb(250 204 21)', href: '/game/valorant/lineups'},
+    {src: rlCL, alt: 'RocketLeague', logo: rlLogo, shadowColor: 'rgb(234 88 12)', href: '/game/rocketLeague/cars'},
+    {src: cs2CL, alt: 'CounterStrike2', logo: cs2Logo, shadowColor: 'rgb(250 204 21)', href: '/game/counterStrike2/weapons'},
 ]
 
 interface HomeGameProps {

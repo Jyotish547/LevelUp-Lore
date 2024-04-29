@@ -14,6 +14,9 @@
   --text-black: rgb(38, 38, 38);
   --eafc24-color: #22C55E;
   --valo-color: #818CF8;
+  --lol-color: #C89B3C;
+  --rl-color: #00BBFF;
+  --cs2-color: #FCD34D;
   --background-primary: rgb(20 184 166);
   --background-gold: rgb(245, 158, 11);
   --red-color: #FF4655;
@@ -69,15 +72,6 @@ body {
   color: var(--eafc24-color);
 }
 
-.active-valo {
-  border-left: 3px solid var(--valo-color);
-  background-color: #818CF830;
-}
-
-.active-valo > span {
-  color: var(--valo-color);
-}
-
 .hover-eafc {
   box-shadow: inset 0 0 0 0 var(--eafc24-color);
   transition: ease-in 0.3s;
@@ -87,6 +81,23 @@ body {
 .hover-eafc:hover {
   box-shadow: inset 500px 0 0 0 var(--eafc24-color);
   color: #262626;
+}
+
+.navImg-eafc:hover img {
+  filter: invert();
+}
+
+.hover-eafc:hover .child {
+  color: #262626;
+}
+
+.active-valo {
+  border-left: 3px solid var(--valo-color);
+  background-color: #818CF830;
+}
+
+.active-valo > span {
+  color: var(--valo-color);
 }
 
 .hover-valo {
@@ -101,17 +112,104 @@ body {
   color: #262626;
 }
 
+.hover-valo:hover .child {
+  color: #262626;
+}
+
+.navImg-valo:hover img {
+  filter: brightness(0%);
+}
+
+.active-lol {
+  border-left: 3px solid var(--lol-color);
+  background-color: #C89B3C30;
+}
+
+.active-lol > span {
+  color: var(--lol-color);
+}
+
+.hover-lol {
+  box-shadow: inset 0 0 0 0 var(--lol-color);
+  transition: ease-in 0.3s;
+  outline: none;
+  font-weight: 700;
+}
+
+.hover-lol:hover {
+  box-shadow: inset 500px 0 0 0 var(--lol-color);
+  color: #262626;
+}
+
+.hover-lol:hover .child {
+  color: #262626;
+}
+
+.navImg-lol:hover img {
+  filter: brightness(0%);
+}
+
+.active-rl {
+  border-left: 3px solid var(--rl-color);
+  background-color: #00BBFF30;
+}
+
+.active-rl > span {
+  color: var(--rl-color);
+}
+
+.hover-rl {
+  box-shadow: inset 0 0 0 0 var(--rl-color);
+  transition: ease-in 0.3s;
+  outline: none;
+  font-weight: 700;
+}
+
+.hover-rl:hover {
+  box-shadow: inset 500px 0 0 0 var(--rl-color);
+  color: #262626;
+}
+
+.hover-rl:hover .child {
+  color: #262626;
+}
+
+.navImg-lol:hover img {
+  filter: brightness(0%);
+}
+
+.active-cs2 {
+  border-left: 3px solid var(--cs2-color);
+  background-color: #FCD34D30;
+}
+
+.active-cs2 > span {
+  color: var(--rl-color);
+}
+
+.hover-cs2 {
+  box-shadow: inset 0 0 0 0 var(--cs2-color);
+  transition: ease-in 0.3s;
+  outline: none;
+  font-weight: 700;
+}
+
+.hover-cs2:hover {
+  box-shadow: inset 500px 0 0 0 var(--cs2-color);
+  color: #262626;
+}
+
+.hover-cs2:hover .child {
+  color: #262626;
+}
+
+.navImg-cs2:hover img {
+  filter: brightness(0%);
+}
+
 .child {
   color: white;
   transition: ease-in 0.3s;
-}
-
-.hover-eafc:hover .child {
-  color: #262626;
-}
-
-.hover-valo:hover .child {
-  color: #262626;
 }
 
 .hover-navMain {
@@ -124,14 +222,6 @@ body {
   transition: ease-in 0.3s;
 }
 
-.navImg-eafc:hover img {
-  filter: invert();
-}
-
-.navImg-valo:hover img {
-  filter: brightness(0%);
-}
-
 .hover-navMain:hover {
   box-shadow: inset 500px 0 0 0 var(--background-primary);
 }
@@ -140,10 +230,6 @@ body {
   color: #262626;
 }
 
-.hover-valo:hover {
-  box-shadow: inset 500px 0 0 0 var(--valo-color);
-  color: #262626;
-}
 
 /* Color Themes */
 .bg-primary {
@@ -248,6 +334,10 @@ input[type='range']::-moz-range-thumb {
   color: var(--text-black);
 }
 
+.bg-eafc20 {
+  background-color: #22C55E20;
+}
+
 /* Valorant */
 
 .text-valo {
@@ -275,8 +365,70 @@ input[type='range']::-moz-range-thumb {
   color: var(--text-black);
 }
 
-.bg-eafc20 {
-  background-color: #22C55E20;
+/* League of Legends */
+
+.text-lol {
+  color: var(--lol-color);
+}
+
+.border-lol {
+  border-color: var(--lol-color);
+}
+
+.bg-lol {
+  background-color: var(--lol-color);
+}
+
+.bg-lol30 {
+  background-color: #C89B3C30;
+}
+
+.bg-lol90 {
+  background-color: #C89B3C90;
+}
+
+/* Rocket League */
+
+.text-rl {
+  color: var(--rl-color);
+}
+
+.border-rl {
+  border-color: var(--rl-color);
+}
+
+.bg-rl {
+  background-color: var(--rl-color);
+}
+
+.bg-rl30 {
+  background-color: #00BBFF30;
+}
+
+.bg-lol90 {
+  background-color: #00BBFF90;
+}
+
+/* Counter Strike 2 */
+
+.text-cs2 {
+  color: var(--cs2-color);
+}
+
+.border-cs2 {
+  border-color: var(--cs2-color);
+}
+
+.bg-cs2 {
+  background-color: var(--cs2-color);
+}
+
+.bg-cs230 {
+  background-color: #FCD34D30;
+}
+
+.bg-90 {
+  background-color: #FCD34D90;
 }
 
 /* Difficulty Tags Colors */
@@ -763,6 +915,8 @@ input[type='range']::-moz-range-thumb {
   color: #262626;
   font-weight: 700;
 }
+
+/* League of Legends */
 
 .hoverImageFilter img {
   transition: ease-in 0.2s
