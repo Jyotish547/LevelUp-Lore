@@ -1,7 +1,5 @@
 // All Game Pages Layout
 
-'use client'
-
 import NavBar from "../navBar";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from 'react';
@@ -15,15 +13,15 @@ export default function GamePageLayout({
     children: React.ReactNode,
   }) {
 
-  const router = usePathname();
+  // const router = usePathname();
 
-  const gameName = router?.split('/')[2];
+  // const gameName = router?.split('/')[2];
 
-  let title= gameName ? getTitleFromGame(gameName) : 'LevelUp Lore';
+  // let title= gameName ? getTitleFromGame(gameName) : 'LevelUp Lore';
 
-  useEffect(() => {
-    document.title = title;
-  }, [])
+  // useEffect(() => {
+  //   document.title = title;
+  // }, [])
   
   return (
     <main className="m-0 p-0 game-background w-screen h-screen overflow-x-hidden">
@@ -38,19 +36,19 @@ export default function GamePageLayout({
   )
 }
 
-  function getTitleFromGame(game: string): string {
-    switch(game) {
-      case 'fc24':
-        return 'FC24 - LevelUp Lore';
-      case 'leagueOfLegends':
-        return 'League of Legends - LevelUp Lore';
-      case 'valorant':
-        return 'Valorant - LevelUp Lore';
-      case 'rocketLeague':
-        return 'Rocket League - LevelUp Lore';
-      case 'counterStrike2':
-        return 'Counter Strike 2 - LevelUp Lore';
-      default:
-        return 'LevelUp Lore';
-    }
-  }
+  // function getTitleFromGame(game: string): string {
+  //   switch(game) {
+  //     case 'fc24':
+  //       return 'FC24 - LevelUp Lore';
+  //     case 'leagueOfLegends':
+  //       return 'League of Legends - LevelUp Lore';
+  //     case 'valorant':
+  //       return 'Valorant - LevelUp Lore';
+  //     case 'rocketLeague':
+  //       return 'Rocket League - LevelUp Lore';
+  //     case 'counterStrike2':
+  //       return 'Counter Strike 2 - LevelUp Lore';
+  //     default:
+  //       return 'LevelUp Lore';
+  //   }
+  // }
