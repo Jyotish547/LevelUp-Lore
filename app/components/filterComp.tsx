@@ -451,23 +451,6 @@ interface V2Props {
     setSelectSide: (selectRole: string) => void;
 }
 export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAgent, setSelectAgent, selectAbility, setSelectAbility, selectSide, setSelectSide }) => {
-    
-    // const [isOpen, setIsOpen] = useState(false);
-
-    function getIconRole(role: string): StaticImageData {
-        switch (role) {
-            case 'Initiator':
-                return initiator;
-            case 'Duelist':
-                return duelist;
-            case 'Controller':
-                return controller;
-            case 'Sentinel':
-                return sentinel;
-            default:
-                return duelist;
-        }
-    }
 
     const [maps, setMaps] = useState<MapFilter[]>([]);
     const [agents, setAgents] = useState<AgentData[]>([]);
@@ -520,7 +503,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
     // }
 
     return(
-        <div className="flex bg-neutral-950 p-6 rounded-md flex-row justify-between items-center shadow-md shadow-violet-500/40 formation-filters w-full h-full space-x-8 text-neutral-300">
+        <div className="flex bg-neutral-950 p-6 rounded-md flex-row justify-between items-start xl:items-center shadow-md shadow-violet-500/40 formation-filters w-full h-full space-x-8 text-neutral-300">
             {/* Filters */}
             {/* Maps */}
             <div className="flex flex-col w-fit items-start space-y-4">
@@ -528,7 +511,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                 <div
                     
                     className={
-                        `flex flex-col w-56 scrollbar-custom h-96 overflow-y-scroll rounded-md
+                        `flex flex-col w-48 xl:w-56 scrollbar-custom h-96 overflow-y-scroll rounded-md
                         ${'popular-f1 active-f1'}
                     `}
                 >
@@ -573,9 +556,9 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                 </div>
             </div>
             {/* Sub filter div */}
-            <div className="flex flex-col w-full items-start justify-between h-full">
+            <div className="flex flex-col w-full items-start space-y-4 xl:justify-between h-full">
                 {/* Agents */}
-                <div className="flex flex-col items-start space-y-4">
+                <div className="flex flex-col items-start space-y-2 xl:space-y-4">
                     <h3 className="text-valo font-semibold">Agent:</h3>
                     <div
                         
@@ -589,7 +572,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                     <label
                                         key={index}
                                         className={
-                                        `text-lg hover-valo-icon flex flex-col w-20 h-20 justify-center items-center p-2 font-regular
+                                        `text-lg hover-valo-icon flex flex-col w-16 h-16 xl:w-20 xl:h-20 justify-center items-center p-2 font-regular
                                         ${selectAgent === agent.displayName ? 'border-l-2 border-valo text-valo bg-valo30 border-b-0': ''}
                                         ${agent.displayName === 'Viper' || agent.displayName === 'Brimstone' ? 'border-b-2 border-teal-500 w-fit' : ''}
                                         `}
@@ -611,7 +594,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
 
                 {/* Abilities */}
                 {selectAgent !== 'All' && (
-                    <div className="flex flex-col items-start space-y-4">
+                    <div className="flex flex-col items-start space-y-2 xl:space-y-4">
                         <h3 className="text-valo font-semibold">Ability:</h3>
                         <div
                             
@@ -624,7 +607,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                                 <label
                                     key={index}
                                     className={
-                                        `hover-valo-icon text-lg flex flex-col flex-wrap w-fit py-3 px-4 items-center justify-center font-regular space-x-2
+                                        `hover-valo-icon text-lg flex flex-col flex-wrap w-fit px-2 py-1 xl:py-3 xl:px-4 items-center justify-center font-regular space-x-2
                                         ${selectAbility === ab.displayName ? 'border-l-2 border-valo text-valo bg-valo30': ''}
                                     `}
                                 >
@@ -655,7 +638,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
                             <label
                                 key={index}
                                 className={
-                                `hover-valo-icon text-base flex flex-row w-fit py-3 px-4 items-center font-regular space-x-2
+                                `hover-valo-icon text-sm xl:text-base flex flex-row w-fit py-3 px-4 items-center font-regular space-x-2
                                 ${selectSide === side ? 'border-l-2 border-valo text-valo bg-valo30 font-semibold': ''}
                                 `}
                             >
