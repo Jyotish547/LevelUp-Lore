@@ -171,6 +171,19 @@ export const FormationsEAFC: React.FC<{ formationData: FormationData[], setForma
         }
     }
 
+    const getIconForType = (type: string): IconDefinition => {
+        switch(type) {
+            case "defensive":
+                return faShieldHeart;
+            case "balanced":
+                return faScaleBalanced;
+            case "offensive":
+                return faBomb;
+            default:
+                return faQuestionCircle;
+        }
+    }
+
     return formationData.map((formation, index) => (
         <div key={index} onClick={() =>goToFormation(formation.formation)} className='hoverPlayer-eafc cursor-pointer bg-black flex flex-col items-start justify-between rounded-xl shadow-md shadow-green-300/30'>
             <Image src={formation.image} alt={formation.formation} className='w-full rounded-t-md' />
@@ -688,35 +701,10 @@ export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.
 
 import { GuideData } from "./types/valorantType";
 
-const getIconForType = (type: string): IconDefinition => {
-    switch(type) {
-        case "defensive":
-            return faShieldHeart;
-        case "balanced":
-            return faScaleBalanced;
-        case "offensive":
-            return faBomb;
-        default:
-            return faQuestionCircle;
-    }
-}
+
 
 import { faStarHalfStroke } from "@fortawesome/free-regular-svg-icons";
 import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
-
-const getIconForDifficulty = (difficulty: string) => {
-    switch (difficulty) {
-      case "beginner":
-        return faStarHalfStroke;
-      case "intermediate":
-        return faStar;
-      case "advanced":
-        return faRankingStar;
-      default:
-        return faQuestionCircle; // Or some default icon
-    }
-};
-
 
 export const GuideList: React.FC = () => {
 

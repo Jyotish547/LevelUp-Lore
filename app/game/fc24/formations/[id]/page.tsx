@@ -21,37 +21,14 @@ import { faShieldHeart } from "@fortawesome/free-solid-svg-icons";
 import { faScaleBalanced } from "@fortawesome/free-solid-svg-icons";
 import { faBomb } from "@fortawesome/free-solid-svg-icons";
 
-const getIconForType = (type: string): IconDefinition => {
-    switch(type) {
-        case "defensive":
-            return faShieldHeart;
-        case "balanced":
-            return faScaleBalanced;
-        case "offensive":
-            return faBomb;
-        default:
-            return faQuestionCircle;
-    }
-}
+
 
 import { faStarHalfStroke } from "@fortawesome/free-regular-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
-const getIconForDifficulty = (difficulty: string) => {
-    switch (difficulty) {
-      case "beginner":
-        return faStarHalfStroke;
-      case "intermediate":
-        return faStar;
-      case "advanced":
-        return faRankingStar;
-      default:
-        return faQuestionCircle; // Or some default icon
-    }
-};
-
+import { getIconForDifficulty } from "../../../../components/infoDesign";
 
 export default async function EAFC24( {params} : {params : {id : string}} ) {
 
@@ -68,8 +45,19 @@ export default async function EAFC24( {params} : {params : {id : string}} ) {
 
     // // Sample Console Logs
     // console.log(formation.customTactics.defenseCap)
-      
-    
+
+    const getIconForType = (type: string): IconDefinition => {
+        switch(type) {
+            case "defensive":
+                return faShieldHeart;
+            case "balanced":
+                return faScaleBalanced;
+            case "offensive":
+                return faBomb;
+            default:
+                return faQuestionCircle;
+        }
+    }
 
     return  (
         <div className="flex flex-col items-start justify-center w-full space-y-6 leading-relaxed"

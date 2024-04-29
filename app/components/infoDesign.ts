@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShieldHalved, faSoccerBall, faRunning, faChessKnight } from '@fortawesome/free-solid-svg-icons';
+import { faShieldHalved, faSoccerBall, faRunning, faChessKnight, faStarHalfStroke, faStar, faRankingStar, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 import logoIcon from '../../public/assets/logos/LULIcon.svg';
@@ -52,5 +52,18 @@ export const formatDate = (date: Date): string => {
   };
 
   return `${day}${getOrdinalSuffix(day)} ${monthName}, ${year}`;
+};
+
+export const getIconForDifficulty = (difficulty: string): IconDefinition => {
+  switch (difficulty) {
+    case "beginner":
+      return faStarHalfStroke;
+    case "intermediate":
+      return faStar;
+    case "advanced":
+      return faRankingStar;
+    default:
+      return faQuestionCircle; // Or some default icon
+  }
 };
   

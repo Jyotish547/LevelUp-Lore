@@ -33,18 +33,7 @@ const getIconForType = (type: string): IconDefinition => {
 import { faStarHalfStroke } from "@fortawesome/free-regular-svg-icons";
 import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
 
-const getIconForDifficulty = (difficulty: string) => {
-    switch (difficulty) {
-      case "beginner":
-        return faStarHalfStroke;
-      case "intermediate":
-        return faStar;
-      case "advanced":
-        return faRankingStar;
-      default:
-        return faQuestionCircle; // Or some default icon
-    }
-};
+import { getIconForDifficulty } from "./infoDesign";
 
 export const F1Filter: React.FC<{ selectForm: FormType[], setSelectForm: React.Dispatch<React.SetStateAction<FormType[]>>, selectDiff: DiffType[], setSelectDiff: React.Dispatch<React.SetStateAction<DiffType[]>> }> = ({ selectForm, setSelectForm, selectDiff, setSelectDiff }) => {
 
