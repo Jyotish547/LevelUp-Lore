@@ -22,7 +22,7 @@ export default function Champions() {
                     <FontAwesomeIcon icon={faMapLocationDot} /> <span>Champion Guide</span>
                 </div>
                 <p className="text-sm xl:text-base text-neutral-300 font-normal leading-relaxed">
-                    Delve into the world of League of Legends with detailed pages for each champion. Discover in-depth information about their abilities, strengths, weaknesses, counters, and recommended playstyles. Whether you're mastering a new champion or looking to counter your opponents, this encyclopedia has you covered.
+                    Delve into the world of League of Legends with detailed pages for each champion. Discover in-depth information about their abilities, strengths, weaknesses, counters, and recommended playstyles. Whether you&apos;re mastering a new champion or looking to counter your opponents, this encyclopedia has you covered.
                 </p>
             </motion.header>
 

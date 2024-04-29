@@ -22,7 +22,7 @@ export default function Insights() {
                     <FontAwesomeIcon icon={faMapLocationDot} /> <span>Meta Insights</span>
                 </div>
                 <p className="text-sm xl:text-base text-neutral-300 font-normal leading-relaxed">
-                    Stay ahead of the curve with insights into the current meta of League of Legends. Access information on optimal item builds, rune setups, and strategies tailored to the latest trends in the game. Whether you're adapting your playstyle or experimenting with new builds, this guide helps you make informed decisions to maximize your impact on the Rift.
+                    Stay ahead of the curve with insights into the current meta of League of Legends. Access information on optimal item builds, rune setups, and strategies tailored to the latest trends in the game. Whether you&apos;re adapting your playstyle or experimenting with new builds, this guide helps you make informed decisions to maximize your impact on the Rift.
                 </p>
             </motion.header>
 

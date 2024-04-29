@@ -22,7 +22,7 @@ export default function Arena() {
                     <FontAwesomeIcon icon={faMapLocationDot} /> <span>Arena Guide</span>
                 </div>
                 <p className="text-sm xl:text-base text-neutral-300 font-normal leading-relaxed">
-                    Navigate the various arenas of Rocket League with an overview of each map's key features and strategic considerations. Learn optimal positioning, boost management, and rotation strategies to maximize your performance on every map and adapt to different playstyles and team compositions.
+                    Navigate the various arenas of Rocket League with an overview of each map&apos;s key features and strategic considerations. Learn optimal positioning, boost management, and rotation strategies to maximize your performance on every map and adapt to different playstyles and team compositions.
                 </p>
             </motion.header>
 
