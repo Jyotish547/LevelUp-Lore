@@ -688,7 +688,6 @@ export const SkillMoves: React.FC<{ skillData: SkillMove[], setSkillData: React.
 
 import { GuideData } from "./types/valorantType";
 
-
 const getIconForType = (type: string): IconDefinition => {
     switch(type) {
         case "defensive":
@@ -701,6 +700,22 @@ const getIconForType = (type: string): IconDefinition => {
             return faQuestionCircle;
     }
 }
+
+import { faStarHalfStroke } from "@fortawesome/free-regular-svg-icons";
+import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
+
+const getIconForDifficulty = (difficulty: string) => {
+    switch (difficulty) {
+      case "beginner":
+        return faStarHalfStroke;
+      case "intermediate":
+        return faStar;
+      case "advanced":
+        return faRankingStar;
+      default:
+        return faQuestionCircle; // Or some default icon
+    }
+};
 
 
 export const GuideList: React.FC = () => {

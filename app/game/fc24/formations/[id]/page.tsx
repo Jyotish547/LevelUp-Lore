@@ -30,25 +30,25 @@ const getIconForType = (type: string): IconDefinition => {
         case "offensive":
             return faBomb;
         default:
-            return defaultIcon;
+            return faQuestionCircle;
     }
 }
 
-import { faStarHalfStroke as beginner } from "@fortawesome/free-regular-svg-icons";
-import { faStar as intermediate } from "@fortawesome/free-solid-svg-icons";
-import { faRankingStar as advanced } from "@fortawesome/free-solid-svg-icons";
-import { faQuestionCircle as defaultIcon } from "@fortawesome/free-solid-svg-icons";
+import { faStarHalfStroke } from "@fortawesome/free-regular-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faRankingStar } from "@fortawesome/free-solid-svg-icons";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
-export const getIconForDifficulty = (difficulty: string) => {
+const getIconForDifficulty = (difficulty: string) => {
     switch (difficulty) {
       case "beginner":
-        return beginner;
+        return faStarHalfStroke;
       case "intermediate":
-        return intermediate;
+        return faStar;
       case "advanced":
-        return advanced;
+        return faRankingStar;
       default:
-        return defaultIcon; // Or some default icon
+        return faQuestionCircle; // Or some default icon
     }
 };
 
