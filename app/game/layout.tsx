@@ -3,9 +3,10 @@
 'use client'
 
 import NavBar from "../navBar";
-import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from 'react';
+import { useRouter } from "next/navigation";
+import React, { useState } from 'react';
 import Formations from "./fc24/formations/page";
+//import FormationPage from "../../eafc24/formationPage";
 import "../globals.css";
 
 export default function GamePageLayout({
