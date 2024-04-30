@@ -1,13 +1,12 @@
 // All Game Pages Layout
 
-'use client'
-
 import NavBar from "../navBar";
 import { useRouter } from "next/navigation";
 import React, { useState } from 'react';
 import Formations from "./fc24/formations/page";
 //import FormationPage from "../../eafc24/formationPage";
 import "../globals.css";
+import { Metadata } from "next";
 
 export default function GamePageLayout({
     children, // will be a page or nested layout

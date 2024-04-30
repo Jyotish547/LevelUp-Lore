@@ -475,7 +475,7 @@ export const V2Filter: React.FC<V2Props> = ({ selectMap, setSelectMap, selectAge
     const [side, setSide] = useState<boolean>(false);
 
     const matchAgent = agents.find(a => a.displayName === selectAgent && a.isPlayableCharacter);
-    // console.log(matchAgent);
+    console.log(matchAgent);
 
     useEffect(() => {
         const fetchMapData = async () => {
