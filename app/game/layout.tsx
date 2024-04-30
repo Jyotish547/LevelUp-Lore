@@ -1,11 +1,12 @@
 // All Game Pages Layout
 
+'use client'
+
 import NavBar from "../navBar";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from 'react';
 import Formations from "./fc24/formations/page";
 import "../globals.css";
-import { Metadata } from "next";
 
 export default function GamePageLayout({
     children, // will be a page or nested layout

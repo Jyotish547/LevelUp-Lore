@@ -41,11 +41,8 @@ export default function Agents() {
         fetchAgentData();
     }, []);
 
-    console.log(roles);
-
     const handleSetRole = (roleStr: string) => {
         setRoles(roleStr);
-        console.log(roleStr);
     }
 
     useEffect(() => {

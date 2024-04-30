@@ -139,8 +139,6 @@ export default function Lineups() {
         }));
     };
 
-    console.log(`${map}, ${ability} and `, filterData.lineups);
-
     useEffect(() => {
         fetchData();
     }, [])
